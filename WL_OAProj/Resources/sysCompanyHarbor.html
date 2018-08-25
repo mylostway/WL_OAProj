@@ -1,0 +1,1146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0049)https://mis.56xyl.com/sysBase/sysCompanyHarbor.do -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./WdatePicker(1).css" rel="stylesheet" type="text/css"></head><body class="easyui-layout"><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div><input type="hidden" id="ctxPath" value="https://mis.56xyl.com">
+
+<input type="hidden" id="misPathInfo" value="https://mis.56xyl.com">
+<input type="hidden" id="accountType" value="null">
+<input type="hidden" id="reportPathInfo" value="https://report.56xyl.com">
+<input type="hidden" id="imgPathInfo" value="https://img.56xyl.com">
+<input type="hidden" id="messagePathInfo" value="https://message.56xyl.com">
+<input type="hidden" id="growthPathInfo" value="http://gs.56xyl.com/Growth">
+
+
+<input type="hidden" id="curr_jsv" value="201807311959">
+<!--
+<script type="text/javascript">window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"browsercollector.oneapm.com/static/js/bw-send-415.6.31.js","beaconUrl":"browsercollector.oneapm.com/beacon","licenseKey":"iAI2J~ZuNEiJzFIB","applicationID":9987725};</script>
+<script type="text/javascript" src="./bw-loader-415.6.31.js"></script>
+-->
+<script type="text/javascript">
+// <!--
+//global variables
+var ctxPath= "https://mis.56xyl.com";
+//任务485 wrm begin 20160630
+var accountDto = {accountId : 484810,loginId : "Mylostway", name : "关生",companyName : "佛山乔润国际货运",companyId : "b5364185acd34d128466bbfd5b956b7b",userType:"3",accountType:"null"};
+//任务485 wrm end 20160630
+var onlyCompanyId="4028b8814cc5792a014cc57a92cb0001";
+var fileWSPath = ""
+//-->
+//TASK#518 begin 20160801 pengbin
+var misPathInfo="https://mis.56xyl.com";
+var reportPathInfo="https://report.56xyl.com";
+var jsPathInfo="https://js.56xyl.com";
+var imgPathInfo="https://img.56xyl.com";
+var messagePathInfo="https://message.56xyl.com";
+//TASK#752 begin pengbin 20160831
+var bossPathInfo="https://boss.56xyl.com";
+var growthPathInfo="http://gs.56xyl.com/Growth";
+//bug#4245 begin pengbin 20170620
+var windowWith=window.screen.availWidth;
+//bug#4245 end pengbin 20170620
+//TASK#752 end pengbin 20160831
+//TASK#518 end 20160801 pengbin
+//序列化后替换数据  serializeStr序列化后字符串     key需替换的key   value需替换的value  return 替换后的序列化字符串  20160822  xy
+	function serializeSetKeyAndValue(serializeStr,key,value){
+		//bug#4755 begin pengbin 20170824
+		var indexof=serializeStr.indexOf(key);
+// 		var setStr=serializeStr.substring(indexof);
+// 		indexof=setStr.indexOf("&");
+// 		if(indexof==-1){
+// 			setStr=setStr.substring(0);	
+// 		}else{
+// 			setStr=setStr.substring(0,indexof);
+// 		}		
+// 		serializeStr=serializeStr.replace(setStr,key+"="+value);
+		if(indexof==-1){
+			serializeStr=serializeStr+"&"+key+"="+value;	
+		}else{
+			var setStr=serializeStr.substring(indexof);
+			indexof=setStr.indexOf("&");
+			if(indexof!=-1){
+				setStr=setStr.substring(0,indexof);
+			}
+			serializeStr=serializeStr.replace(setStr,key+"="+value);
+		}	
+		//bug#4755 end pengbin 20170824
+        return serializeStr;
+    };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+
+
+<title>集运管理平台</title>
+
+<link href="../Styles/bootstrap.min.css" rel="stylesheet">
+<link href="../Styles/bootstrap-responsive.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../Styles/font-awesome.min.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="/images/main/css/font-awesome-ie7.min.css?jsv=201807311959" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/ace.min.css">
+<link rel="stylesheet" href="../Styles/ace-responsive.min.css">
+<link rel="stylesheet" href="../Styles/ace-skins.min.css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="/images/main/css/ace-ie.min.css?jsv=201807311959" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/new.css">
+<link rel="stylesheet" href="../Styles/style.css">
+<link type="text/css" rel="stylesheet" href="../Styles/content.css">
+<script src="../Scripts/jquery.min.js"></script> 
+<script type="text/javascript" src="../Scripts/jquery-3.14.form.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.blockUI.js"></script>
+
+<script type="text/javascript" src="../Scripts/search.js"></script> 
+<script type="text/javascript" src="../Scripts/extend.js"></script>
+<script type="text/javascript" src="../Scripts/commonOpt.js"></script> 
+
+<script src="../Scripts/jquery-ui.js"></script> 
+
+
+<script src="../Scripts/bootstrap.min.js"></script>
+
+<link rel="stylesheet" path="/js/artDialog/artDialog/skins/" type="text/css" id="artDialogCss" href="./blue.css">
+<script type="text/javascript" src="../Scripts/panel.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.artDialog.js"></script>
+<script type="text/javascript" src="../Scripts/backSpace.js"></script>
+<script type="text/javascript">
+	$(function(){	
+		$("input[type='text']").focus(function(){this.focused=true;this.select();});	
+		$("input[type='text']").mouseup(function(){if(this.focused){this.focused=false;return false;}});
+	});
+	$(document).bind("click",function(evt){
+		evt.stopPropagation();
+		$(".heng1 > dd > ul",parent.document).hide();
+	});
+	
+	//全局的ajax访问，处理ajax请求时session超时  
+	$.ajaxSetup({   
+		    contentType:"application/x-www-form-urlencoded;charset=utf-8",   
+		    complete:function(XMLHttpRequest,textStatus){
+            	var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); //通过XMLHttpRequest取得响应头，sessionstatus，  
+            	if(sessionstatus=="timeout"){   
+                     //如果超时就处理 ，指定要跳转的页面  
+                     window.location.replace("https://mis.56xyl.com"); 
+                }   
+		    }   
+	});
+</script>
+
+
+<link rel="stylesheet" type="text/css" href="../Styles/panelslider.css">
+<script type="text/javascript" src="../Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.panelslider.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../Styles/jquery.valid.css">
+<script type="text/javascript" src="../Scripts/WdatePicker.js"></script>
+<script type="text/javascript" src="../Scripts/getPY.js"></script>
+<script type="text/javascript" src="../Scripts/optTable.js"></script>
+<script type="text/javascript" src="../Scripts/valid.form.js"></script>
+<script type="text/javascript" src="../Scripts/commonSearchDialog.js"></script>
+<script type="text/javascript" src="../Scripts/commonSearchDialogIndex.js"></script>
+<link rel="stylesheet" path="/js/artDialog/artDialog/skins/" type="text/css" id="artDialogCss">
+<script type="text/javascript" src="../Scripts/panel.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.artDialog.js"></script>
+<script type="text/javascript" src="../Scripts/autocomplete.js"></script>	<style type="text/css">		#divAddressMenu {line-height:20px;text-align:left;position:absolute;visibility:hidden;z-index:20202020;overflow:hidden;width:230px;background:#fff;border:solid #1bd9c3 1px;border-top:gray solid 1px;font-size:12px;}		#divAddressMenu h4{border-bottom:dotted #CCCCCC 1px;color:#999999;font-size:12px; font-weight:100; padding:2px 2px 0 2px; margin:5px;}		#divAddressMenu div{padding:1px;}		#divAddressMenu a {display:block;max-width:230px !important;width:100%;padding:1px 5px 2px 5px;cursor:default;text-decoration:none;color:#008e91;background-color:none;}		#divAddressMenu a span{float:right;font-family:vernada }		#divAddressMenu a:hover {border:solid #1bd9c3 1px;background-color:#ecfafa;}	    .sel {border:solid 1px #1bd9c3;background-color:#ccf }	</style>
+<script type="text/javascript" src="../Scripts/tablefixed.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../Scripts/tabledragging.js"></script>
+<script type="text/javascript" src="../Scripts/freightEntrust.js"></script>
+
+<script type="text/javascript" src="../Scripts/search.js"></script> 
+<script type="text/javascript" src="../Scripts/extend.js"></script>
+<script type="text/javascript" src="../Scripts/commonOpt.js"></script> 
+<style type="text/css">
+.tdDiv {
+	text-align: left;
+	padding-left: 60px;
+	
+}
+.tdDivChild1 {
+	padding-left: 80px;
+}
+.tdDivChild2 {
+	padding-left: 105px;
+}
+.tdDivChild3 {
+	padding-left: 120px;
+}
+
+.tdSpan {
+	background-color: #2DAEEF;
+	color: #FFFFFF;
+	cursor: pointer;
+	padding: 1px 5px 1px 5px;
+	margin-right: 2px;
+}
+.tdSpanImg{
+    /**background: url(../image/admin/line_conn.gif) 10px bottom repeat-y;*/
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+
+.tdSpanImg2{
+    /**background: url(../image/admin/line_conn.gif) 10px bottom repeat-y;*/
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+.tdImg{
+  /**background: url(../image/admin/line_conn.gif) 10px bottom repeat-y;*/
+}
+html{overflow: hidden;}
+	#divAddressMenu a {text-overflow:ellipsis; overflow:hidden; white-space:nowrap}	
+	.datagrid-row-checked{background-color: #fccb78!important;}	
+	.opt-table td select{width: 40px!important;}
+</style>
+<script type="text/javascript">
+  $(function (){
+	     var spanList=$("span.tdSpan");
+	     loadHtml(spanList);
+	     
+	     
+	     $("#btn-search").bind("click",function (){
+	    	 $("#companyHarbor").submit();
+	     });
+	  
+	     
+	 	$("#btn-add").click(function(){
+				$(".saveTr").removeClass("datagrid-row-checked");
+				$.blockUI(); 
+				$.ajax({
+					type: "post",
+					async: true,
+					url: '/sysBase/getSysSysBasicHarborAllList.do',
+					dataType:'html',
+					success: function(data) {
+						$.unblockUI(); 
+						$("#right-panel-html").html(data);
+					}
+				});	
+		});
+	 	
+	 	//浮动框
+		 $('.right-panel').panelslider({ side: 'right', clickClose: true, duration: 500});
+		 $('#close-panel-bt-add').click(function () {
+			     $.panelslider.close(1000);
+		 });
+		 
+		 //自动打开加载
+		 var type='';
+		 if(type && "search" == type){
+			 var openOrCloseSpanObj = $("#openOrCloseSpan");
+			 openOrClose(openOrCloseSpanObj);
+		 }
+  });
+  
+  function loadHtml(spanList){
+	  var html="";
+	  if(null != spanList && $(spanList).size() > 0){
+		   $.each($(spanList),function(v,m){
+			      $(m).bind("click",function (){
+			    	  guangkou(this);
+			      });
+		   });
+	  }
+  }
+  
+  
+  
+  
+  function openHtml(html,provinceParentObj,defaultHtml,provinceNo,open,trClass,flat){
+   var cityNo=""; 
+   if(parseInt(2)==parseInt(flat)){
+	    cityNo=trClass.replace("Tr","");
+   }
+   if(defaultHtml && $(defaultHtml).size() > 0){
+	   var trList = $("#table_report").find("tr");
+	   if(parseInt(1) == parseInt(flat)){
+		   if(trList && $(trList).size() > 1){
+			     if(parseInt(1) == parseInt(open)){
+			    	 $(defaultHtml).show();
+			    	 $("#openOrCloseSpan").attr("openValue","2");//关闭
+					 $("#openOrCloseSpan").text("关闭");
+				   }else{
+					  $("#openOrCloseSpan").attr("openValue","1");//关闭
+					  $("#openOrCloseSpan").text("展开");
+					   /* var provinceNoClass=provinceNo+"Tr";
+					   var provinceNoClassList=  $("#table_report").find("tr."+provinceNoClass);
+					   $(provinceNoClassList).hide();*/
+					  $.each($(trList),function (v,m){
+			    		     var provinceNoValue=$(m).attr("provinceNo");
+			    		     if(provinceNo==provinceNoValue){
+			    		    	 $(m).hide();
+			    		    	 var spanParentList=$(m).find("span.tdSpan");
+			    		    	 $(spanParentList).text("+");
+			    		    	 $(spanParentList).attr("openValue","1");
+			    		     }
+			    	  });
+				   } 
+		   }else{
+			   if(parseInt(1) == parseInt(open)){
+				   $(defaultHtml).show();
+			   }else{
+				   $(defaultHtml).hide();
+			   }  
+		   }
+	   }else if(parseInt(2) == parseInt(flat)){
+		   if(trList && $(trList).size() > 1){
+			     if(parseInt(1) == parseInt(open)){
+			    	 $(defaultHtml).show();
+			    	 $("#openOrCloseSpan").attr("openValue","2");//关闭
+					 $("#openOrCloseSpan").text("关闭");
+				   }else{
+					   $("#openOrCloseSpan").attr("openValue","1");//关闭
+					   $("#openOrCloseSpan").text("展开");
+					   $.each($(trList),function (v,m){
+			    		     var cityNoValue=$(m).attr("cityNo");
+			    		     var flat=$(m).attr("flat");
+			    		     if(cityNo==cityNoValue && 2 != flat){
+			    		    	 $(m).hide();
+			    		    	 var spanParentList=$(m).find("span.tdSpan");
+			    		    	 $(spanParentList).text("+");
+			    		    	 $(spanParentList).attr("openValue","1");
+			    		     }
+			    	  });
+				   } 
+		   }else{
+			   if(parseInt(1) == parseInt(open)){
+				   $(defaultHtml).show();
+			   }else{
+				   $(defaultHtml).hide();
+			   } 
+		   }
+	   }
+	   
+   	   
+   }else{
+	  
+	   	var url=ctxPath+'/sysBase/getSysCompanyCity.action';
+	   	
+	   	var mnemonicCode=$("#mnemonicCode").val();
+	   	var provinceCityName=$("#provinceCityName").val();
+	   	var byname=$("#byname").val();
+	   	var chName=$("#chName").val();
+	   	$("#openOrCloseSpan").attr("openValue","2");//关闭
+		$("#openOrCloseSpan").text("关闭");
+	   	$.ajax({
+				type:"post",
+				url: url,
+				data: {"provinceNo":provinceNo,"cityNo":cityNo,"flat":flat,"mnemonicCode":mnemonicCode,"provinceCityName":provinceCityName,"byname":byname,"chName":chName},
+				async: false,
+				success: function(data) {
+					if(data.indexOf("失败")!=-1){
+						alertNew("加载数据失败！");
+						return false;
+					}else{
+						var datas = eval("("+data+")");
+						
+						for(var i=0;i<datas.length;i++){
+							
+							var data8="";
+							if(datas[i][8]){
+								data8=datas[i][8];
+							}
+							var data9="";
+							if(datas[i][9]){
+								data9=datas[i][9];
+							}
+							if(parseInt(1)==parseInt(flat)){
+								var datasTwoShowName=datas[i][4];
+								if(datasTwoShowName){
+									  var index=datasTwoShowName.indexOf(provinceCityName);
+								      if(index != -1 && provinceCityName){
+								    	  datasTwoShowName=datasTwoShowName.replace(provinceCityName,"<span style=\"color:red;\">"+provinceCityName+"</span>");
+								      }
+									 
+								}
+								html+="<tr class='"+trClass+"' flat=\"2\" provinceNo='"+provinceNo+"' cityNo='"+datas[i][5]+"'>"+
+				                  "<td class=\"tdImg\">"+
+				                     "<div class=\"tdDiv tdDivChild1\">"+
+				                       "<span class=\"tdSpanImg2\"><span class=\"tdSpan\" onclick=\"guangkou(this);\" flat=\"2\" cityNo='"+datas[i][5]+"' openValue=\"1\" id='"+datas[i][0]+"' name='"+datas[i][4]+"' provinceNo='"+datas[i][2]+"'>+</span>"+datasTwoShowName+"</span>"+
+				                     "</div>"+
+				                  "</td>"+
+				                  "<td></td>"+
+				                  "<td></td>"+
+				                  "<td>"+data9+"</td>"+
+				                  "<td>"+data8+"</td>"+
+				                  "<td>&nbsp;</td>"+
+				                "</tr>";
+						     }else if(parseInt(2)==parseInt(flat)){
+						    	 var datasFreeShowName=datas[i][1];
+									if(datasFreeShowName){
+										  var index=datasFreeShowName.indexOf(provinceCityName);
+									      if(index != -1 && provinceCityName){
+									    	  datasFreeShowName=datasFreeShowName.replace(provinceCityName,"<span style=\"color:red;\">"+provinceCityName+"</span>");
+									      }
+										 
+									}
+						    	 html+="<tr class='"+trClass+"' provinceNo='"+provinceNo+"' flat=\"3\" cityNo='"+datas[i][5]+"' harborId='"+datas[i][0]+"'>"+
+				                  "<td>"+
+				                     "<div class=\"tdDiv tdDivChild2\">"+
+				                       "<span><span class=\"tdSpan\" onclick=\"guangkouMaTou(this,'"+provinceNo+"','"+datas[i][5]+"');\" flat=\"3\" cityNo='"+datas[i][5]+"' openValue=\"1\" id='"+datas[i][0]+"' name='"+datas[i][1]+"' provinceNo='"+datas[i][2]+"'>+</span>"+datasFreeShowName+"</span>"+
+				                     "</div>"+
+				                  "</td>"+
+				                  "<td></td>"+
+				                  "<td></td>"+
+				                  "<td>"+data9+"</td>"+
+				                  "<td>"+data8+"</td>"+
+				                  "<td>&nbsp;</td>"+
+				                "</tr>";
+						     }
+							
+						}
+					}
+				}
+		});
+	   if(html){
+			  $(provinceParentObj).after(html);
+		}
+     }
+ }
+  
+ function guangkou($this){
+	 var html="";
+	 var provinceNo=$($this).attr("provinceNo");
+	 var cityNo=$($this).attr("cityNo");
+     var provinceParentObj=$($this).parent().parent().parent().parent();
+     var trClass="";
+     var openValue=$($this).attr("openValue");  //1为关闭，2为打开，默认为1
+     var flat=$($this).attr("flat");  //1为关闭，2为打开，默认为1
+     if(parseInt(1)==parseInt(flat)){
+    	 trClass=provinceNo+"Tr";
+     }else if(parseInt(2)==parseInt(flat)){
+    	 trClass=cityNo+"Tr";
+     }
+     var defaultHtml=$(provinceParentObj).parent().find("tr."+trClass);
+     if(provinceNo){
+     	    if(parseInt(1) == parseInt(openValue)){ 
+     	    	$($this).attr("openValue","2");
+     	    	$($this).text("-");
+     	    	openHtml(html,provinceParentObj,defaultHtml,provinceNo,openValue,trClass,flat);
+     	    }else if(parseInt(2) == parseInt(openValue)){
+     	    	$($this).attr("openValue","1");
+     	    	$($this).text("+");
+     	    	openHtml(html,provinceParentObj,defaultHtml,provinceNo,openValue,trClass,flat);
+     	    }
+     }else{
+     	alertNew("数据有误！");
+     }
+ }
+ 
+ 
+ function guangkouMaTou($this,provinceNo,cityNo){
+	     var id=$($this).attr("id");
+	     var trClass=id+"Tr";
+	     var parentObj=$($this).parent().parent().parent().parent();
+	     var trParentObj = $(parentObj).parent();
+	     var defaultHtml=$(trParentObj).parent().find("tr."+trClass);
+	     var openValue=$($this).attr("openValue");  //1为关闭，2为打开，默认为1
+	     
+	     if(parseInt(1) == parseInt(openValue)){ 
+  	    	$($this).attr("openValue","2");
+  	    	$($this).text("-");
+  	    }else if(parseInt(2) == parseInt(openValue)){
+  	    	$($this).attr("openValue","1");
+  	    	$($this).text("+");
+  	    }
+	     
+	     if(defaultHtml && $(defaultHtml).size() > 0){
+	  	   if(parseInt(1) == parseInt(openValue)){
+	  		   $(defaultHtml).show();
+	  	   }else{
+	  		   $(defaultHtml).hide();
+	  	   }
+	     	   
+	     }else {
+	    	 var mnemonicCode=$("#mnemonicCode").val();
+	 	   	 var provinceCityName=$("#provinceCityName").val();
+	 	   	 var byname=$("#byname").val();
+	 	   	 var chName=$("#chName").val();
+	    	 var url=ctxPath+'/sysBase/getSysCompanyPortList.action';
+	    	 var html="";
+	    	 $.ajax({
+					type:"post",
+					url: url,
+					data: {"portId":id,"mnemonicCode":mnemonicCode,"provinceCityName":provinceCityName,"byname":byname,"chName":chName},
+					async: false,
+					success: function(data) {
+						 if(data){
+							 var datas = eval("("+data+")");
+							 for(var i=0;i<datas.length;i++){
+									    var data6="";
+										if(datas[i][6]){
+											data6=datas[i][6];	
+											var index =data6.indexOf(byname); 
+											if(index != -1 && byname){
+												data6=data6.replace(byname,"<span style=\"color:red;\">"+byname+"</span>") ;
+											}
+										}
+										var data4="";
+										if(datas[i][4]){
+											data4=datas[i][4];
+											var index =data4.indexOf(mnemonicCode.toUpperCase()); 
+											if(index != -1 && mnemonicCode){
+												data4=data4.replace(mnemonicCode.toUpperCase(),"<span style=\"color:red;\">"+mnemonicCode.toUpperCase()+"</span>") ;
+											}
+										}
+										var data7="";
+										if(datas[i][7]){
+											data7=datas[i][7];
+										}
+										var data5="";
+										if(datas[i][5]){
+											data5=datas[i][5];
+										}    
+										
+										var showNameTitle=datas[i][3];
+										if(showNameTitle){
+											var showNameTitleIndex = showNameTitle.indexOf(chName);
+											if(showNameTitleIndex != -1 && chName){
+												showNameTitle=showNameTitle.replace(chName,"<span style=\"color:red;\">"+chName+"</span>");
+											}else{
+												var showNameTitleTwoIndex = showNameTitle.indexOf(provinceCityName);
+												if(showNameTitleTwoIndex != -1 && provinceCityName){
+													showNameTitle=showNameTitle.replace(provinceCityName,"<span style=\"color:red;\">"+provinceCityName+"</span>");
+												}
+											}
+										}
+									    var editId=datas[i][0]+"_edit";
+										html+="<tr class='"+trClass+"' provinceNo='"+provinceNo+"'  cityNo='"+cityNo+"'>"+
+						                  "<td>"+
+						                     "<div class=\"tdDiv tdDivChild3\">"+
+						                       "<span><input type=\"checkbox\" flat=\"5\" cityNo='"+datas[i][2]+"' onclick=\"checkboxNotAllName(this);\" openValue=\"1\" id='"+datas[i][0]+"' name=\"cityNoCheckboxAll\"  provinceNo='"+datas[i][2]+"' style=\"color:#009DD9;cursor: pointer;\"  value='"+datas[i][0]+"'>"+showNameTitle+"</span>"+
+						                     "</div>"+
+						                  "</td>"+
+						                  "<td>"+data6+"</td>"+
+						                  "<td>"+data4+"</td>"+
+						                  "<td>"+data7+"</td>"+
+						                  "<td>"+data5+"</td>"+
+						                  "<td><a id='"+editId+"' onclick=\"editNickName("+datas[i][0]+",this);\" style=\"cursor:pointer;\"><i class=\"icon-edit\"></i>编辑</a></td>"+
+						                "</tr>";
+								}
+							 $(parentObj).after(html);
+						 }else{
+							 alertNew("数据有误！");
+						 }
+					}
+				});
+	     }
+ }
+
+  function editNickName(id,$this){
+	    var codeValueObj  =$($this).parent().prev().prev().prev();
+	    var byNameObj  =$($this).parent().prev().prev().prev().prev();
+	    var parentObj  = $($this).parent();
+	    var codeValue=$(codeValueObj).text();
+	    var byNameValue=$(byNameObj).text();
+	    var codeInput="<input  width='8%' name=\"mnemonicCode\" value='"+codeValue+"'>";
+	    var byNameInput="<input  width='8%' name=\"byName\" value='"+byNameValue+"'>";
+	    $(codeValueObj).html(codeInput);
+	    $(byNameObj).html(byNameInput);
+	    $(parentObj).html("<a onclick='saveNickName("+id+",this);' style='cursor:pointer;'><i class='icon-save'></i>保存</a>");
+  }
+  
+  function saveNickName(id,$this){
+	    var codeValueObj  =$($this).parent().prev().prev().prev();
+	    var byNameObj  =$($this).parent().prev().prev().prev().prev();
+	    var parentObj  = $($this).parent();
+	    $(parentObj).html("<span style=\"color:red;\">数据提交中...</span>");
+	    var codeValue=$(codeValueObj).find("input[name='mnemonicCode']").val();
+	    var byNameValue=$(byNameObj).find("input[name='byName']").val();
+	    if("undefined" == byNameValue){
+	    	byNameValue="";
+	    }
+	    if("undefined" == codeValue){
+	    	codeValue="";
+	    }
+	    var postUrl=ctxPath+'/sysBase/saveHarborByname.action';
+	    $.ajax({
+	    	    async : true,  
+		        type: 'POST',  
+		        url: postUrl,
+		       	data: {"id":id,"nickName":byNameValue,"mnemonicCode":codeValue},
+		        error: function () {//请求失败处理函数  
+   		        	alertNew('保存失败');  
+   		        },
+   		        success:function(data){ //请求成功后处理函数。   
+   		           if(data.indexOf("失败") != -1) {
+					 alertTwo(data);
+					 return false;
+               	  }else{
+               		alertTwo(data+",正在刷新当前页面，请稍后。。。");
+               		setTimeout(function (){
+               			$(codeValueObj).text(codeValue);
+		        	    $(byNameObj).text(byNameValue);
+		        	    $(parentObj).html("<a  onclick=\"editNickName("+id+",this);\" style=\"cursor:pointer;\"><i class=\"icon-edit\"></i>编辑</a>");
+               		},1500);
+               	  }
+		        } 
+	    });
+  }
+  
+  
+ function saveHarbor($this){
+	 var checkAll = $("body").find("input[name='selectHortName']:checked");
+	 var checkAllSize=$(checkAll).size();
+	 if(checkAllSize > 0){
+		 var saveValue="";
+		 $.each($(checkAll),function (v,m){
+			 var disabled=$(m).attr("disabled");
+			 if(!(disabled && "disabled"==disabled)){
+			   saveValue+=$(m).val()+",";				 
+			 }
+		 });
+		 
+		 if(saveValue){
+			 saveValue=saveValue.substr(0,saveValue.length-1);
+		 }else{
+			 alertTwo("请选择要保存的码头");
+			 return false;
+		 }
+		 var url=ctxPath+'/sysBase/saveHarbor.action';
+		 $.ajax({
+				type:"post",
+				url: url,
+				data: {"saveValue":saveValue},
+				async: false,
+				success: function(data) {
+					 if(data.indexOf("失败") != -1) {
+						 alertTwo(data);
+						return false;
+                   	 }else{
+                   		alertTwo(data+",正在刷新当前页面，请稍后。。。");
+                   		setTimeout(function (){
+                   		    window.location.href=window.location.href;
+                   		},2000);
+                   		
+                   		/*
+	                   	 $.each($(checkAll),function (v,m){
+	            			 var openValue =$(m).val();
+	            			 if(openValue){
+	            				 var valueList=openValue.split("#"); 
+	            				 var provinceNo=valueList[2];
+	            				 var cityNo=valueList[1];
+	            				 var harborNo=valueList[7];
+	            				 var saveTrList = $("#table_report").find("tr.saveTr");
+	            				 if(saveTrList && $(saveTrList).size()){
+	            					 $.each($(saveTrList),function (v,m){
+	            						   var parentProvinceNo=$(m).attr("parentProvinceNo");
+	            						   if(provinceNo==parentProvinceNo){
+	            							     //展开第二级
+	            							     
+	            							     var spanList=$(m).find("span.tdSpan");
+	            							     if(null != spanList && $(spanList).size() > 0){
+	            									   $.each($(spanList),function(vv,mm){
+	            										   $(mm).attr("openValue","1");
+	            										   guangkou($(mm));
+	            									   });
+	            								  }
+	            							     var trClass=provinceNo+"Tr";
+	            							     //展开第三级
+	            							     var saveFreeTrList = $("#table_report").find("tr."+trClass);
+	            							     if(saveFreeTrList && $(saveFreeTrList).size() > 0){
+	            							    	  $.each($(saveFreeTrList),function (vvv,mmm){
+	            							    		  var freeCityno=$(mmm).attr("cityNo");
+	            							    		  if(cityNo==freeCityno){
+	            							    			   var spanList=$(mmm).find("span.tdSpan");
+	            							    			   if(null != spanList && $(spanList).size() > 0){
+	       	            									     $.each($(spanList),function(vvi,mmi){
+	       	            									    	$(mmi).attr("openValue","1");
+	       	            										   guangkou($(mmi));
+	       	            									     });
+	       	            								       }
+	            							    			  return false;
+	            							    		  }
+	            							    	  });
+	            							     }
+	            							     
+	            							     //展开最后一级
+	            							     
+	            							     var lastTrClass=cityNo+"Tr";
+	            							     var saveLastTrList = $("#table_report").find("tr."+lastTrClass);
+	            							     if(saveLastTrList && $(saveLastTrList).size() > 0){
+	            							    	 $.each($(saveLastTrList),function (lastIndex,lastObj){
+	            							    		 var lastHarborId=$(lastObj).attr("harborId");
+	            							    		 if(harborNo==lastHarborId){
+	            							    			 var lastSpanList=$(lastObj).find("span.tdSpan");
+	            							    			 if(null != lastSpanList && $(lastSpanList).size() > 0){
+	       	            									     $.each($(lastSpanList),function(vvindex,mmiObj){
+	       	            									    	$(mmiObj).attr("openValue","1");
+	       	            									    	guangkouMaTou($(mmiObj),provinceNo,cityNo);
+	       	            									     });
+	       	            								       }
+	            							    			  return false;
+	            							    		 }
+	            							    	 });
+	            							     }
+	            							     return false;
+	            						   }
+	            					 });
+	            				 }
+	            			 }
+	            		 });*/
+                   	}
+				}
+		});
+		 
+	 }else{
+		 alertNew("请展开码头树，选择需要添加的码头！");
+		 return false;
+	 }
+	 
+ }
+ 
+ function delHarbot($this){
+	     var _html = "";
+	    _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">提示</span>';
+	    _html += '<a id="mb_ico">x</a><div id="mb_msg">确定删除当前码头？</div><div id="mb_btnbox">';
+	    _html += '<input id="mb_btn_ok" type="button"  value="确定"/>';
+	    _html += '<input id="mb_btn_no" type="button"  value="取消" />';
+	    _html += '</div></div>';
+	    $("body").append(_html); 
+	    GenerateCss();
+	    
+	    
+	    $("#mb_ico").click(function () {
+	        $("#mb_box,#mb_con").remove();
+	    });
+	    $("#mb_btn_no").click(function () {
+	        $("#mb_box,#mb_con").remove();
+	         if(typeof(url) != "undefined"){
+	         window.location.href=url;}
+	    });
+	    
+	    
+	    $("#mb_btn_ok").click(function () {
+	         $("#mb_box,#mb_con").remove();
+	         var url=ctxPath+'/sysBase/delCompanyHarbor.action';
+	         var ids="";
+	         var cityNoCheckboxAllList= $("#table_report").find("input[name='cityNoCheckboxAll']:checked");
+	         if(cityNoCheckboxAllList && $(cityNoCheckboxAllList).size() > 0){
+	        	 $.each($(cityNoCheckboxAllList),function (gh,km){
+	        		   ids += $(km).val()+",";
+	        	 });
+	        	 if(ids){
+	        		 ids=ids.substr(0,ids.length -1);
+	        	 }
+	        	 
+	        	 $.ajax({
+						type:"post",
+						url: url,
+						data: {"ids":ids},
+						async: false,
+						success: function(data) {
+							 if(data.indexOf("失败") != -1) {
+								 alertTwo(data);
+								return false;
+		                   	 }else{
+		                   		$($this).parent().parent().parent().parent().remove();
+		                   		alertTwo(data+"正在重新刷新页面，请稍后...");
+		                   		setTimeout(function (){
+		                   		    window.location.href=window.location.href;
+		                   		},2000);
+		                   	}
+						}
+				});
+	         }else{
+	        	 alertNew("请选择要删除的码头！");
+	         }
+			 
+	    }); 
+ }
+ 
+ //生成Css
+ var GenerateCss = function () {
+   $("#mb_box").css({ width: '100%', height: '100%', zIndex: '99999', position: 'fixed',
+     filter: 'Alpha(opacity=60)', backgroundColor: 'black', top: '0', left: '0', opacity: '0.6'
+   });
+
+   $("#mb_con").css({ zIndex: '999999', width: '400px', position: 'fixed',
+     backgroundColor: 'White', borderRadius: '15px',cursor: 'move'
+   });
+
+   $("#mb_tit").css({ display: 'block', fontSize: '14px', color: '#444', padding: '10px 15px',
+     backgroundColor: '#DDD', borderRadius: '15px 15px 0 0',
+     borderBottom: '3px solid #009BFE', fontWeight: 'bold'
+   });
+
+   $("#mb_msg").css({ padding: '20px', lineHeight: '20px',
+     borderBottom: '1px dashed #DDD', fontSize: '13px'
+   });
+
+   $("#mb_ico").css({ display: 'block', position: 'absolute', right: '10px', top: '9px',
+     border: '1px solid Gray', width: '18px', height: '18px', textAlign: 'center',
+     lineHeight: '16px', cursor: 'pointer', borderRadius: '12px', fontFamily: '微软雅黑'
+   });
+
+   $("#mb_btnbox").css({ margin: '15px 0 10px 0', textAlign: 'center' });
+   $("#mb_btn_ok,#mb_btn_no").css({ width: '85px', height: '30px', color: 'white', border: 'none' });
+   $("#mb_btn_ok").css({ backgroundColor: '#168bbb' });
+   $("#mb_btn_no").css({ backgroundColor: 'gray', marginLeft: '20px' });
+
+
+   //右上角关闭按钮hover样式
+   $("#mb_ico").hover(function () {
+     $(this).css({ backgroundColor: 'Red', color: 'White' });
+   }, function () {
+     $(this).css({ backgroundColor: '#DDD', color: 'black' });
+   });
+
+   var _widht = document.documentElement.clientWidth; //屏幕宽
+   var _height = document.documentElement.clientHeight; //屏幕高
+
+   var boxWidth = $("#mb_con").width();
+   var boxHeight = $("#mb_con").height();
+
+   //让提示框居中
+   $("#mb_con").css({ top: (_height - boxHeight) / 2 + "px", left: (_widht - boxWidth) / 2 + "px" });
+ }
+ 
+ 
+ 
+ function openOrClose($this){
+	   $($this).hide();
+	   var prevObj = $($this).prev();
+	   if(prevObj){
+		   $(prevObj).remove();
+	   }
+	   $($this).before("<span style=\"color:red;\">数据加载中，请稍后...</span>");
+	   
+	   setTimeout(function (){
+		   openOrCloseFunc($this);
+	   },500);
+ }
+ 
+ function openOrCloseFunc($this){
+	 var openValueClose=$($this).attr("openValue");
+	   var trList=$("#table_report").find("tr.saveTr");
+	   
+	   if(parseInt(openValueClose) == parseInt(1)){//展开
+		  
+		   if(null != trList && $(trList).size() > 0){
+			    $.each($(trList),function (b,bn){
+			    	 var tdSpanObj = $(bn).find("span.tdSpan");
+			    	 guangkou($(tdSpanObj));
+			    	 
+			    	 
+			    	 //第二级
+			    	 var provinceNoValue = $(bn).attr("parentProvinceNo");
+			    	 var trClass=provinceNoValue+"Tr";
+			    	 var trTwoList=$("#table_report").find("tr."+trClass);
+			    	 if(trTwoList && $(trTwoList).size() > 0){
+			    		  $.each($(trTwoList),function (bb,bbnn){
+			    			     var bbnnSpanObj = $(bbnn).find("span.tdSpan");
+						    	 guangkou($(bbnnSpanObj));
+						    	
+						    	 
+						    	 var provinceNoClass=$(bbnn).attr("provinceNo");
+						    	 var cityNo=$(bbnn).attr("cityNo");
+						    	 var trProvinceNoClass=cityNo+"Tr";
+						    	 var trFreeList=$("#table_report").find("tr."+trProvinceNoClass);
+						    	 if(trFreeList && $(trFreeList).size() > 0){
+						    		 $.each($(trFreeList),function (vv,mm){
+						    			 var mmSpanObj = $(mm).find("span.tdSpan");
+						    			 guangkouMaTou($(mmSpanObj),provinceNoValue,cityNo);
+						    		 });
+						    	 }
+			    		  });
+			    	 }
+			 
+			    });
+		   }
+	   
+		   $($this).attr("openValue","2");
+		   $($this).text("关闭");
+	   }else if(parseInt(openValueClose) == parseInt(2)){
+		     $($this).attr("openValue","1");//关闭
+		     $($this).text("展开");
+		     var trList=$("#table_report").find("tr");
+		     if(null != trList && $(trList).size() > 0){
+		    	    $("#table_report").find("span.tdSpan").text("+");
+		    	    $("#table_report").find("span.tdSpan").attr("openValue","1");
+				    $.each($(trList),function (b,bn){
+				    	var trClass=$(bn).attr("class");
+				    	if("saveTr"!=trClass && "headTr" !=trClass ){
+				    		$(bn).hide();
+				    	}
+				    });
+				    
+			 }
+	   }
+	   
+	   $($this).prev().remove();
+	   $($this).show();
+ }
+ 
+ 
+ function checkboxAllName($this){
+	 var cityNoCheckboxAllList= $("#table_report").find("input[name='cityNoCheckboxAll']");
+	 var checked =$($this).is(':checked');
+	 if(cityNoCheckboxAllList && $(cityNoCheckboxAllList).size() > 0){
+		 $(cityNoCheckboxAllList).prop("checked",checked);
+	 }else{
+		 alertNew("请选择展开所有码头！");
+		 $($this).attr("checked",false);
+		 return false;
+	 }
+     
+ }
+ 
+ function checkboxNotAllName($this){
+	 var checked =$($this).is(':checked');
+	 if(checked || "checked" == checked){
+		 var cityNoCheckboxAllList= $("#table_report").find("input[name='cityNoCheckboxAll']");
+		 var isAllOk=true;
+		 if(cityNoCheckboxAllList && $(cityNoCheckboxAllList).size() > 0){
+			  $.each($(cityNoCheckboxAllList),function (v,m){
+				  var childChecked =$(m).is(':checked');
+				  if(!(childChecked || "checked" == childChecked)){
+					  isAllOk=false;
+					  return false;
+				  }
+			  });
+			  $("#checkboxAllNameId").prop("checked",isAllOk);
+		 }
+	 }else{
+		 $("#checkboxAllNameId").attr("checked",false);
+	 }
+ }
+</script>
+
+
+
+	
+	 <div id="page-content" class="clearfix">
+		<div class="row-fluid">
+		   <form action="https://mis.56xyl.com/sysBase/sysBase/sysCompanyHarbor.do" id="companyHarbor" name="companyHarbor" method="post">
+		      <input type="hidden" value="search" name="type">
+			<div class="form-actions">
+				<div class="search-div">
+							助记码
+							<input type="text" autocomplete="off" name="mnemonicCode" id="mnemonicCode" class="input-medium search-query" value="">
+							地区
+							<input type="text" autocomplete="off" name="provinceCityName" id="provinceCityName" class="input-medium search-query" value="">
+							别名
+							<input type="text" autocomplete="off" name="byname" id="byname" class="input-medium search-query" value="">
+							码头
+							<input type="text" autocomplete="off" name="chName" id="chName" class="input-medium search-query" value="">
+			     </div>
+				<a href="javascript:;" class="btn btn-small btn-purple" id="btn-search"><i class="icon-search"></i>查询</a>
+				<a href="https://mis.56xyl.com/sysBase/sysCompanyHarbor.do#right-panel" class="btn btn-small btn-success right-panel" id="btn-add"><i class="icon-plus"></i>添加码头数据</a>
+				<a href="javascript:delHarbot(this);" class="btn btn-small btn-danger"><i class="icon-trash"></i>删除</a>
+			</div>
+			<div id="tableDivHeight" style="height: 500px;">
+				<table id="table_report" class="table table-bordered table-hover  table-fixed-header">
+					<thead class="header">
+						<tr class="headTr">
+							<th style="width: 260px;"><span style="cursor: pointer;color:#2DAEEF;" id="openOrCloseSpan" onclick="openOrClose(this);" openvalue="1">展开</span>&nbsp;<input type="checkbox" name="checkboxAll" id="checkboxAllNameId" onclick="checkboxAllName(this);">&nbsp;码头</th>
+							<th style="width: 116px;">别名</th>
+							<th style="width: 168px;">助记码</th>
+							<th style="width: 168px;">操作员</th>
+							<th style="width: 301px;">添加日期</th>
+							<th style="width: 50px;">操作</th>
+						</tr>
+					</thead>
+					<tbody style="border-bottom: 1px solid #ddd;">
+						
+							<tr class="saveTr" id="saveTr_7" parentprovinceno="450000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="7" name="广西省" provinceno="450000000" openvalue="1">+</span>
+					                        
+					                          
+					                          广西省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_8" parentprovinceno="440000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="8" name="广东省" provinceno="440000000" openvalue="1">+</span>
+					                        
+					                          
+					                          广东省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_9" parentprovinceno="350000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="9" name="福建省" provinceno="350000000" openvalue="1">+</span>
+					                        
+					                          
+					                          福建省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_17" parentprovinceno="320000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="17" name="江苏省" provinceno="320000000" openvalue="1">+</span>
+					                        
+					                          
+					                          江苏省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_36" parentprovinceno="330000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="36" name="浙江省" provinceno="330000000" openvalue="1">+</span>
+					                        
+					                          
+					                          浙江省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_40" parentprovinceno="370000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="40" name="山东省" provinceno="370000000" openvalue="1">+</span>
+					                        
+					                          
+					                          山东省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_47" parentprovinceno="310000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="47" name="上海" provinceno="310000000" openvalue="1">+</span>
+					                        
+					                          
+					                          上海
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_54" parentprovinceno="120000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="54" name="天津" provinceno="120000000" openvalue="1">+</span>
+					                        
+					                          
+					                          天津
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							<tr class="saveTr" id="saveTr_83" parentprovinceno="430000000">
+					                  <td>
+					                     <div class="tdDiv">
+					                       <span class="tdSpanImg"><span class="tdSpan" flat="1" id="83" name="湖南省" provinceno="430000000" openvalue="1">+</span>
+					                        
+					                          
+					                          湖南省
+					                        
+					                       </span>
+					                     </div>
+					                  </td>
+					                  <td></td>
+					                  <td></td>
+					                  <td>霍佩森</td>
+					                  <td>2018-01-06</td>
+					                  <td>&nbsp;</td>
+							</tr>
+						
+							
+					</tbody>
+				<thead class="header-copy header-fixed hide" style="margin: 0px auto; width: 1092px; background-color: rgb(238, 238, 238);">
+						<tr class="headTr">
+							<th style="width: 260px;"><span style="cursor: pointer;color:#2DAEEF;" id="openOrCloseSpan" onclick="openOrClose(this);" openvalue="1">展开</span>&nbsp;<input type="checkbox" name="checkboxAll" id="checkboxAllNameId" onclick="checkboxAllName(this);">&nbsp;码头</th>
+							<th style="width: 116px;">别名</th>
+							<th style="width: 168px;">助记码</th>
+							<th style="width: 168px;">操作员</th>
+							<th style="width: 301px;">添加日期</th>
+							<th style="width: 50px;">操作</th>
+						</tr>
+					</thead></table>
+			</div>
+		   </form>
+		</div>
+	    <div id="right-panel" class="xyl-panel">
+	    	<div id="form-actions" style="margin-top: 3px;margin-left: 3px;">
+				<a href="javascript:saveHarbor(this);" class="btn btn-small btn-primary" id="btn-save"><i class="icon-save"></i>保存</a>
+				<a href="javascript:;" class="btn btn-small" id="close-panel-bt-add"><i class="icon-remove-sign"></i>关闭</a>
+			</div>
+			<div id="right-panel-html"></div>
+	    </div>
+	</div> 
+
+
+<script src="./bw-send-415.6.31.js"></script></body></html>

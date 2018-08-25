@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Data" namespace="Data.entity" default-lazy="true">
+
+  <class name="DriverInfoEntity" table="t_driverInfo">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate"  not-null="true"/>
+
+    <property name="Fno" column="Fno"  not-null="true"/>
+    <property name="Fname" column="Fname"  not-null="true"/>
+    <property name="Fphone1" column="Fphone1" not-null="true" />
+    <property name="Fphone2"   column="Fphone2" not-null="true"  />
+    <property name="Fphone3"      column="Fphone3"  not-null="true"    />
+    <property name="FcertID"    column="FcertID"   not-null="true" />
+    <property name="FDriverNo"    column="FDriverNo"  not-null="true"   />
+    <property name="FworkState"    column="FworkState"  not-null="true"  />
+
+  </class>
+
+</hibernate-mapping>

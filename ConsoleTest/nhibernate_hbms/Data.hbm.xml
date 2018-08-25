@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Data" namespace="Data.entity" default-lazy="true">
+
+  <class name="DriverInfoEntity" table="t_driverInfo">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate"  not-null="true"/>
+
+    <property name="Fname" column="Fname"  not-null="true"/>
+    <property name="Fphone1" column="Fphone1" not-null="true" />
+    <property name="Fphone2"   column="Fphone2" not-null="true"  />
+    <property name="Fphone3"      column="Fphone3"  not-null="true"    />
+    <property name="FcertID"    column="FcertID"   not-null="true" />
+    <property name="FDriverNo"    column="FDriverNo"  not-null="true"   />
+    <property name="FworkState"    column="FworkState"  not-null="true"  />
+
+  </class>
+
+  <class name="GoodsInfoEntity" table="t_goodsInfo">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" not-null="true" column="Fstate"  />
+
+    <property name="Fchn_name"      not-null="true"   column="Fchn_Name"  />
+    <property name="Feng_name"      not-null="true"   column="Feng_Name"  />
+    <property name="Fmark"          not-null="true"   column="Fmark"   />
+    <property name="FisCheckWeight" not-null="true"   column="FisCheckWeight"  />
+    <property name="Fusable"        not-null="true"   column="Fusable"  />
+
+  </class>
+
+  <class name="WharfInfoEntity" table="t_wharfInfo">
+    <!-- BaseEntity部分字段 -->
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" not-null="true" column="Fstate"  />
+
+    <property name="Fposition"   not-null="true"   column="FPosition"  />
+    <property name="Falias"      not-null="true"   column="Falias"  />
+    <property name="Fmark"       not-null="true"   column="Fmark"   />
+    <property name="Fop"         not-null="true"   column="Fop"  />
+    
+    <!-- AuditInfo部分字段 -->
+    <property name="FInputUser"       not-null="true"    column="FinputUser"  />
+    <property name="FInputTime"       not-null="true"    column="FinputTime"  />
+    <property name="FlastModifyUser"  not-null="false"   column="FlastModifyUser"   />
+    <property name="FlastModifyTime"  not-null="false"   column="FlastModifyTime"  />
+  </class>
+
+  <class name="AirLineEntity" table="t_airway">
+    <!-- BaseEntity部分字段 -->
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" not-null="true" column="Fstate"  />
+
+    <property name="Fchn_name"       not-null="true"   column="Fchn_Name"  />
+    <property name="Feng_name"       not-null="true"   column="Feng_Name"  />
+    <property name="Fremark"         not-null="true"   column="Fremark"   />
+    <property name="Fusable"         not-null="true"   column="Fusable"  />
+    <property name="FlastModifyTime" not-null="true"   column="FlastModifyTime"  />
+  </class>
+
+</hibernate-mapping>

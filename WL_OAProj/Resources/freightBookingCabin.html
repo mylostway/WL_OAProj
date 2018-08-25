@@ -1,0 +1,2225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0075)https://mis.56xyl.com/freightBookingCabin/freightBookingCabin.do?type=begin -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="../Styles/WdatePicker(1).css" rel="stylesheet" type="text/css"></head><body class="easyui-layout"><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div><input type="hidden" id="ctxPath" value="https://mis.56xyl.com">
+
+<input type="hidden" id="misPathInfo" value="https://mis.56xyl.com">
+<input type="hidden" id="accountType" value="null">
+<input type="hidden" id="reportPathInfo" value="https://report.56xyl.com">
+<input type="hidden" id="imgPathInfo" value="https://img.56xyl.com">
+<input type="hidden" id="messagePathInfo" value="https://message.56xyl.com">
+<input type="hidden" id="growthPathInfo" value="http://gs.56xyl.com/Growth">
+
+
+<input type="hidden" id="curr_jsv" value="201807311959">
+<!--
+<script type="text/javascript">window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"browsercollector.oneapm.com/static/js/bw-send-415.6.31.js","beaconUrl":"browsercollector.oneapm.com/beacon","licenseKey":"iAI2J~ZuNEiJzFIB","applicationID":9987725};</script>
+<script type="text/javascript" src="./bw-loader-415.6.31.js"></script> -->
+<script type="text/javascript">
+// <!--
+//global variables
+var ctxPath= "https://mis.56xyl.com";
+//任务485 wrm begin 20160630
+var accountDto = {accountId : 484810,loginId : "Mylostway", name : "关生",companyName : "佛山乔润国际货运",companyId : "b5364185acd34d128466bbfd5b956b7b",userType:"3",accountType:"null"};
+//任务485 wrm end 20160630
+var onlyCompanyId="4028b8814cc5792a014cc57a92cb0001";
+var fileWSPath = ""
+//-->
+//TASK#518 begin 20160801 pengbin
+var misPathInfo="https://mis.56xyl.com";
+var reportPathInfo="https://report.56xyl.com";
+var jsPathInfo="https://js.56xyl.com";
+var imgPathInfo="https://img.56xyl.com";
+var messagePathInfo="https://message.56xyl.com";
+//TASK#752 begin pengbin 20160831
+var bossPathInfo="https://boss.56xyl.com";
+var growthPathInfo="http://gs.56xyl.com/Growth";
+//bug#4245 begin pengbin 20170620
+var windowWith=window.screen.availWidth;
+//bug#4245 end pengbin 20170620
+//TASK#752 end pengbin 20160831
+//TASK#518 end 20160801 pengbin
+//序列化后替换数据  serializeStr序列化后字符串     key需替换的key   value需替换的value  return 替换后的序列化字符串  20160822  xy
+	function serializeSetKeyAndValue(serializeStr,key,value){
+		//bug#4755 begin pengbin 20170824
+		var indexof=serializeStr.indexOf(key);
+// 		var setStr=serializeStr.substring(indexof);
+// 		indexof=setStr.indexOf("&");
+// 		if(indexof==-1){
+// 			setStr=setStr.substring(0);	
+// 		}else{
+// 			setStr=setStr.substring(0,indexof);
+// 		}		
+// 		serializeStr=serializeStr.replace(setStr,key+"="+value);
+		if(indexof==-1){
+			serializeStr=serializeStr+"&"+key+"="+value;	
+		}else{
+			var setStr=serializeStr.substring(indexof);
+			indexof=setStr.indexOf("&");
+			if(indexof!=-1){
+				setStr=setStr.substring(0,indexof);
+			}
+			serializeStr=serializeStr.replace(setStr,key+"="+value);
+		}	
+		//bug#4755 end pengbin 20170824
+        return serializeStr;
+    };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+
+
+<title>集运管理平台</title>
+
+<link href="../Styles/bootstrap.min.css" rel="stylesheet">
+<link href="../Styles/bootstrap-responsive.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../Styles/font-awesome.min.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="/images/main/css/font-awesome-ie7.min.css?jsv=201807311959" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/ace.min.css">
+<link rel="stylesheet" href="../Styles/ace-responsive.min.css">
+<link rel="stylesheet" href="../Styles/ace-skins.min.css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="/images/main/css/ace-ie.min.css?jsv=201807311959" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/new.css">
+<link rel="stylesheet" href="../Styles/style.css">
+<link type="text/css" rel="stylesheet" href="../Styles/content.css">
+<script src="../Scripts/jquery.min.js"></script> 
+<script type="text/javascript" src="../Scripts/jquery-3.14.form.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.blockUI.js"></script>
+
+<script type="text/javascript" src="../Scripts/search.js"></script> 
+<script type="text/javascript" src="../Scripts/extend.js"></script>
+<script type="text/javascript" src="../Scripts/commonOpt.js"></script> 
+
+<script src="../Scripts/jquery-ui.js"></script> 
+
+
+<script src="../Scripts/bootstrap.min.js"></script>
+
+<link rel="stylesheet" path="/js/artDialog/artDialog/skins/" type="text/css" id="artDialogCss" href="./blue.css">
+<script type="text/javascript" src="../Scripts/panel.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.artDialog.js"></script>
+<script type="text/javascript" src="../Scripts/backSpace.js"></script>
+<script type="text/javascript">
+	$(function(){	
+		$("input[type='text']").focus(function(){this.focused=true;this.select();});	
+		$("input[type='text']").mouseup(function(){if(this.focused){this.focused=false;return false;}});
+	});
+	$(document).bind("click",function(evt){
+		evt.stopPropagation();
+		$(".heng1 > dd > ul",parent.document).hide();
+	});
+	
+	//全局的ajax访问，处理ajax请求时session超时  
+	$.ajaxSetup({   
+		    contentType:"application/x-www-form-urlencoded;charset=utf-8",   
+		    complete:function(XMLHttpRequest,textStatus){
+            	var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); //通过XMLHttpRequest取得响应头，sessionstatus，  
+            	if(sessionstatus=="timeout"){   
+                     //如果超时就处理 ，指定要跳转的页面  
+                     window.location.replace("https://mis.56xyl.com"); 
+                }   
+		    }   
+	});
+</script>
+
+
+<script type="text/javascript" src="../Scripts/WdatePicker.js"></script>
+<script type="text/javascript" src="../Scripts/commonSearchDialog.js"></script>
+
+<link rel="stylesheet" path="/js/artDialog/artDialog/skins/" type="text/css" id="artDialogCss">
+<style type="text/css">
+.memo-200{
+	max-width:200px;
+	word-wrap: break-word;
+}
+
+#table_report td{vertical-align:middle;}
+</style>
+<script type="text/javascript" src="../Scripts/panel.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.artDialog.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("#btn-search").click(function(){
+  	    //bug#3444 begin pengbin 20170417
+    	$("input[type='text']").each(function(){
+    		var value = $(this).val(); 
+    		$(this).val($.trim(value));
+    	});
+    	$("input[type='hidden']").each(function(){
+    		var value = $(this).val(); 
+    		$(this).val($.trim(value));
+    	});
+        //bug#3444 end pengbin 20170417
+		$("#mainForm").submit();
+	});
+    
+	$("#btn-add").click(function(){
+		var searchForm= $("#mainForm").serialize();
+		var editUrl="/freightBookingCabin/editFreightBookingCabin.do?action=add";
+		var htmlForm='<form style="display:none;" action='+editUrl+'  method="post" target="_self" id="postOrder_form_window">' +
+		'<input type="hidden" name="searchForm"  value="'+searchForm+'"">'+
+		'</form>';
+	     $("#postOrder_form_window").remove();
+	     $("body").append(htmlForm);
+	     $("#postOrder_form_window").submit(); 
+	});
+				
+	$("#btn-edit").click(function(){
+		if(getCheckBoxNum("edit")==-1){return false;}
+		var id = getCheckedOnlyVal();
+		//window.location.href="/freightBookingCabin/editFreightBookingCabin.do?action=edit&id="+id;
+		var searchForm= $("#mainForm").serialize();
+		var editUrl="/freightBookingCabin/editFreightBookingCabin.do?action=edit&id="+id;
+		var htmlForm='<form style="display:none;" action='+editUrl+'  method="post" target="_self" id="postOrder_form_window">' +
+		'<input type="hidden" name="searchForm"  value="'+searchForm+'"">'+
+		'</form>';
+	     $("#postOrder_form_window").remove();
+	     $("body").append(htmlForm);
+	     $("#postOrder_form_window").submit(); 
+	});
+				
+	$("#btn-delete").click(function(){
+		if(getCheckBoxNum("delete")==-1){return false;}
+		var ids = "";
+		var flag = false;
+		var num = "";
+		$("input[name='checkOne']:checked").each(function(i){
+			/**if($("#usedNum_"+$(this).val()).val() > 0){
+				flag = true;
+				num = num + $("#checknum_"+$(this).val()).val();+","
+			}*/
+			var tr = $(this).parent().parent();
+			var bookingNumber = $(tr).find(".bookingNumber").html();
+			if(bookingNumber!=null && bookingNumber!=''){
+				flag = true;
+				alertTwo("预订舱记录了订舱委托单号，此不允许删除！");
+				return false;
+			}else{
+				ids += $(this).val()+",";
+			}
+		});
+		if(flag){return false};
+		//判断预订舱信息是否可删除
+		var form = $("#mainForm");
+		var options  = {
+         	url:'/freightBookingCabin/validDelAble.action?ids='+ids,
+           	type:'post',
+           	success:function(data){
+                   if(data.indexOf("成功") != -1) {
+	                	$.MsgBox.Confirm("温馨提示", "确定删除所选记录?",function(){
+	               			var options  = {
+	               	          	 	url:'/freightBookingCabin/delFreightBookingCabin.action?ids='+ids,
+	               		           	type:'post',
+	               		           	success:function(data){
+	               		                     if(data.indexOf("失败") != -1) {
+	               		                    	 alertTwo(data);
+	               		                     }else{
+	               	                     		$.MsgBox.Alert("提示", "删除成功！",function(){
+// 	               		                     		$('#mainForm').submit();
+	               		                     	window.location.href="/freightBookingCabin/freightBookingCabin.do?actionType=bookingCabinEdit";
+	               	                     		});
+	               		                     }
+	               		           	}
+	               	       	};
+	               			form.ajaxSubmit(options);
+	               		});
+	                }else{
+	                  	alertTwo(data);
+	                  	return false;
+	                }
+           		}
+       	};
+		form.ajaxSubmit(options);
+		
+		/**if(flag){
+			if(num.indexOf(",") > 0){
+				num = num.substr(0,num.lastIndexOf(","));
+			}
+			alertTwo("第【"+num+"】行舱位已使用，不允许删除！");
+			return false;
+		}*/
+		
+	});
+	
+	$("body").on("dblclick",".ydc",function(e){	
+		 var id = $(this).find("input[name='checkOne']").val();
+         //window.location.href="/freightBookingCabin/editFreightBookingCabin.do?action=edit&id="+id;
+     	 var searchForm= $("#mainForm").serialize();
+		 var editUrl="/freightBookingCabin/editFreightBookingCabin.do?action=edit&id="+id;
+		 var htmlForm='<form style="display:none;" action="'+editUrl+'"  method="post" target="_self" id="postOrder_form_window">' +
+		'<input type="hidden" name="searchForm"  value="'+searchForm+'"">'+
+		'</form>';
+	     $("#postOrder_form_window").remove();
+	     $("body").append(htmlForm);
+	     $("#postOrder_form_window").submit(); 
+         
+	});
+	//bug#4186 begin pengbin 20170329
+	//订舱委托
+	$("body").on("click","#btn-booking-msg",function(){
+		var isAble=$("#btn-booking-msg").attr("isable");
+		if(isAble=="disAble"){
+			alertTwo("对不起，您没有订舱委托权限!");
+		}else{
+			parent.addTab('订舱委托','/freight/applyBookingCabin.do');
+		}
+	});
+	//bug#4186 end pengbin 20170329
+	//需求1500 huangkun 20160606 begin
+	var type='begin';
+	if(type=="begin"){
+		$("#dateYdc").val("2");
+		 var date=new Date();
+		$("#beginDate").val(date.Format("yyyy-MM-dd"));
+		   date.setDate(date.getDate()+7);
+		$("#endDate").val(date.Format("yyyy-MM-dd"));
+	}
+	//需求1500 huangkun 20160606 end
+});
+</script>
+
+
+
+	
+ <form id="mainForm" action="https://mis.56xyl.com/freightBookingCabin/freightBookingCabin.do" namespace="/freightBookingCabin" method="post">
+ <input type="hidden" name="actionType" id="actionType" value="return">
+<div id="page-content" class="clearfix">
+  
+	 <div class="row-fluid">
+		<div class="form-actions">
+			    <div class="search-div">
+			        
+				  <select name="dateYdc" id="dateYdc">
+				    <option value="">不限日期</option>
+				    <option value="1">订舱日期</option>
+				    <option value="2">预开船期</option>
+				    <option value="3">预到船期</option>
+			      </select>
+			      <input type="text" name="beginDate" autocomplete="off" id="beginDate" onclick="WdatePicker({dateFmt:&#39;yyyy-MM-dd&#39;})" class="ipt wid170px" value="">至
+			      <input type="text" name="endDate" autocomplete="off" id="endDate" onclick="WdatePicker({dateFmt:&#39;yyyy-MM-dd&#39;})" class="ipt wid170px" value="">
+			        船公司
+			      <input type="text" autocomplete="off" id="shippingCompany" name="shippingCompany" value="" class="search_dialog">
+			    </div>
+			    <div class="search-div">
+			     船名
+			    <input type="text" autocomplete="off" id="shipName" name="shipName" value="" class="search_dialog">
+			     航次
+			    <input type="text" autocomplete="off" id="shipVoyage" name="shipVoyage" value="" class="search_dialog">
+				
+				<select name="containerSpec">
+				     <option value="">不限柜型</option>
+					
+						<option value="20GP">20GP</option>
+					
+						<option value="40GP">40GP</option>
+					
+						<option value="20HQ">20HQ</option>
+					
+						<option value="40HQ">40HQ</option>
+					
+						<option value="40RF">40RF</option>
+					
+						<option value="45GP">45GP</option>
+					
+						<option value="CMB">CMB</option>
+					
+						<option value="KGS">KGS</option>
+					
+						<option value="20TK">20TK</option>
+					
+						<option value="升">升</option>
+					
+						<option value="票">票</option>
+					
+						<option value="40HC">40HC</option>
+					
+						<option value="吨">吨</option>
+					
+						<option value="20OT">20OT</option>
+					
+						<option value="40OT">40OT</option>
+					
+						<option value="40RH">40RH</option>
+					
+						<option value="托">托</option>
+					
+						<option value="20RF">20RF</option>
+					
+						<option value="袋">袋</option>
+					
+						<option value="45HC">45HC</option>
+					
+						<option value="20FR">20FR</option>
+					
+						<option value="40FR">40FR</option>
+					
+				</select>
+				</div>
+				<div class="search-div">
+				
+				<select name="dhydc">
+				   <option value="">不限单号类型</option>
+				   <option value="1">订舱单号</option>
+				   <option value="2">运单号</option>
+			    </select>
+				<input type="text" autocomplete="off" id="dhlx" name="dhlx" value="" class="search_dialog">
+				目的港
+				<input type="text" autocomplete="off" id="destinationPort" name="destinationPort" value="" class="search_dialog">
+				
+				<select name="usable">
+				   <!-- <option value="">请选择...</option> -->
+				   <option value="1" selected="">可用</option>
+				   <option value="0">已用</option>
+				   <option value="2">全部</option>
+			    </select>
+				</div>
+				<div class="search-div">
+				<a href="javascript:;" class="btn btn-small btn-purple" id="btn-search"><i class="icon-search"></i>查询</a>
+				<a class="btn btn-small btn-success" id="btn-add"><i class="icon-plus"></i> 新增</a>
+				<a class="btn btn-small btn-info" id="btn-edit"><i class="icon-edit"></i>修改</a>
+				<a class="btn btn-small btn-danger" id="btn-delete"><i class="icon-trash"></i>删除</a>
+				
+				
+				<a class="btn btn-small btn-success" style="color:gray;" id="btn-booking-msg" isable="disAble"><i class="icon-trash"></i>制作订舱委托书</a>
+			 	
+			   </div>
+			</div>
+		</div>
+		<table id="table_report" class="table table-striped table-bordered table-hover">
+			<tbody><tr>
+				<th class="center">
+					<input type="checkbox" name="checkAll">
+				</th>
+				<th>船公司</th>
+				<th>船名</th>
+				<th>航次</th>
+				<th>起运港</th>
+				<th>目的港</th>
+				<th>运单号</th>
+				<th>订舱日期</th>
+				<th>预开船期</th>
+				<th>柜型</th>
+				<th>柜量</th>
+				<th>取消数量</th>
+				<th>已用数量</th>
+				<th>启用</th>
+				<th>订舱委托单号</th>
+				
+				<th>收货单位</th>
+				<th>订舱代理</th>
+				<th>单柜成本</th>
+				<th>业务员</th>
+				<th class="memo-200">备注</th>
+				
+			</tr>
+				
+			
+					<tr>
+						<!-- bug#2668 oyrf begin -->
+						<td colspan="20">暂无数据</td>
+						
+						<!-- bug#2668 oyrf end -->
+					</tr>
+						
+		</tbody></table>
+		
+	</div>
+</form>
+
+<style type="text/css">
+.theme-popover table tbody tr:HOVER {
+	background: #eaf2ff;
+	color: #000000;
+	cursor: default;
+}
+/* 批量招标样式 */
+#tbody_BatchCompetition input[type="text"]{min-width: 0!important;font-size: 10px!important;text-align: center;font-family: "宋体"}
+
+</style>
+<!-- 托运人 -->
+<div class="theme-popover" id="dialog_consignor">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="consignorMnemonicCode" onkeyup="showDialogConsignor(1,&#39;consignorPropertyId&#39;,&#39;consignorMnemonicCode&#39;,1,1,1);">
+			<input type="hidden" id="consignorPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogConsignor(0,&#39;consignorPropertyId&#39;,&#39;consignorMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th>业务员</th>
+						<th>主要货物</th>
+						<th>付款方式</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_consignor"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 起始拖车 -->
+<div class="theme-popover" id="dialog_startTrailer">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="startTrailerMnemonicCode" onkeyup="showDialogStartTrailer(1,&#39;startTrailerPropertyId&#39;,&#39;startTrailerMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="startTrailerPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogStartTrailer(0,&#39;startTrailerPropertyId&#39;,&#39;startTrailerMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_startTrailer"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 拖车公司 -->
+<div class="theme-popover" id="dialog_trailer_company">
+	<div class="theme-poptit">
+		<a href="javascript:;" title="关闭" class="close">×</a>
+		<h6>拖车公司</h6>
+	</div>
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="trailerCompanyMnemonicCode" onkeyup="showDialogTrailer(&#39;1&#39;,&#39;trailerCompanyPropertyId&#39;,&#39;trailerCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="trailerCompanyPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogTrailer(&#39;0&#39;,&#39;trailerCompanyPropertyId&#39;,&#39;trailerCompanyMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead><tbody id="tbody_trailer_company"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 目的拖车 -->
+<div class="theme-popover" id="dialog_destinationTrailer">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="destinationTrailerMnemonicCode" onkeyup="showDialogDestinationTrailer(&#39;1&#39;,&#39;destinationTrailerPropertyId&#39;,&#39;destinationTrailerMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="destinationTrailerPropertyId" class="clearIpt"> <a href="javascript:;" onclick="showDialogDestinationTrailer(&#39;0&#39;,&#39;destinationTrailerPropertyId&#39;,&#39;destinationTrailerMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_destinationTrailer"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 保险公司 -->
+<div class="theme-popover" id="dialog_insurCompany">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="insurCompanyMnemonicCode" onkeyup="showDialogInsurCompany(&#39;1&#39;,&#39;insurCompanyPropertyId&#39;,&#39;insurCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="insurCompanyPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogInsurCompany(&#39;0&#39;,&#39;insurCompanyPropertyId&#39;,&#39;insurCompanyMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_insurCompany"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 船公司 -->
+<div class="theme-popover" id="dialog_shipCompany">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="shipCompanyMnemonicCode" onkeyup="showDialogShippingCompany(&#39;1&#39;,&#39;shipCompanyPropertyId&#39;,&#39;shipCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="shipCompanyPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogShippingCompany(&#39;0&#39;,&#39;shipCompanyPropertyId&#39;,&#39;shipCompanyMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_shipCompany"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_freightCompany">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span>
+			<input type="text" id="freightCompanyMnemonicCode" onkeyup="showDialogFreightCompany(&#39;1&#39;,&#39;freightCompanyPropertyId&#39;,&#39;freightCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="freightCompanyPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogShippingCompany(&#39;0&#39;,&#39;freightCompanyPropertyId&#39;,&#39;freightCompanyMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height:290px;overflow-y:auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+				<tr>
+					<th>名称</th>
+					<th>名称（英文）</th>
+					<th>全称（中文）</th>
+					<th width="60px;" class="center">操作</th>
+				</tr>
+				</thead>
+				<tbody id="tbody_freightCompany"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_shipCompany_index">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="shipCompanyMnemonicCode" onkeyup="showDialogShippingCompanyIndex(&#39;1&#39;,&#39;shipCompanyPropertyId&#39;,&#39;shipCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="shipCompanyPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogShippingCompanyIndex(&#39;0&#39;,&#39;shipCompanyPropertyId&#39;,&#39;shipCompanyMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_shipCompany"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 起运港 -->
+<div class="theme-popover" id="dialog_departurePort">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="departurePortMnemonicCode" onkeyup="showDialogDeparturePort(&#39;1&#39;,&#39;departurePortPropertyId&#39;,&#39;departurePortMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="departurePortPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDeparturePort(&#39;0&#39;,&#39;departurePortPropertyId&#39;,&#39;departurePortMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th>别名</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_departurePort"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 目的港 -->
+<div class="theme-popover" id="dialog_destinationPort">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="destinationPortMnemonicCode" onkeyup="showDialogDestinationPort(&#39;1&#39;,&#39;destinationPortPropertyId&#39;,&#39;destinationPortMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="destinationPortPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDestinationPort(&#39;0&#39;,&#39;destinationPortPropertyId&#39;,&#39;destinationPortMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th>别名</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_destinationPort"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 起运地 -->
+<div class="theme-popover" id="dialog_departure">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="departureMnemonicCode" onkeyup="showDialogDeparture(&#39;1&#39;,&#39;departurePropertyId&#39;,&#39;departureMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="departurePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDeparture(&#39;0&#39;,&#39;departurePropertyId&#39;,&#39;departureMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>所属区域</th>
+						<th>名称</th>
+						<th>别名</th>
+						<th>英文名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_departure"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 地点 下标 -->
+<div class="theme-popover" id="dialog_address_index">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="departureMnemonicCodeIndex" onkeyup="showDialogDepartureIndex(&#39;1&#39;,&#39;departurePropertyIdIndex&#39;,&#39;departureMnemonicCodeIndex&#39;,1,1,1)">
+			<input type="hidden" id="departurePropertyIdIndex" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDepartureIndex(&#39;0&#39;,&#39;departurePropertyIdIndex&#39;,&#39;departureMnemonicCodeIndex&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>上级城市</th>
+						<th>名称</th>
+						<th>别名</th>
+						<th>英文名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_address_index"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 目的地 -->
+<div class="theme-popover" id="dialog_destination">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="destinationMnemonicCode" onkeyup="showDialogDestination(&#39;1&#39;,&#39;destinationPropertyId&#39;,&#39;destinationMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="destinationPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDestination(&#39;0&#39;,&#39;destinationPropertyId&#39;,&#39;destinationMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>所属区域</th>
+						<th>名称</th>
+						<th>全称（中文）</th>
+						<th>名称（英文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_destination"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 装货地点 -->
+<div class="theme-popover" id="dialog_loadingPlace" style="width: 600px;">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="loadingPlaceMnemonicCode" onkeyup="showDialogLoadingPlace(&#39;1&#39;,&#39;loadingPlacePropertyId&#39;,&#39;loadingPlaceMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="loadingPlacePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogLoadingPlace(&#39;0&#39;,&#39;loadingPlacePropertyId&#39;,&#39;loadingPlaceMnemonicCode&#39;,1,1,1)"><i class="icon-zoom-out"></i>查询</a> <span><a href="javascript:;" onclick="saveLoadingPlace();"><i class="icon-download-alt"></i>保存</a></span>
+			<span><a href="javascript:;" class="table-row-add-hand-loading"><i class="icon-plus"></i>新增</a></span> <span><a href="javascript:;" onclick="delCusAddress(&#39;dialog_loadingPlace&#39;);"><i class="icon-trash"></i>删除</a></span>
+		</div>
+		<form name="mainForm1" id="mainForm1" method="post">
+			<input type="hidden" name="consignor" id="customer"> <input type="hidden" name="customerId" id="customerId"> <input type="hidden" name="handArea" id="handArea-load"> <input type="hidden" name="handId" value="">
+			<div class="opt-table-div" style="max-height: 290px; width: 600px; overflow-y: auto;">
+				<table class="opt-table">
+					<thead>
+						<tr>
+							<th width="40px"><input type="checkbox" name="checkHandAll"></th>
+							<th>操作</th>
+							<th>装卸货区域</th>
+							<th>地点</th>
+							<th>装卸说明</th>
+							<th>收(发)货单位</th>
+							<th>联系人</th>
+							<th>电话</th>
+							<th>手机</th>
+							<!--需求 1436 begin xy-->
+							<th>货主</th>
+							<!--需求 1436 end xy-->
+							<th>传真</th>
+							<th>备注</th>
+							<th>排序号</th>
+							<th>是否发短信</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_loadingPlace">
+
+					</tbody>
+				</table>
+			</div>
+			<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+		</form>
+	</div>
+
+</div>
+
+<!-- 卸货地点 -->
+<div class="theme-popover" id="dialog_unloadPlace">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="unloadPlaceMnemonicCode" onkeyup="showDialogUnloadPlace(&#39;1&#39;,&#39;unloadPlacePropertyId&#39;,&#39;unloadPlaceMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="unloadPlacePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogUnloadPlace(&#39;0&#39;,&#39;unloadPlacePropertyId&#39;,&#39;unloadPlaceMnemonicCode&#39;,1,1,1)"><i class="icon-zoom-out"></i>查询</a> <span><a href="javascript:;" onclick="saveUnloadPlace();"><i class="icon-download-alt"></i>保存</a></span>
+			<span><a href="javascript:;" class="table-row-add-hand-unload"><i class="icon-plus"></i>新增</a></span> <span><a href="javascript:;" onclick="delCusAddress(&#39;dialog_unloadPlace&#39;);"><i class="icon-trash"></i>删除</a></span>
+		</div>
+		<form name="mainForm1-unload" id="mainForm1-unload" method="post">
+			<input type="hidden" name="consignor" id="customer-unload"> <input type="hidden" name="customerId" id="customerId-unload"> <input type="hidden" name="handArea" id="handArea-unload"> <input type="hidden" name="handId" value="">
+			<div class="opt-table-div" style="max-height: 290px; width: 600px; overflow-y: auto;">
+				<table class="opt-table">
+					<thead>
+						<tr>
+							<th width="40px"><input type="checkbox" name="checkHandAll"></th>
+							<th>操作</th>							
+							<th>装卸货区域</th>
+							<th>地点</th>
+							<th>装卸说明</th>
+							<th>收(发)货单位</th>
+							<th>联系人</th>
+							<th>电话</th>
+							<th>手机</th>
+							<th>货主</th>
+							<th>传真</th>
+							<th>备注</th>
+							<th>排序号</th>
+							<th>是否发短信</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_unloadPlace">
+
+					</tbody>
+				</table>
+			</div>
+			<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	//checkBox全选、反选
+	$("body").on("click", "input[name='checkHandAll']", function(e) {
+		if (this.checked) {
+			$("input[name='checkOnehand']").not(":disabled").each(function() {
+				this.checked = true;
+			});
+		} else {
+			$("input[name='checkOnehand']").not(":disabled").each(function() {
+				this.checked = false;
+			});
+		}
+	});
+</script>
+
+<!-- 船名 -->
+<div class="theme-popover" id="dialog_shipName">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="shipNameMnemonicCode" onkeyup="showDialogTrunkBoatName(&#39;1&#39;,&#39;shipNamePropertyId&#39;,&#39;shipNameMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="shipNamePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogTrunkBoatName(&#39;0&#39;,&#39;shipNamePropertyId&#39;,&#39;shipNameMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>船名</th>
+						<th>船名全称（中文）</th>
+						<th>名称（英文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_shipName"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 航次 -->
+<div class="theme-popover" id="dialog_voyage">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="voyageMnemonicCode" onkeyup="showDialogTrunkVoyage(&#39;1&#39;,&#39;voyagePropertyId&#39;,&#39;voyageMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="voyagePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogTrunkVoyage(&#39;0&#39;,&#39;voyagePropertyId&#39;,&#39;voyageMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>航次</th>
+						<th>名称（中文）</th>
+						<th>名称（英文）</th>
+						<th width="60 px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_voyage"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 货物名称 -->
+<div class="theme-popover" id="dialog_goodsName">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="goodsNameMnemonicCode" onkeyup="showDialogGoodsName(&#39;1&#39;,&#39;goodsNamePropertyId&#39;,&#39;goodsNameMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="goodsNamePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogGoodsName(&#39;0&#39;,&#39;goodsNamePropertyId&#39;,&#39;goodsNameMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_goodsName"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 人员 -->
+<div class="theme-popover" id="dialog_user">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="userMnemonicCode" onkeyup="showDialogUser(&#39;1&#39;,&#39;userPropertyId&#39;,&#39;userMnemonicCode&#39;,1)">
+			<input type="hidden" id="userPropertyId" class="clearIpt"> <a href="javascript:;" onclick="showDialogUser(&#39;0&#39;,&#39;userPropertyId&#39;,&#39;userMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>用户名</th>
+						<th>登录名</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_user"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 人员 下标-->
+<div class="theme-popover" id="dialog_user_index">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="userMnemonicCode" onkeyup="showDialogUserIndex(&#39;1&#39;,&#39;userPropertyId&#39;,&#39;userMnemonicCode&#39;,1)">
+			<input type="hidden" id="userPropertyId" class="clearIpt"> <a href="javascript:;" onclick="showDialogUserIndex(&#39;0&#39;,&#39;userPropertyId&#39;,&#39;userMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>用户名</th>
+						<th>登录名</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_user"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="theme-popover" id="dialog_subType">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="subTypeMnemonicCode" onkeyup="showDialogBusinessSubType(&#39;1&#39;,&#39;subTypePropertyId&#39;,&#39;subTypeMnemonicCode&#39;,1)">
+			<input type="hidden" id="subTypePropertyId" class="clearIpt"> <a href="javascript:;" onclick="showDialogBusinessSubType(&#39;0&#39;,&#39;subTypePropertyId&#39;,&#39;subTypeMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>业务子类型名称</th>
+						<th>主业务类型名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_subType"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 核算对象 -->
+<div class="theme-popover" id="dialog_checkObject">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="checkObjectMnemonicCode" onkeyup="showDialogCheckObject(&#39;1&#39;,&#39;checkObjectPropertyId&#39;,&#39;checkObjectMnemonicCode&#39;,1,1)">
+			<input type="hidden" id="checkObjectPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogCheckObject(&#39;0&#39;,&#39;checkObjectPropertyId&#39;,&#39;checkObjectMnemonicCode&#39;,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_checkObject"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 费用项目 -->
+<div class="theme-popover" id="dialog_feeItems">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="feeItemsMnemonicCode" onkeyup="showDialogFeeItems(&#39;1&#39;,&#39;feeItemsPropertyId&#39;,&#39;feeItemsMnemonicCode&#39;,1,1)">
+			<input type="hidden" id="feeItemsPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogFeeItems(&#39;0&#39;,&#39;feeItemsPropertyId&#39;,&#39;feeItemsMnemonicCode&#39;,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>费用名称</th>
+						<th>费用全称</th>
+						<th>助记码</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_feeItems"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 费用项目 单个-->
+<div class="theme-popover" id="dialog_feeItems_only">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="feeItemsMnemonicCodeOnly" onkeyup="showDialogFeeItemsOnly(&#39;1&#39;,&#39;feeItemsPropertyIdOnly&#39;,&#39;feeItemsMnemonicCodeOnly&#39;,1)">
+			<input type="hidden" id="feeItemsPropertyIdOnly" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogFeeItemsOnly(&#39;0&#39;,&#39;feeItemsPropertyIdOnly&#39;,&#39;feeItemsMnemonicCodeOnly&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>费用名称</th>
+						<th>费用全称</th>
+						<th>助记码</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_feeItems_only"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 部门 -->
+<div class="theme-popover" id="dialog_search_companyName">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> 
+			<input type="text" id="companyNamemnemonicCode" onkeyup="showDialogCompanyDeptList(&#39;1&#39;,&#39;companyNamepropertyId&#39;,&#39;companyNamemnemonicCode&#39;,1,1,1)"> 
+			<input type="hidden" id="companyNamepropertyId" class="clearIpt"> 
+			<a href="javascript:;" id="search_companyName" onclick="showDialogCompanyDeptList(&#39;1&#39;,&#39;companyNamepropertyId&#39;,&#39;companyNamemnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 350px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>代码</th>
+						<th>名称</th>
+						<th>上级部门</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_companyName"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 往来单位 -->
+<div class="theme-popover" id="dialog_contactUnit">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="contactUnitMnemonicCode" onkeyup="showDialogContactUnit(&#39;1&#39;,&#39;contactUnitPropertyId&#39;,&#39;contactUnitMnemonicCode&#39;,1)">
+			<input type="hidden" id="contactUnitPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogContactUnit(&#39;0&#39;,&#39;contactUnitPropertyId&#39;,&#39;contactUnitMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_contactUnit"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 车辆编号 -->
+<div class="theme-popover" id="dialog_carNumber">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="carNumberMnemonicCode" onkeyup="showDialogCarNumberFront(&#39;1&#39;,&#39;carNumberFirstName&#39;,&#39;carNumberMnemonicCode&#39;,1)">
+			<input type="hidden" id="carNumberFirstName" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogCarNumberFront(&#39;0&#39;,&#39;carNumberFirstName&#39;,&#39;carNumberMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div>
+			<div style="max-height: 290px; overflow-y: auto;">
+				<table class="table table-bordered table-line">
+					<thead>
+						<tr>
+							<th>车辆编号</th>
+							<th>车牌号</th>
+							<th>拖车公司</th>
+							<th>司机</th>
+							<th>身份证</th>
+							<th>电话</th>
+							<th>挂车号码</th>
+							<th>油卡号</th>
+							<th>自有/挂靠</th>
+							<th width="60px;" class="center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_carNumber"></tbody>
+				</table>
+				
+			</div>
+			<div class="mylist_foot">
+					<div id="pageFooter" class="page fr"></div>
+				</div>
+		</div>
+	</div>
+</div>
+
+<!-- 车牌号 -->
+<div class="theme-popover" id="dialog_carNo">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="carNoMnemonicCode" onkeyup="showDialogCarNo(&#39;1&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">
+			<input type="hidden" id="carNoFirstName" class="clearIpt"> <a href="javascript:;" onclick="showDialogCarNo(&#39;0&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>车辆编号</th>
+						<th>车牌号</th>
+						<th>拖车公司</th>
+						<th>司机</th>
+						<th>身份证</th>
+						<th>电话</th>
+						<th>挂车号码</th>
+						<th>油卡号</th>
+						<th>自有/挂靠</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_carNo"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 车牌号 下标 -->
+<div class="theme-popover" id="dialog_carNo_index">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="carNoMnemonicCode" onkeyup="showDialogCarNoIndex(&#39;1&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">
+			<input type="hidden" id="carNoFirstName" class="clearIpt"> <a href="javascript:;" onclick="showDialogCarNoIndex(&#39;0&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>车辆编号</th>
+						<th>车牌号</th>
+						<th>司机</th>
+						<th>身份证</th>
+						<th>电话</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_carNo"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<div class="theme-popover" id="dialog_arrivecarNo_index">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="carNoMnemonicCode" onkeyup="showDialogArrivalsCarNoIndex(&#39;1&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">
+			<input type="hidden" id="carNoFirstName" class="clearIpt"> <a href="javascript:;" onclick="showDialogArrivalsCarNoIndex(&#39;0&#39;,&#39;carNoFirstName&#39;,&#39;carNoMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>车辆编号</th>
+						<th>车牌号</th>
+						<th>司机</th>
+						<th>身份证</th>
+						<th>电话</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_arrivalscarNo"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 司机 -->
+<div class="theme-popover" id="dialog_driver">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="driverMnemonicCode" onkeyup="showDialogDriverFront(&#39;1&#39;,&#39;driverFirstName&#39;,&#39;driverMnemonicCode&#39;,1)">
+			<input type="hidden" id="driverFirstName" class="clearIpt"> <a href="javascript:;" onclick="showDialogDriverFront(&#39;0&#39;,&#39;driverFirstName&#39;,&#39;driverMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div>
+			<div style="max-height: 290px; overflow-y: auto;">
+				<table class="table table-bordered table-line">
+					<thead>
+						<tr>
+							<th>司机编号</th>
+							<th>司机姓名</th>
+							<th>联系电话1</th>
+							<th>联系电话2</th>
+							<th>身份证号码</th>
+							<th width="60px;" class="center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_driver"></tbody>
+				</table>
+				
+			</div>
+			<div class="mylist_foot">
+					<div id="pageFooter" class="page fr"></div>
+				</div>
+		</div>
+	</div>
+</div>
+<!-- 费用科目 -->
+<div class="theme-popover" id="dialog_feeSubject">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="feeSubjectMnemonicCode" onkeyup="showDialogFeeSubject(&#39;1&#39;,&#39;feeSubjectPropertyId&#39;,&#39;feeSubjectMnemonicCode&#39;,1)">
+			<input type="hidden" id="feeSubjectPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogFeeSubject(&#39;0&#39;,&#39;feeSubjectPropertyId&#39;,&#39;feeSubjectMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>费用科目名称</th>
+						<th>费用科目全称</th>
+						<th>助记码</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_feeSubject"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 付款方式 -->
+<div class="theme-popover" id="dialog_paymentType">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="paymentTypeMnemonicCode" onkeyup="showDialogPaymentType(&#39;1&#39;,&#39;paymentTypePropertyId&#39;,&#39;paymentTypeMnemonicCode&#39;,1)">
+			<input type="hidden" id="paymentTypePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogPaymentType(&#39;0&#39;,&#39;paymentTypePropertyId&#39;,&#39;paymentTypeMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_paymentType"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 路线 -->
+<div class="theme-popover" id="dialog_billing">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="billingMnemonicCode" onkeyup="showDialogBilling(&#39;1&#39;,&#39;billingPropertyId&#39;,&#39;billingMnemonicCode&#39;,1)">
+			<input type="hidden" id="billingPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogBilling(&#39;0&#39;,&#39;billingPropertyId&#39;,&#39;billingMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>路线</th>
+						<th>码头</th>
+						<th>装卸地点</th>
+						<th>计费里程/助记码</th>
+						<th>计费重里程</th>
+						<th>计费轻里程</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_billing"></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- 运输条款 -->
+<div class="theme-popover" id="dialog_transportTerms">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="transportTermsMnemonicCode" onkeyup="showDialogTransportTerms(&#39;1&#39;,&#39;transportTermsPropertyId&#39;,&#39;transportTermsMnemonicCode&#39;,1)">
+			<input type="hidden" id="transportTermsPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogTransportTerms(&#39;0&#39;,&#39;transportTermsPropertyId&#39;,&#39;transportTermsMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_transportTerms"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 柜型 -->
+<div class="theme-popover" id="dialog_containerSpec">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">关键字</span> <input type="text" id="containerSpecMnemonicCode" onkeyup="showDialogContainerSpec(&#39;1&#39;,&#39;containerSpecPropertyId&#39;,&#39;containerSpecMnemonicCode&#39;,1)">
+			<input type="hidden" id="containerSpecPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogContainerSpec(&#39;0&#39;,&#39;containerSpecPropertyId&#39;,&#39;containerSpecMnemonicCode&#39;,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_containerSpec"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<!-- 表单验证提示 -->
+<div class="theme-popover" id="dialog-form-valid">
+	<div class="div-error-mes">
+		<ul id="error-mes">
+		</ul>
+	</div>
+</div>
+
+<div class="theme-popover-mask"></div>
+
+<div id="templateTr-hand">
+	<!-- 
+				<tr>
+					<input type="hidden" name="handAddressList[0].handId" class="handId trIndex">
+					<td class='center'><input type='checkbox' name='checkOnehand'></td>
+					<td></td>				
+					<td><input type="text" name="handAddressList[0].handArea" alt="handAreaId[0]" onclick="GetFromDataBase(this);" onfocus="GetFromDataBase(this);" onkeyup="selCityData(event,this)" class="trIndex" style='width:150px!important;'></td>
+					<td><input type="text" name="handAddressList[0].address" class="trIndex" style='width:250px!important;'></td>
+					<td><input type="text" name="handAddressList[0].handMemo" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].unit" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].contact" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].phone" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].mobilePhone" class="trIndex"></td>
+					<td>
+						<input type="text" name="handAddressList[0].goodsOwner" class="trIndex">
+					</td>
+					<td><input type="text" name="handAddressList[0].fax" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].memo" class="trIndex"></td>
+					<td><input type="text" name="handAddressList[0].sortNo" class="trIndex"></td>
+					<td class='center'>
+						<select name="handAddressList[0].sendMessage" class="trIndex" >
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+					</td>
+				</tr>
+			 -->
+</div>
+<!-- wurm add start -->
+<div class="theme-popover" id="dialog_company">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">简称</span> <input type="text" id="companyName" onkeyup="showDialogCompany(&#39;1&#39;,&#39;companyNamePropertyId&#39;,&#39;companyName&#39;,1,1,1,&#39;query&#39;)">
+			<input type="hidden" id="companyNamePropertyId" class="clearIpt">
+			<input type="hidden" id="model_fun">
+			<a href="javascript:;" onclick="showDialogCompany(&#39;0&#39;,&#39;companyNamePropertyId&#39;,&#39;companyName&#39;,1,1,1,&#39;query&#39;)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>简称</th>
+						<th>全称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_company"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_ship_company">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">简称</span> <input type="text" id="shipCompName" onkeyup="showDialogShipCompany(&#39;1&#39;,&#39;shipCompNamePropertyId&#39;,&#39;shipCompName&#39;,1,1)">
+			<input type="hidden" id="shipCompNamePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogShipCompany(&#39;0&#39;,&#39;shipCompNamePropertyId&#39;,&#39;shipCompName&#39;,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>简称</th>
+						<th>全称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_ship_company"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_match_org">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">简称</span> <input type="text" id="matchOrgName" onkeyup="showDialogMatchOrg(&#39;1&#39;,&#39;matchOrgNamePropertyId&#39;,&#39;matchOrgName&#39;,1,1,1,&#39;query&#39;)">
+			<input type="hidden" id="matchOrgNamePropertyId" class="clearIpt">
+			<input type="hidden" id="model_fun">
+			<a href="javascript:;" onclick="showDialogMatchOrg(&#39;0&#39;,&#39;matchOrgNamePropertyId&#39;,&#39;matchOrgName&#39;,1,1,1,&#39;query&#39;)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>全称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_match_org"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<!-- 航线 -->
+<div class="theme-popover" id="dialog_transport_route">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">航线</span> <input type="text" id="routeCode" onkeyup="showDialogTransportRoute(&#39;1&#39;,&#39;routeCodePropertyId&#39;,&#39;routeCode&#39;,1,1,1)">
+			<input type="hidden" id="routeCodePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogTransportRoute(&#39;0&#39;,&#39;routeCodePropertyId&#39;,&#39;routeCode&#39;,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>航线编号</th>
+						<th>航线名称（中文）</th>
+						<th>航线名称（英文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_transport_route"></tbody>
+			</table>
+		</div>
+		<div class="mylist_foot">
+			<div id="pageFooter" class="page fr"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 客户关系船公司 -->
+<div class="theme-popover" id="dialog_shipCompany_cus">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">助记码</span> <input type="text" id="shipCompanyCusMnemonicCode" onkeyup="showDialogCustomerShipCompany(&#39;1&#39;,&#39;shipCompanyCusPropertyId&#39;,&#39;shipCompanyMnemonicCode&#39;,1,1,1)">
+			<input type="hidden" id="shipCompanyCusPropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogCustomerShipCompany(&#39;0&#39;,&#39;shipCompanyPropertyId&#39;,&#39;shipCompanyCusMnemonicCode&#39;,1,1,1)">查询</a>
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>名称（英文）</th>
+						<th>全称（中文）</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_shipCompany_cus"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+
+<!-- 批量费用添加 -->
+<script type="text/javascript">
+	function saveBatchFee() {
+		var size = $("#tbody_BatchFee tr").size();
+		if (size == 0) {
+			alertTwo("请增加记录！");
+			return false;
+		}
+		var form1 = $("#mainForm1");
+		if (!validateForm2(form1)) {
+			return false;
+		}
+		var options = {
+			url : ctxPath + '/freight/validBatchFee.action',
+			type : 'post',
+			success : function(data) {
+				if (data.indexOf("失败") != -1) {
+					alertTwo(data);
+				} else {
+					var options = {
+						url : ctxPath + '/freight/saveBatchFee.action',
+						type : 'post',
+						success : function(data) {
+							if (data.indexOf("失败") != -1) {
+								alertTwo(data);
+							} else {
+								alertTwo("保存成功！");
+								$("#tbody_BatchFee").empty();
+								art.dialog({
+									id : 'dialogBatchAddFee'
+								}).close();
+							}
+						}
+					};
+					form1.ajaxSubmit(options);
+				}
+			}
+		};
+		form1.ajaxSubmit(options);
+	}
+</script>
+<div class="theme-popover" id="dialog_BatchAddFee_freight" style="width: 600px;">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span><a href="javascript:;" class="table-row-add-batch-fee"><i class="icon-plus"></i>增加</a></span> <span><a href="javascript:;" class="table-row-del-batch-fee"><i class="icon-trash"></i>删除</a></span> <span><a href="javascript:;" onclick="saveBatchFee();"><i class="icon-download-alt"></i>更新费用</a></span>
+		</div>
+		<form name="mainForm1" id="mainForm1" method="post">
+			<input type="hidden" name="ids" id="ids">
+			<div class="opt-table-div" style="max-height: 290px; width: 600px; overflow-y: auto;">
+				<table class="opt-table">
+					<thead>
+						<tr>
+							<th width="40px"><input type="checkbox" name="checkHandAll"></th>
+							<th>序号</th>
+							<th>收/付</th>
+							<th>核算对象类型</th>
+							<th>核算对象</th>
+							<th>费用项目</th>
+							<th>计费方式</th>
+							<th>金额</th>
+							<th>代收付</th>
+							<th>无关</th>
+							<th>备注</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_BatchFee">
+
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+
+</div>
+<div id="templateTr-fee-freight">
+	<!-- 
+	<tr>
+		<td class='center'><input type='checkbox' name='checkOnehand'></td>
+		<td><no></no></td>
+		<td>
+			<select name="batchFeeList[0].feeType" class="trIndex" style="width: 40px!important;">
+				<option value="1">收</option>
+				<option value="2">付</option>
+			</select>
+		</td>
+		<td>
+			<select name="batchFeeList[0].checkObjectType" id="checkObjectType" class="trIndex" onchange="changeCheckObject(this,this.value)" style="width: 120px!important;">
+				<option value="实际核算对象">实际核算对象</option>
+				<option value="工作单托运人">工作单托运人</option>
+				<option value="工作单船公司">工作单船公司</option>
+				<option value="工作单订舱代理">工作单订舱代理</option>
+				<option value="工作单保险公司">工作单保险公司</option>
+				<option value="工作单起始拖车">工作单起始拖车</option>
+				<option value="工作单目的拖车">工作单目的拖车</option>
+				<option value="工作单货主">工作单货主</option>
+				<option value="工作单业务员">工作单业务员</option>
+			</select>
+		</td>
+		<td>
+			<input type="text" name="batchFeeList[0].checkObject" id="checkObject" class="trIndex search_dialog_index checkObject ipt_valid2  required" msg="请填写核算对象">
+			<input type="hidden" name="batchFeeList[0].checkObjectId" class="trIndex">
+		</td>
+		<td><input type="text" name="batchFeeList[0].feeItems" id="feeItems" class="trIndex ipt_valid2  required search_dialog_index" msg="请填写费用项目"></td>
+		<td>
+			<select name="batchFeeList[0].chargingWay" id="chargingWay" class="trIndex">
+				<option value="每柜单价">每柜单价</option>
+				<option value="柜合计金额">柜合计金额</option>
+				<option value="每票单价">每票单价</option>
+				<option value="每吨单价">每吨单价</option>
+				<option value="平均至每票">平均至每票</option>
+			</select>
+		</td>
+		<td><input type="text" name="batchFeeList[0].money" class="trIndex smallNumber ipt_valid2 required" msg="请填写金额"></td>
+		<td><input type="checkbox" name="batchFeeList[0].replaceFee" class="trIndex" value="1"></td>
+		<td><input type="checkbox" name="batchFeeList[0].isAssociate" class="trIndex" value="1"></td>
+		<td><input type="text" name="batchFeeList[0].memo" class="trIndex"></td>
+	</tr>
+ -->
+</div>
+<div class="theme-popover" id="dialog_BatchAddFee_trailer" style="width: 600px;">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span><a href="javascript:;" class="table-row-add-batch-fee"><i class="icon-plus"></i>增加</a></span> <span><a href="javascript:;" class="table-row-del-batch-fee"><i class="icon-trash"></i>删除</a></span> <span><a href="javascript:;" onclick="saveBatchFee();"><i class="icon-download-alt"></i>更新费用</a></span>
+		</div>
+		<form name="mainForm1" id="mainForm1" method="post">
+			<input type="hidden" name="ids" id="ids">
+			<div class="opt-table-div" style="max-height: 290px; width: 600px; overflow-y: auto;">
+				<table class="opt-table">
+					<thead>
+						<tr>
+							<th width="40px"><input type="checkbox" name="checkHandAll"></th>
+							<th>序号</th>
+							<th>收/付</th>
+							<th>核算对象类型</th>
+							<th>核算对象</th>
+							<th>费用项目</th>
+							<th>计费方式</th>
+							<th>金额</th>
+							<th>代收付</th>
+							<th>无关</th>
+							<th>备注</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_BatchFee">
+
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+
+</div>
+<div id="templateTr-fee-trailer">
+	<!-- 
+	<tr>
+		<td class='center'><input type='checkbox' name='checkOnehand'></td>
+		<td><no></no></td>
+		<td>
+			<select name="batchFeeList[0].feeType" class="trIndex" style="width: 40px!important;">
+				<option value="1">收</option>
+				<option value="2">付</option>
+			</select>
+		</td>
+		<td>
+			<select name="batchFeeList[0].checkObjectType" id="checkObjectType" class="trIndex" onchange="changeCheckObject(this,this.value)" style="width: 120px!important;">
+				<option value="实际核算对象">实际核算对象</option>
+				<option value="工作单托运人">工作单托运人</option>
+				<option value="工作单船公司">工作单船公司</option>
+				<option value="工作单保险公司">工作单保险公司</option>
+				<option value="工作单拖车公司">工作单拖车公司</option>
+				<option value="工作单业务员">工作单业务员</option>
+			</select>
+		</td>
+		<td>
+			<input type="text" name="batchFeeList[0].checkObject" id="checkObject" class="trIndex search_dialog_index checkObject ipt_valid2  required" msg="请填写核算对象">
+			<input type="hidden" name="batchFeeList[0].checkObjectId" class="trIndex">
+		</td>
+		<td><input type="text" name="batchFeeList[0].feeItems" id="feeItems" class="trIndex ipt_valid2  required search_dialog_index" msg="请填写费用项目"></td>
+		<td>
+			<select name="batchFeeList[0].chargingWay" id="chargingWay" class="trIndex">
+				<option value="每柜单价">每柜单价</option>
+				<option value="柜合计金额">柜合计金额</option>
+				<option value="每票单价">每票单价</option>
+				<option value="每吨单价">每吨单价</option>
+				<option value="平均至每票">平均至每票</option>
+			</select>
+		</td>
+		<td><input type="text" name="batchFeeList[0].money" class="trIndex smallNumber ipt_valid2 required" msg="请填写金额"></td>
+		<td><input type="checkbox" name="batchFeeList[0].replaceFee" class="trIndex" value="1"></td>
+		<td><input type="checkbox" name="batchFeeList[0].isAssociate" class="trIndex" value="1"></td>
+		<td><input type="text" name="batchFeeList[0].memo" class="trIndex"></td>
+	</tr>
+ -->
+</div>
+<!-- 拖车拆装箱上传图片 -->
+<div class="theme-popover" id="dialog-trailerUploadJPG" style="width: 300px">
+	<!-- <div class="theme-poptit">
+		<a href="javascript:;" title="关闭" class="close">×</a>
+		<h6>拆装箱图片上传</h6>
+	</div> -->
+	<div>
+		<div class="dialog-search">
+			<div id="tbody_uploadContainerImg" class="tbody_containerImg">
+			</div>
+		</div>
+
+		<div>
+			<!-- <input type="file" name="img" id="photo" onchange="checkImgType(this.id,'tbody_uploadContainerImg','containerImgName')" /> -->
+			
+			
+			<div class="filecolumn">
+			    <div class="filediv">选择上传图片</div>
+			    <input type="file" class="fileupload" name="img" id="photo" onchange="checkImgType(this.id,&#39;tbody_uploadContainerImg&#39;,&#39;containerImgName&#39;)">
+			</div>
+			
+			
+			
+			<input type="hidden" id="myContainerId" name="myContainerId">
+			<input type="hidden" id="containerImgName" name="containerImgName">
+			 <a href="javascript:;" id="uploadImgSubmit" class="uploadsubmit btn btn-success btn-small">确认上传</a>
+		</div>
+		<div id="preView"></div>
+	</div>
+</div>
+
+<!-- 拖车拆装箱查看图片 -->
+<div class="theme-popover" id="dialog-trailerViewJPG">
+	<!-- <div class="theme-poptit">
+		<a href="javascript:;" title="关闭" class="close">×</a>
+		<h6>拆装箱图片上传</h6>
+	</div> -->
+	<div class="dialog-search">
+		<div id="tbody_containerImg" class="tbody_containerImg"></div>
+
+	</div>
+</div>
+<!-- 货代拆装箱查看图片 -->
+<div class="theme-popover" id="dialog-freightViewJPG">
+	<!-- <div class="theme-poptit">
+		<a href="javascript:;" title="关闭" class="close">×</a>
+		<h6>拆装箱图片上传</h6>
+	</div> -->
+	<div class="dialog-search">
+		<div id="tbody_freightContainerImg" class="tbody_containerImg">
+			<!-- <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="viewImgUl">
+			<li class="active">
+				<a data-toggle="tab" href="#viewImgDown" onclick="viewImgDown();">拆箱</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#viewImgUp">装箱</a>
+			</li>
+		</ul>
+		<div class="tab-content" style="min-width: 0!important;">
+		主信息begin
+					<div id="viewImgDown" class="tab-pane in active">
+					</div>
+					主信息end
+				
+					其他信息begin
+					<div id="viewImgUp" class="tab-pane">
+					</div>
+					其他信息end
+					</div> -->
+		</div>
+
+	</div>
+</div>
+<!-- wurm add end -->
+<!-- 任务363wurm begin --><!-- 需求1680 lwj 20160718 begin -->
+<div class="theme-popover" id="dialog_show_enterNo" style="width: 150;">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span id="error_info" style="color: red;"></span>
+		</div>
+			<div>
+				<!--  <select class="searchableSelect w200" id="enterNos"></select> -->
+				<div>
+					<div style="text-align:center;">
+						登帐单号：<input id="enterNosSelect" isexport="" onkeydown="if (event.keyCode == 13 ){changeEnterNos(1)}" style="width:220px;" type="text">
+						<a class="btn btn-small btn-purple" href="javascript:;" onclick="changeEnterNos(1)">
+							<i class="icon-search"></i>
+							查询
+						</a>						
+					</div>
+					<table style="text-align:center;">
+						<thead>
+							<tr bgcolor="#d3d7d4">
+								<th style="width:120px;">登账单号</th>
+								<th style="width:120px;">登账期间</th>
+								<th style="width:160px;">导出日期</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div style="height:200px; overflow-y:scroll;">
+					<table id="enterNosTable" style="text-align:center;">
+						<tbody id="enterNos">					
+						</tbody>
+					</table>
+				</div>	
+			</div>
+			<div style="clear: both;"></div>
+			<div style="margin-top: 10px;text-align:center;">
+				<input type="button" value="导出" id="loadOut">
+				<input type="button" value="取消" id="cancel">
+			</div>	
+	</div>
+</div>
+<!-- 任务363wurm end --><!-- 需求1680 end -->
+<!-- 任务424wurm begin 20160606 -->
+<div class="theme-popover" id="dialog_setDisplayField" style="width: 460px;">
+	<div style="color: red"><i class="icon-info-sign"></i>系统关键字段会自动添加到模板中</div>
+	<div>
+		<div class="bidrectionalCSS">
+			<dl>
+				<dt>可用字段</dt>
+				<dd>
+					<select id="BidrectionalLeft" name="BidrectionalLeft" multiple="multiple">
+					</select>
+				</dd>
+			</dl>
+		</div>
+		<div class="bidrectionalCSS" style="width: 100px!important;">
+			<dl>
+				<dd>
+					<p>
+						<!-- <input type="button" id="addBidrectional" value="--&gt;" /> -->
+						<button type="button" id="addBidrectional">
+						     	&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-arrow-right"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+						</button>
+					</p>
+					<!-- <p><input type="button" id="addBidrectionalAll" value="--&gt;&gt;" /></p> -->
+					<!-- <p style="margin-top:80px;"><input type="button" id="removeBidrectional"  value="&lt;--" /> -->
+					<p style="margin-top:50px;">
+						<button type="button" id="removeBidrectional">
+						     	&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+						</button>
+					</p>
+					<!-- <p><input type="button" id="removeBidrectionalAll"  value="&lt;&lt;--" /></p> -->
+				</dd>
+			</dl>
+		</div>
+		<div class="bidrectionalCSS">
+			<dl>
+				<dt>当前字段</dt>
+				<dd>
+					<select id="BidrectionalRight" name="BidrectionalRight" multiple="multiple">
+					</select>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div>
+		<select class="duizhang1" name="model" id="model" onchange="changeModel(this.value)"></select>
+		<input type="checkbox" id="isDefaultModel" value="2">默认模板
+	</div>
+	<div style="text-align: right;">	
+		<a href="javascript:;" class="btn btn-small btn-primary" id="savePersonalizedFields"><i class="icon-save"></i>保存</a>
+		<a href="javascript:;" class="btn btn-small btn-primary" id="saveAsPersonalizedFields"><i class="icon-save"></i>另存为</a>
+		<a href="javascript:;" class="btn btn-small btn-danger" id="deletePersonalizedFields"><i class="icon-trash"></i>删除模板</a>
+		<a href="javascript:;" class="btn btn-small btn-primary" id="resetPersonalizedFields"><i class="icon-repeat"></i>重置</a>
+		<a href="javascript:;" class="btn btn-small btn-primary" id="initPersonalizedFields"><i class="icon-refresh"></i>初始化</a>
+		<a href="javascript:;" class="btn btn-small btn-primary" id="closeSetDialog"><i class="icon-remove"></i>取消</a>
+	</div>
+</div>
+<!-- 任务424wurm end 20160606 -->
+<!-- TASK#422 begin pengbin  20160613 货代业务操作中心 需要默认列的排序 -->
+<div class="theme-popover" id="dialog_liftingSequence" style="width: 550px;min-height:400px;">
+	<div class="liftingTop">
+		<h2>
+			排序字段：
+			<i class="lifting-up"></i>升序 | 
+			<i class="lifting-down"></i>降序
+		</h2>
+		<ul class="dragsort" id="lifting1">
+		</ul>
+		<div style="clear:both;"></div>
+	</div> 
+	<div class="liftingContent">
+		<h2>当前字段：</h2>
+		<div style="height: 260px;overflow: auto;width: 550px;overflow-x: hidden;">
+			<ul class="dragsort" id="lifting2">
+			</ul>
+		</div>
+	</div> 
+	<div class="liftingBottom">
+		<dl>
+			<dt>
+				<select id="systemDefaultSortPlan">
+				</select>
+				<input type="button" id="btn-deleteSortPlan" value="删除" style="background: #fff;border: 1px solid #ccc;border-left: 0;margin-left: -6px;height: 26px;">				
+				<input type="checkbox" id="defaultSort" name="defaultSort">默认排序
+			</dt>
+			<dd>
+			
+				<a href="javascript:;" class="btn btn-small btn-info" id="btn-cancelSortPlan"><i class="icon-save"></i>取消</a>
+				<a href="javascript:;" class="btn btn-small btn-info" id="btn-resetSortPlan"><i class="icon-save"></i>重置</a>
+				<a href="javascript:;" class="btn btn-small btn-info" id="btn-saveAsPlan"><i class="icon-save"></i>存为方案</a>
+				<a href="javascript:;" class="btn btn-small btn-info" id="btn-saveSortPlan"><i class="icon-save"></i>保存</a>
+			
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- TASK#422 end pengbin  20160613 货代业务操作中心 需要默认列的排序 -->
+<!-- TASK#912 begin pengbin  20160913 套箱、拼箱规则优化2 -->
+<div class="theme-popover" id="dialog_carMsg" style="min-height:100px;">
+	<div id="carMsg_msg"></div>	
+	<div style="margin-top: 10px;">
+		<input type="text" name="carmsg" id="carmsg" style="width:310px;" onclick="getFromCarMsg(this);" onfocus="getFromCarMsg(this);" onkeyup="selDefaultCarMsg(event,this)">
+		<input type="hidden" name="carmsg_ids" id="carmsg_ids">
+		<input type="hidden" name="carmsg_carsNo" id="carmsg_carsNo">
+		<input type="hidden" name="carmsg_carNo" id="carmsg_carNo">
+		<input type="hidden" name="carmsg_driver" id="carmsg_driver">
+		<input type="hidden" name="carmsg_phoneNo" id="carmsg_phoneNo">
+		<input type="hidden" name="carmsg_idNo" id="carmsg_idNo">
+		<input type="hidden" name="carmsg_trailerCompany" id="carmsg_trailerCompany">
+	</div>
+	<div class="dialog-search" style="text-align: center;margin-top: 10px;">
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="syncCarMsg" onclick="syncCarMsg()">&nbsp;确&nbsp;定&nbsp;</a></span>
+		<span><a href="javascript:;" class="btn btn-small" id="cancelSyncCarMsg" onclick="cancelSyncCarMsg()">&nbsp;取&nbsp;消&nbsp;</a></span>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_carMsgForCarpooling" style="width:310px;min-height:100px;">
+    <div id="carMsgForCarpooling_msg"></div>
+	<div id="carMsgForCarpooling"></div>
+	<div class="dialog-search" style="text-align: center;margin-top: 10px;">
+	    <input type="hidden" name="carmsgpooling_ids" id="carmsgpooling_ids">
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="syncCarMsgForCarpooling" onclick="syncCarMsgForCarpooling()">确&nbsp;定</a></span>
+		<span><a href="javascript:;" class="btn btn-small" id="cancelSyncCarMsgForCarpooling" onclick="cancelSyncCarMsgForCarpooling()">取&nbsp;消</a></span>
+	</div>
+</div>
+<div class="theme-popover" id="dialog_cabinetNoMsg" style="width:310px;min-height:100px;">
+    <div id="cabinetNoMsg_msg"></div>
+	<div id="cabinetNoMsg"></div>	
+	<div class="dialog-search" style="text-align: center;margin-top: 10px;">
+	    <input type="hidden" name="cabinetNoMsg_ids" id="cabinetNoMsg_ids">
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="syncCabinetNoMsg" onclick="syncCabinetNoMsg()">确&nbsp;定</a></span>
+		<span><a href="javascript:;" class="btn btn-small" id="cancelSyncCabinetNoMsg" onclick="cancelSyncCabinetNoMsg()">取&nbsp;消</a></span>
+	</div>
+</div>
+<!-- TASK#912 end pengbin  20160913 套箱、拼箱规则优化2 -->
+<!-- 任务441 wrm begin 20160608 -->
+<!-- 默认类型 -->
+<div class="theme-popover" id="dialog_default_type">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">名称</span> <input type="text" id="codeName" onkeyup="showDialogDefaultType(&#39;1&#39;,&#39;codeNamePropertyId&#39;,&#39;codeName&#39;,1,1,1)">
+			<input type="hidden" id="codeNamePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogDefaultType(&#39;0&#39;,&#39;codeNamePropertyId&#39;,&#39;codeName&#39;,1,1,1)">查询</a>	
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>默认类型名称</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_default_type"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<!-- 任务441 wrm end 20160608 -->
+<!-- task1573 zengdewang begin 20170306 -->
+<div class="theme-popover" id="dialog_company_dept">
+	<div>
+		<div class="dialog-search">
+			<span style="font-size: 14px">名称</span> <input type="text" id="deptName" onkeyup="showDialogCompanyDept(&#39;1&#39;,&#39;deptNamePropertyId&#39;,&#39;deptName&#39;,1,1,1)">
+			<input type="hidden" id="deptNamePropertyId" class="clearIpt">
+			<a href="javascript:;" onclick="showDialogCompanyDept(&#39;0&#39;,&#39;deptNamePropertyId&#39;,&#39;deptName&#39;,1,1,1)">查询</a>	
+		</div>
+		<div style="max-height: 290px; overflow-y: auto;">
+			<table class="table table-bordered table-line">
+				<thead>
+					<tr>
+						<th>助记码</th>
+						<th>名称</th>
+						<th>上级部门</th>
+						<th width="60px;" class="center">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_company_dept"></tbody>
+			</table>
+			
+		</div>
+		<div class="mylist_foot">
+				<div id="pageFooter" class="page fr"></div>
+			</div>
+	</div>
+</div>
+<!-- task1573 zengdewang end 20170306 -->
+<!-- 任务488 wrm begin 20160620 -->
+<div class="theme-popover" id="dialog_batch_competition" style="width:  810px;">
+	<div class="row-fluid">
+		<div class="dialog-search">
+			<span><a href="javascript:;" class="btn btn-small btn-success" id="publishBtn" onclick="publishCompetition()">确认发布</a></span>
+		</div>
+		<form name="mainForm1" id="mainForm1" method="post">
+			<input type="hidden" name="ids" id="ids">
+			<input type="hidden" id="matchOrgId">
+			<div class="opt-table-div" style="height: 290px; width: 810px; overflow-y: auto;">
+				<table class="opt-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th id="th_time"></th>
+							<th>工作单号</th>
+							<th style="text-align: center!important;">业务类型</th>
+							<th>干线船名</th>
+							<th>干线航次</th>
+							<th style="width: 60px!important;">作业港口</th>
+							<th id="th_station"></th>
+							<th>箱型柜量</th>
+							<th>截标时间</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_BatchCompetition">
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 任务488 wrm end 20160620 -->
+
+<!-- 任务684 lwj begin 20160805 -->
+<div class="theme-popover" id="dialog_edit_msg" style="width:100%;height:100%;">
+	<div>
+		编辑短信模板，现已经输入<span id="dialog_textTotalNum" style="color: red">-</span>个字
+		<textarea id="dialog_mesgText" style="width:380px;height:150px;" onkeyup="changeTextTotalNum(this)" onchange="changeTextTotalNum(this)"></textarea>
+		<input type="hidden" id="dialog_trNum" value="">
+	</div>
+	<div class="dialog-search">
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="saveMessage" onclick="saveMessage()">保存</a></span>
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="defaultMessage" onclick="defaultMessage()">重置</a></span>
+		<span><a href="javascript:;" class="btn btn-small btn-success" id="getDefaultMessage" onclick="getDefaultMessage()">使用平台默认模板</a></span>
+	</div>
+</div>
+<!-- 任务684 end -->
+
+
+<!-- <script src="./bw-send-415.6.31.js"></script></body></html> -->
