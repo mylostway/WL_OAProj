@@ -1,0 +1,166 @@
+
+<!-- saved from url=(0038)https://mis.56xyl.com/push/findShip.do -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="./layer.css" id="layui_layer_skindefaultlayercss" style=""></head><body><input type="hidden" id="ctxPath" value="https://mis.56xyl.com">
+
+<input type="hidden" id="misPathInfo" value="https://mis.56xyl.com">
+<input type="hidden" id="accountType" value="null">
+<input type="hidden" id="reportPathInfo" value="https://report.56xyl.com">
+<input type="hidden" id="imgPathInfo" value="https://img.56xyl.com">
+<input type="hidden" id="messagePathInfo" value="https://message.56xyl.com">
+<input type="hidden" id="growthPathInfo" value="http://gs.56xyl.com/Growth">
+
+
+<input type="hidden" id="curr_jsv" value="201807311956">
+<!--
+<script type="text/javascript">window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"browsercollector.oneapm.com/static/js/bw-send-415.6.31.js","beaconUrl":"browsercollector.oneapm.com/beacon","licenseKey":"iAI2J~ZuNEiJzFIB","applicationID":9987725};</script>
+<script type="text/javascript" src="./bw-loader-415.6.31.js"></script>
+-->
+<script type="text/javascript">
+// <!--
+//global variables
+var ctxPath= "https://mis.56xyl.com";
+//任务485 wrm begin 20160630
+var accountDto = {accountId : 484810,loginId : "Mylostway", name : "关生",companyName : "佛山乔润国际货运",companyId : "b5364185acd34d128466bbfd5b956b7b",userType:"3",accountType:"null"};
+//任务485 wrm end 20160630
+var onlyCompanyId="4028b8814cc5792a014cc57a92cb0001";
+var fileWSPath = ""
+//-->
+//TASK#518 begin 20160801 pengbin
+var misPathInfo="https://mis.56xyl.com";
+var reportPathInfo="https://report.56xyl.com";
+var jsPathInfo="https://js.56xyl.com";
+var imgPathInfo="https://img.56xyl.com";
+var messagePathInfo="https://message.56xyl.com";
+//TASK#752 begin pengbin 20160831
+var bossPathInfo="https://boss.56xyl.com";
+var growthPathInfo="http://gs.56xyl.com/Growth";
+//bug#4245 begin pengbin 20170620
+var windowWith=window.screen.availWidth;
+//bug#4245 end pengbin 20170620
+//TASK#752 end pengbin 20160831
+//TASK#518 end 20160801 pengbin
+//序列化后替换数据  serializeStr序列化后字符串     key需替换的key   value需替换的value  return 替换后的序列化字符串  20160822  xy
+	function serializeSetKeyAndValue(serializeStr,key,value){
+		//bug#4755 begin pengbin 20170824
+		var indexof=serializeStr.indexOf(key);
+// 		var setStr=serializeStr.substring(indexof);
+// 		indexof=setStr.indexOf("&");
+// 		if(indexof==-1){
+// 			setStr=setStr.substring(0);	
+// 		}else{
+// 			setStr=setStr.substring(0,indexof);
+// 		}		
+// 		serializeStr=serializeStr.replace(setStr,key+"="+value);
+		if(indexof==-1){
+			serializeStr=serializeStr+"&"+key+"="+value;	
+		}else{
+			var setStr=serializeStr.substring(indexof);
+			indexof=setStr.indexOf("&");
+			if(indexof!=-1){
+				setStr=setStr.substring(0,indexof);
+			}
+			serializeStr=serializeStr.replace(setStr,key+"="+value);
+		}	
+		//bug#4755 end pengbin 20170824
+        return serializeStr;
+    };
+</script>
+
+
+
+
+
+
+
+
+    
+    <title>船舶动态推送服务</title>
+    <link type="text/css" rel="stylesheet" href="../Styles/style(1).css">
+    <link type="text/css" rel="stylesheet" href="../Styles/content(1).css">
+    <link type="text/css" rel="stylesheet" href="../Styles/findShip.css">  
+
+
+<!--content start-->
+<div id="content">
+    <!--m-right start-->
+    <div class="m-right">
+        <div class="tab-warp">
+       		 <form id="mainForm" action="https://mis.56xyl.com/push/findShip.do" namespace="/push" method="post">
+	            <ul class="tab-nav clearfix">
+	                <li class="active">
+	                	<a href="https://mis.56xyl.com/push/findShip.do#" data-id="#has-sail" data-toggle="tab" onclick="push.search(0)">已开船
+	                		
+	                	</a>
+	                	<input id="shipStatus" name="shipStatus" value="0" type="hidden">
+	                </li>
+	                <li>
+	                	<a href="https://mis.56xyl.com/push/findShip.do#" data-id="#has-sail" data-toggle="tab" onclick="push.search(1)">已到船
+	                		
+	                			<b class="push-tips">6</b>
+	                		
+	                	</a>
+	                </li>
+	                
+	            </ul>
+	            <div class="tab-content">
+	                <div class="pane-content active" id="has-sail">
+	                    <div class="push-top">
+	                        <!-- <button class="save-btm radius5" style="padding: 6px 15px" type="button" >确定上船</button> -->
+	                        <button class="save-btm radius5" style="padding: 6px 15px" type="button" onclick="push.updateShipStatusRead()">忽略消息</button>
+	                    </div> 
+	                    <div class="push-table">
+	                        <table class="table-ui">
+	                            <thead>
+	                            <tr>
+	                                <th><div><input type="checkbox" name="checkAll" id="checkAll"></div></th>
+	                                
+		                                <th><div>提醒日期</div></th>
+		                                <th><div>离港日期</div></th>
+		                                <th><div>船名</div></th>
+		                                <th><div>起运码头</div></th>
+		                                <th><div>信息准确吗？</div></th>
+		                                <th><div>&nbsp;</div></th>
+	                                
+	                                
+	                               <!--  <th><div>已确定企业数</div></th> -->
+	                            </tr>
+	                            </thead>
+	                            <tbody id="companyDetailResult">
+	                            
+	                            </tbody>
+	                        </table>
+	                    	<div id="pageInfo" class="pagi-btn">
+								
+							</div> 
+	                    </div>
+                        
+	                </div>
+	            </div>
+            </form>
+        </div>
+    </div>
+</div>
+   
+<script type="text/javascript" src="../Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../Scripts/layer.js"></script>
+<script type="text/javascript" src="../Scripts/push.js"></script>
+<script type="text/javascript" src="../Scripts/util.js"></script>
+<script type="text/javascript" src="../Scripts/iconyTab.js"></script>
+<script>
+$(function(){
+	//联动菜单中数字提醒
+	var offCount = '0';
+	var onCount = '6';
+	var total = parseInt(offCount) + parseInt(onCount);
+	if(total == 0){
+		$('#unReadCount', parent.document).removeClass("unReadCount").html("");
+	}else{
+		$('#unReadCount', parent.document).addClass("unReadCount").html(total);
+	}
+})
+</script>
+
+
+<!--
+<script src="./bw-send-415.6.31.js"></script></body></html>
+-->

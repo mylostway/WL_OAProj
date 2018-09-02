@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0053)https://mis.56xyl.com/sysBase/querySysCompanyAreas.do -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body class="easyui-layout"><div class="" style="display: none; position: absolute;"><div class="aui_outer"><table class="aui_border"><tbody><tr><td class="aui_nw"></td><td class="aui_n"></td><td class="aui_ne"></td></tr><tr><td class="aui_w"></td><td class="aui_c"><div class="aui_inner"><table class="aui_dialog"><tbody><tr><td colspan="2" class="aui_header"><div class="aui_titleBar"><div class="aui_title" style="cursor: move;"></div><a class="aui_close" href="javascript:/*artDialog*/;">×</a></div></td></tr><tr><td class="aui_icon" style="display: none;"><div class="aui_iconBg" style="background: none;"></div></td><td class="aui_main" style="width: auto; height: auto;"><div class="aui_content" style="padding: 20px 25px;"></div></td></tr><tr><td colspan="2" class="aui_footer"><div class="aui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="aui_e"></td></tr><tr><td class="aui_sw"></td><td class="aui_s"></td><td class="aui_se" style="cursor: se-resize;"></td></tr></tbody></table></div></div><input type="hidden" id="ctxPath" value="https://mis.56xyl.com">
+
+<input type="hidden" id="misPathInfo" value="https://mis.56xyl.com">
+<input type="hidden" id="accountType" value="null">
+<input type="hidden" id="reportPathInfo" value="https://report.56xyl.com">
+<input type="hidden" id="imgPathInfo" value="https://img.56xyl.com">
+<input type="hidden" id="messagePathInfo" value="https://message.56xyl.com">
+<input type="hidden" id="growthPathInfo" value="http://gs.56xyl.com/Growth">
+
+
+<input type="hidden" id="curr_jsv" value="201807311956">
+<!--
+<script type="text/javascript">window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"browsercollector.oneapm.com/static/js/bw-send-415.6.31.js","beaconUrl":"browsercollector.oneapm.com/beacon","licenseKey":"iAI2J~ZuNEiJzFIB","applicationID":9987725};</script>
+<script type="text/javascript" src="./bw-loader-415.6.31.js"></script>
+-->
+<script type="text/javascript">
+// <!--
+//global variables
+var ctxPath= "https://mis.56xyl.com";
+//任务485 wrm begin 20160630
+var accountDto = {accountId : 484810,loginId : "Mylostway", name : "关生",companyName : "佛山乔润国际货运",companyId : "b5364185acd34d128466bbfd5b956b7b",userType:"3",accountType:"null"};
+//任务485 wrm end 20160630
+var onlyCompanyId="4028b8814cc5792a014cc57a92cb0001";
+var fileWSPath = ""
+//-->
+//TASK#518 begin 20160801 pengbin
+var misPathInfo="https://mis.56xyl.com";
+var reportPathInfo="https://report.56xyl.com";
+var jsPathInfo="https://js.56xyl.com";
+var imgPathInfo="https://img.56xyl.com";
+var messagePathInfo="https://message.56xyl.com";
+//TASK#752 begin pengbin 20160831
+var bossPathInfo="https://boss.56xyl.com";
+var growthPathInfo="http://gs.56xyl.com/Growth";
+//bug#4245 begin pengbin 20170620
+var windowWith=window.screen.availWidth;
+//bug#4245 end pengbin 20170620
+//TASK#752 end pengbin 20160831
+//TASK#518 end 20160801 pengbin
+//序列化后替换数据  serializeStr序列化后字符串     key需替换的key   value需替换的value  return 替换后的序列化字符串  20160822  xy
+	function serializeSetKeyAndValue(serializeStr,key,value){
+		//bug#4755 begin pengbin 20170824
+		var indexof=serializeStr.indexOf(key);
+// 		var setStr=serializeStr.substring(indexof);
+// 		indexof=setStr.indexOf("&");
+// 		if(indexof==-1){
+// 			setStr=setStr.substring(0);	
+// 		}else{
+// 			setStr=setStr.substring(0,indexof);
+// 		}		
+// 		serializeStr=serializeStr.replace(setStr,key+"="+value);
+		if(indexof==-1){
+			serializeStr=serializeStr+"&"+key+"="+value;	
+		}else{
+			var setStr=serializeStr.substring(indexof);
+			indexof=setStr.indexOf("&");
+			if(indexof!=-1){
+				setStr=setStr.substring(0,indexof);
+			}
+			serializeStr=serializeStr.replace(setStr,key+"="+value);
+		}	
+		//bug#4755 end pengbin 20170824
+        return serializeStr;
+    };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+
+
+<title>集运管理平台</title>
+
+<link href="../Styles/bootstrap.min(2).css" rel="stylesheet">
+<link href="../Styles/bootstrap-responsive.min(1).css" rel="stylesheet">
+<link rel="stylesheet" href="../Styles/font-awesome.min(1).css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="/images/main/css/font-awesome-ie7.min.css?jsv=201807311956" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/ace.min(1).css">
+<link rel="stylesheet" href="../Styles/ace-responsive.min(1).css">
+<link rel="stylesheet" href="../Styles/ace-skins.min(1).css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="/images/main/css/ace-ie.min.css?jsv=201807311956" />
+<![endif]-->
+<link rel="stylesheet" href="../Styles/new(1).css">
+<link rel="stylesheet" href="../Styles/style(2).css">
+<link type="text/css" rel="stylesheet" href="../Styles/content(2).css">
+<script src="../Scripts/jquery.min.js"></script> 
+<script type="text/javascript" src="../Scripts/jquery-3.14.form.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.blockUI.js"></script>
+
+<script type="text/javascript" src="../Scripts/search.js"></script> 
+<script type="text/javascript" src="../Scripts/extend.js"></script>
+<script type="text/javascript" src="../Scripts/commonOpt.js"></script> 
+
+<script src="../Scripts/jquery-ui.js"></script> 
+
+
+<script src="../Scripts/bootstrap.min.js"></script>
+
+<link rel="stylesheet" path="/js/artDialog/artDialog/skins/" type="text/css" id="artDialogCss" href="./blue.css">
+<script type="text/javascript" src="../Scripts/panel.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.artDialog.js"></script>
+<script type="text/javascript" src="../Scripts/backSpace.js"></script>
+<script type="text/javascript">
+	$(function(){	
+		$("input[type='text']").focus(function(){this.focused=true;this.select();});	
+		$("input[type='text']").mouseup(function(){if(this.focused){this.focused=false;return false;}});
+	});
+	$(document).bind("click",function(evt){
+		evt.stopPropagation();
+		$(".heng1 > dd > ul",parent.document).hide();
+	});
+	
+	//全局的ajax访问，处理ajax请求时session超时  
+	$.ajaxSetup({   
+		    contentType:"application/x-www-form-urlencoded;charset=utf-8",   
+		    complete:function(XMLHttpRequest,textStatus){
+            	var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); //通过XMLHttpRequest取得响应头，sessionstatus，  
+            	if(sessionstatus=="timeout"){   
+                     //如果超时就处理 ，指定要跳转的页面  
+                     window.location.replace("https://mis.56xyl.com"); 
+                }   
+		    }   
+	});
+</script>
+
+
+	<script type="text/javascript">
+   		    $(function(){
+   		        $("#btn-search").click(function(){
+   		            $("#mainForm").submit();
+   		        });
+   		        
+				$("#btn-delete").click(function(){
+					if(getCheckBoxNum("delete")==-1){return false;}
+					$.MsgBox.Confirm("温馨提示", "确定删除所选记录？", function () { 
+						var form = $("#mainForm");
+						var ids = getCheckedAllVal();
+						var options  = {
+			           	 	url:'/sysBase/deleteSysCompanyArea.action?ids='+ids,
+			            	type:'post',
+			            	success:function(data){
+			                      if(data.indexOf("失败") != -1) {
+			                    	 alertNew(data);
+			                      }else{
+		                      		$.MsgBox.Alert("提示", "删除成功！",function(){
+		                        		window.location.href='/sysBase/querySysCompanyAreas.do';
+		                        	});
+			                      }
+			            	}
+		            	};
+			   			form.ajaxSubmit(options);
+				    });
+				});
+				//定制地区数据
+				$("#btn-cogradient").click(function(){
+					window.location.href="/sysBase/toMakeCompanyArea.do";
+   		        });
+			});
+   		    
+   		function editNickName(no){
+   			var nickname = $("#hid_"+no).val();
+   			var mnemonicCode = $("#hidcode_"+no).val();
+   			$("#td_"+no).html("<input width='12%' id='nickname_"+no+"' value='"+nickname+"'>");
+   			$("#code_"+no).html("<input width='12%' id='mnemonicCode_"+no+"' value='"+mnemonicCode+"'>");
+   			$("#op_"+no).html("<a onclick='saveNickName("+no+");' style='cursor:pointer;'><i class='icon-save'></i>保存</a>");
+   			//$("#mnemonicCode_"+no).focus();
+   		}
+   		
+   		function saveNickName(no){
+   			$.blockUI();
+   			var name = $("#nickname_"+no).val();
+   			var code = $("#mnemonicCode_"+no).val();
+   			if(name == "undefined"){name = "";}
+   			$.ajax({  
+   		        async : true,  
+   		        type: 'POST',  
+   		        url: "/sysBase/saveAreaNickName.action",
+   		       	data: {"id":no,"nickName":name,"mnemonicCode":code},
+   		        error: function () {//请求失败处理函数  
+   		        	$.unblockUI();
+   		        	alertNew('保存失败');  
+   		        },  
+   		        success:function(data){ //请求成功后处理函数。    
+   		        	$.unblockUI();
+   		        	$.MsgBox.Alert("提示", "保存成功！",function(){
+   		        		$("#td_"+no).html(name);
+   		        		$("#hid_"+no).val(name);
+   		        		$("#code_"+no).html(code);
+   		        		$("#hidcode_"+no).val(code);
+   		        		$("#op_"+no).html("<a onclick='editNickName("+no+");' style='cursor:pointer;'><i class='icon-edit'></i>编辑</a>");
+   		        	});
+   		        }  
+   		    }); 
+   		}
+		</script>
+
+
+
+	
+	<div id="page-content" class="clearfix">
+		<div class="row-fluid">
+		<form id="mainForm" action="https://mis.56xyl.com/sysBase/querySysCompanyAreas.do" namespace="/sysBase" method="post">
+			<div class="form-actions">
+				<div class="span8">
+				<div class="search-div">
+				        中文名称
+					<input type="text" autocomplete="off" name="cityName" class="input-medium search-query" value="">
+					助记码
+					<input type="text" autocomplete="off" name="mnemonicCode" class="input-medium search-query" value="">
+					<a href="javascript:;" class="btn btn-small btn-purple" id="btn-search"><i class="icon-search"></i>查询</a>
+					<a href="javascript:;" class="btn btn-small btn-danger" id="btn-delete"><i class="icon-trash"></i>删除</a> 
+					<a href="javascript:;" class="btn btn-small btn-info" id="btn-cogradient"><i class="icon-plus"></i>定制装卸地址</a>
+				</div>
+				</div>
+			</div>
+			<table id="table_report" class="table table-striped table-bordered table-hover">
+				<tbody><tr>
+					<th class="center">
+						<input type="checkbox" name="checkAll">
+					</th><th>编码</th><th>中文名称</th><th>英文名称</th><th width="12%">助记码</th><th width="12%">别名</th>
+					<th>可用</th><th>操作员</th><th>录入日期</th><th>操作</th>
+				</tr>
+				
+				
+					<tr>
+						<td colspan="12">暂无数据</td>
+					</tr>
+							
+			</tbody></table>
+			
+			</form>
+		</div>
+	</div>
+
+<!--
+<script src="./bw-send-415.6.31.js"></script></body></html>
+-->
