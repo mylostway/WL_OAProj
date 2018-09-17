@@ -17,9 +17,11 @@ namespace Data.dal
 
         private static readonly string CFG_FILE_NAME = "chloe.cfg.xml";
 
+        static readonly string MYSQL_CONNECTION_STR_CFG_KEY = "MysqlConnectionString";
+
         static ChloeUtil()
         {
-            DbContext = new MySqlContext(new MySqlConnectionFactory(ConfigHelper.GetOnKey("")));
+            DbContext = new MySqlContext(new MySqlConnectionFactory(ConfigHelper.GetOnKey(MYSQL_CONNECTION_STR_CFG_KEY)));
         }
 
     }

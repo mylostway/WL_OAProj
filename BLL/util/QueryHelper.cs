@@ -41,6 +41,27 @@ namespace BLL.util
             return rawRowCont;
         }
 
+
+        /// <summary>
+        /// 修正日期，默认间隔为30（一个月），结束日期为当天
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="dayInter"></param>
+        /// <returns></returns>
+        public static void FixDate(ref DateTime? start,ref DateTime? end,int dayInter = 30)
+        {
+            if(!end.HasValue)
+            {
+                end = DateTime.Now;
+            }
+
+            if(!start.HasValue)
+            {
+                start = end.Value.AddDays(dayInter);
+            }
+        }
+
         /// <summary>
         /// 软删除的状态值
         /// </summary>

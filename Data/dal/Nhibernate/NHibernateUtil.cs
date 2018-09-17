@@ -17,31 +17,10 @@ namespace Data.dal
 
         static NHibernateUtil()
         {
-            var cfg = new Configuration().Configure();
-            //cfg.SetProperty("characterEncoding", "GBK");
+            var cfg = new Configuration().Configure();            
             sessionFactory = cfg.BuildSessionFactory();
 
-            curSession = sessionFactory.OpenSession(new NHibernateHelper.NHibernateSqlInjector());
-
-            var query = curSession.CreateSQLQuery("SET character_set_client=gbk");
-            var nRet = query.ExecuteUpdate();
-
-            query = curSession.CreateSQLQuery("SET character_set_connection=gbk");
-            nRet = query.ExecuteUpdate();
-
-            query = curSession.CreateSQLQuery("SET character_set_database=utf8");
-            nRet = query.ExecuteUpdate();
-
-            query = curSession.CreateSQLQuery("SET character_set_results=gbk");
-            nRet = query.ExecuteUpdate();
-
-            query = curSession.CreateSQLQuery("SET character_set_server=gbk");
-            nRet = query.ExecuteUpdate();
-
-            curSession.Flush(); 
-
-            query = curSession.CreateSQLQuery("show variables like '%char%'");
-            var list = query.List();
+            curSession = sessionFactory.OpenSession(new NHibernateHelper.NHibernateSqlInjector());            
         }
 
         public static ISessionFactory getSessionFactory()

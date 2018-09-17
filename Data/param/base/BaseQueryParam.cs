@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.param
 {
-    public class BaseQueryParam : IParams
+    public class BaseQueryParam : IQueryParam
     {
         public int? Skip { get; set; }
 

@@ -48,13 +48,13 @@ namespace BLL.query
         /// <param name="entity"></param>
         public void AddEntity(T entity)
         {
-            /*
+            
             var session = NHibernateUtil.getSession();
             var trans = session.BeginTransaction();
             session.Save(entity);
             trans.Commit();
-            */
-            ChloeUtil.DbContext.Insert(entity);
+
+            //ChloeUtil.DbContext.Insert(entity);
         }
 
 
@@ -71,6 +71,13 @@ namespace BLL.query
                 session.Save(e);
             }
             trans.Commit();
+           
+            /*
+            foreach (var e in entityList)
+            {
+                ChloeUtil.DbContext.Insert(e);
+            }
+            */
         }
 
 

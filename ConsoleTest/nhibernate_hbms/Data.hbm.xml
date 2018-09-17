@@ -65,4 +65,73 @@
     <property name="FlastModifyTime" not-null="true"   column="FlastModifyTime"  />
   </class>
 
+  <class name="ShipBookManagerEntity" table="t_ship_book_manager">
+    <!-- BaseEntity部分字段 -->
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" not-null="true" column="Fstate"  />
+
+    <property name="FshipCompany" column="Fship_company" />
+    <property name="FshipName" column="Fship_name" />
+    <property name="FshipTNo" column="Fship_tNo" />
+    <property name="FshipStartWharf" column="Fship_start_wharf" />
+    <property name="FshipToWharf" column="Fship_to_wharf" />
+    <property name="FshipTransNo" column="Fship_trans_no" />
+    <property name="FshipBookDate" column="Fship_book_date" />
+    <property name="FshipScheduleDate" column="Fship_schedule_date" />
+    <property name="FshipCabinetType" column="Fship_cabinet_type" />
+    <property name="FshipCabinetAmt" column="Fship_cabinet_amt" />
+    <property name="FshipCancelAmt" column="Fship_cancel_amt" />
+    <property name="FshipUsedAmt" column="Fship_used_amt" />
+    <property name="FshipIsUsed" column="Fship_is_used" />
+    <property name="FshipDelegateTransNo" column="Fship_delegate_trans_no" />
+    <property name="FshipTakeUnit" column="Fship_take_unit" />
+    <property name="FshipBookProxy" column="Fship_book_proxy" />
+    <property name="FshipPerCost" column="Fship_per_cost" />
+    <property name="Fbusinesser" column="Fbusinesser" />
+    <property name="Fmemo" column="Fmemo" />
+
+  </class>
+
+  <class name="FreBusinessOpCenterEntity" table="t_fre_business_center">
+    <!-- BaseEntity部分字段 -->
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" not-null="true" column="Fstate"  />
+
+    <property name="FinterflowState" column="Finterflow_state" />
+    <property name="FconsignMan" column="Fconsign_man" />
+    <property name="FstartWharf" column="Fstart_wharf" />
+    <property name="FstartPlace" column="Fstart_place" />
+    <property name="FtoPlace" column="Fto_place" />
+    <property name="FtoWharf" column="Fto_wharf" />
+    <property name="FbusinessDate" column="Fbusiness_date" />
+    <property name="Fbusinesser" column="Fbusinesser" />
+    <property name="FgoodsName" column="Fgoods_name" />
+    <property name="FholdGoodsPlace" column="Fhold_goods_place" />
+    <property name="FholdGoodsPeoplePhone" column="Fhold_goods_people_phone" />
+    <property name="FputGoodsPlace" column="Fput_goods_place" />
+    <property name="FputGoodsPeoplePhone" column="Fput_goods_people_phone" />
+    <property name="FopTerm" column="Fop_term" />
+    <property name="FtransitTerm" column="Ftransit_term" />
+    <property name="FpayWay" column="Fpay_way" />
+    <property name="FworkOrderNo" column="Fwork_order_no" />
+    <property name="FrecordState" column="Frecord_state" />
+    <property name="FshipCompany" column="Fship_company" />
+    <property name="FshipMainShipName" column="Fship_main_ship_name" />
+    <property name="FshipMainLineNo" column="Fship_main_line_no" />
+    <property name="FshipTransNo" column="Fship_trans_no" />
+    <property name="FstartTrailCar" column="Fstart_trail_car" />
+    <property name="FholdGoodsDate" column="Fhold_goods_date" />
+    <property name="FtoTrailCar" column="Fto_trail_car" />
+    <property name="FcabinetNo" column="Fcabinet_no" />
+    <property name="F20th" column="F20th" />
+    <property name="F40th" column="F40th" />
+    <property name="F40thHq" column="F40th_hq" />
+    <property name="FholdState" column="Fhold_state" />
+
+  </class>
+
 </hibernate-mapping>
