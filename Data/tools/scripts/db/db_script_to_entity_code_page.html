@@ -1,0 +1,48 @@
+<html>
+	<head>	
+		<title>转换db建表语句到C#实体Code</title>
+	</head>
+	<body style="margin:6px">
+		<label>请输入创表语句：</label><br/>
+		<textarea id='txt_source' rows="15" cols="90" ></textarea>
+		<br/>
+		<span style="display:inline-block">
+			<input type='button' onclick="javascript:trans()" value="转换" style="margin:6px;width:60px;height:28px;"></input>
+			<input type='button' onclick="javascript:clear()" value="清空" style="margin:6px;width:60px;height:28px;"></input>
+		</span>		
+		<br/>
+		
+		<div>
+			<label>转化结果：</label><br/>
+			<span style="display:inline-block">
+				<textarea id='txt_dest' rows="15" cols="90" disabled="disabled"></textarea>
+				<textarea id='txt_dest_xml' rows="15" cols="90" disabled="disabled" style="margin-left:6px"></textarea>
+			</span>
+		</div>
+		
+		<br/>
+	</body>
+	<script src='./db_script_to_entity_code.js'></script>
+	<script>
+		function trans(){
+			var txtSource = document.getElementById('txt_source').value;
+			
+			var resultText = entityGen.go(txtSource);
+			
+			console.log(resultText);
+			
+			var xmlResult = entityGen.toXml(txtSource);
+			
+			console.log(xmlResult);
+			
+			document.getElementById('txt_dest').value = resultText;
+			document.getElementById('txt_dest_xml').value = xmlResult;
+		}
+		
+		function clear(){
+			document.getElementById('txt_source').value = "";
+			document.getElementById('txt_dest').value = "";
+			document.getElementById('txt_dest_xml').value = "";
+		}
+	</script>
+</html>

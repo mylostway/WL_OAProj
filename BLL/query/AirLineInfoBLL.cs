@@ -29,7 +29,7 @@ namespace BLL.query
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
 
             var query2 = session.QueryOver<AirLineEntity>();
 

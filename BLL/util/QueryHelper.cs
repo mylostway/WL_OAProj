@@ -43,6 +43,11 @@ namespace BLL.util
 
 
         /// <summary>
+        /// 默认最小时间，1970-01-01
+        /// </summary>
+        static readonly DateTime MIN_DATE_TIME = DateTime.Parse("1970-01-01");
+
+        /// <summary>
         /// 修正日期，默认间隔为30（一个月），结束日期为当天
         /// </summary>
         /// <param name="start"></param>
@@ -58,7 +63,14 @@ namespace BLL.util
 
             if(!start.HasValue)
             {
-                start = end.Value.AddDays(dayInter);
+                if (dayInter < 0)
+                {
+                    start = MIN_DATE_TIME;
+                }
+                else
+                {
+                    start = end.Value.AddDays(dayInter);
+                }                
             }
         }
 

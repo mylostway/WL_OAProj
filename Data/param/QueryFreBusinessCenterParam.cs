@@ -6,7 +6,7 @@ namespace Data.param
 {
     public class QueryFreBusinessCenterParam : BaseQueryParam
     {
-        public DateTypeEnums DateType { get; set; }
+        public DateTypeEnums? DateType { get; set; }
 
         public DateTime? StartDate { get; set; }
 

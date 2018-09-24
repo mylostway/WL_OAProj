@@ -9,6 +9,7 @@ using Data.utils;
 using Data.dal;
 using Data.param;
 using BLL.query;
+using Data;
 
 namespace ConsoleTest
 {
@@ -54,7 +55,11 @@ namespace ConsoleTest
         }
 
         static void TestQueryEntity()
-        {            
+        {
+            var val = "".ToEnumVal(typeof(PaywayEnums));
+
+            var val2 = "票结".ToEnumVal(typeof(PaywayEnums));
+
             var driverInfoList = (new DriverInfoBLL()).GetEntityList(new QueryDriverInfoParams(null,"alexguan"));
 
             var goodsInfoList = (new GoodsInfoBLL()).GetEntityList(new QueryGoodsInfoParam());
@@ -62,12 +67,14 @@ namespace ConsoleTest
             var wharfInfoList = (new WharfInfoBLL()).GetEntityList(new QueryWharfInfoParam());
 
             var airlineList = (new AirInfoBLL()).GetEntityList(new QueryAirLineInfoParam());
+
+            var customInfoList = (new CustomerManagerBLL()).GetEntityList(new QueryCustomerInfoParam());
         }
 
 
         static void Main(string[] args)
         {
-            TestAddEntity();
+            //TestAddEntity();
             TestQueryEntity();
 
             Console.Read();

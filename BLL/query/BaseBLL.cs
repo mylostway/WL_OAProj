@@ -9,13 +9,13 @@ using Data.dto;
 using Data.dal;
 using Data.dal.Chloe;
 
+using NHibernate;
 using NHibernate.Criterion;
 
 using BLL.settings;
 using BLL.util;
 
 using Chloe;
-
 
 namespace BLL.query
 {
@@ -28,7 +28,7 @@ namespace BLL.query
         /// <returns></returns>
         public virtual QueryResult<T> GetEntityById(S id)
         {
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
 
             var queryEntity = session.Get<T>(id);
 
@@ -46,12 +46,11 @@ namespace BLL.query
         /// 增加Entity
         /// </summary>
         /// <param name="entity"></param>
-        public void AddEntity(T entity)
+        public virtual void AddEntity(T entity)
         {
-            
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
             var trans = session.BeginTransaction();
-            session.Save(entity);
+            var id = session.Save(entity);
             trans.Commit();
 
             //ChloeUtil.DbContext.Insert(entity);
@@ -62,16 +61,28 @@ namespace BLL.query
         /// 增加一个列表
         /// </summary>
         /// <param name="entityList"></param>
-        public void AddEntityList(List<T> entityList)
+        public virtual void AddEntityList(List<T> entityList, bool bIsAutomic = false)
         {
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
             var trans = session.BeginTransaction();
+
             foreach (var e in entityList)
             {
-                session.Save(e);
+                try
+                {
+                    var id = session.Save(e);
+                }
+                catch (Exception ex)
+                {
+                    if (bIsAutomic)
+                    {
+                        trans.Rollback();
+                        throw ex;
+                    }
+                }
             }
             trans.Commit();
-           
+
             /*
             foreach (var e in entityList)
             {
@@ -82,12 +93,12 @@ namespace BLL.query
 
 
         /// <summary>
-        /// 更新DriverInfo
+        /// 更新Entity
         /// </summary>
         /// <param name="entity"></param>
-        public void UpdateEntity(T entity)
+        public virtual void UpdateEntity(T entity)
         {
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
             var trans = session.BeginTransaction();
             session.Update(entity);
             trans.Commit();
@@ -98,15 +109,45 @@ namespace BLL.query
         /// 删除Entity
         /// </summary>
         /// <param name="entity"></param>
-        public void DelEntity(T entity)
+        public virtual void DelEntity(T entity)
         {
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
             var trans = session.BeginTransaction();
             session.Delete(entity);
             trans.Commit();
         }
 
-        
+
+        /// <summary>
+        /// 获取开启事务的session，用于扩展一堆之后复杂的DB操作。
+        /// </summary>
+        /// <returns></returns>
+        public ISession StartTrans()
+        {
+            var session = NHibernateHelper.getSession();
+            session.BeginTransaction();
+            return session;
+        }
+
+
+        /// <summary>
+        /// 提交已经开启事务的session，StartTrans方法的补充commit
+        /// </summary>
+        /// <param name="session"></param>
+        public void CommitOnSession(ISession session)
+        {
+            session.Transaction.Commit();
+        }
+
+
+        /// <summary>
+        /// 回滚已经开启事务的session，StartTrans方法的补充rollback
+        /// </summary>
+        /// <param name="session"></param>
+        public void RollBackOnSession(ISession session)
+        {
+            session.Transaction.Rollback();
+        }
     }
 
 
@@ -117,9 +158,9 @@ namespace BLL.query
         /// 删除Entity
         /// </summary>
         /// <param name="entity"></param>
-        public void DelEntity(int entityID)
+        public virtual void DelEntity(int entityID)
         {
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
             var trans = session.BeginTransaction();
             var entity = (new T());
             entity.Fid = entityID;

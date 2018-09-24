@@ -12,26 +12,27 @@ using System.Text;
 
 namespace BLL.query
 {
-    public class FreBusinessCenterBLL : CommBaseBLL<FreBusinessOpCenterEntity>
+    public class FreBusinessCenterBLL : CommBaseBLL<FreBusinessCenterEntity>
     {
-        public override QueryResult<IList<FreBusinessOpCenterEntity>> GetEntityList(BaseQueryParam param)
+        public override QueryResult<IList<FreBusinessCenterEntity>> GetEntityList(BaseQueryParam param)
         {
             var queryParam = param as QueryFreBusinessCenterParam;
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateUtil.getSession();
+            var session = NHibernateHelper.getSession();
 
-            var query = session.QueryOver<FreBusinessOpCenterEntity>();
+            var query = session.QueryOver<FreBusinessCenterEntity>();
 
             var queryStartDate = queryParam.StartDate;
 
             var queryEndDate = queryParam.EndDate;
 
-            QueryHelper.FixDate(ref queryStartDate, ref queryEndDate);
+            QueryHelper.FixDate(ref queryStartDate, ref queryEndDate, 1);
 
             switch(queryParam.DateType)
             {
+                case null:
                 case DateTypeEnums.None:
                 case DateTypeEnums.BusinessDate:
                     {
@@ -94,7 +95,7 @@ namespace BLL.query
 
             var retList = query.List();
 
-            return new QueryResult<IList<FreBusinessOpCenterEntity>>(retList, rawRowCont, retList.Count);
+            return new QueryResult<IList<FreBusinessCenterEntity>>(retList, rawRowCont, retList.Count);
         }
 
     }
