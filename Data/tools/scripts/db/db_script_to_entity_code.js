@@ -17,16 +17,19 @@ var entityGen = (function(){
 	var _keyWordMap = {		
 		"int" : "int",
 		"datetime" : "DateTime",
-		"tinyint" : "byte",	
-		//"varchar\(.+\)" : "string",		
+		"date" : "DateTime",
+		"tinyint" : "byte",		
 		"varchar" : "string",
 		"char" : "string",
+		"decimal" : "int",
 	}
 	
 	// 转换属性名字
 	var _convName = function(nameStr){
-		var arr = nameStr.split("_");
-		if(!arr || 1 == arr.length) return nameStr;
+		var arr = _trim(nameStr).split("_");
+		if(!arr || 1 == arr.length) {
+			return nameStr;
+		}
 		var part = arr[0];
 		var ret = (part[0].toUpperCase() + part.substr(1));
 		for(var i = 1;i < arr.length;i++){
@@ -34,6 +37,11 @@ var entityGen = (function(){
 			ret += (part[0].toUpperCase() + part.substr(1))
 		}
 		return ret;
+	}
+		
+	
+	var _toCammalCaseStr = function(str){
+		return (str[0].toUpperCase() + str.substr(1));
 	}
 	
 	// 转换数据类型
@@ -81,6 +89,24 @@ var entityGen = (function(){
 		return str.replace(/^\s+|\s+$/gm,'');
 	}
 	
+	// 去除空格和mysql分隔符'`'的影响
+	var _fixLineStr = function(strLine){
+		return _trim(strLine).replace(/`/g,"");
+	}
+	
+	// 去掉创表语句的注释行和空行
+	var _removeUselessLine = function(lineArr){
+		var retVal = [];
+		if(!lineArr || !lineArr.length) return retVal;
+		for(var i = 0;i < lineArr.length;i++){
+			var line = _trim(lineArr[i]);
+			if(!line || !line.length) continue;
+			if(line.substr(0,2) == "--") continue;
+			retVal.push(lineArr[i]);
+		}
+		return retVal;
+	}
+	
 	var LINE_SPLITOR = "\n";
 	
 	var m_tabName = "";
@@ -89,9 +115,9 @@ var entityGen = (function(){
 	// 根据db表创建语句生成Entity属性
 	var _go = function(str){
 		var resultStr = "";	
-		var arr = str.split(LINE_SPLITOR);
+		var arr = _removeUselessLine(str.split(LINE_SPLITOR));		
 		var i = 0;
-		var firstLine = arr[0];
+		var firstLine = _fixLineStr(arr[0]).toLocaleLowerCase();
 		var lArr = [];
 		if(firstLine.indexOf("create table ") >= 0){
 			lArr = firstLine.split(" ");
@@ -106,13 +132,13 @@ var entityGen = (function(){
 				}
 			}
 			m_tabName = tabName;
-			m_className = _convName(tabName.substr(2)) + "Entity";
+			m_className = _toCammalCaseStr(_convName(tabName.substr(2))) + "Entity";
 			resultStr += "[Table(\"" + tabName + "\")]\r\npublic class " + m_className + " : BaseEntity<int>\r\n{\r\n";
 			i = 1;
 		}
 		for(;i < arr.length;i++){
 			var line = "";
-			lArr = arr[i].split(" ");
+			lArr = _fixLineStr(arr[i]).split(" ");
 			if(lArr.length <= 1) continue;	
 			var name = _convName(_trim(lArr[0]));
 			// 已经从基类继承，忽略这两行
@@ -141,9 +167,9 @@ var entityGen = (function(){
 	// 根据db表创建语句生成xml配置
 	var _toXml = function(str){
 		var resultStr = "";	
-		var arr = str.split(LINE_SPLITOR);
+		var arr = _removeUselessLine(str.split(LINE_SPLITOR));
 		var i = 0;
-		var firstLine = arr[0];
+		var firstLine = _fixLineStr(arr[0]).toLocaleLowerCase();
 		var lArr = [];
 		if(firstLine.indexOf("create table ") >= 0){			
 			resultStr += "<class name=\"" + m_className + "\" table=\"" + m_tabName + "\">\r\n";
@@ -151,14 +177,17 @@ var entityGen = (function(){
 		}
 		for(;i < arr.length;i++){
 			var line = "";
-			lArr = arr[i].split(" ");
+			lArr = _fixLineStr(arr[i]).split(" ");
 			if(lArr.length <= 1) continue;
 			// 结束创表语句
-			if(/\)\s*ENGINE\s*=\s*Innodb/.test(arr[i])){
+			//if(/\)\s*ENGINE\s*=\s*Innodb/.test(arr[i])){
+			if(/\)\s*engine\s*=\s*innodb/.test(arr[i].toLocaleLowerCase())){
 				resultStr += "</class>\r\n";
 				break;
 			}			
-			var name = _trim(lArr[0]);	
+			var name = _trim(lArr[0]);
+			var type = _convType(_trim(lArr[1]));
+			if(!type) continue;
 			var entityFieldName = _convName(name);
 			// 特殊字段处理
 			if(entityFieldName == "Fid")
