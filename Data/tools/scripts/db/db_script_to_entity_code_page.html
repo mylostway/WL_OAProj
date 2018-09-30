@@ -15,8 +15,9 @@
 		<div>
 			<label>转化结果：</label><br/>
 			<span style="display:inline-block">
-				<textarea id='txt_dest' rows="15" cols="90" disabled="disabled"></textarea>
-				<textarea id='txt_dest_xml' rows="15" cols="90" disabled="disabled" style="margin-left:6px"></textarea>
+				<textarea id='txt_dest' rows="20" cols="80" disabled="disabled"></textarea>
+				<textarea id='txt_dest_xml' rows="20" cols="80" disabled="disabled" style="margin-left:6px"></textarea>
+				<textarea id='txt_dest_viewMode' rows="20" cols="80" disabled="disabled" style="margin-left:6px"></textarea>
 			</span>
 		</div>
 		
@@ -25,24 +26,17 @@
 	<script src='./db_script_to_entity_code.js'></script>
 	<script>
 		function trans(){
-			var txtSource = document.getElementById('txt_source').value;
-			
-			var resultText = entityGen.go(txtSource);
-			
-			console.log(resultText);
-			
-			var xmlResult = entityGen.toXml(txtSource);
-			
-			console.log(xmlResult);
-			
-			document.getElementById('txt_dest').value = resultText;
-			document.getElementById('txt_dest_xml').value = xmlResult;
+			var txtSource = document.getElementById('txt_source').value;			
+			if(entityGen.go) document.getElementById('txt_dest').value = entityGen.go(txtSource);
+			if(entityGen.toXml) document.getElementById('txt_dest_xml').value = entityGen.toXml(txtSource);
+			if(entityGen.toViewMode) document.getElementById('txt_dest_viewMode').value = entityGen.toViewMode(txtSource);
 		}
 		
 		function clear(){
 			document.getElementById('txt_source').value = "";
 			document.getElementById('txt_dest').value = "";
 			document.getElementById('txt_dest_xml').value = "";
+			document.getElementById('txt_dest_viewMode').value = "";
 		}
 	</script>
 </html>
