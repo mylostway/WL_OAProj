@@ -6,10 +6,10 @@ using Chloe;
 using Chloe.Infrastructure;
 using Chloe.MySql;
 
-using Data.dal.Chloe;
-using Data.utils.cfg;
+using WL_OA.Data.dal.Chloe;
+using WL_OA.Data.utils.cfg;
 
-namespace Data.dal
+namespace WL_OA.Data.dal
 {
     public class ChloeUtil
     {

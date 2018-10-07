@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Data
+namespace WL_OA.Data
 {
     public class EnumNamesAttribute : Attribute
     {

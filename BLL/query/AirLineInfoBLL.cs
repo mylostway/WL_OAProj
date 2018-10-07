@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq.Expressions;
 
-using Data;
-using Data.entity;
-using Data.param;
-using Data.dal;
-using Data.dto;
+using WL_OA.Data;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dal;
+using WL_OA.Data.dto;
 using NHibernate.Criterion;
 using BLL.settings;
 using BLL.util;
-using Data.utils;
+using WL_OA.Data.utils;
 using System.Reflection;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
-    public partial class AirInfoBLL : CommBaseBLL<AirLineEntity>
+    public partial class AirLineInfoBLL : CommBaseBLL<AirwayEntity, QueryAirLineInfoParam>
     {
-        public override QueryResult<AirLineEntity> GetEntityById(int id)
+        public override QueryResult<AirwayEntity> GetEntityById(int id)
         {
             return base.GetEntityById(id);
         }
 
-        public override QueryResult<IList<AirLineEntity>> GetEntityList(BaseQueryParam param)
+        public override QueryResult<IList<AirwayEntity>> GetEntityList(QueryAirLineInfoParam param)
         {
-            var queryParam = param as QueryAirLineInfoParam;
+            var queryParam = param;
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
 
-            var query2 = session.QueryOver<AirLineEntity>();
+            var query2 = session.QueryOver<AirwayEntity>();
 
-            if (null != queryParam.AirLineNo) query2.And(c => c.Fid == queryParam.AirLineNo.Value);
+            if (null != param.AirLineNo) query2.And(c => c.Fid == queryParam.AirLineNo.Value);
             if (!string.IsNullOrEmpty(queryParam.AirName)) query2.And(Restrictions.Like("Fchn_name", string.Format("%{0}%", queryParam.AirName)));            
 
             int rawRowCont = query2.RowCount();
@@ -45,7 +45,7 @@ namespace BLL.query
 
             var retList = query2.List();
 
-            return new QueryResult<IList<AirLineEntity>>(retList, rawRowCont, retList.Count);
+            return new QueryResult<IList<AirwayEntity>>(retList, rawRowCont, retList.Count);
         }
     }
 }

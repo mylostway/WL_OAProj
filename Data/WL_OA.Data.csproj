@@ -2,7 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>WL_OA.Data</AssemblyName>
+    <RootNamespace>WL_OA.Data</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dal\Nhibernate\bak_up\**" />
+    <EmbeddedResource Remove="dal\Nhibernate\bak_up\**" />
+    <None Remove="dal\Nhibernate\bak_up\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="utils\tools\FieldValueValidator.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AntiXssLibrary" Version="1.0.0" />
@@ -13,7 +25,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="MySql.Data" Version="8.0.12" />
     <PackageReference Include="NHibernate" Version="5.1.3" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
   </ItemGroup>
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Data.param;
+using WL_OA.Data.param;
 
-namespace Data.dal
+namespace WL_OA.Data.dal
 {
     interface IDAL<T>
         where T:new()

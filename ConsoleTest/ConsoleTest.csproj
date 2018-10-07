@@ -41,17 +41,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="MySql.Data" Version="8.0.12" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj" />
-    <ProjectReference Include="..\Data\Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="test_cases\" />
+    <ProjectReference Include="..\BLL\WL_OA.BLL.csproj" />
+    <ProjectReference Include="..\Data\WL_OA.Data.csproj" />
+    <ProjectReference Include="..\WL_OA.NET\WL_OA.NET.csproj" />
   </ItemGroup>
 
 </Project>

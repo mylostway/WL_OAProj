@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.param
+namespace WL_OA.Data.param
 {
     public class QueryFreBusinessCenterParam : BaseQueryParam
     {

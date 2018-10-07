@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq.Expressions;
 
-using Data;
-using Data.entity;
-using Data.param;
-using Data.dal;
-using Data.dto;
+using WL_OA.Data;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dal;
+using WL_OA.Data.dto;
 using NHibernate.Criterion;
 using BLL.settings;
 using BLL.util;
-using Data.utils;
+using WL_OA.Data.utils;
 using System.Reflection;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
-    public class GoodsInfoBLL : CommBaseBLL<GoodsInfoEntity>
+    public class GoodsInfoBLL : CommBaseBLL<GoodsinfoEntity,QueryGoodsInfoParam>
     {
         /*
         /// <summary>
@@ -115,15 +115,15 @@ namespace BLL.query
         */
 
 
-        public override QueryResult<IList<GoodsInfoEntity>> GetEntityList(BaseQueryParam param)
+        public override QueryResult<IList<GoodsinfoEntity>> GetEntityList(QueryGoodsInfoParam param)
         {
             var queryParam = param as QueryGoodsInfoParam;
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
 
-            var query2 = session.QueryOver<GoodsInfoEntity>();
+            var query2 = session.QueryOver<GoodsinfoEntity>();
 
             if (null != queryParam.Fid) query2.And(c => c.Fid == queryParam.Fid.Value);
             if (!string.IsNullOrEmpty(queryParam.FChnName)) query2.And(Restrictions.Like("Fchn_name", string.Format("%{0}%", queryParam.FChnName)));
@@ -138,7 +138,7 @@ namespace BLL.query
 
             var retList = query2.List();
 
-            return new QueryResult<IList<GoodsInfoEntity>>(retList, rawRowCont, retList.Count);
+            return new QueryResult<IList<GoodsinfoEntity>>(retList, rawRowCont, retList.Count);
         }
     }
 }

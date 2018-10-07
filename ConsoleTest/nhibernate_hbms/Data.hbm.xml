@@ -1,69 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Data" namespace="Data.entity" default-lazy="true">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="WL_OA.Data" namespace="WL_OA.Data.entity" default-lazy="true">
 
-  <class name="DriverInfoEntity" table="t_driverInfo">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
-      <generator class="identity"/>
-    </id>
-    <property name="Fstate" column="Fstate"  not-null="true"/>
+  <class name="DriverinfoEntity" table="t_driverinfo">
+	  <id name="Fid" type="int" column="Fid" unsaved-value="0">
+		  <generator class="identity"/>
+	  </id>
+	  <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="Fname" column="Fname"  not-null="true"/>
-    <property name="Fphone1" column="Fphone1" not-null="true" />
-    <property name="Fphone2"   column="Fphone2" not-null="true"  />
-    <property name="Fphone3"      column="Fphone3"  not-null="true"    />
-    <property name="FcertID"    column="FcertID"   not-null="true" />
-    <property name="FDriverNo"    column="FDriverNo"  not-null="true"   />
-    <property name="FworkState"    column="FworkState"  not-null="true"  />
-
+	  <property name="Fname" column="Fname" />
+	  <property name="Fphone1" column="Fphone1" />
+	  <property name="Fphone2" column="Fphone2" />
+	  <property name="Fphone3" column="Fphone3" />
+	  <property name="FcertID" column="FcertID" />
+	  <property name="FDriverNo" column="FDriverNo" />
+	  <property name="FworkState" column="FworkState" />
   </class>
 
-  <class name="GoodsInfoEntity" table="t_goodsInfo">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
-      <generator class="identity"/>
-    </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
 
-    <property name="Fchn_name"      not-null="true"   column="Fchn_Name"  />
-    <property name="Feng_name"      not-null="true"   column="Feng_Name"  />
-    <property name="Fmark"          not-null="true"   column="Fmark"   />
-    <property name="FisCheckWeight" not-null="true"   column="FisCheckWeight"  />
-    <property name="Fusable"        not-null="true"   column="Fusable"  />
 
+  <class name="GoodsinfoEntity" table="t_goodsinfo">
+	  <id name="Fid" type="int" column="Fid" unsaved-value="0">
+		  <generator class="identity"/>
+	  </id>
+	  <property name="Fstate" column="Fstate" not-null="true" />
+
+	  <property name="Fchn_Name" column="Fchn_Name" />
+	  <property name="Feng_Name" column="Feng_Name" />
+	  <property name="Fmark" column="Fmark" />
+	  <property name="FisCheckWeight" column="FisCheckWeight" />
+	  <property name="Fusable" column="Fusable" />
   </class>
 
-  <class name="WharfInfoEntity" table="t_wharfInfo">
-    <!-- BaseEntity部分字段 -->
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
-      <generator class="identity"/>
-    </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
 
-    <property name="Fposition"   not-null="true"   column="FPosition"  />
-    <property name="Falias"      not-null="true"   column="Falias"  />
-    <property name="Fmark"       not-null="true"   column="Fmark"   />
-    <property name="Fop"         not-null="true"   column="Fop"  />
-    
-    <!-- AuditInfo部分字段 -->
-    <property name="FInputUser"       not-null="true"    column="FinputUser"  />
-    <property name="FInputTime"       not-null="true"    column="FinputTime"  />
-    <property name="FlastModifyUser"  not-null="false"   column="FlastModifyUser"   />
-    <property name="FlastModifyTime"  not-null="false"   column="FlastModifyTime"  />
+  <class name="WharfinfoEntity" table="t_wharfinfo">
+	  <id name="Fid" type="int" column="Fid" unsaved-value="0">
+		  <generator class="identity"/>
+	  </id>
+	  <property name="Fstate" column="Fstate" not-null="true" />
+
+	  <property name="FPosition" column="FPosition" />
+	  <property name="Falias" column="Falias" />
+	  <property name="Fmark" column="Fmark" />
+	  <property name="Fop" column="Fop" />
+	  <property name="FinputUser" column="FinputUser" />
+	  <property name="FinputTime" column="FinputTime" />
+	  <property name="FlastModifyUser" column="FlastModifyUser" />
+	  <property name="FlastModifyTime" column="FlastModifyTime" />
   </class>
 
-  <class name="AirLineEntity" table="t_airway">
-    <!-- BaseEntity部分字段 -->
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
-      <generator class="identity"/>
-    </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
 
-    <property name="Fchn_name"       not-null="true"   column="Fchn_Name"  />
-    <property name="Feng_name"       not-null="true"   column="Feng_Name"  />
-    <property name="Fremark"         not-null="true"   column="Fremark"   />
-    <property name="Fusable"         not-null="true"   column="Fusable"  />
-    <property name="FlastModifyTime" not-null="true"   column="FlastModifyTime"  />
+  <class name="AirwayEntity" table="t_airway">
+	  <id name="Fid" type="int" column="Fid" unsaved-value="0">
+		  <generator class="identity"/>
+	  </id>
+	  <property name="Fstate" column="Fstate" not-null="true" />
+
+	  <property name="Fchn_Name" column="Fchn_Name" />
+	  <property name="Feng_Name" column="Feng_Name" />
+	  <property name="Fremark" column="Fremark" />
+	  <property name="Fusable" column="Fusable" />
+	  <property name="FlastModifyTime" column="FlastModifyTime" />
   </class>
+
 
   <class name="ShipBookManagerEntity" table="t_ship_book_manager">
     <!-- BaseEntity部分字段 -->
@@ -95,42 +94,41 @@
   </class>
 
   <class name="FreBusinessCenterEntity" table="t_fre_business_center">
-    <!-- BaseEntity部分字段 -->
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+    <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FinterflowState" column="Finterflow_state" />
-    <property name="FconsignMan" column="Fconsign_man" />
-    <property name="FstartWharf" column="Fstart_wharf" />
-    <property name="FstartPlace" column="Fstart_place" />
-    <property name="FtoPlace" column="Fto_place" />
-    <property name="FtoWharf" column="Fto_wharf" />
-    <property name="FbusinessDate" column="Fbusiness_date" />
+    <property name="Finterflow_state" column="Finterflow_state" />
+    <property name="Fconsign_man" column="Fconsign_man" />
+    <property name="Fstart_wharf" column="Fstart_wharf" />
+    <property name="Fstart_place" column="Fstart_place" />
+    <property name="Fto_place" column="Fto_place" />
+    <property name="Fto_wharf" column="Fto_wharf" />
+    <property name="Fbusiness_date" column="Fbusiness_date" />
     <property name="Fbusinesser" column="Fbusinesser" />
-    <property name="FgoodsName" column="Fgoods_name" />
-    <property name="FholdGoodsPlace" column="Fhold_goods_place" />
-    <property name="FholdGoodsPeoplePhone" column="Fhold_goods_people_phone" />
-    <property name="FputGoodsPlace" column="Fput_goods_place" />
-    <property name="FputGoodsPeoplePhone" column="Fput_goods_people_phone" />
-    <property name="FopTerm" column="Fop_term" />
-    <property name="FtransitTerm" column="Ftransit_term" />
-    <property name="FpayWay" column="Fpay_way" />
-    <property name="FworkOrderNo" column="Fwork_order_no" />
-    <property name="FrecordState" column="Frecord_state" />
-    <property name="FshipCompany" column="Fship_company" />
-    <property name="FshipMainShipName" column="Fship_main_ship_name" />
-    <property name="FshipMainLineNo" column="Fship_main_line_no" />
-    <property name="FshipTransNo" column="Fship_trans_no" />
-    <property name="FstartTrailCar" column="Fstart_trail_car" />
-    <property name="FholdGoodsDate" column="Fhold_goods_date" />
-    <property name="FtoTrailCar" column="Fto_trail_car" />
-    <property name="FcabinetNo" column="Fcabinet_no" />
+    <property name="Fgoods_name" column="Fgoods_name" />
+    <property name="Fhold_goods_place" column="Fhold_goods_place" />
+    <property name="Fhold_goods_people_phone" column="Fhold_goods_people_phone" />
+    <property name="Fput_goods_place" column="Fput_goods_place" />
+    <property name="Fput_goods_people_phone" column="Fput_goods_people_phone" />
+    <property name="Fop_term" column="Fop_term" />
+    <property name="Ftransit_term" column="Ftransit_term" />
+    <property name="Fpay_way" column="Fpay_way" />
+    <property name="Fwork_order_no" column="Fwork_order_no" />
+    <property name="Frecord_state" column="Frecord_state" />
+    <property name="Fship_company" column="Fship_company" />
+    <property name="Fship_main_ship_name" column="Fship_main_ship_name" />
+    <property name="Fship_main_line_no" column="Fship_main_line_no" />
+    <property name="Fship_trans_no" column="Fship_trans_no" />
+    <property name="Fstart_trail_car" column="Fstart_trail_car" />
+    <property name="Fhold_goods_date" column="Fhold_goods_date" />
+    <property name="Fto_trail_car" column="Fto_trail_car" />
+    <property name="Fcabinet_no" column="Fcabinet_no" />
     <property name="F20th" column="F20th" />
     <property name="F40th" column="F40th" />
-    <property name="F40thHq" column="F40th_hq" />
-    <property name="FholdState" column="Fhold_state" />
+    <property name="F40th_hq" column="F40th_hq" />
+    <property name="Fhold_state" column="Fhold_state" />
   </class>
 
 

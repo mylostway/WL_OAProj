@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
 
-namespace Data.utils.tools
+namespace WL_OA.Data.utils.tools
 {
     /// <summary>
     /// 字段值格式验证

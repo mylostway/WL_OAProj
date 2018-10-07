@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>WL_OA.BLL</AssemblyName>
+    <RootNamespace>WL_OA.BLL</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,12 +12,11 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="NHibernate" Version="5.1.3" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Data\WL_OA.Data.csproj" />
   </ItemGroup>
 
 </Project>

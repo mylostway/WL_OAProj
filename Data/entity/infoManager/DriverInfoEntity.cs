@@ -3,86 +3,85 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-namespace Data.entity
+using Chloe.Annotations;
+
+namespace WL_OA.Data.entity
 {
-    public class DriverInfoEntity : BaseEntity<int>
+    [Table("t_driverinfo")]
+    public class DriverinfoEntity : BaseEntity<int>
     {
+        public DriverinfoEntity() { }
+
+        public DriverinfoEntity(string name,string phone,string cert,string driverNo)
+        {
+            fname = name;
+            fphone1 = phone;
+            fcertID = cert;
+            fDriverNo = driverNo;
+        }
+
+        public DriverinfoEntity(DriverinfoEntity rhs)
+        {
+            this.Fid = rhs.Fid;
+            this.Fstate = rhs.Fstate;
+            this.Fname = rhs.Fname;
+            this.Fphone1 = rhs.Fphone1;
+            this.Fphone2 = rhs.Fphone2;
+            this.Fphone3 = rhs.Fphone3;
+            this.FcertID = rhs.FcertID;
+            this.FDriverNo = rhs.FDriverNo;
+            this.FworkState = rhs.FworkState;
+        }
+
+        protected string fname = "";
         /// <summary>
-        /// 创建一个空白的DriverInfoEntity
+        /// 司机姓名'
         /// </summary>
-        public DriverInfoEntity() { }
+        [Required]
+        [MaxLength(30)]
+        public virtual string Fname { get { return fname; } set { fname = value; } }
 
+        protected string fphone1 = "";
         /// <summary>
-        /// 仅仅使用主键ID创建DriverInfo对象，目前用于删除
+        /// 司机手机号码'
         /// </summary>
-        /// <param name="ID"></param>
-        public DriverInfoEntity(int ID) { this.Fid = ID; }
+        [Required]
+        [MaxLength(15)]
+        public virtual string Fphone1 { get { return fphone1; } set { fphone1 = value; } }
 
+        protected string fphone2 = "";
         /// <summary>
-        /// 构建完整信息的DriverInfoEntity
+        /// 司机备用手机号码'
         /// </summary>
-        /// <param name="fname"></param>
-        /// <param name="fphone1"></param>
-        /// <param name="fphone2"></param>
-        /// <param name="fphone3"></param>
-        /// <param name="certID"></param>
-        /// <param name="driverNo"></param>
-        /// <param name="workState"></param>
-        public DriverInfoEntity(string fname,string fphone1,
-            string certID, string driverNo, 
-            string fphone2 = "", string fphone3 = "", short workState = 1)
-        {
-            this.Fname = fname;
-            this.Fphone1 = fphone1;
-            this.Fphone2 = fphone2;
-            this.Fphone3 = fphone3;
-            this.FcertID = certID;
-            this.FDriverNo = driverNo;
-            this.FworkState = workState;
-        }
+        [MaxLength(15)]
+        public virtual string Fphone2 { get { return fphone2; } set { fphone2 = value; } }
 
-        public virtual string Fname { get; set; }
+        protected string fphone3 = "";
+        /// <summary>
+        /// 司机备用手机号码'
+        /// </summary>
+        [MaxLength(15)]
+        public virtual string Fphone3 { get { return fphone3; } set { fphone3 = value; } }
 
-        public virtual string Fphone1 { get; set; }
+        protected string fcertID = "";
+        /// <summary>
+        /// 司机证件号码'
+        /// </summary>
+        [MaxLength(20)]
+        public virtual string FcertID { get { return fcertID; } set { fcertID = value; } }
 
-        public virtual string Fphone2 { get; set; }
+        protected string fDriverNo = "";
+        /// <summary>
+        /// 驾驶证编号'
+        /// </summary>
+        [Required]
+        [MaxLength(20)]
+        public virtual string FDriverNo { get { return fDriverNo; } set { fDriverNo = value; } }
 
-        public virtual string Fphone3 { get; set; }
-
-        public virtual string FcertID { get; set; }
-
-        public virtual string FDriverNo { get; set; }
-
-        public virtual short FworkState { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-            {
-                return true;
-            }
-
-            DriverInfoEntity entity = obj as DriverInfoEntity;
-
-            if (entity == null)
-            {
-                return false;
-            }
-            else
-            {
-                return this.Fid.Equals(entity.Fid);
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        protected int fworkState = 0;
+        /// <summary>
+        /// 是否在职 0 - 否 1 - 是，其他待添加，默认0
+        /// </summary>
+        public virtual int FworkState { get { return fworkState; } set { fworkState = value; } }
     }
 }

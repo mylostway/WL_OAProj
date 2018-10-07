@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Data.entity;
+using WL_OA.Data.entity;
 
-namespace Data.dto
+namespace WL_OA.Data.dto
 {
     /// <summary>
     /// 客户管理信息DTO

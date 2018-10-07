@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Data;
-using Data.entity;
-using Data.param;
-using Data.dto;
-using Data.dal;
-using Data.dal.Chloe;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dto;
+using WL_OA.Data.dal;
+using WL_OA.Data.dal.Chloe;
 
 using NHibernate;
 using NHibernate.Criterion;
@@ -17,10 +16,11 @@ using BLL.util;
 
 using Chloe;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
-    public abstract class BaseBLL<T,S>
-        where T : BaseEntity<S>,new()
+    public abstract class BaseBLL<T, S, Q>
+        where T : BaseEntity<S>, new()
+        where Q : BaseQueryParam
     {
         /// <summary>
         /// 根据指定ID获取实例
@@ -28,7 +28,7 @@ namespace BLL.query
         /// <returns></returns>
         public virtual QueryResult<T> GetEntityById(S id)
         {
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
 
             var queryEntity = session.Get<T>(id);
 
@@ -40,20 +40,29 @@ namespace BLL.query
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public abstract QueryResult<IList<T>> GetEntityList(BaseQueryParam param);
+        public abstract QueryResult<IList<T>> GetEntityList(Q param);
 
         /// <summary>
         /// 增加Entity
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void AddEntity(T entity)
+        public virtual BaseOpResult AddEntity(T entity)
         {
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-            var id = session.Save(entity);
-            trans.Commit();
+            try
+            {
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                var id = session.Save(entity);
+                trans.Commit();
 
-            //ChloeUtil.DbContext.Insert(entity);
+                //ChloeUtil.DbContext.Insert(entity);
+            }
+            catch (Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            
+            return BaseOpResult.SucceedInstance;
         }
 
 
@@ -61,34 +70,42 @@ namespace BLL.query
         /// 增加一个列表
         /// </summary>
         /// <param name="entityList"></param>
-        public virtual void AddEntityList(List<T> entityList, bool bIsAutomic = false)
+        public virtual BaseOpResult AddEntityList(List<T> entityList, bool bIsAutomic = false)
         {
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-
-            foreach (var e in entityList)
+            try
             {
-                try
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+
+                foreach (var e in entityList)
                 {
-                    var id = session.Save(e);
-                }
-                catch (Exception ex)
-                {
-                    if (bIsAutomic)
+                    try
                     {
-                        trans.Rollback();
-                        throw ex;
+                        var id = session.Save(e);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (bIsAutomic)
+                        {
+                            trans.Rollback();
+                            throw ex;
+                        }
                     }
                 }
-            }
-            trans.Commit();
+                trans.Commit();
 
-            /*
-            foreach (var e in entityList)
-            {
-                ChloeUtil.DbContext.Insert(e);
+                /*
+                foreach (var e in entityList)
+                {
+                    ChloeUtil.DbContext.Insert(e);
+                }
+                */
             }
-            */
+            catch (Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
         }
 
 
@@ -96,12 +113,20 @@ namespace BLL.query
         /// 更新Entity
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void UpdateEntity(T entity)
+        public virtual BaseOpResult UpdateEntity(T entity)
         {
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-            session.Update(entity);
-            trans.Commit();
+            try
+            {
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                session.Update(entity);
+                trans.Commit();
+            }
+            catch(Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
         }
 
 
@@ -109,12 +134,20 @@ namespace BLL.query
         /// 删除Entity
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void DelEntity(T entity)
+        public virtual BaseOpResult DelEntity(T entity)
         {
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-            session.Delete(entity);
-            trans.Commit();
+            try
+            {
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                session.Delete(entity);
+                trans.Commit();
+            }
+            catch(Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
         }
 
 
@@ -124,7 +157,7 @@ namespace BLL.query
         /// <returns></returns>
         public ISession StartTrans()
         {
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
             session.BeginTransaction();
             return session;
         }
@@ -151,21 +184,30 @@ namespace BLL.query
     }
 
 
-    public abstract class CommBaseBLL<T> : BaseBLL<T,int>
-        where T : BaseEntity<int>,new()
+    public abstract class CommBaseBLL<T, Q> : BaseBLL<T, int, Q>
+        where T : BaseEntity<int>, new()
+        where Q : BaseQueryParam
     {
         /// <summary>
         /// 删除Entity
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void DelEntity(int entityID)
+        public virtual BaseOpResult DelEntity(int entityID)
         {
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-            var entity = (new T());
-            entity.Fid = entityID;
-            session.Delete(entity);
-            trans.Commit();
+            try
+            {
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                var entity = (new T());
+                entity.Fid = entityID;
+                session.Delete(entity);
+                trans.Commit();
+            }
+            catch(Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
         }
     }
 }

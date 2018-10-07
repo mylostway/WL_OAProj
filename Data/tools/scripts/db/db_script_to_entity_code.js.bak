@@ -25,30 +25,23 @@ var entityGen = (function(){
 	}
 	
 	// 转换属性名字
-	// 规则为：用下划线分组单词，然后每个组的单词首字母大写。
 	var _convName = function(nameStr){
 		var arr = _trim(nameStr).split("_");
 		if(!arr || 1 == arr.length) {
 			return nameStr;
 		}
 		var part = arr[0];
-		var ret = _toCammalCaseStr(part);
+		var ret = (part[0].toUpperCase() + part.substr(1));
 		for(var i = 1;i < arr.length;i++){
 			part = arr[i];
-			ret += _toCammalCaseStr(part);
+			ret += (part[0].toUpperCase() + part.substr(1))
 		}
 		return ret;
 	}
 		
 	
-	// 转换字符串为CammalCase形式 - 首字母大写
 	var _toCammalCaseStr = function(str){
 		return (str[0].toUpperCase() + str.substr(1));
-	}
-	
-	// 转换字符串为LittleCase形式 - 首字母小写
-	var _toLittleCaseStr = function(str){
-		return (str[0].toLowerCase() + str.substr(1));
 	}
 	
 	// 转换数据类型
@@ -154,61 +147,17 @@ var entityGen = (function(){
 			if(!type) continue;
 			var comment = "";
 			for(var j = 2;j < lArr.length;j++){
-				if(lArr[j].toLowerCase() == "comment") {
+				if(lArr[j] == "comment") {
 					comment = _trim(lArr.splice(j+1).join(" "));
 					break;
 				}
 			}
 			
-			var fieldName = _toLittleCaseStr(name);
-			line += LINE_STAND_FORMAT_STR + "protected " + (type + " " + fieldName + ";") + LINE_SPLITOR;
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;			
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
+			line += "\t\/\/\/ <summary>\r\n";			
+			line += "\t\/\/\/ " + comment.substr(1,comment.length - 2) + "\r\n";
+			line += "\t\/\/\/ </summary>\r\n";
 			line += _genAttribute(lArr);
-			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
-			line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
-			resultStr += (line + "\r\n\r\n");
-		}		
-		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
-		return resultStr;
-	}
-	
-	var _toViewMode = function(str){
-		var resultStr = "";	
-		var arr = _removeUselessLine(str.split(LINE_SPLITOR));
-		var i = 0;
-		var firstLine = _fixLineStr(arr[0]).toLocaleLowerCase();
-		var lArr = [];
-		if(firstLine.indexOf("create table ") >= 0){			
-			resultStr += "public class " + m_className + "ViewMode : " + m_className + "\n{\n";			
-			i = 1;
-		}		
-		for(;i < arr.length;i++){
-			var line = "";
-			lArr = _fixLineStr(arr[i]).split(" ");
-			if(lArr.length <= 1) continue;	
-			var name = _convName(_trim(lArr[0]));
-			// 已经从基类继承，忽略这两行
-			if(name == "Fid" || name == "Fstate") continue;
-			var type = _convType(_trim(lArr[1]));
-			if(!type) continue;
-			var comment = "";
-			for(var j = 2;j < lArr.length;j++){
-				if(lArr[j].toLowerCase() == "comment") {
-					comment = _trim(lArr.splice(j+1).join(" "));
-					console.log(comment);
-					break;
-				}
-			}
-			
-			var fieldName = _toLittleCaseStr(name);
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ viewMode子属性 - " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
-			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
-			//line += _genAttribute(lArr);
-			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
-			line += "\tpublic " + (type + " V" + name + "\n\t{\n\t\tget { return " + fieldName + "; }\n\t\tset\n\t\t{\n\t\t\tif (" + fieldName + " == value) return;\n\t\t\t" + fieldName + " = value;\n\t\t\tOnPropertyChanged();\n\t\t }\n\t }");
+			line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
 			resultStr += (line + "\r\n\r\n");
 		}		
 		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
@@ -264,7 +213,6 @@ var entityGen = (function(){
 	return {
 		go : _go,
 		toXml : _toXml,
-		toViewMode : _toViewMode,
 		LINE_SPLITOR : LINE_SPLITOR
 	}
 	

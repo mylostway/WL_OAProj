@@ -4,7 +4,7 @@ using System.Text;
 
 using Microsoft.Security.Application;
 
-namespace Data.utils.tools
+namespace WL_OA.Data.utils.tools
 {
     /// <summary>
     /// SQL字符串验证类

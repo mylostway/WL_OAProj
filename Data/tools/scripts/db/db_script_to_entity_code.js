@@ -24,24 +24,67 @@ var entityGen = (function(){
 		"decimal" : "int",
 	}
 	
+	// 类型映射
+	var _keyWordDefaultValueMap = {		
+		"int" : "0",
+		"DateTime" : "DateTime.Now",
+		"byte" : "0",		
+		"double" : "0",
+		"string" : "\"\"",
+	}
+	
 	// 转换属性名字
+	// 规则为：用下划线分组单词，然后每个组的单词首字母大写。
 	var _convName = function(nameStr){
+		return nameStr;
+		// 2018-10-03 FIX：不用下面规则了，为了兼容以后可能迁移Chloe.net
 		var arr = _trim(nameStr).split("_");
 		if(!arr || 1 == arr.length) {
 			return nameStr;
 		}
 		var part = arr[0];
-		var ret = (part[0].toUpperCase() + part.substr(1));
+		var ret = _toCammalCaseStr(part);
 		for(var i = 1;i < arr.length;i++){
 			part = arr[i];
-			ret += (part[0].toUpperCase() + part.substr(1))
+			ret += _toCammalCaseStr(part);
 		}
+		return ret;
+	}
+	
+	
+	// 转换属性名字
+	// 规则为：用下划线分组单词，然后每个组的单词首字母大写。
+	var _convTabName = function(nameStr){
+		var arr = _trim(nameStr).split("_");
+		if(!arr || 1 == arr.length) {
+			return nameStr;
+		}
+		var part = arr[0];
+		var ret = _toCammalCaseStr(part);
+		for(var i = 1;i < arr.length;i++){
+			part = arr[i];
+			ret += _toCammalCaseStr(part);
+		}
+		return ret;
+	}
+	
+	
+	// 获取类型字段对应的默认值
+	var _getDefaultFieldVal = function(type){
+		var ret = _keyWordDefaultValueMap[type];
+		if(!ret) ret = "default(" + type + ")";
 		return ret;
 	}
 		
 	
+	// 转换字符串为CammalCase形式 - 首字母大写
 	var _toCammalCaseStr = function(str){
 		return (str[0].toUpperCase() + str.substr(1));
+	}
+	
+	// 转换字符串为LittleCase形式 - 首字母小写
+	var _toLittleCaseStr = function(str){
+		return (str[0].toLowerCase() + str.substr(1));
 	}
 	
 	// 转换数据类型
@@ -112,6 +155,21 @@ var entityGen = (function(){
 	var m_tabName = "";
 	var m_className = "";
 	
+	// 记录所有该类的字段名称，用于制作copy构造函数	
+	var m_classFieldsDic = {};
+	
+	var _genConstructor = function(){
+		if(!m_className) return "";
+		var ret = "\t\tpublic " + m_className + "(){ }\n\n";
+				
+		ret += "\t\tpublic " + m_className + "(" + m_className + " rhs)" + LINE_SPLITOR + "\t\t{" + LINE_SPLITOR;
+		for(var e in m_classFieldsDic){
+			ret += "\t\t\tthis." + e + " = rhs." + e + ";" + LINE_SPLITOR;
+		}
+		ret += "\t\t}\n";
+		return ret;
+	}
+	
 	// 根据db表创建语句生成Entity属性
 	var _go = function(str){
 		var resultStr = "";	
@@ -132,8 +190,55 @@ var entityGen = (function(){
 				}
 			}
 			m_tabName = tabName;
-			m_className = _toCammalCaseStr(_convName(tabName.substr(2))) + "Entity";
+			m_className = _toCammalCaseStr(_convTabName(tabName.substr(2))) + "Entity";
 			resultStr += "[Table(\"" + tabName + "\")]\r\npublic class " + m_className + " : BaseEntity<int>\r\n{\r\n";
+			i = 1;
+		}
+		m_classFieldsDic = {};
+		for(;i < arr.length;i++){
+			var line = "";
+			lArr = _fixLineStr(arr[i]).split(" ");
+			if(lArr.length <= 1) continue;
+			var type = _convType(_trim(lArr[1]));
+			if(!type) continue;
+			var name = _convName(_trim(lArr[0]));
+			m_classFieldsDic[name] = 1;
+			// 已经从基类继承，忽略这两行
+			if(name == "Fid" || name == "Fstate") continue;			
+			var comment = "";
+			for(var j = 2;j < lArr.length;j++){
+				if(lArr[j].toLowerCase() == "comment") {
+					comment = _trim(lArr.splice(j+1).join(" "));
+					break;
+				}
+			}
+			
+			var fieldName = _toLittleCaseStr(name);
+			line += LINE_STAND_FORMAT_STR + "protected " + (type + " " + fieldName + " = " + _getDefaultFieldVal(type) + ";") + LINE_SPLITOR;
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;			
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
+			line += _genAttribute(lArr);
+			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
+			line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
+			resultStr += (line + "\r\n\r\n");
+		}
+		resultStr += _genConstructor();
+		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
+		return resultStr;
+	}
+	
+	var _toViewMode = function(str){
+		var resultStr = "";	
+		var arr = _removeUselessLine(str.split(LINE_SPLITOR));
+		var i = 0;
+		var firstLine = _fixLineStr(arr[0]).toLocaleLowerCase();
+		var lArr = [];
+		var viewModeName = "";
+		if(m_className) {
+			viewModeName = m_className + "ViewMode";
+			resultStr += "public class " + viewModeName + " : " + m_className + ", INotifyPropertyChanged, IIsCheckableView\n{\n";
+			resultStr += "\tpublic " + viewModeName + "() { }\n\n\tpublic " + viewModeName + "(" + m_className + " rhs) : base(rhs) { }\n\n";
 			i = 1;
 		}
 		for(;i < arr.length;i++){
@@ -142,24 +247,35 @@ var entityGen = (function(){
 			if(lArr.length <= 1) continue;	
 			var name = _convName(_trim(lArr[0]));
 			// 已经从基类继承，忽略这两行
-			if(name == "Fid" || name == "Fstate") continue;
+			if(name == "Fstate") continue;
+			if(name == "Fid"){
+				line += 
+				continue;
+			}
 			var type = _convType(_trim(lArr[1]));
 			if(!type) continue;
 			var comment = "";
 			for(var j = 2;j < lArr.length;j++){
-				if(lArr[j] == "comment") {
+				if(lArr[j].toLowerCase() == "comment") {
 					comment = _trim(lArr.splice(j+1).join(" "));
+					console.log(comment);
 					break;
 				}
 			}
 			
-			line += "\t\/\/\/ <summary>\r\n";			
-			line += "\t\/\/\/ " + comment.substr(1,comment.length - 2) + "\r\n";
-			line += "\t\/\/\/ </summary>\r\n";
-			line += _genAttribute(lArr);
-			line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
-			resultStr += (line + "\r\n\r\n");
+			var fieldName = _toLittleCaseStr(name);
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ viewMode子属性 - " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
+			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
+			//line += _genAttribute(lArr);
+			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
+			line += "\tpublic " + (type + " V" + name + "\n\t{\n\t\tget { return " + fieldName + "; }\n\t\tset\n\t\t{\n\t\t\tif (" + fieldName + " == value) return;\n\t\t\t" + fieldName + " = value;\n\t\t\tOnPropertyChanged();\n\t\t }\n\t }");
+			resultStr += (line + "\n\n");
 		}		
+		resultStr += "\tbool isSelected;\n";
+		resultStr += "\tpublic string IsSelected\n\t{\n\t\tget { return DataConvetor.ConvertBoolToStrSeen(isSelected); }\n\t\tset\n\t\t{\n\t\tvar val = DataConvetor.ConvertStrBoolToVal(value);\n\t\tif (isSelected == val) return;\n\t\tisSelected = val;\n\t\tOnPropertyChanged();\n\t\t}\n\t}\n\n";
+		resultStr += "\tpublic event PropertyChangedEventHandler PropertyChanged;\n\tprotected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)\n\t{\n\t\tPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));\n\t}\n\n"
+		
 		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
 		return resultStr;
 	}
@@ -213,6 +329,7 @@ var entityGen = (function(){
 	return {
 		go : _go,
 		toXml : _toXml,
+		toViewMode : _toViewMode,
 		LINE_SPLITOR : LINE_SPLITOR
 	}
 	

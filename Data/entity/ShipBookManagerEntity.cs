@@ -5,7 +5,7 @@ using System.Text;
 using Chloe;
 using Chloe.Annotations;
 
-namespace Data.entity
+namespace WL_OA.Data.entity
 {
     /// <summary>
     /// 预定舱管理Entity

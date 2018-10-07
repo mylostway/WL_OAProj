@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace Data.entity
+namespace WL_OA.Data.entity
 {
     /// <summary>
     /// 基础Entity
@@ -27,7 +25,6 @@ namespace Data.entity
         /// 数据状态，1 - 启用，0 - 失效
         /// </summary>
         [Required]
-        [Range(0, 1)]
         public virtual short Fstate { get; set; }
     }
 
@@ -52,8 +49,7 @@ namespace Data.entity
         /// <summary>
         /// 数据状态，1 - 启用，0 - 失效
         /// </summary>
-        [Required]
-        [Range(0,1)]
+        [Required]        
         public virtual short Fstate { get; set; }
     }
 }

@@ -3,79 +3,84 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading;
 
-using Data.entity;
-using Data.utils;
-using Data.dal;
-using Data.param;
-using BLL.query;
-using Data;
+using WL_OA.Data.entity;
+using WL_OA.Data.utils;
+using WL_OA.Data.dal;
+using WL_OA.Data.param;
+using WL_OA.BLL.query;
+using WL_OA.Data;
+
+using WL_OA.NET;
+
+using ConsoleTest.test_cases;
+
+using Newtonsoft.Json;
 
 namespace ConsoleTest
 {
     class Program
     {
-        static void TestAddEntity()
+        static void TestLocal()
         {
-            string TEST_USER = "test_sys";
-            var addList = new List<DriverInfoEntity>();
-            addList.Add(new DriverInfoEntity("alexguan", "15002094251", "440682198910155016", "EF738"));
-            addList.Add(new DriverInfoEntity("alenguan", "15002094251", "440682198910155016", "EF738"));
-            addList.Add(new DriverInfoEntity("brucekuan", "15002094251", "440682198910155016", "EF738"));
-            addList.Add(new DriverInfoEntity("ccluan", "15002094251", "440682198910155016", "EF738"));
-            addList.Add(new DriverInfoEntity("zzguan", "15002094251", "440682198910155016", "EF738"));
-            (new DriverInfoBLL()).AddEntityList(addList);
-
-            var goodList = new List<GoodsInfoEntity>();
-
-            goodList.Add(new GoodsInfoEntity("氧化铝粉", "YHLF"));
-            goodList.Add(new GoodsInfoEntity("塑料颗粒", "SLKL"));
-            goodList.Add(new GoodsInfoEntity("不锈钢", "BXG"));
-            goodList.Add(new GoodsInfoEntity("铁砂", "TS"));
-            goodList.Add(new GoodsInfoEntity("灯具", "DJ"));
-            goodList.Add(new GoodsInfoEntity("家具", "JJ"));
-            (new GoodsInfoBLL()).AddEntityList(goodList);
-
-            var wharfList = new List<WharfInfoEntity>();
-            wharfList.Add(new WharfInfoEntity("广东省;佛山市;佛山港;佛山高明", "FSGM", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广东省;佛山市;佛山港;佛山小塘", "FSXT", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广东省;佛山市;佛山港;佛山和乐", "FSHL", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广东省;江门市;开平港;开平水口", "KPSK", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广西省;梧州市;梧州港;梧州赤水", "WZCS", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广西省;梧州市;梧州港;梧州港", "WZG", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广西省;防城港市;防城港;防城港", "FCG", TEST_USER));
-            wharfList.Add(new WharfInfoEntity("广西省;贵港市;贵港港;贵港港", "GGG", TEST_USER));
-            (new WharfInfoBLL()).AddEntityList(wharfList);
-
-            var airLineList = new List<AirLineEntity>();
-            airLineList.Add(new AirLineEntity("南方航空"));
-            airLineList.Add(new AirLineEntity("春秋航空"));
-            airLineList.Add(new AirLineEntity("中国国航"));
-            (new AirInfoBLL()).AddEntityList(airLineList);
+            SimpleTestCase.TestAddEntity();
+            SimpleTestCase.TestQueryEntity();
         }
 
-        static void TestQueryEntity()
-        {
-            var val = "".ToEnumVal(typeof(PaywayEnums));
+        static void TestNet()
+        {            
+            var bllAssembly = Assembly.GetAssembly(typeof(GoodsInfoBLL));
 
-            var val2 = "票结".ToEnumVal(typeof(PaywayEnums));
+            var testServer = new SimpleUdpServer(NetBase.DEFAULT_PORT, (requestParam, endpoint) =>
+            {
+                try
+                {
+                    var reqMethodArr = requestParam.RequestMethod.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
 
-            var driverInfoList = (new DriverInfoBLL()).GetEntityList(new QueryDriverInfoParams(null,"alexguan"));
+                    var totalTypeName = string.Format("{0}.{1}", "WL_OA.BLL.query", reqMethodArr[0]);
 
-            var goodsInfoList = (new GoodsInfoBLL()).GetEntityList(new QueryGoodsInfoParam());
+                    var callType = bllAssembly.GetType(totalTypeName);
 
-            var wharfInfoList = (new WharfInfoBLL()).GetEntityList(new QueryWharfInfoParam());
+                    var callInstance = bllAssembly.CreateInstance(totalTypeName);
 
-            var airlineList = (new AirInfoBLL()).GetEntityList(new QueryAirLineInfoParam());
+                    var callMethod = callType.GetMethod(reqMethodArr[1]);
 
-            var customInfoList = (new CustomerManagerBLL()).GetEntityList(new QueryCustomerInfoParam());
+                    var callParamsInfo = callMethod.GetParameters();
+
+                    if(callParamsInfo.Length != 1)
+                    {
+                        throw new WLOARequestException(NetHandleResultCode.ErrorFormat,"暂时不支持大于1个参数的请求");
+                    }
+
+                    var callMethodParam = JsonHelper.DeserializeTo(requestParam.RequestParam, callParamsInfo[0].ParameterType);
+
+                    var callResult = callMethod.Invoke(callInstance, new object[] { callMethodParam });
+
+                    return new NetHandleResult(callResult);
+                }
+                catch(WLOARequestException ex)
+                {
+                    return new NetHandleResult(ex.ResultCode, ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return new NetHandleResult(NetHandleResultCode.Failed, ex.Message);
+                }
+            });
+
+            testServer.Listen();
+
+            while(true)
+            {
+                Thread.Sleep(10);
+            }
         }
-
 
         static void Main(string[] args)
         {
-            //TestAddEntity();
-            TestQueryEntity();
+            //TestLocal();
+            TestNet();
 
             Console.Read();
         }

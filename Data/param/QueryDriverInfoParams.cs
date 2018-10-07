@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.param
+namespace WL_OA.Data.param
 {
     /// <summary>
     /// 查询司机信息的参数

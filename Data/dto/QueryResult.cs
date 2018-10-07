@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.dto
+namespace WL_OA.Data.dto
 {
     public class QueryResult<T> : BaseQueryResult
         where T : class

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
     public partial class UserDefineDataBLL
     {

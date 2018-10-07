@@ -4,20 +4,19 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using Data;
-using Data.entity;
-using Data.param;
-using Data.dal;
-using Data.dto;
-using Data.utils;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dal;
+using WL_OA.Data.dto;
+using WL_OA.Data.utils;
 using BLL.settings;
 using BLL.util;
 
 using NHibernate.Criterion;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
-    public partial class DriverInfoBLL : CommBaseBLL<DriverInfoEntity>
+    public partial class DriverInfoBLL : CommBaseBLL<DriverinfoEntity,QueryDriverInfoParams>
     {
         /*
         /// <summary>
@@ -135,15 +134,15 @@ namespace BLL.query
         }
         */
 
-        public override QueryResult<IList<DriverInfoEntity>> GetEntityList(BaseQueryParam param)
+        public override QueryResult<IList<DriverinfoEntity>> GetEntityList(QueryDriverInfoParams param)
         {
             var queryParam = param as QueryDriverInfoParams;
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
             
-            var query2 = session.QueryOver<DriverInfoEntity>();
+            var query2 = session.QueryOver<DriverinfoEntity>();
 
             if (null != queryParam.Fid) query2.And(c => c.Fid == queryParam.Fid.Value);
             if (!string.IsNullOrEmpty(queryParam.FName)) query2.And(Restrictions.Like("Fname", string.Format("%{0}%", queryParam.FName)));
@@ -161,7 +160,7 @@ namespace BLL.query
 
             var retList = query2.List();
 
-            return new QueryResult<IList<DriverInfoEntity>>(retList, rawRowCont, retList.Count);
+            return new QueryResult<IList<DriverinfoEntity>>(retList, rawRowCont, retList.Count);
         }
     }
 }

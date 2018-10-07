@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using BLL.query;
-using Data.entity;
-using Data.param;
-using Data.dto;
+using WL_OA.BLL.query;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dto;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +26,7 @@ namespace WL_OAProj
         */
 
         [HttpGet]
-        public QueryResult<IList<DriverInfoEntity>> GetAllDriverInfo()
+        public QueryResult<IList<DriverinfoEntity>> GetAllDriverInfo()
         {
             DriverInfoBLL bll = new DriverInfoBLL();
             return bll.GetEntityList(new QueryDriverInfoParams());

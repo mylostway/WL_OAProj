@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.entity
+namespace WL_OA.Data.entity
 {
     public class SessionEntity
     {

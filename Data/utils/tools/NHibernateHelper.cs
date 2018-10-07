@@ -7,7 +7,7 @@ using NHibernate;
 using NHibernate.SqlCommand;
 using NHibernate.Type;
 
-namespace Data.utils.tools
+namespace WL_OA.Data.utils.tools
 {
     public class NHibernateHelper
     {

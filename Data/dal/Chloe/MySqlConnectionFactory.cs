@@ -6,7 +6,7 @@ using System.Text;
 using Chloe.Infrastructure;
 using MySql.Data.MySqlClient;
 
-namespace Data.dal.Chloe
+namespace WL_OA.Data.dal.Chloe
 {
     public class MySqlConnectionFactory : IDbConnectionFactory
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data
+namespace WL_OA.Data
 {
     public interface IAttributeValidator
     {

@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-using Data;
-using Data.entity;
-using Data.param;
-using Data.dal;
-using Data.dto;
-using Data.utils;
+using WL_OA.Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.dal;
+using WL_OA.Data.dto;
+using WL_OA.Data.utils;
 
 using BLL.settings;
 using BLL.util;
 
 using NHibernate;
 using NHibernate.Criterion;
+using WL_OA.Data;
 
-namespace BLL.query
+namespace WL_OA.BLL.query
 {
-    public partial class CustomerManagerBLL : CommBaseBLL<CustomerInfoEntity>
+    public partial class CustomerManagerBLL : CommBaseBLL<CustomerInfoEntity, QueryCustomerInfoParam>
     {
         /// <summary>
         /// 获取客户完整信息
@@ -27,7 +27,7 @@ namespace BLL.query
         /// <returns></returns>
         public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(int customerID)
         {
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
 
             var queryEntity = session.Get<CustomerInfoEntity>(customerID);
             var contactInfoQuery = session.QueryOver<CustomerContactEntity>().Where(c => c.FcustomerId == customerID).Take(1);
@@ -57,13 +57,13 @@ namespace BLL.query
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public override QueryResult<IList<CustomerInfoEntity>> GetEntityList(BaseQueryParam param)
+        public override QueryResult<IList<CustomerInfoEntity>> GetEntityList(QueryCustomerInfoParam param)
         {
-            var queryParam = param as QueryCustomerInfoParam;
+            var queryParam = param;
 
             SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            var session = NHibernateHelper.getSession();
+            var session = NHibernateSessionManager.GetSession();
 
             var query = session.QueryOver<CustomerInfoEntity>();
 
@@ -229,7 +229,7 @@ namespace BLL.query
         }
 
 
-        public void AddEntity(CustomerInfoDTO dto)
+        public BaseOpResult AddEntity(CustomerInfoDTO dto)
         {
             var session = StartTrans();
 
@@ -249,10 +249,12 @@ namespace BLL.query
             catch(Exception ex)
             {
                 RollBackOnSession(session);
-                throw ex;
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
             }
 
             CommitOnSession(session);
+
+            return BaseOpResult.SucceedInstance;
         }
 
 
@@ -260,11 +262,20 @@ namespace BLL.query
         /// 更新信息，考虑先用delete，再add替代，当然有不完备性，比如add异常，则数据已经被delete掉
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void UpdateEntity(CustomerInfoDTO dto)
+        public virtual BaseOpResult UpdateEntity(CustomerInfoDTO dto)
         {
-            DelEntity(dto.CustomerInfo);
+            try
+            {
+                DelEntity(dto.CustomerInfo);
 
-            AddEntity(dto);
+                AddEntity(dto);
+            }
+            catch(Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+
+            return BaseOpResult.SucceedInstance;
 
             /*
             var session = NHibernateHelper.getSession();
@@ -279,12 +290,10 @@ namespace BLL.query
         /// 删除Entity
         /// </summary>
         /// <param name="entity"></param>
-        public override void DelEntity(CustomerInfoEntity entity)
+        public override BaseOpResult DelEntity(CustomerInfoEntity entity)
         {
-            var session = StartTrans();
-
             var relatedID = entity.Fid;
-
+            var session = StartTrans();
             try
             {
                 session.Delete(new CustomerContactEntity() { FcustomerId = relatedID });
@@ -300,10 +309,12 @@ namespace BLL.query
             catch (Exception ex)
             {
                 RollBackOnSession(session);
-                throw ex;
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
             }
 
             CommitOnSession(session);
+
+            return BaseOpResult.SucceedInstance;
         }
 
     }

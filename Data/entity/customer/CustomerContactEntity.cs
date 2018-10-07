@@ -5,7 +5,7 @@ using System.Text;
 using Chloe;
 using Chloe.Annotations;
 
-namespace Data.entity
+namespace WL_OA.Data.entity
 {
     [Table("t_customer_contact")]
     public class CustomerContactEntity : BaseEntity<int>

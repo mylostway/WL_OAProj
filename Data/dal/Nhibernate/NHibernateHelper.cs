@@ -4,45 +4,67 @@ using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
 
-using Data.utils.tools;
+using WL_OA.Data.utils.tools;
 
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace Data.dal
+namespace WL_OA.Data.dal
 {
-    public static class NHibernateHelper
+    /// <summary>
+    /// NHibernate连接管理器
+    /// </summary>
+    public class NHibernateSessionManager
     {
-        private static readonly ISessionFactory sessionFactory;
-
-        private static string HibernateHbmXmlFileName = "hibernate.cfg.xml";
-
-        private static ISession curSession = null;
-
-        static NHibernateHelper()
+        internal class NHibernateSession
         {
-            var cfg = new Configuration().Configure();            
-            sessionFactory = cfg.BuildSessionFactory();
+            private readonly ISessionFactory sessionFactory;
 
-            curSession = sessionFactory.OpenSession(new utils.tools.NHibernateHelper.NHibernateSqlInjector());            
+            private const string HIBERNATE_CFG_FILE_NAME = "hibernate.cfg.xml";
+
+            private static ISession curSession = null;
+
+            internal NHibernateSession()
+            {
+                var cfg = new Configuration().Configure();
+                sessionFactory = cfg.BuildSessionFactory();
+
+                curSession = sessionFactory.OpenSession();
+            }
+
+            internal ISession GetSession()
+            {
+                return curSession;
+            }
+
+            internal void CloseSession()
+            {
+
+            }
         }
 
-        public static ISessionFactory getSessionFactory()
+        private NHibernateSession m_session = null;
+
+        protected static NHibernateSessionManager Instance { get; private set; } = new NHibernateSessionManager();
+
+        private NHibernateSessionManager()
         {
-            return sessionFactory;
+            m_session = new NHibernateSession();
         }
 
-        public static ISession getSession()
+        public static ISession GetSession()
         {
-            //return sessionFactory.OpenSession(new NHibernateHelper.NHibernateSqlInjector());
-            return curSession;
+            return Instance.m_session.GetSession();
         }
+    }
 
-        public static void closeSessionFactory()
-        {
 
-        }
 
+    /// <summary>
+    /// Nhibernate的Query扩展方法，方便使用
+    /// </summary>
+    static class NhibernateHelper
+    {
         public static void WhereIfNotNull<T, S>(this IQueryOver<T, T> query, S obj, Expression<Func<T, bool>> exp)
         {
             if (null != obj)

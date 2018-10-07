@@ -5,7 +5,7 @@ using System.IO;
 
 using Microsoft.Extensions.Configuration;
 
-namespace Data.utils.cfg
+namespace WL_OA.Data.utils.cfg
 {
     public class ConfigHelper
     {

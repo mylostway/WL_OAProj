@@ -4,8 +4,8 @@ using System.Text;
 
 using NHibernate;
 
-using Data.param;
-using Data.entity;
+using WL_OA.Data.param;
+using WL_OA.Data.entity;
 using BLL.settings;
 
 
