@@ -162,7 +162,7 @@ var entityGen = (function(){
 		if(!m_className) return "";
 		var ret = "\t\tpublic " + m_className + "(){ }\n\n";
 				
-		ret += "\t\tpublic " + m_className + "(" + m_className + " rhs)" + LINE_SPLITOR + "\t\t{" + LINE_SPLITOR;
+		ret += "\t\tpublic " + m_className + "(" + m_className + " rhs)" + LINE_SPLITOR + "\t\t{" + LINE_SPLITOR + "\t\t\tif(null == rhs) return;" + LINE_SPLITOR;
 		for(var e in m_classFieldsDic){
 			ret += "\t\t\tthis." + e + " = rhs." + e + ";" + LINE_SPLITOR;
 		}
@@ -249,7 +249,7 @@ var entityGen = (function(){
 			// 已经从基类继承，忽略这两行
 			if(name == "Fstate") continue;
 			if(name == "Fid"){
-				line += 
+				//line += 
 				continue;
 			}
 			var type = _convType(_trim(lArr[1]));
