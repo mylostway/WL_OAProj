@@ -249,7 +249,7 @@ var entityGen = (function(){
 			// 已经从基类继承，忽略这两行
 			if(name == "Fstate") continue;
 			if(name == "Fid"){
-				line += 
+				//line += 
 				continue;
 			}
 			var type = _convType(_trim(lArr[1]));

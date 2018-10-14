@@ -6,6 +6,8 @@ namespace WL_OA.Data.param
 {
     public class QueryWharfInfoParam : BaseQueryParam
     {
+        public QueryWharfInfoParam() { }
+
         public QueryWharfInfoParam(string mark = "",string area = "",string alias = "",string wharfName = "")
         {
             Mark = mark;

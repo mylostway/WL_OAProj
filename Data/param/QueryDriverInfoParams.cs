@@ -9,6 +9,8 @@ namespace WL_OA.Data.param
     /// </summary>
     public class QueryDriverInfoParams : BaseQueryParam
     {
+        public QueryDriverInfoParams() { }
+
         public QueryDriverInfoParams(int? id = null, string name = "")
         {
             this.Fid = id;

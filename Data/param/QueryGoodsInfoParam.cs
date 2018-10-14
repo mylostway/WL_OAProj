@@ -9,6 +9,8 @@ namespace WL_OA.Data.param
     /// </summary>
     public class QueryGoodsInfoParam : BaseQueryParam
     {
+        public QueryGoodsInfoParam() { }
+
         public QueryGoodsInfoParam(int? id = null, string name = "", string mark = "")
         {
             this.Fid = id;

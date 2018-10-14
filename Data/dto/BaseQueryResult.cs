@@ -25,41 +25,6 @@ namespace WL_OA.Data.dto
         Timeout,
     }
 
-    /// <summary>
-    /// 基本查询结果
-    /// </summary>
-    public class BaseQueryResult
-    {
-        public BaseQueryResult(int maxResultCount = 0,int resultCount = 0, 
-            QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = "")
-        {
-            ResultCode = resultCode;
-            RetMsg = retMsg;
-            MaxResultCount = maxResultCount;
-            ResultCount = resultCount;
-        }
-
-        /// <summary>
-        /// 这次查询最大记录数
-        /// </summary>
-        public int MaxResultCount { get; set; }
-
-        /// <summary>
-        /// 返回查询最大记录数
-        /// </summary>
-        public int ResultCount { get; set; }
-
-        /// <summary>
-        /// 查询结果返回码
-        /// </summary>
-        public QueryResultCode ResultCode { get; set; }
-
-        /// <summary>
-        /// 结果信息
-        /// </summary>
-        public string RetMsg { get; set; }
-    }
-
 
     /// <summary>
     /// 操作结果
@@ -102,4 +67,32 @@ namespace WL_OA.Data.dto
             }
         }
     }
+
+
+    /// <summary>
+    /// 基本查询结果
+    /// </summary>
+    public class BaseQueryResult : BaseOpResult
+    {
+        public BaseQueryResult(int maxResultCount = 0,int resultCount = 0, 
+            QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = "")
+        {
+            ResultCode = resultCode;
+            RetMsg = retMsg;
+            MaxResultCount = maxResultCount;
+            ResultCount = resultCount;
+        }
+
+        /// <summary>
+        /// 这次查询最大记录数
+        /// </summary>
+        public int MaxResultCount { get; set; }
+
+        /// <summary>
+        /// 返回查询最大记录数
+        /// </summary>
+        public int ResultCount { get; set; }
+    }
+
+
 }

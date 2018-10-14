@@ -13,50 +13,47 @@ using WL_OA.Data.dto;
 
 namespace WL_OAProj
 {
-    [Route("api/[controller]")]
+    [Route("api/Datas")]
     public class DatasController : Controller
     {
-        // GET: api/<controller>
-        /*
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpPost("QueryDriverInfoList")]       
+        public QueryResult<IList<DriverinfoEntity>> QueryDriverInfoList([FromBody] QueryDriverInfoParams param)
         {
-            return new string[] { "value1", "value2" };
-        }
-        */
-
-        [HttpGet]
-        public QueryResult<IList<DriverinfoEntity>> GetAllDriverInfo()
-        {
-            DriverInfoBLL bll = new DriverInfoBLL();
-            return bll.GetEntityList(new QueryDriverInfoParams());
+            var bll = new DriverInfoBLL();
+            return bll.GetEntityList(param);
         }
 
 
-
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("AddDriverInfo")]
+        public BaseOpResult AddDriverInfo([FromBody] DriverinfoEntity entity)
         {
-            return "value";
+            var bll = new DriverInfoBLL();
+            return bll.AddEntity(entity);
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
+
+        [HttpPost("DelDriverInfo")]
+        public BaseOpResult DelDriverInfo([FromBody] int entityID)
         {
+            var bll = new DriverInfoBLL();
+            return bll.DelEntity(entityID);
         }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+
+        [HttpGet("QueryGoodsInfoList")]
+        public QueryResult<IList<GoodsinfoEntity>> QueryGoodsInfoList([FromQuery] QueryGoodsInfoParam param)
         {
+            var bll = new GoodsInfoBLL();
+            return bll.GetEntityList(param);
         }
 
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        [HttpGet("QueryWharfInfoList")]
+        public QueryResult<IList<WharfinfoEntity>> QueryWharfInfoList([FromQuery] QueryWharfInfoParam param)
         {
+            var bll = new WharfInfoBLL();
+            return bll.GetEntityList(param);
         }
+        
     }
 }
