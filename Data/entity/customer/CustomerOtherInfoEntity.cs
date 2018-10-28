@@ -7,7 +7,7 @@ using Chloe.Annotations;
 
 namespace WL_OA.Data.entity
 {
-    [Table("t_customer_other_info")]
+    //[Table("t_customer_other_info")]
     public class CustomerOtherInfoEntity : BaseEntity<int>
     {
         /// <summary>

@@ -7,7 +7,7 @@ using Chloe.Annotations;
 
 namespace WL_OA.Data.entity
 {
-    [Table("t_driverinfo")]
+    //[Table("t_driverinfo")]
     public class DriverinfoEntity : BaseEntity<int>
     {
         public DriverinfoEntity() { }

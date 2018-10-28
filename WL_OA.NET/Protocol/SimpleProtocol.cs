@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace WL_OA.NET
 {
+    /// <summary>
+    /// 通讯协议结构体
+    /// </summary>
     public class SimpleProtocolStruct
     {
         public SimpleProtocolStruct() { }
@@ -87,6 +90,9 @@ namespace WL_OA.NET
         public static SimpleProtocolStruct ErrorFormatResponseInstance = new SimpleProtocolStruct("", "", "", NetHandleResult.ErrorFormatResponseStrInstance, "");
     }
 
+    /// <summary>
+    /// 通讯协议
+    /// </summary>
     public class SimpleProtocol
     {
         private SimpleProtocol() { }

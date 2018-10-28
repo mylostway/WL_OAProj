@@ -10,7 +10,7 @@ namespace WL_OA.Data.entity
     /// <summary>
     /// 航线信息
     /// </summary>
-    [Table("t_airway")]
+    //[Table("t_airway")]
     public class AirwayEntity : BaseEntity<int>
     {
         /// <summary>

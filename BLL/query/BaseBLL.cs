@@ -14,7 +14,7 @@ using NHibernate.Criterion;
 using BLL.settings;
 using BLL.util;
 
-using Chloe;
+//using Chloe;
 
 namespace WL_OA.BLL.query
 {
