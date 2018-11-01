@@ -4,7 +4,7 @@ using System.Text;
 
 using Newtonsoft.Json;
 
-namespace WL_OA.NET
+namespace WL_OA.Data
 {
     public class JsonHelper
     {

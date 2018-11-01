@@ -4,6 +4,8 @@ using System.Text;
 
 using Newtonsoft.Json;
 
+using WL_OA.Data;
+
 namespace WL_OA.NET
 {
     /// <summary>

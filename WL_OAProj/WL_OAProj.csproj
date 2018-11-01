@@ -38,6 +38,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\WL_OA.BLL.csproj" />
+    <ProjectReference Include="..\Data\WL_OA.Data.csproj" />
     <ProjectReference Include="..\WL_OA.NET\WL_OA.NET.csproj" />
   </ItemGroup>
   <ItemGroup>
