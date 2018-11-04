@@ -40,15 +40,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BLL\WL_OA.BLL.csproj" />
     <ProjectReference Include="..\Data\WL_OA.Data.csproj" />
-    <ProjectReference Include="..\WL_OA.NET\WL_OA.NET.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WL_OA.BLL">
-      <HintPath>..\BLL\bin\Debug\netstandard2.0\WL_OA.BLL.dll</HintPath>
-    </Reference>
-    <Reference Include="WL_OA.Data">
-      <HintPath>..\Data\bin\Debug\netstandard2.0\WL_OA.Data.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.json">

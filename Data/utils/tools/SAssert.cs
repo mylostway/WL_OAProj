@@ -13,8 +13,8 @@ namespace WL_OA.Data.utils
         /// <param name="asMsg"></param>
         public static void MustTrue(bool bVal, string asMsg)
         {
-            if (!bVal)
-                throw new Exception(asMsg);
+            if (string.IsNullOrEmpty(asMsg)) asMsg = "表达式值异常，必须为真";
+            if (!bVal) throw new Exception(asMsg);
         }
 
 
@@ -25,8 +25,7 @@ namespace WL_OA.Data.utils
         /// <param name="asMsg"></param>
         public static void MustTrue(bool bVal, Exception ex)
         {
-            if (!bVal)
-                throw ex;
+            if (!bVal) throw ex;
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿{
+  "CfgVal_Str1": "test_str_val1",
+  "CfgVal_Str2": "",
+  "CfgVal_Str3": "test_str_val3",
+  "CfgVal_Int1": 101,
+  "CfgVal_Int3": 77,
+  "CfgVal_double1": 101.11,
+  "CfgVal_bool1": true,
+  "CfgVal_bool2": false,
+  "CfgVal_Date1": "2018-11-03",
+  "CfgVal_Struct1": {
+    "CldStr1": "cld_str1",
+    "CldStr2": "cld_str2",
+    "Cldint1": 1
+  }
+}

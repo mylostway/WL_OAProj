@@ -80,7 +80,9 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             //TestLocal();
-            TestNet();
+            //TestNet();
+
+            (new TestConfig()).RunTest();
 
             Console.Read();
         }

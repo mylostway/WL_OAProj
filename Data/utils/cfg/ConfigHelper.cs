@@ -5,6 +5,7 @@ using System.IO;
 
 using Microsoft.Extensions.Configuration;
 using WL_OA.Data.utils.tools;
+using System.Reflection;
 
 namespace WL_OA.Data.utils.cfg
 {
@@ -36,7 +37,7 @@ namespace WL_OA.Data.utils.cfg
             PathHelper.MustBeNotUpPath(cfgFileName);
 
             // 只能传入配置文件子路径，不能传入非法路径
-            string cfgFilePath = string.Format("{0}/{1}", Directory.GetCurrentDirectory(), cfgFileName);
+            string cfgFilePath = string.Format("{0}/{1}", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), cfgFileName);
 
             if (!ConfigurationDic.ContainsKey(cfgFileName))
             {
@@ -63,7 +64,7 @@ namespace WL_OA.Data.utils.cfg
         /// <param name="cfgFileName"></param>
         /// <returns></returns>
         public static T Get<T>(string cfgFileName = "")
-            where T : class, new()
+            where T : class
         {
             if(string.IsNullOrEmpty(cfgFileName))
             {
@@ -79,7 +80,8 @@ namespace WL_OA.Data.utils.cfg
                 {
                     var attr = attributes[0] as ConfigAttribute;
 
-                    cfgFileName = attr.FileRelativePath;
+                    if(string.IsNullOrEmpty(attr.FileRelativePath)) cfgFileName = string.Format("{0}.json", type.Name);
+                    else cfgFileName = attr.FileRelativePath;
                 }
             }
 
@@ -99,33 +101,11 @@ namespace WL_OA.Data.utils.cfg
         /// <returns></returns>
         public static string GetOnKey(string key, string cfgFileName = DEFAULT_CFG_FILE_NAME)
         {
-            IConfiguration configuartion = null;
+            var cfgPath = InitCfg(cfgFileName);
 
-            if (!ConfigurationDic.ContainsKey(cfgFileName))
-            {
-                PathHelper.MustBeNotUpPath(cfgFileName);
+            var cfg = ConfigurationDic[cfgFileName];
 
-                // 只能传入配置文件子路径，不能传入非法路径
-                string cfgFilePath = string.Format("{0}/{1}", Directory.GetCurrentDirectory(), cfgFileName);
-
-                SAssert.MustTrue(File.Exists(cfgFilePath), string.Format("配置文件:{0}不存在", cfgFilePath));
-
-                configuartion = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile(cfgFileName).Build();
-
-                ConfigurationDic.Add(cfgFileName, configuartion);
-
-                var cfgContent = FileHelper.ReadFileContent(cfgFilePath);
-
-                ConfigurationContentDic.Add(cfgFileName, cfgContent);
-            }
-            else
-            {
-                configuartion = ConfigurationDic[cfgFileName];
-            }
-
-            return configuartion[key];
+            return cfg[key];
         }
     }
 }

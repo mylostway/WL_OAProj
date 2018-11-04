@@ -7,7 +7,7 @@ namespace WL_OA.Data
     [AttributeUsage(AttributeTargets.Class)]
     public class ConfigAttribute : Attribute
     {
-        public ConfigAttribute(string fileRelativePath)
+        public ConfigAttribute(string fileRelativePath = "")
         {
             FileRelativePath = fileRelativePath;
         }

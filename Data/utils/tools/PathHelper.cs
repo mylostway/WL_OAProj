@@ -24,7 +24,7 @@ namespace WL_OA.Data.utils.tools
 
 
         /// <summary>
-        /// 文件路径不能超越当前级别
+        /// 文件路径不能超越当前级别（非空字符串）
         /// </summary>
         /// <returns></returns>
         public static bool IsNotUpPath(string path)
@@ -33,7 +33,7 @@ namespace WL_OA.Data.utils.tools
         }
 
         /// <summary>
-        /// 文件路径不能超越当前级别
+        /// 文件路径不能超越当前级别（非空字符串）
         /// </summary>
         /// <param name="path"></param>
         public static void MustBeNotUpPath(string path)

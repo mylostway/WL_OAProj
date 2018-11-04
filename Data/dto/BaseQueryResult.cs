@@ -31,6 +31,11 @@ namespace WL_OA.Data.dto
     /// </summary>
     public class BaseOpResult
     {
+        /// <summary>
+        /// 空构造函数必须有(反射用)
+        /// </summary>
+        public BaseOpResult() : this(QueryResultCode.Succeed, "") { }
+
         public BaseOpResult(QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = "")
         {
             ResultCode = resultCode;
@@ -74,6 +79,8 @@ namespace WL_OA.Data.dto
     /// </summary>
     public class BaseQueryResult : BaseOpResult
     {
+        public BaseQueryResult() : this(0, 0, QueryResultCode.Succeed, "") { }
+
         public BaseQueryResult(int maxResultCount = 0,int resultCount = 0, 
             QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = "")
         {
