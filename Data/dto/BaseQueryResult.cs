@@ -31,12 +31,16 @@ namespace WL_OA.Data.dto
     /// </summary>
     public class BaseOpResult
     {
+        const string DEFAULT_OP_SUCCEED_MSG = "操作成功";
+
+        const string DEFAULT_OP_FAILED_MSG = "操作失败";
+
         /// <summary>
         /// 空构造函数必须有(反射用)
         /// </summary>
-        public BaseOpResult() : this(QueryResultCode.Succeed, "") { }
+        public BaseOpResult() : this(QueryResultCode.Succeed, DEFAULT_OP_SUCCEED_MSG) { }
 
-        public BaseOpResult(QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = "")
+        public BaseOpResult(QueryResultCode resultCode = QueryResultCode.Succeed, string retMsg = DEFAULT_OP_SUCCEED_MSG)
         {
             ResultCode = resultCode;
             RetMsg = retMsg;

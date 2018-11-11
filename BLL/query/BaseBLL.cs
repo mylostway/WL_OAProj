@@ -50,6 +50,8 @@ namespace WL_OA.BLL.query
         {
             try
             {
+                entity.CheckValidator();
+
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
                 var id = session.Save(entity);
@@ -81,6 +83,8 @@ namespace WL_OA.BLL.query
                 {
                     try
                     {
+                        e.CheckValidator();
+
                         var id = session.Save(e);
                     }
                     catch (Exception ex)
@@ -117,6 +121,8 @@ namespace WL_OA.BLL.query
         {
             try
             {
+                entity.CheckValidator();
+
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
                 session.Update(entity);
@@ -138,6 +144,8 @@ namespace WL_OA.BLL.query
         {
             try
             {
+                entity.CheckValidator();
+
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
                 session.Delete(entity);

@@ -49,7 +49,15 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 数据状态，1 - 启用，0 - 失效
         /// </summary>
-        [Required]        
+        [Required]
         public virtual short Fstate { get; set; }
+
+        /// <summary>
+        /// 检测数据合法性
+        /// </summary>
+        public virtual void CheckValidator()
+        {
+
+        }
     }
 }

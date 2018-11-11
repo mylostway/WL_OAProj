@@ -34,6 +34,15 @@ namespace WL_OAProj.Controllers
         }
 
 
+        [HttpPost]
+        [Route("api/UpdateDriverInfo")]
+        public BaseOpResult UpdateDriverInfo([FromBody] DriverinfoEntity entity)
+        {
+            var bll = new DriverInfoBLL();
+            return bll.UpdateEntity(entity);
+        }
+
+
         [HttpGet]
         [Route("api/DelDriverInfo/{entityID}")]
         public BaseOpResult DelDriverInfo(int entityID)

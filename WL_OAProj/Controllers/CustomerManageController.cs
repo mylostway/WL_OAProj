@@ -12,7 +12,8 @@ using WL_OA.Data.param;
 
 namespace WL_OAProj.Controllers
 {
-    [Route("api/Customer")]
+    //[Route("api/Customer")]
+    [Produces("application/json")]
     public class CustomerManageController : BaseController<CustomerManagerBLL>
     {
         [HttpGet]
@@ -24,15 +25,15 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("GetEntityList")]
-        public BaseOpResult GetEntityList([FromBody] QueryCustomerInfoParam param)
+        [Route("api/GetCustomerInfoList")]
+        public QueryResult<IList<CustomerInfoEntity>> GetEntityList([FromBody] QueryCustomerInfoParam param)
         {
             return BLL().GetEntityList(param);
         }
 
 
         [HttpPost]
-        [Route("AddCustomerInfo")]
+        [Route("api/AddCustomerInfo")]
         public BaseOpResult AddCustomerInfo([FromBody] CustomerInfoDTO dto)
         {
             return BLL().AddEntity(dto);
@@ -40,7 +41,7 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("UpdateEntity")]
+        [Route("api/UpdateCustomerInfo")]
         public BaseOpResult UpdateEntity([FromBody] CustomerInfoDTO dto)
         {
             return BLL().UpdateEntity(dto);
@@ -48,7 +49,7 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("DelEntity")]
+        [Route("api/DelCustomerInfo")]
         public BaseOpResult DelEntity([FromBody] CustomerInfoEntity entity)
         {
             return BLL().DelEntity(entity);

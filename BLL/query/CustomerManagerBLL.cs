@@ -146,8 +146,8 @@ namespace WL_OA.BLL.query
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.Payway:
-                        {                            
-                            query.Where(c => c.FpayWay == val.ToEnumVal(typeof(PaywayEnums)));
+                        {
+                            query.Where(c => c.FpayWay == val.ToEnumVal(typeof(PaywayEnums)));                            
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.BusinessMan:

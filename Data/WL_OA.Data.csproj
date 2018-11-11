@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="consts\" />
     <Folder Include="tools\scripts\" />
   </ItemGroup>
 

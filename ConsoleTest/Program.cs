@@ -82,7 +82,9 @@ namespace ConsoleTest
             //TestLocal();
             //TestNet();
 
-            (new TestConfig()).RunTest();
+            //(new TestConfig()).RunTest();
+
+            new EnumUnitTest().RunTest();
 
             Console.Read();
         }

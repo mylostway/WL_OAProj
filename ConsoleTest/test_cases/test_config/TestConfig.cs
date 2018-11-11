@@ -8,6 +8,9 @@ using WL_OA.Data.utils.cfg;
 
 namespace ConsoleTest.test_cases
 {
+    /// <summary>
+    /// 配置子结构
+    /// </summary>
     public class ChildConfigStruct
     {
         public string CldStr1 { get; set; }
@@ -17,6 +20,9 @@ namespace ConsoleTest.test_cases
         public int Cldint1 { get; set; }
     }
 
+    /// <summary>
+    /// 测试配置读取/转换的逻辑用例
+    /// </summary>
     [Config("configs/TestConfig.json")]
     public class TestConfig : ITest
     {
