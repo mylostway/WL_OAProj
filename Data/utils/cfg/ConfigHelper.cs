@@ -36,15 +36,17 @@ namespace WL_OA.Data.utils.cfg
         {
             PathHelper.MustBeNotUpPath(cfgFileName);
 
+            var basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
             // 只能传入配置文件子路径，不能传入非法路径
-            string cfgFilePath = string.Format("{0}/{1}", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), cfgFileName);
+            string cfgFilePath = string.Format("{0}/{1}", basePath, cfgFileName);
 
             if (!ConfigurationDic.ContainsKey(cfgFileName))
             {
                 SAssert.MustTrue(File.Exists(cfgFilePath), string.Format("配置文件:{0}不存在", cfgFilePath));
 
                 var configuartion = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .SetBasePath(basePath)
                     .AddJsonFile(cfgFileName).Build();
 
                 ConfigurationDic.Add(cfgFileName, configuartion);
