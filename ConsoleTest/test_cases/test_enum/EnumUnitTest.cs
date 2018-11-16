@@ -16,9 +16,8 @@ namespace ConsoleTest.test_cases
     {
         public bool RunTest()
         {
-            var toEnumVal = "托运人".ToEnumVal<QueryCustomerInfoTypeEnums>();
-            var val2 = (int)QueryCustomerInfoTypeEnums.Consignor;
-            SAssert.MustTrue(toEnumVal == val2, "");
+            SAssert.MustTrue("托运人".ToEnumVal<QueryCustomerInfoTypeEnums>() == QueryCustomerInfoTypeEnums.Consignor, "");
+            SAssert.MustTrue("BusinessDate".ToEnumVal<DateTypeEnums>() != DateTypeEnums.BusinessDate,"");
             return true;
         }
     }

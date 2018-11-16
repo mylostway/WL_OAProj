@@ -150,17 +150,25 @@ namespace WL_OA.Data
         }
 
 
+        public static T getVal<T>(object obj)
+        {
+            return (T)obj;
+        }
+
+
         /// <summary>
         /// 将枚举类的名字转换成对应的约定值
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumName"></param>
         /// <returns></returns>
-        public static int ToEnumVal<T>(this string enumName)
+        public static T ToEnumVal<T>(this string enumName)
         {
             var type = typeof(T);
-            if (!type.IsEnum) return -1;      
-            return ToEnumVal(enumName, type);
+            if (!type.IsEnum) return default(T);      
+            var retVal = ToEnumVal(enumName, type);
+            if (-1 == retVal) return default(T);
+            return (T)Enum.ToObject(type, retVal);
         }
 
         /// <summary>

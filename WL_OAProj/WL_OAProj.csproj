@@ -6,6 +6,20 @@
     <WarningLevel>1</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Scripts\**" />
+    <Compile Remove="Services\**" />
+    <Compile Remove="Styles\**" />
+    <Content Remove="Scripts\**" />
+    <Content Remove="Services\**" />
+    <Content Remove="Styles\**" />
+    <EmbeddedResource Remove="Scripts\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="Styles\**" />
+    <None Remove="Scripts\**" />
+    <None Remove="Services\**" />
+    <None Remove="Styles\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Data.hbm.xml" />
     <None Remove="hibernate.cfg.xml" />
   </ItemGroup>
@@ -32,9 +46,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Interface\" />
-    <Folder Include="Styles\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
