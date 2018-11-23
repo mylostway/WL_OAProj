@@ -9,37 +9,15 @@ namespace WL_OA.Data.dto
     /// <summary>
     /// 客户管理信息DTO
     /// </summary>
-    public class CustomerInfoDTO
+    public class CustomerInfoDTO : IDataValidator
     {
         public CustomerInfoDTO() { }
-
 
 
         /// <summary>
         /// 客户管理信息
         /// </summary>
-        public CustomerInfoEntity CustomerInfo { get; set; }
-
-        /// <summary>
-        /// 关联联系人
-        /// </summary>
-        public CustomerContactEntity ContactInfo { get; set; }
-
-        /// <summary>
-        /// 装卸地址
-        /// </summary>
-        public CustomerHoldAddrEntity HoldAddrInfo { get; set; }
-
-        /// <summary>
-        /// 银行账号
-        /// </summary>
-        public CustomerBankAccountEntity BankAccountInfo { get; set; }
-
-
-        /// <summary>
-        /// 订舱收货人
-        /// </summary>
-        public CustomerBookSpaceReceiverEntity BookSpaceReceiverInfo { get; set; }
+        public CustomerSummaryInfoDTO CustomerInfo { get; set; }
 
 
         /// <summary>
@@ -60,6 +38,14 @@ namespace WL_OA.Data.dto
         /// </summary>
         public CustomerOtherInfoEntity OtherInfo { get; set; }
 
+        public bool IsValid()
+        {
+            return CustomerInfo.IsValid()
+                && CreditInfo.IsValid()
+                && CreditInfo.IsValid()
+                && OtherInfo.IsValid();
+        }
+
 
 
         /// <summary>
@@ -68,14 +54,19 @@ namespace WL_OA.Data.dto
         /// <param name="linkCustomerID">关联的customerId</param>
         public void Linked(int linkCustomerID)
         {
+            /*
             ContactInfo.FcustomerId = linkCustomerID;
             HoldAddrInfo.FcustomerId = linkCustomerID;
             BankAccountInfo.FcustomerId = linkCustomerID;
             BookSpaceReceiverInfo.FcustomerId = linkCustomerID;
+            */
+            CustomerInfo.Linked(linkCustomerID);
             CreditInfo.FcustomerId = linkCustomerID;
             ConfigInfo.FcustomerId = linkCustomerID;
             OtherInfo.FcustomerId = linkCustomerID;
         }
+
+
 
     }
 }

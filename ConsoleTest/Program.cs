@@ -84,7 +84,9 @@ namespace ConsoleTest
 
             //(new TestConfig()).RunTest();
 
-            new EnumUnitTest().RunTest();
+            //new EnumUnitTest().RunTest();
+
+            new TestGenTestData().Run();
 
             Console.Read();
         }

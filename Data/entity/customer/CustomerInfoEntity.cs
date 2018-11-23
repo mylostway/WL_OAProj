@@ -10,6 +10,23 @@ namespace WL_OA.Data.entity
     //[Table("t_customer_info")]
     public class CustomerInfoEntity : BaseEntity<int>
     {
+        public CustomerInfoEntity() { }
+
+        public CustomerInfoEntity(CustomerInfoEntity rhs)
+        {
+            if (null == rhs) return;
+            this.Fid = rhs.Fid;
+            this.Fstate = rhs.Fstate;
+            this.FnameForShort = rhs.FnameForShort;
+            this.Fmark = rhs.Fmark;
+            this.Fname = rhs.Fname;
+            this.FcompanyType = rhs.FcompanyType;
+            this.Fbusinesser = rhs.Fbusinesser;
+            this.FdefaultType = rhs.FdefaultType;
+            this.FcustomerType = rhs.FcustomerType;
+            this.Fmemo = rhs.Fmemo;
+        }
+
         /// <summary>
         /// 客户简称'
         /// </summary>

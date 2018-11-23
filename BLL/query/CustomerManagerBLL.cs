@@ -38,17 +38,20 @@ namespace WL_OA.BLL.query
             var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.FcustomerId == customerID).Take(1);
             var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.FcustomerId == customerID).Take(1);
 
-            return new QueryResult<CustomerInfoDTO>(new CustomerInfoDTO()
+            var retResult = new QueryResult<CustomerInfoDTO>(new CustomerInfoDTO()
             {
-                CustomerInfo = queryEntity,
-                ContactInfo = contactInfoQuery.SingleOrDefault(),
-                HoldAddrInfo = holdAddrQuery.SingleOrDefault(),
-                BankAccountInfo = bankAccountQuery.SingleOrDefault(),
-                BookSpaceReceiverInfo = bookSpaceReceiverQuery.SingleOrDefault(),
+                CustomerInfo = new CustomerSummaryInfoDTO(queryEntity),
                 CreditInfo = creditInfoQuery.SingleOrDefault(),
                 ConfigInfo = configInfoQuery.SingleOrDefault(),
                 OtherInfo = otherInfoQuery.SingleOrDefault()
             });
+
+            retResult.ResultData.CustomerInfo.ContactInfoList = contactInfoQuery.List();
+            retResult.ResultData.CustomerInfo.HoldAddrInfoList = holdAddrQuery.List();
+            retResult.ResultData.CustomerInfo.BankAccountInfoList = bankAccountQuery.List();
+            retResult.ResultData.CustomerInfo.BookSpaceReceiverInfoList = bookSpaceReceiverQuery.List();
+
+            return retResult;
         }
 
 
@@ -235,13 +238,23 @@ namespace WL_OA.BLL.query
 
             try
             {
+                // FIX：输入录入人
+                //dto.CustomerInfo.Finputor = "";
+                dto.CustomerInfo.FinputTime = DateTime.Now;
+
                 var customID = session.Save(dto.CustomerInfo);
                 dto.Linked(dto.CustomerInfo.Fid);
 
-                session.Save(dto.ContactInfo);
-                session.Save(dto.HoldAddrInfo);
-                session.Save(dto.BankAccountInfo);
-                session.Save(dto.BookSpaceReceiverInfo);
+                //session.AddEntityListEx(dto.CustomerInfo.ContactInfoList);
+                //session.AddEntityListEx(dto.CustomerInfo.BankAccountInfoList);
+                //session.AddEntityListEx(dto.CustomerInfo.BookSpaceReceiverInfoList);
+                //session.AddEntityListEx(dto.CustomerInfo.HoldAddrInfoList);
+
+                AddEntityList(session, dto.CustomerInfo.ContactInfoList);
+                AddEntityList(session, dto.CustomerInfo.BankAccountInfoList);
+                AddEntityList(session, dto.CustomerInfo.BookSpaceReceiverInfoList);
+                AddEntityList(session, dto.CustomerInfo.HoldAddrInfoList);
+
                 session.Save(dto.CreditInfo);
                 session.Save(dto.ConfigInfo);
                 session.Save(dto.OtherInfo);
@@ -295,7 +308,7 @@ namespace WL_OA.BLL.query
             var relatedID = entity.Fid;
             var session = StartTrans();
             try
-            {
+            {                
                 session.Delete(new CustomerContactEntity() { FcustomerId = relatedID });
                 session.Delete(new CustomerHoldAddrEntity() { FcustomerId = relatedID });
                 session.Delete(new CustomerBankAccountEntity() { FcustomerId = relatedID });

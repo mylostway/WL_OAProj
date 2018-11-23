@@ -50,7 +50,7 @@ namespace WL_OA.BLL.query
         {
             try
             {
-                entity.CheckValidator();
+                entity.IsValid();
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
@@ -83,7 +83,7 @@ namespace WL_OA.BLL.query
                 {
                     try
                     {
-                        e.CheckValidator();
+                        e.IsValid();
 
                         var id = session.Save(e);
                     }
@@ -113,6 +113,50 @@ namespace WL_OA.BLL.query
         }
 
 
+
+
+        /// <summary>
+        /// 增加一个列表，传入已经开启事务的session（相当于封装一个简便函数而已）
+        /// </summary>
+        /// <param name="entityList"></param>
+        public virtual BaseOpResult AddEntityList<W>(ISession session, IList<W> entityList, bool bIsAutomic = false)
+            where W : BaseEntity<int>, new()
+        {
+            try
+            {
+                foreach (var e in entityList)
+                {
+                    try
+                    {
+                        e.IsValid();
+
+                        var id = session.Save(e);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (bIsAutomic)
+                        {
+                            throw ex;
+                        }
+                    }
+                }
+
+                /*
+                foreach (var e in entityList)
+                {
+                    ChloeUtil.DbContext.Insert(e);
+                }
+                */
+            }
+            catch (Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
+        }
+
+
+
         /// <summary>
         /// 更新Entity
         /// </summary>
@@ -121,7 +165,7 @@ namespace WL_OA.BLL.query
         {
             try
             {
-                entity.CheckValidator();
+                entity.IsValid();
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
@@ -144,7 +188,7 @@ namespace WL_OA.BLL.query
         {
             try
             {
-                entity.CheckValidator();
+                entity.IsValid();
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
