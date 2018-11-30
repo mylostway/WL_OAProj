@@ -13,15 +13,39 @@ using NHibernate.Criterion;
 
 using BLL.settings;
 using BLL.util;
+using WL_OA.Data;
+using WL_OA.Data.dal.Cache;
 
 //using Chloe;
 
-namespace WL_OA.BLL.query
+namespace WL_OA.BLL
 {
-    public abstract class BaseBLL<T, S, Q>
+    public abstract class BaseBLL<T, S, Q> : IRequestContext
         where T : BaseEntity<S>, new()
-        where Q : BaseQueryParam
+        where Q : BaseQueryParam        
     {
+        private SysRequestContext m_requestContext = null;
+
+        protected ICacheContext m_cache;
+
+        /// <summary>
+        /// 获取请求上下文
+        /// </summary>
+        /// <returns></returns>
+        public SysRequestContext GetRequestContext()
+        {
+            return m_requestContext;
+        }
+
+        /// <summary>
+        /// 设置请求上下文
+        /// </summary>
+        /// <param name="context"></param>
+        public void SetRequestContext(SysRequestContext context)
+        {
+            m_requestContext = context;
+        }
+
         /// <summary>
         /// 根据指定ID获取实例
         /// </summary>
@@ -233,6 +257,8 @@ namespace WL_OA.BLL.query
         {
             session.Transaction.Rollback();
         }
+
+        
     }
 
 

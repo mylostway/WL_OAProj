@@ -18,9 +18,9 @@ namespace WL_OAProj.Controllers
     {
         [HttpGet]
         [Route("GetCustomerFullInfo/{customerID}")]
-        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(int customerID)
+        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam param)
         {
-            return BLL().GetCustomerFullInfo(customerID);
+            return BLL().GetCustomerFullInfo(param);
         }
 
 

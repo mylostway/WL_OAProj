@@ -25,27 +25,33 @@ namespace WL_OA.BLL.query
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
-        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(int customerID)
+        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam queryParam)
         {
             var session = NHibernateSessionManager.GetSession();
 
+            var customerID = queryParam.CustomerID;
+            var skipNum = queryParam.ChildInfoListSkip;
+            var takeNum = queryParam.ChildInfoListTake;
             var queryEntity = session.Get<CustomerInfoEntity>(customerID);
-            var contactInfoQuery = session.QueryOver<CustomerContactEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var holdAddrQuery = session.QueryOver<CustomerHoldAddrEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var bankAccountQuery = session.QueryOver<CustomerBankAccountEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var bookSpaceReceiverQuery = session.QueryOver<CustomerBookSpaceReceiverEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var creditInfoQuery = session.QueryOver<CustomerCreditInfoEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.FcustomerId == customerID).Take(1);
-            var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.FcustomerId == customerID).Take(1);
+            var contactInfoQuery = session.QueryOver<CustomerContactEntity>().Where(c => c.FcustomerId == customerID);
+            var holdAddrQuery = session.QueryOver<CustomerHoldAddrEntity>().Where(c => c.FcustomerId == customerID);
+            var bankAccountQuery = session.QueryOver<CustomerBankAccountEntity>().Where(c => c.FcustomerId == customerID);
+            var bookSpaceReceiverQuery = session.QueryOver<CustomerBookSpaceReceiverEntity>().Where(c => c.FcustomerId == customerID);
+
+            var creditInfoQuery = session.QueryOver<CustomerCreditInfoEntity>().Where(c => c.FcustomerId == customerID);
+            var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.FcustomerId == customerID);
+            var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.FcustomerId == customerID);
 
             var retResult = new QueryResult<CustomerInfoDTO>(new CustomerInfoDTO()
             {
+                // 这里没对数据进行校验，应该是每个客户信息只有一个下面信息记录的（目前DB没有进行限制）
                 CustomerInfo = new CustomerSummaryInfoDTO(queryEntity),
                 CreditInfo = creditInfoQuery.SingleOrDefault(),
                 ConfigInfo = configInfoQuery.SingleOrDefault(),
                 OtherInfo = otherInfoQuery.SingleOrDefault()
             });
 
+            // 目前采取一次性查询完整数据返回的形式实现。
             retResult.ResultData.CustomerInfo.ContactInfoList = contactInfoQuery.List();
             retResult.ResultData.CustomerInfo.HoldAddrInfoList = holdAddrQuery.List();
             retResult.ResultData.CustomerInfo.BankAccountInfoList = bankAccountQuery.List();
@@ -244,11 +250,6 @@ namespace WL_OA.BLL.query
 
                 var customID = session.Save(dto.CustomerInfo);
                 dto.Linked(dto.CustomerInfo.Fid);
-
-                //session.AddEntityListEx(dto.CustomerInfo.ContactInfoList);
-                //session.AddEntityListEx(dto.CustomerInfo.BankAccountInfoList);
-                //session.AddEntityListEx(dto.CustomerInfo.BookSpaceReceiverInfoList);
-                //session.AddEntityListEx(dto.CustomerInfo.HoldAddrInfoList);
 
                 AddEntityList(session, dto.CustomerInfo.ContactInfoList);
                 AddEntityList(session, dto.CustomerInfo.BankAccountInfoList);

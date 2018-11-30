@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace WL_OA.BLL.query
+namespace WL_OA.BLL
 {
-    public class FreBusinessCenterBLL : CommBaseBLL<FreBusinessCenterEntity,QueryFreBusinessCenterParam>
+    public partial class FreBusinessCenterBLL : CommBaseBLL<FreBusinessCenterEntity,QueryFreBusinessCenterParam>
     {
         public override QueryResult<IList<FreBusinessCenterEntity>> GetEntityList(QueryFreBusinessCenterParam param)
         {
@@ -98,5 +98,60 @@ namespace WL_OA.BLL.query
             return new QueryResult<IList<FreBusinessCenterEntity>>(retList, rawRowCont, retList.Count);
         }
 
+
+
+        public BaseOpResult AddEntity(FreBussinessOpCenterDTO dto)
+        {
+            var listID = this.GenListID();
+
+            dto.LinkListID(listID);
+
+            var session = NHibernateSessionManager.GetSession();
+
+            var trans = session.BeginTransaction();
+
+            try
+            {
+                session.Save(dto.OrderInfo);
+                session.Save(dto.HoldGoodsInfo);
+                session.Save(dto.LayGoodsInfo);
+
+                AddEntityList(session, dto.ContainsInfoList, true);
+                session.Save(dto.MatterInfo);
+                session.Save(dto.AssuranceInfo);
+                session.Save(dto.SeaTransportInfo);
+                session.Save(dto.OpInfo);
+                session.Save(dto.OtherInfo);
+            }
+            catch(Exception ex)
+            {
+                trans.Rollback();
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            
+            return BaseOpResult.SucceedInstance;
+        }
+
+
+
+        public BaseOpResult Del(string listID)
+        {
+            var session = NHibernateSessionManager.GetSession();
+
+            var trans = session.BeginTransaction();
+
+            try
+            {
+                // 这里删除需要用到query了
+                throw new NotImplementedException();                
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+
+            return BaseOpResult.SucceedInstance;
+        }
     }
 }

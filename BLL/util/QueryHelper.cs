@@ -23,18 +23,18 @@ namespace BLL.util
         {
             int rawRowCont = allRowCount;
 
-            if (rawRowCont > QuerySettings.DEFAULT_PRE_QUERY_MAX_COUNT)
+            if (rawRowCont > BLLSettings.DEFAULT_PRE_QUERY_MAX_COUNT)
             {
                 if (null != param.Skip && param.Skip.Value > 0)
                 {
-                    if (rawRowCont - param.Skip > QuerySettings.DEFAULT_PRE_QUERY_MAX_COUNT)
+                    if (rawRowCont - param.Skip > BLLSettings.DEFAULT_PRE_QUERY_MAX_COUNT)
                     {
-                        param.Take = QuerySettings.DEFAULT_PRE_QUERY_MAX_COUNT;                        
+                        param.Take = BLLSettings.DEFAULT_PRE_QUERY_MAX_COUNT;                        
                     }
                 }
                 else
                 {
-                    param.Take = QuerySettings.DEFAULT_PRE_QUERY_MAX_COUNT;
+                    param.Take = BLLSettings.DEFAULT_PRE_QUERY_MAX_COUNT;
                 }
                 return param.Take.Value;
             }
