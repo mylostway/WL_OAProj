@@ -526,7 +526,7 @@
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="Fuser_id" column="Fuser_id" />
+    <property name="Fuser_account" column="Fuser_account" />
     <property name="Fname" column="Fname" />
     <property name="Fphone" column="Fphone" />
     <property name="Femail" column="Femail" />

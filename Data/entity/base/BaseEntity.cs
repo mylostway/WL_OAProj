@@ -25,7 +25,7 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual short Fstate { get; set; }
 
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             //throw new NotImplementedException();
             return true;
@@ -57,7 +57,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 检测数据合法性
         /// </summary>
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             //throw new NotImplementedException();
             return true;

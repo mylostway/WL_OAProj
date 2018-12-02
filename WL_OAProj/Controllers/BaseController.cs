@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WL_OA;
 using WL_OA.BLL;
 using WL_OA.BLL.query;
 using WL_OA.Data;
@@ -62,16 +63,21 @@ namespace WL_OAProj.Controllers
             if (string.IsNullOrEmpty(token))
             {
                 // 没有登录，重定向到登录页面
-                if (WebSettings.RedirectUrl.NullOrEmpty()) throw new Exception("登录重定向URL为空！");
+                if (WebSettings.RedirectUrl.NullOrEmpty()) throw new UserFriendlyException("登录重定向URL为空！", ExceptionScope.Logic);
                 Response.Redirect(WebSettings.RedirectUrl);
                 return null;
             }
 
             // 用token获取缓存
+            var loginInfo = (new UserManagerBLL()).GetLoginInfo(token);
 
-            // 如果缓存为空，则也认为没有登录，重新登录
+            if(null == loginInfo)
+            {
+                Response.Redirect(WebSettings.RedirectUrl);
+                return null;
+            }
 
-            throw new NotImplementedException();
+            return loginInfo;
         }
 
 

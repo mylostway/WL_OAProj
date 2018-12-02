@@ -212,7 +212,7 @@ namespace WL_OA.BLL
         {
             try
             {
-                entity.IsValid();
+                //entity.IsValid();
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
@@ -226,6 +226,35 @@ namespace WL_OA.BLL
             return BaseOpResult.SucceedInstance;
         }
 
+
+        /// <summary>
+        /// 软删除数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public virtual BaseOpResult SoftDelEntity(T entity)
+        {
+            try
+            {
+                //entity.IsValid();
+
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                var queryEntity = session.Get<T>(entity.Fid);
+                if (null == queryEntity) return new BaseOpResult(QueryResultCode.Failed, "要废弃的记录不存在");
+                if(queryEntity.Fstate != 0)
+                {
+                    queryEntity.Fstate = 0;
+                    session.Update(queryEntity);
+                    trans.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
+        }
 
         /// <summary>
         /// 获取开启事务的session，用于扩展一堆之后复杂的DB操作。
@@ -282,6 +311,36 @@ namespace WL_OA.BLL
                 trans.Commit();
             }
             catch(Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
+        }
+
+
+        /// <summary>
+        /// 软删除数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public virtual BaseOpResult SoftDelEntity(int entityID)
+        {
+            try
+            {
+                //entity.IsValid();
+
+                var session = NHibernateSessionManager.GetSession();
+                var trans = session.BeginTransaction();
+                var queryEntity = session.Get<T>(entityID);
+                if (null == queryEntity) return new BaseOpResult(QueryResultCode.Failed, "要废弃的记录不存在");
+                if (queryEntity.Fstate != 0)
+                {
+                    queryEntity.Fstate = 0;
+                    session.Update(queryEntity);
+                    trans.Commit();
+                }
+            }
+            catch (Exception ex)
             {
                 return new BaseOpResult(QueryResultCode.Failed, ex.Message);
             }

@@ -86,7 +86,9 @@ namespace ConsoleTest
 
             //new EnumUnitTest().RunTest();
 
-            new TestGenTestData().Run();
+            //new TestGenTestData().Run();
+
+            new TestUserManager().Run();
 
             Console.Read();
         }

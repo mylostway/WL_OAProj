@@ -15,13 +15,12 @@ namespace WL_OA.Data.entity
         [Required]
         public virtual int Frole_id { get { return frole_id; } set { frole_id = value; } }
 
-        protected string fuser_id = "";
+        protected int fuser_id = 0;
         /// <summary>
         /// 用户ID'
         /// </summary>
-        [Required]
-        [MaxLength(8)]
-        public virtual string Fuser_id { get { return fuser_id; } set { fuser_id = value; } }
+        [Required]        
+        public virtual int Fuser_id { get { return fuser_id; } set { fuser_id = value; } }
 
         public SystemUserRoleRelationEntity() { }
 

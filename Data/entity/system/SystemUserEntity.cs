@@ -8,13 +8,13 @@ namespace WL_OA.Data.entity
     [Table("t_system_user")]
     public class SystemUserEntity : BaseEntity<int>
     {
-        protected string fuser_id = "";
+        protected string fuser_account = "";
         /// <summary>
-        /// 用户ID'
+        /// 用户ID，用户注册的账号
         /// </summary>
         [Required]
-        [MaxLength(8)]
-        public virtual string Fuser_id { get { return fuser_id; } set { fuser_id = value; } }
+        [MaxLength(30)]
+        public virtual string Fuser_account { get { return fuser_account; } set { fuser_account = value; } }
 
         protected string fname = "";
         /// <summary>
@@ -79,7 +79,7 @@ namespace WL_OA.Data.entity
             if (null == rhs) return;
             this.Fid = rhs.Fid;
             this.Fstate = rhs.Fstate;
-            this.Fuser_id = rhs.Fuser_id;
+            this.Fuser_account = rhs.Fuser_account;
             this.Fname = rhs.Fname;
             this.Fphone = rhs.Fphone;
             this.Femail = rhs.Femail;

@@ -11,9 +11,9 @@ namespace WL_OA.Data
 
 
         /// <summary>
-        /// 用户ID
+        /// 用户账号
         /// </summary>
-        public string ID { get; set; }
+        public string Account { get; set; }
 
         /// <summary>
         /// 登录名
@@ -30,6 +30,13 @@ namespace WL_OA.Data
         /// 登录key
         /// </summary>
         public string Token { get; set; }
+
+
+        /// <summary>
+        /// 请求key，每次请求匹配Ticket，防止Token泄漏造成的危害（目前未实现）
+        /// </summary>
+        public string Ticket { get; set; }
+
 
         /// <summary>
         /// 登录时间

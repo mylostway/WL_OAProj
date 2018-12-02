@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WL_OA.BLL
+using WL_OA.BLL;
+
+namespace WL_OA
 {
     public static class StringBLLEx
     {

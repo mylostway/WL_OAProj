@@ -46,7 +46,7 @@ namespace WL_OA.BLL
 
             var strTime = DateTime.Now.ToDateSecondStr();
 
-            var strUserID = GetRequestContext().LoginInfo.ID.ToUserID();
+            var strUserID = GetRequestContext().LoginInfo.Account.ToUserID();
 
             var nCounter = Interlocked.Increment(ref s_idCounter);
 
