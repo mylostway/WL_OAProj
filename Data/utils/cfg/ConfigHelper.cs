@@ -93,7 +93,9 @@ namespace WL_OA.Data.utils.cfg
 
             SAssert.MustTrue(!string.IsNullOrEmpty(cfgContent), string.Format("配置{0}内容为空！", cfgPath));
 
-            return JsonHelper.DeserializeTo<T>(cfgContent);
+            var retObj = JsonHelper.DeserializeTo<T>(cfgContent);
+
+            return retObj;
         }
 
         /// <summary>

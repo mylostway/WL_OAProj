@@ -29,21 +29,30 @@ namespace WL_OAProj.Controllers
         /// <returns></returns>
         public string GetValFromRequest(string key)
         {
-            SAssert.MustTrue(!key.NullOrEmpty(),string.Format("获取Request内容的Key不能为空"));
+            SAssert.MustTrue(!key.NullOrEmpty(), string.Format("获取Request内容的Key不能为空"));
 
             var val = Request.Query[key];
 
             if (string.IsNullOrEmpty(val))
             {
-                val = Request.Form[TOKEN_KEY];
+                if (Request.ContentType.ToLower().IndexOf("html") >= 0)
+                {
+                    // 只有是html的请求才能获取form的值
+                    val = Request.Form[key];
+                }
 
                 if (string.IsNullOrEmpty(val))
                 {
-                    val = Request.Cookies[TOKEN_KEY];
+                    val = Request.Cookies[key];
 
                     if (string.IsNullOrEmpty(val))
                     {
-                        return "";
+                        val = Request.Headers[key];
+
+                        if (string.IsNullOrEmpty(val))
+                        {
+                            return "";
+                        }
                     }
                 }
             }
@@ -87,8 +96,9 @@ namespace WL_OAProj.Controllers
 
             T ins = new T();
 
+            // 暂时没有登录信息
             var context = new SysRequestContext();
-            context.LoginInfo = GatherLoginInfo();
+            //context.LoginInfo = GatherLoginInfo();
 
             ins.SetRequestContext(context);
 

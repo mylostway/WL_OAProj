@@ -100,6 +100,19 @@ namespace WL_OA.BLL
 
 
 
+        public FreBussinessOpCenterDTO GetDetail(int id)
+        {
+            var session = NHibernateSessionManager.GetSession();
+
+            var entity = session.Get<FreBusinessCenterEntity>(id);
+
+            if (null == entity) return null;
+
+            throw new NotImplementedException();
+        }
+
+
+
         public BaseOpResult AddEntity(FreBussinessOpCenterDTO dto)
         {
             var listID = this.GenListID();

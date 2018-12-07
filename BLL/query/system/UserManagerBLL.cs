@@ -70,7 +70,7 @@ namespace WL_OA.BLL
             info.Token = GenToken();
             info.LoginTime = DateTime.Now;
 
-            m_cache.Set(info.Token, info, GetTokenTimeExpire());
+            m_cache?.Set(info.Token, info, GetTokenTimeExpire());
 
             return false;
         }
@@ -82,12 +82,12 @@ namespace WL_OA.BLL
         /// <returns></returns>
         public LoginInfo GetLoginInfo(string token)
         {
-            var loginInfo = m_cache.Get<LoginInfo>(token);
+            var loginInfo = m_cache?.Get<LoginInfo>(token);
 
             if (null != loginInfo)
             {
                 // 更新信息过期时间
-                m_cache.Set(loginInfo.Token, loginInfo, GetTokenTimeExpire());
+                m_cache?.Set(loginInfo.Token, loginInfo, GetTokenTimeExpire());
             }
 
             return loginInfo;

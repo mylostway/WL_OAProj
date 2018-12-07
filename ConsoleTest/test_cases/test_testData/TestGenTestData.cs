@@ -10,6 +10,11 @@ namespace ConsoleTest.test_cases
 {
     public class TestGenTestData
     {
+        class Names
+        {
+            public string Name { get; set; }
+        }
+
         class Person
         {
             public int ID { get; set; }
