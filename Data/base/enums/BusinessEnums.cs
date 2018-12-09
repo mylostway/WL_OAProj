@@ -5,6 +5,17 @@ using System.Text;
 
 namespace WL_OA.Data
 {
+    public enum CustomManagerSearchDateTypeEnums
+    {
+        [EnumNames("不限日期", IsSelected = true)]
+        None = 0,
+        [EnumNames("录入日期")]
+        InputDate,
+        [EnumNames("审核日期")]
+        AduitDate
+    }
+
+
     public enum DateTypeEnums : int
     {
         [EnumNames("不限")]
@@ -96,11 +107,11 @@ namespace WL_OA.Data
     /// </summary>
     public enum QueryCustomerInfoIDTypeEnums : int
     {
-        [EnumNames("不限")]
+        [EnumNames("不限条件")]
         None = 0,
         [EnumNames("助记码")]
         Remark,
-        [EnumNames("公司简称,selected")]
+        [EnumNames("公司简称")]
         Forshot,
         [EnumNames("公司全称")]
         FullName,

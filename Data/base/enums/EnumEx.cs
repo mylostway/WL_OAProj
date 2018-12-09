@@ -4,24 +4,32 @@ using System.Reflection;
 
 namespace WL_OA.Data
 {
+    /// <summary>
+    /// 枚举描述
+    /// </summary>
     public class EnumNamesAttribute : Attribute
     {
-        public EnumNamesAttribute(string name = "")
+        public EnumNamesAttribute(string name = "",bool isSelected = false)
         {
             Name = name;
+            IsSelected = isSelected;
         }
         public string Name { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 
 
+    /// <summary>
+    /// 枚举信息
+    /// </summary>
     public class EnumInfo
     {
-        //public EnumInfo() { }
-
-        public EnumInfo(Enum val,string name)
+        public EnumInfo(Enum val,string name,bool isSelected = false)
         {
             Value = val;
             Name = name;
+            IsSelected = isSelected;
         }
 
         /// <summary>
@@ -34,6 +42,12 @@ namespace WL_OA.Data
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 是否默认选中
+        /// </summary>
+        public bool IsSelected { get; set; }
+
+
         //public object Context { get; set; }
     }
 
@@ -43,20 +57,20 @@ namespace WL_OA.Data
     /// </summary>
     public static class EnumHelper
     {
-        static Dictionary<string, Dictionary<string, Enum>> s_dicEnumsKeyValPair = new Dictionary<string, Dictionary<string, Enum>>();
+        static Dictionary<string, Dictionary<string, EnumInfo>> s_dicEnumsKeyValPair = new Dictionary<string, Dictionary<string, EnumInfo>>();
 
         /// <summary>
         /// 获取指定名称的枚举配置
         /// </summary>
         /// <param name="enumName"></param>
         /// <returns></returns>
-        public static Dictionary<string, Enum> GetEnumSettingOnName(string enumName)
+        public static Dictionary<string, EnumInfo> GetEnumSettingOnName(string enumName)
         {
-            if (string.IsNullOrEmpty(enumName)) return new Dictionary<string, Enum>();
+            if (string.IsNullOrEmpty(enumName)) return new Dictionary<string, EnumInfo>();
             if (!s_dicEnumsKeyValPair.ContainsKey(enumName))
             {
                 // 遇到没有找到enum配置的情况，直接添加一个空列表以返回
-                s_dicEnumsKeyValPair.Add(enumName, new Dictionary<string, Enum>());
+                s_dicEnumsKeyValPair.Add(enumName, new Dictionary<string, EnumInfo>());
             }
             return s_dicEnumsKeyValPair[enumName];
         }
@@ -73,6 +87,25 @@ namespace WL_OA.Data
             return GetEnumInfoListOnName(type.Name);
         }
 
+
+        /// <summary>
+        /// 获取指定枚举类型的枚举配置
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static EnumInfo GetSelectedEnumInfoListOnName<T>()
+        {
+            var type = typeof(T);
+            if (!type.IsEnum) return null;
+            var enumInfoList = GetEnumInfoListOnName(type.Name);
+            foreach(var e in enumInfoList)
+            {
+                if (e.IsSelected) return e;
+            }
+            return null; 
+        }
+
+
         /// <summary>
         /// 获取指定名称的枚举配置
         /// </summary>
@@ -85,7 +118,7 @@ namespace WL_OA.Data
             if (null == dic || 0 == dic.Count) return retList;
             foreach(var e in dic)
             {
-                retList.Add(new EnumInfo(e.Value, e.Key));
+                retList.Add(e.Value);
             }
             return retList;
         }
@@ -146,7 +179,7 @@ namespace WL_OA.Data
             if (!s_dicEnumsKeyValPair.ContainsKey(typeName)) return null;
             var dic = s_dicEnumsKeyValPair[typeName];
             if (!dic.ContainsKey(enumName)) return null;
-            return dic[enumName];
+            return dic[enumName].Value;
         }
 
 
@@ -198,7 +231,7 @@ namespace WL_OA.Data
             {
                 if (eType.IsEnum)
                 {
-                    var dic = new Dictionary<string, Enum>();
+                    var dic = new Dictionary<string, EnumInfo>();
                     var arrays = eType.GetEnumValues();
                     foreach (var eElem in arrays)
                     {
@@ -215,7 +248,7 @@ namespace WL_OA.Data
                             // 不符合的枚举格式，没有说明属性
                             continue;
                         }
-                        dic.Add(attrib.Name, eElem as Enum);
+                        dic.Add(attrib.Name, new EnumInfo(eElem as Enum, attrib.Name, attrib.IsSelected));
                     }
                     s_dicEnumsKeyValPair.Add(eType.Name, dic);
                 }
