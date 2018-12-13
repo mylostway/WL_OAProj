@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="consts\" />
+    <Folder Include="tools\test\" />
   </ItemGroup>
 
 </Project>

@@ -18,8 +18,6 @@ namespace WL_OAProj.Controllers
     public class BaseController<T> : Controller
         where T : IRequestContext, new()
     {
-        const int MAX_TRY_TIMES = 5;
-
         const string TOKEN_KEY = "token";
 
         /// <summary>

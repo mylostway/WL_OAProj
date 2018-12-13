@@ -25,9 +25,13 @@ namespace WL_OA.Data
     /// </summary>
     public class EnumInfo
     {
+        public const int INVALID_EVAL = -1;
+
         public EnumInfo(Enum val,string name,bool isSelected = false)
         {
             Value = val;
+            if (null == val) EValue = INVALID_EVAL;
+            else EValue = Convert.ToInt32(val);
             Name = name;
             IsSelected = isSelected;
         }
@@ -36,6 +40,11 @@ namespace WL_OA.Data
         /// 枚举值
         /// </summary>
         public Enum Value { get; set; }
+
+        /// <summary>
+        /// 枚举数值
+        /// </summary>
+        public int EValue { get; set; }
 
         /// <summary>
         /// 枚举名称

@@ -8,7 +8,7 @@ namespace WL_OA.Data.dto
     /// <summary>
     /// 业务操作中心数据
     /// </summary>
-    public class FreBussinessOpCenterDTO
+    public class FreBussinessOpCenterDTO : IDataValidator
     {
         public FreBussinessOpCenterDTO() { }
         
@@ -76,6 +76,29 @@ namespace WL_OA.Data.dto
             {
                 e.Flist_id = listID;
             }
+        }
+
+
+        public bool IsValid()
+        {
+            var bRet = OrderInfo.IsValid()
+                && HoldGoodsInfo.IsValid()
+                && LayGoodsInfo.IsValid()
+                && SeaTransportInfo.IsValid()
+                && AssuranceInfo.IsValid()
+                && MatterInfo.IsValid()
+                && OpInfo.IsValid()
+                && OtherInfo.IsValid();
+
+            if(bRet)
+            {
+                foreach (var e in ContainsInfoList)
+                {
+                    if (!e.IsValid()) return false;
+                }
+            }
+
+            return bRet;
         }
     }
 }
