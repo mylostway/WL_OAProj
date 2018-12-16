@@ -89,7 +89,7 @@ namespace WL_OA.Data
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static List<EnumInfo> GetEnumInfoListOnName<T>()
+        public static List<EnumInfo> GetEnumInfoList<T>()
         {
             var type = typeof(T);
             if (!type.IsEnum) return new List<EnumInfo>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 using Chloe;
@@ -56,6 +57,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 性别 0 -- 未知 1 - 男 2 - 女'
         /// </summary>
+        [Range((int)SexEnums.None, (int)SexEnums.Female, ErrorMessage = "非法的性别类型")]
         public virtual int Fsex { get; set; }
 
         /// <summary>
@@ -103,6 +105,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 记录状态，按位取值，0 - 可用'
         /// </summary>
+        [BitUsageField(1)]
         public virtual int FdataStatus { get; set; }
 
         /// <summary>

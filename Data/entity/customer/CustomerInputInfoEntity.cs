@@ -18,35 +18,30 @@ namespace WL_OA.Data.entity
 
         /// <summary>
         /// 录入员'
-        /// </summary>
-        [Required]
+        /// </summary>        
         [MaxLength(50)]
         public string Finputor { get; set; }
 
         /// <summary>
         /// 录入时间'
-        /// </summary>
-        [Required]
+        /// </summary>        
         public DateTime FinputTime { get; set; }
 
         /// <summary>
         /// 所属部门(列表选择)'
-        /// </summary>
-        [Required]
+        /// </summary>        
         [MaxLength(100)]
         public string Fdepartment { get; set; }
 
         /// <summary>
         /// 审核人'
-        /// </summary>
-        [Required]
+        /// </summary>        
         [MaxLength(50)]
         public string Faduitor { get; set; }
 
         /// <summary>
         /// 审核时间
-        /// </summary>
-        [Required]
+        /// </summary>        
         public DateTime FaduitTime { get; set; }
 
     }

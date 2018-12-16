@@ -25,7 +25,7 @@ namespace WL_OA.BLL.query
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
-        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam queryParam)
+        public QueryResult<AddCustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam queryParam)
         {
             var session = NHibernateSessionManager.GetSession();
 
@@ -42,7 +42,7 @@ namespace WL_OA.BLL.query
             var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.FcustomerId == customerID);
             var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.FcustomerId == customerID);
 
-            var retResult = new QueryResult<CustomerInfoDTO>(new CustomerInfoDTO()
+            var retResult = new QueryResult<AddCustomerInfoDTO>(new AddCustomerInfoDTO()
             {
                 // 这里没对数据进行校验，应该是每个客户信息只有一个下面信息记录的（目前DB没有进行限制）
                 CustomerInfo = new CustomerSummaryInfoDTO(queryEntity),
@@ -115,7 +115,6 @@ namespace WL_OA.BLL.query
             if (null != param.Take && param.Take.Value > 0) query.Take(param.Take.Value);
 
             var retList = query.List();
-
             return new QueryResult<IList<CustomerInfoEntity>>(retList, rawRowCont, retList.Count);
         }
 
@@ -238,7 +237,7 @@ namespace WL_OA.BLL.query
         }
 
 
-        public BaseOpResult AddEntity(CustomerInfoDTO dto)
+        public BaseOpResult AddEntity(AddCustomerInfoDTO dto)
         {
             var session = StartTrans();
 
@@ -276,7 +275,7 @@ namespace WL_OA.BLL.query
         /// 更新信息，考虑先用delete，再add替代，当然有不完备性，比如add异常，则数据已经被delete掉
         /// </summary>
         /// <param name="entity"></param>
-        public virtual BaseOpResult UpdateEntity(CustomerInfoDTO dto)
+        public virtual BaseOpResult UpdateEntity(AddCustomerInfoDTO dto)
         {
             try
             {
@@ -330,6 +329,6 @@ namespace WL_OA.BLL.query
 
             return BaseOpResult.SucceedInstance;
         }
-
+        
     }
 }

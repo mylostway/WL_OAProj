@@ -474,7 +474,7 @@ create table wldb.t_customer_info
 	Fname_for_short varchar(30) not null default '' comment '客户简称',
 	Fmark varchar(10) not null default '' comment '助记码',
 	Fname varchar(50) not null default '' comment '公司全称',
-	Fcompany_type int not null comment '企业类型',
+	Fcompany_type varchar(200) not null default '' comment '企业类型',
 	Fbusinesser varchar(30) not null comment '业务员 - (公司人员)',
 	Fdefault_type int not null comment '默认类型',
 	Fbelong_industry varchar(30) comment '所属行业',

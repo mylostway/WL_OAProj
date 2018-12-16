@@ -33,7 +33,6 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 开户名'
         /// </summary>
-        [Required]
         [MaxLength(100)]
         public virtual string FdepositName { get; set; }
 

@@ -45,6 +45,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 记录状态，按位取值，0 - 是否白名单车队
         /// </summary>
+        [BitUsageField(1)]
         public virtual int FdataStatus { get; set; }
 
     }

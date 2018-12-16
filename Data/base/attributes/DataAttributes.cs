@@ -10,6 +10,29 @@ namespace WL_OA.Data
     }
 
     /// <summary>
+    /// 按位取值
+    /// </summary>
+    public class BitUsageFieldAttribute: Attribute
+    {
+        public BitUsageFieldAttribute(int maxBit,string errMsg = "按位取值字段录入错误")
+        {
+            MaxBit = maxBit;
+            ErrorMsg = errMsg;
+        }
+
+        /// <summary>
+        /// 最大位下标
+        /// </summary>
+        public int MaxBit { get; set; }
+
+        /// <summary>
+        /// 错误信息
+        /// </summary>
+        public string ErrorMsg { get; set; }
+    }
+
+
+    /// <summary>
     /// 字符串/buffer最大长度限制
     /// </summary>
     public class MaxLengthAttribute : Attribute

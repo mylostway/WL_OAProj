@@ -18,14 +18,12 @@ namespace WL_OA.Data.entity
 
         /// <summary>
         /// 资信额度'
-        /// </summary>
-        [Required]
+        /// </summary>        
         public virtual int FcreditLimit { get; set; }
 
         /// <summary>
         /// 额度说明'
-        /// </summary>
-        [Required]
+        /// </summary>        
         [MaxLength(100)]
         public virtual string FlimitMemo { get; set; }
 

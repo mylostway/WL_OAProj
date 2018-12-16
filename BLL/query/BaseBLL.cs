@@ -20,6 +20,12 @@ using WL_OA.Data.dal.Cache;
 
 namespace WL_OA.BLL
 {
+    /// <summary>
+    /// 基础查询业务逻辑
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <typeparam name="Q"></typeparam>
     public abstract class BaseBLL<T, S, Q> : IRequestContext
         where T : BaseEntity<S>, new()
         where Q : BaseQueryParam        
@@ -291,6 +297,11 @@ namespace WL_OA.BLL
     }
 
 
+    /// <summary>
+    /// 目前使用查询业务逻辑
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="Q"></typeparam>
     public abstract class CommBaseBLL<T, Q> : BaseBLL<T, int, Q>
         where T : BaseEntity<int>, new()
         where Q : BaseQueryParam

@@ -11,7 +11,7 @@ namespace WL_OA.Data.dto
 
         public CustomerSummaryInfoDTO(CustomerInfoEntity rhs) : base(rhs)
         {
-
+            
         }
 
         /// <summary>

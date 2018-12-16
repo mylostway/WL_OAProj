@@ -9,9 +9,9 @@ namespace WL_OA.Data.dto
     /// <summary>
     /// 客户管理信息DTO
     /// </summary>
-    public class CustomerInfoDTO : IDataValidator
+    public class AddCustomerInfoDTO : IDataValidator
     {
-        public CustomerInfoDTO() { }
+        public AddCustomerInfoDTO() { }
 
 
         /// <summary>

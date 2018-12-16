@@ -48,6 +48,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 货柜状态，按位取值,从低到高为：订舱 - 装货（办单）- 装货（派车） - 回场 - 送货 - 维修'
         /// </summary>
+        [BitUsageField(6, "货柜状态错误")]
         public virtual int Flist_state { get { return flist_state; } set { flist_state = value; } }
 
         protected string fbook_space_list_no = "";
@@ -93,6 +94,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货'
         /// </summary>
+        
         public virtual int Fhold_get_way { get { return fhold_get_way; } set { fhold_get_way = value; } }
 
         protected DateTime fdispatch_goods_date = DateTime.Now;

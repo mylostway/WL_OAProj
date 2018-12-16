@@ -18,8 +18,7 @@ namespace WL_OA.Data.entity
 
         /// <summary>
         /// 英文全称'
-        /// </summary>
-        [Required]
+        /// </summary>        
         [MaxLength(50)]
         public virtual string FengFullName { get; set; }
 

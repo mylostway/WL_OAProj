@@ -18,7 +18,7 @@ namespace WL_OAProj.Controllers
     {
         [HttpGet]
         [Route("GetCustomerFullInfo/{customerID}")]
-        public QueryResult<CustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam param)
+        public QueryResult<AddCustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam param)
         {
             return BLL().GetCustomerFullInfo(param);
         }
@@ -26,15 +26,22 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/GetCustomerInfoList")]
-        public QueryResult<IList<CustomerInfoEntity>> GetEntityList([FromBody] QueryCustomerInfoParam param)
+        public QueryResult<IList<CustomerInfoQueryResultDTO>> GetEntityList([FromBody] QueryCustomerInfoParam param)
         {
-            return BLL().GetEntityList(param);
+            var baseInfoQueryResult = BLL().GetEntityList(param);
+            var infoList = baseInfoQueryResult.ResultData;
+            var retList = new List<CustomerInfoQueryResultDTO>();
+            foreach(var eInfo in infoList)
+            {
+                retList.Add(new CustomerInfoQueryResultDTO(eInfo));
+            }
+            return new QueryResult<IList<CustomerInfoQueryResultDTO>>(retList, baseInfoQueryResult.MaxResultCount);
         }
 
 
         [HttpPost]
         [Route("api/AddCustomerInfo")]
-        public BaseOpResult AddCustomerInfo([FromBody] CustomerInfoDTO dto)
+        public BaseOpResult AddCustomerInfo([FromBody] AddCustomerInfoDTO dto)
         {
             return BLL().AddEntity(dto);
         }
@@ -42,7 +49,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/UpdateCustomerInfo")]
-        public BaseOpResult UpdateEntity([FromBody] CustomerInfoDTO dto)
+        public BaseOpResult UpdateEntity([FromBody] AddCustomerInfoDTO dto)
         {
             return BLL().UpdateEntity(dto);
         }

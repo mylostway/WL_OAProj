@@ -132,12 +132,74 @@ namespace WL_OA.Data
         [EnumNames("部门")]
         Department,
         [EnumNames("公司地址")]
-        CompanyAddr
+        CompanyAddr,
+        [EnumNames("业务联系人")]
+        BusinessConcatPeople,
+        [EnumNames("业务电话")]
+        BusinessPhone,
+        [EnumNames("业务手机")]
+        BusinessMobile,
+        [EnumNames("目的港电话")]
+        DstWhartfPhone,
+        [EnumNames("备注")]
+        Memo,
     }
 
 
     /// <summary>
     /// 客户类型枚举
+    /// </summary>
+    public enum CustomerInfoTypeEnums : int
+    {
+        [EnumNames("请选择")]
+        None = 0,
+        [EnumNames("船东")]
+        ShipOwner,
+        [EnumNames("托运人")]
+        Consignor,
+        [EnumNames("发货人")]
+        Sender,
+        [EnumNames("收货人")]
+        Receiver,
+        [EnumNames("通知人")]
+        Notifier,
+        [EnumNames("仓库")]
+        Cabinet,
+        [EnumNames("港口代理")]
+        WharfProxy,
+        [EnumNames("拖车公司")]
+        TrailCompany,
+        [EnumNames("海关")]
+        CIQ,
+        [EnumNames("其他")]
+        Other,
+        [EnumNames("货代")]
+        Freight,
+        [EnumNames("客户")]
+        Customer,
+        [EnumNames("保险")]
+        Insure,
+        [EnumNames("堆场")]
+        YARD,
+        [EnumNames("快递")]
+        Express,
+        [EnumNames("码头")]
+        Wharf,
+        [EnumNames("船代")]
+        CCST,
+        [EnumNames("贸易公司")]
+        TradeCompany,
+        [EnumNames("司机")]
+        Driver,
+        [EnumNames("船公司")]
+        ShipCompany,
+        [EnumNames("目的车队")]
+        DstFleet,
+    }
+
+
+    /// <summary>
+    /// 查询的客户类型枚举
     /// </summary>
     public enum QueryCustomerInfoTypeEnums : int
     {
@@ -156,12 +218,63 @@ namespace WL_OA.Data
         [EnumNames("仓库")]
         Cabinet,
         [EnumNames("港口代理")]
-        WharfProxy
+        WharfProxy,
+        [EnumNames("拖车公司")]
+        TrailCompany,
+        [EnumNames("海关")]
+        CIQ,
+        [EnumNames("其他")]
+        Other,
+        [EnumNames("货代")]
+        Freight,
+        [EnumNames("客户")]
+        Customer,
+        [EnumNames("保险")]
+        Insure,
+        [EnumNames("堆场")]
+        YARD,
+        [EnumNames("快递")]
+        Express,
+        [EnumNames("码头")]
+        Wharf,
+        [EnumNames("船代")]
+        CCST,
+        [EnumNames("贸易公司")]
+        TradeCompany,
+        [EnumNames("司机")]
+        Driver,
+        [EnumNames("船公司")]
+        ShipCompany,
+        [EnumNames("目的车队")]
+        DstFleet,
+        [EnumNames("白名单车队")]
+        Whitelist,
     }
 
 
     /// <summary>
     /// 客户状态枚举，按位取值，0 - 可用，1 - 已审核，2 - 共享，3 - 完成，4 - 黑名单，5 - 收短信
+    /// </summary>
+    public enum CustomerInfoStateEnums:int
+    {
+        [EnumNames("可用")]
+        可用 = 0,
+        [EnumNames("已审核")]
+        已审核,
+        [EnumNames("共享")]
+        共享,
+        [EnumNames("完成")]
+        完成,
+        [EnumNames("黑名单")]
+        黑名单,
+        [EnumNames("收短信")]
+        收短信,
+    }
+
+
+
+    /// <summary>
+    /// 查询客户状态枚举
     /// </summary>
     public enum QueryCustomerInfoStateEnums : int
     {

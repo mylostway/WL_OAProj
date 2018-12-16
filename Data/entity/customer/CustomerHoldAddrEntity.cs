@@ -80,6 +80,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 记录状态，按位取值，0 - 可用,1 - 是否发短信'
         /// </summary>
+        [BitUsageField(2, "错误的记录状态")]
         public virtual int FdataStatus { get; set; }
 
         /// <summary>
