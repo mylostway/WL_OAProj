@@ -54,6 +54,7 @@ namespace WL_OA.Data.entity
         /// </summary>
         [Required]
         [MaxLength(50)]
+        [ColumnInfo("货物名称(中文)")]
         public virtual string Fchn_Name { get { return fchn_Name; } set { fchn_Name = value; } }
 
         protected string feng_Name = "";
@@ -69,6 +70,7 @@ namespace WL_OA.Data.entity
         /// </summary>
         [Required]
         [MaxLength(15)]
+        [ColumnInfo("助记码")]
         public virtual string Fmark { get { return fmark; } set { fmark = value; } }
 
         protected int fisCheckWeight = 0;

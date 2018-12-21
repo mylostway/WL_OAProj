@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -71,6 +72,7 @@ namespace WL_OA.Data.entity
         /// 操作条款'
         /// </summary>
         [Required]
+        [Range((int)FreBusinessTransportTermsEnums.St_St, (int)FreBusinessTransportTermsEnums.Gate_Fgate, ErrorMessage = "非法的操作条款")]
         public virtual int Fop_term { get { return fop_term; } set { fop_term = value; } }
 
         protected int ftransit_term = 0;
@@ -78,6 +80,7 @@ namespace WL_OA.Data.entity
         /// 运输条款'
         /// </summary>
         [Required]
+        [Range((int)FreBusinessTransportTermsEnums.St_St, (int)FreBusinessTransportTermsEnums.Gate_Fgate, ErrorMessage = "非法的运输条款")]
         public virtual int Ftransit_term { get { return ftransit_term; } set { ftransit_term = value; } }
 
         protected int fpay_way = 0;
@@ -85,6 +88,7 @@ namespace WL_OA.Data.entity
         /// 付款方式'
         /// </summary>
         [Required]
+        [Range((int)FreBusinessPaymentTypeEnums.None, (int)FreBusinessPaymentTypeEnums.Advance, ErrorMessage = "非法的付款方式")]
         public virtual int Fpay_way { get { return fpay_way; } set { fpay_way = value; } }
 
         protected string fprotocol_no = "";
@@ -98,6 +102,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 整柜拼箱方式'
         /// </summary>
+        [Range((int)FreBusinessFLTypeEnums.None, (int)FreBusinessFLTypeEnums.LCL, ErrorMessage = "非法的整柜拼箱方式")]
         public virtual int Fassociate_way { get { return fassociate_way; } set { fassociate_way = value; } }
 
         protected string forder_no = "";
@@ -119,7 +124,10 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual int Fchild_bus_type { get { return fchild_bus_type; } set { fchild_bus_type = value; } }
 
-        public FreBusinessOrderInfoEntity() { }
+        public FreBusinessOrderInfoEntity()
+        {
+            Fbusiness_date = DateTime.Now;
+        }
 
         public FreBusinessOrderInfoEntity(FreBusinessOrderInfoEntity rhs)
         {

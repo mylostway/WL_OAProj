@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -20,6 +21,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 业务类型'
         /// </summary>
+        [Range((int)FreBusinessBusinessTypeEnums.None, (int)FreBusinessBusinessTypeEnums.Freight, ErrorMessage = "非法的业务类型")]
         public virtual int Fbusiness_type { get { return fbusiness_type; } set { fbusiness_type = value; } }
 
         protected string fassist_people = "";

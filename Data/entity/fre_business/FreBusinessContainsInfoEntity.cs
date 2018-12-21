@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -94,7 +95,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货'
         /// </summary>
-        
+        [Range((int)FreBusinessDetainReleaseEnums.None, (int)FreBusinessDetainReleaseEnums.Release, ErrorMessage = "非法的扣放货方式")]
         public virtual int Fhold_get_way { get { return fhold_get_way; } set { fhold_get_way = value; } }
 
         protected DateTime fdispatch_goods_date = DateTime.Now;

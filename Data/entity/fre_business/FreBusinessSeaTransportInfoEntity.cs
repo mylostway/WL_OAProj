@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -181,12 +182,13 @@ namespace WL_OA.Data.entity
         [MaxLength(50)]
         public virtual string Ftransfer_ship_wharf2 { get { return ftransfer_ship_wharf2; } set { ftransfer_ship_wharf2 = value; } }
 
-        protected string fcarft_ship_info_way = "";
+        protected int fcarft_ship_info_way = 0;
         /// <summary>
         /// 驳船信息'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fcarft_ship_info_way { get { return fcarft_ship_info_way; } set { fcarft_ship_info_way = value; } }
+        [Range((int)FreBusinessBargeInformationEnums.None, (int)FreBusinessBargeInformationEnums.Intelligence, ErrorMessage = "非法的驳船信息")]
+        public virtual int Fcarft_ship_info_way { get { return fcarft_ship_info_way; } set { fcarft_ship_info_way = value; } }
 
         protected DateTime ffirst_ship_get_date = DateTime.Now;
         /// <summary>

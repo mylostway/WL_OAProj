@@ -7,7 +7,7 @@ namespace WL_OA.Data
     /// <summary>
     /// 整柜拼箱
     /// </summary>
-    public enum FreBusinessTypeEnums : int
+    public enum FreBusinessFLTypeEnums : int
     {
         [EnumNames("请选择")]
         None = 0,

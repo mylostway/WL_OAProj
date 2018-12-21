@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -76,6 +77,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货'
         /// </summary>
+        [Range((int)FreBusinessDetainReleaseEnums.None, (int)FreBusinessDetainReleaseEnums.Release, ErrorMessage = "非法的扣放货方式")]
         public virtual int Fhold_get_way { get { return fhold_get_way; } set { fhold_get_way = value; } }
 
         protected string fhold_get_memo = "";
@@ -98,12 +100,13 @@ namespace WL_OA.Data.entity
         [MaxLength(30)]
         public virtual string Ftarget_trailer { get { return ftarget_trailer; } set { ftarget_trailer = value; } }
 
-        protected DateTime fdispatch_priority = DateTime.Now;
+        protected int fdispatch_priority = 0;
         /// <summary>
         /// 配送优先级'
         /// </summary>
         [Required]
-        public virtual DateTime Fdispatch_priority { get { return fdispatch_priority; } set { fdispatch_priority = value; } }
+        [Range((int)FreBusinessDeliveryLevelEnums.None, (int)FreBusinessDeliveryLevelEnums.Special, ErrorMessage = "非法的配送优先级")]
+        public virtual int Fdispatch_priority { get { return fdispatch_priority; } set { fdispatch_priority = value; } }
 
         protected DateTime fpredit_send_goods_date = DateTime.Now;
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -96,6 +97,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 发车预约方式'
         /// </summary>
+        [Range((int)FreBusinessReserveCarEnums.None, (int)FreBusinessReserveCarEnums.WaitingNotify, ErrorMessage = "非法的发车预约方式")]
         public virtual int Fcar_book_way { get { return fcar_book_way; } set { fcar_book_way = value; } }
 
         protected string fstart_trailer = "";
@@ -115,6 +117,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 装货优先级
         /// </summary>
+        [Range((int)FreBusinessLoadingLevelEnums.None, (int)FreBusinessLoadingLevelEnums.Urgent, ErrorMessage = "非法的装货优先级")]
         public virtual int Fhold_priority { get { return fhold_priority; } set { fhold_priority = value; } }
 
         public FreBusinessHoldGoodsInfoEntity() { }

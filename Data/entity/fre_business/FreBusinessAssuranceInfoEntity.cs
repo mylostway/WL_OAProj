@@ -1,6 +1,7 @@
 ﻿using Chloe.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -52,6 +53,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 保险类型'
         /// </summary>
+        [Range((int)FreBusinessInsurTypeEnums.None, (int)FreBusinessInsurTypeEnums.Basic, ErrorMessage = "非法的保险类型")]
         public virtual int Fassurance_type { get { return fassurance_type; } set { fassurance_type = value; } }
 
         protected string fassurance_info = "";

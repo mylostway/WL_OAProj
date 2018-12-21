@@ -279,7 +279,7 @@ create table wldb.t_fre_business_lay_goods_info
 	Fhold_get_memo varchar(100) not null default '' comment '扣放货说明',
 	Fhold_get_date datetime null comment '扣放货日期',
 	Ftarget_trailer varchar(30) not null default '' comment '目的拖车',
-	Fdispatch_priority datetime not null comment '配送优先级',
+	Fdispatch_priority int not null default 0 comment '配送优先级',
 	Fpredit_send_goods_date datetime not null comment '预计送货期'
 
 )ENGINE=Innodb default charset=utf8;
