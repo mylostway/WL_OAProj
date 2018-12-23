@@ -29,27 +29,8 @@ namespace WL_OA.Data
         /// 错误信息
         /// </summary>
         public string ErrorMsg { get; set; }
-    }
+    }    
 
-
-    /// <summary>
-    /// 字符串/buffer最大长度限制
-    /// </summary>
-    public class MaxLengthAttribute : Attribute
-    {
-        public MaxLengthAttribute(int maxLen) { MaxLength = maxLen; }
-
-        public int MaxLength = 0;
-    }
-
-
-    /// <summary>
-    /// 必须字段（非null和非空值）
-    /// </summary>
-    public class RequiredAttribute : Attribute
-    {
-        public RequiredAttribute() { }
-    }
 
 
     /// <summary>

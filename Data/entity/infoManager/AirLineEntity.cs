@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 using Chloe;
@@ -44,14 +45,25 @@ namespace WL_OA.Data.entity
 
         public AirwayEntity(AirwayEntity rhs)
         {
+            if (null == rhs) return;
             this.Fid = rhs.Fid;
             this.Fstate = rhs.Fstate;
+            this.Fline_no = rhs.Fline_no;
             this.Fchn_Name = rhs.Fchn_Name;
             this.Feng_Name = rhs.Feng_Name;
             this.Fremark = rhs.Fremark;
             this.Fusable = rhs.Fusable;
             this.FlastModifyTime = rhs.FlastModifyTime;
         }
+
+        protected string fline_no = "";
+        /// <summary>
+        /// 航线编号'
+        /// </summary>
+        [Required]
+        [MaxLength(50)]
+        public virtual string Fline_no { get { return fline_no; } set { fline_no = value; } }
+
 
         protected string fchn_Name = "";
         /// <summary>

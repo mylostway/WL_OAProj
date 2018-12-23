@@ -148,7 +148,7 @@ namespace WL_OA.BLL.query
             if (!string.IsNullOrEmpty(queryParam.FName)) query2.And(Restrictions.Like("Fname", string.Format("%{0}%", queryParam.FName)));
             if (!string.IsNullOrEmpty(queryParam.Fphone)) query2.And(c => c.Fphone1 == queryParam.Fphone);
             if (!string.IsNullOrEmpty(queryParam.Fcert)) query2.And(c => c.FcertID == queryParam.Fcert);
-            if (!string.IsNullOrEmpty(queryParam.FdriverNo)) query2.And(c => c.FDriverNo == queryParam.FdriverNo);
+            if (!string.IsNullOrEmpty(queryParam.FdriverNo)) query2.And(c => c.FdriverCardNo == queryParam.FdriverNo);
             if (null != queryParam.FworkState) query2.And(c => c.FworkState == queryParam.FworkState.Value);
 
             int rawRowCont = query2.RowCount();

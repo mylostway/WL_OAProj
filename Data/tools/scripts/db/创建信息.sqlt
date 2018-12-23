@@ -54,13 +54,20 @@ create table wldb.t_driverInfo
 	Fid int primary key auto_increment comment '数据唯一ID',
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 			
+    FdriverNo varchar(20) not null comment '司机编号', 
 	Fname varchar(30) not null comment '司机姓名',
 	Fphone1 varchar(15) not null comment '司机手机号码',
-	Fphone2 varchar(15) not null default '' comment '司机备用手机号码',
-	Fphone3 varchar(15) not null default '' comment '司机备用手机号码',
-	FcertID varchar(20) not null default '' comment '司机证件号码',
-	FDriverNo varchar(20) not null comment '驾驶证编号',
-	FworkState tinyint not null default 0 comment '是否在职 0 - 否 1 - 是，其他待添加，默认0'
+	Fphone2 varchar(15) not null default '' comment '司机备用手机号码',	
+	FcertID varchar(30) not null comment '司机证件号码',
+	FdriverCardNo varchar(30) not null comment '驾驶证编号',
+	FcarNo varchar(30) not null default '' comment '车牌号',
+	FtrailerNo varchar(30) not null default '' comment '挂车号',
+	Fbirthday datetime null comment '生日',
+	FbirthPlace varchar(50) not null default '' comment '籍贯',
+	FlivePlace varchar(50) not null default '' comment '家庭住址',
+	FlowestSalary int not null default 0 comment '保底工资(分)',
+	Fmemo varchar(200) not null default '' comment '备注',
+	FworkState tinyint not null default 1 comment '是否在职 0 - 否 1 - 是，其他待添加，默认0'
 )ENGINE=Innodb default charset=utf8;
 
 select * from wldb.t_driverInfo;
@@ -75,7 +82,10 @@ create table wldb.t_goodsInfo
 	Fchn_Name varchar(50) not null comment '货物名称名（中文）',
 	Feng_Name varchar(30) not null default '' comment '货物名称名（英文）',
 	Fmark varchar(15) not null comment '助记码',
+	FgoodsType tinyint not null default 0 comment '货物类型',
+	FbelongType tinyint not null default 0 comment '所属货类',
 	FisCheckWeight tinyint not null default 0 comment '标志-需核实重量',
+	Fmemo varchar(200) not null default '' comment '备注',
 	Fusable tinyint not null default 0 comment '标志-可用'
 )ENGINE=Innodb default charset=utf8;
 
@@ -112,6 +122,7 @@ create table wldb.t_airway
 	Fid int primary key auto_increment comment '数据唯一ID',
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 			
+	Fline_no varchar(50) not null comment '航线编号',
 	Fchn_Name varchar(50) not null comment '航线名称名（中文）',
 	Feng_Name varchar(30) not null default '' comment '航线名称名（英文）',
 	Fremark varchar(60) not null default '' comment '备注',
@@ -120,6 +131,45 @@ create table wldb.t_airway
 )ENGINE=Innodb default charset=utf8;
 
 select * from wldb.t_airway;
+
+
+
+
+-- 示例功能，创建车牌号信息表
+create table wldb.t_carCardNo
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+    Fcar_no varchar(30) not null comment '车辆编号', 
+	Fcar_card_no varchar(30) not null comment '车牌号',
+	Ftrailer_company varchar(30) not null comment '拖车公司',
+	Ftrailer_no varchar(30) not null default '' comment '挂车号码',	
+	Fdriver varchar(30) not null comment '司机',
+	Fphone varchar(20) not null default '' comment '电话',
+	Faddr varchar(100) not null default ' comment '地址',
+	Fcert varchar(30) not null comment '身份证',
+	Fbox_type int not null default 0 comment '箱位类型',
+	Fmakein varchar(30) not null default '' comment '制造国',
+	Fbelong_nature varchar(30) not null default '' comment '所有权性质',
+	Fmodel_no varchar(30) not null default '' comment '厂牌型号',
+	Fmake_time datetime null comment '出厂时间',
+	Fturn_style varchar(30) not null default '' comment '转向形式',
+	Fpower varchar(30) not null default '' comment '排量/功率',
+	Ffuel_type varchar(30) not null default '' comment '燃料种类',
+	Funderpan_no varchar(30) not null default '' comment '底盘号',
+	Foutstand_size varchar(30) not null default '' comment '外廓尺寸',
+	Fcar_color varchar(30) not null default '' comment '车身颜色',
+	Fmotor_no varchar(30) not null default '' comment '发动机号码',
+	Ftyre_num varchar(30) not null default '' comment '轮胎数',
+	Fwheel_base  varchar(30) not null default '' comment '轴距',
+	Foutstand_inch varchar(30) not null default '' comment '外廓次寸',
+	Faxles_num varchar(30) not null default '' comment '轴数',
+	Ftotal_weight varchar(30) not null default '' comment '总重量',
+	Fztgczl varchar(30) not null default '' comment '准托挂车质量',
+	Fjssqpgcs varchar(30) not null default '' comment '驾驶室前排共乘数',
+	
+)ENGINE=Innodb default charset=utf8;
 
 
 

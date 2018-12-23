@@ -8,17 +8,23 @@
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
 
+    <property name="FdriverNo" column="FdriverNo" />
     <property name="Fname" column="Fname" />
     <property name="Fphone1" column="Fphone1" />
     <property name="Fphone2" column="Fphone2" />
-    <property name="Fphone3" column="Fphone3" />
     <property name="FcertID" column="FcertID" />
-    <property name="FDriverNo" column="FDriverNo" />
+    <property name="FdriverCardNo" column="FdriverCardNo" />
+    <property name="FcarNo" column="FcarNo" />
+    <property name="FtrailerNo" column="FtrailerNo" />
+    <property name="Fbirthday" column="Fbirthday" />
+    <property name="FbirthPlace" column="FbirthPlace" />
+    <property name="FlivePlace" column="FlivePlace" />
+    <property name="FlowestSalary" column="FlowestSalary" />
+    <property name="Fmemo" column="Fmemo" />
     <property name="FworkState" column="FworkState" />
   </class>
 
-
-
+  
   <class name="GoodsinfoEntity" table="t_goodsinfo">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
@@ -28,9 +34,13 @@
     <property name="Fchn_Name" column="Fchn_Name" />
     <property name="Feng_Name" column="Feng_Name" />
     <property name="Fmark" column="Fmark" />
+    <property name="FgoodsType" column="FgoodsType" />
+    <property name="FbelongType" column="FbelongType" />
     <property name="FisCheckWeight" column="FisCheckWeight" />
+    <property name="Fmemo" column="Fmemo" />
     <property name="Fusable" column="Fusable" />
   </class>
+
 
 
   <class name="WharfinfoEntity" table="t_wharfinfo">
