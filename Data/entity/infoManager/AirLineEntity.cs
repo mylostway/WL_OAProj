@@ -91,6 +91,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 标志-是否可用'
         /// </summary>
+        [Range(0,1)]
         public virtual int Fusable { get { return fusable; } set { fusable = value; } }
 
         protected DateTime flastModifyTime = DateTime.Now;

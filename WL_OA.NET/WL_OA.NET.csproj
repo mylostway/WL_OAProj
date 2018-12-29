@@ -9,13 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BLL\WL_OA.BLL.csproj" />
     <ProjectReference Include="..\Data\WL_OA.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="WL_OA.BLL">
-      <HintPath>..\WL_OAProj\bin\Debug\netcoreapp2.0\WL_OA.BLL.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

@@ -22,19 +22,22 @@ namespace WL_OA.Data.dal
 
             private const string HIBERNATE_CFG_FILE_NAME = "hibernate.cfg.xml";
 
-            private static ISession curSession = null;
-
             internal NHibernateSession()
             {
                 var cfg = new Configuration().Configure();
                 sessionFactory = cfg.BuildSessionFactory();
-
-                curSession = sessionFactory.OpenSession();
             }
 
+            /// <summary>
+            /// 获取NHibernate的操作数据库session，这个session是非线程安全的。
+            /// FIXME：每次GetSession新建一个Isession对象对性能是有影响的，可以优化，参考：
+            /// https://www.cnblogs.com/aaa6818162/p/4631412.html
+            /// http://www.360doc.com/content/16/1201/09/1355383_610938159.shtml
+            /// </summary>
+            /// <returns></returns>
             internal ISession GetSession()
-            {
-                return curSession;
+            {                
+                return sessionFactory.OpenSession();
             }
 
             internal void CloseSession()

@@ -20,7 +20,7 @@ namespace WL_OA.Data.dal
         static readonly string MYSQL_CONNECTION_STR_CFG_KEY = "MysqlConnectionString";
 
         static ChloeUtil()
-        {
+        {            
             DbContext = new MySqlContext(new MySqlConnectionFactory(ConfigHelper.GetOnKey(MYSQL_CONNECTION_STR_CFG_KEY)));
         }
 

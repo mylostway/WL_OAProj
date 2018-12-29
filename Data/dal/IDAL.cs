@@ -6,7 +6,7 @@ using WL_OA.Data.param;
 
 namespace WL_OA.Data.dal
 {
-    interface IDAL<T>
+    public interface IDAL<T>
         where T:new()
     {
         /// <summary>

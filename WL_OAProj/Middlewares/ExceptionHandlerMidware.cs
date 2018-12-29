@@ -45,7 +45,7 @@ namespace WL_OAProj.Middlewares
         public async void UserFriendlyExceptionHandler(HttpContext context, UserFriendlyException ex)
         {
             //m_logger?.Log();
-            m_logger?.LogError(ex.Message, null);
+            m_logger?.LogError(ex.ToString(), null);
 
             var rsp = new BaseOpResult(QueryResultCode.Failed, ex.Message);
             context.Response.StatusCode = 400;
@@ -56,7 +56,7 @@ namespace WL_OAProj.Middlewares
         public async void DefaultExceptionHandler(HttpContext context,Exception ex)
         {
             //m_logger?.Log();
-            m_logger?.LogError(ex.Message, null);
+            m_logger?.LogError(ex.ToString(), null);
 
             var rsp = new BaseOpResult(QueryResultCode.Failed, ex.Message);
             context.Response.StatusCode = 500;

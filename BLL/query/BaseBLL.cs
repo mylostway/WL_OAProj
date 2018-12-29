@@ -199,7 +199,7 @@ namespace WL_OA.BLL
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
-                session.Update(entity);
+                session.Update(entity, entity.Fid);
                 trans.Commit();
             }
             catch(Exception ex)

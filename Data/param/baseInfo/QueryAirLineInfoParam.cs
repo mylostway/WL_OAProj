@@ -6,6 +6,8 @@ namespace WL_OA.Data.param
 {
     public class QueryAirLineInfoParam : BaseQueryParam
     {
+        public QueryAirLineInfoParam() { }
+
         public QueryAirLineInfoParam(int? airLineNo = null,string airName = "")
         {
             AirLineNo = airLineNo;
