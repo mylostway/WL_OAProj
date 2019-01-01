@@ -525,8 +525,8 @@ create table wldb.t_customer_info
 	Fmark varchar(10) not null default '' comment '助记码',
 	Fname varchar(50) not null default '' comment '公司全称',
 	Fcompany_type varchar(200) not null default '' comment '企业类型',
-	Fbusinesser varchar(30) not null comment '业务员 - (公司人员)',
-	Fdefault_type int not null comment '默认类型',
+	Fbusinesser varchar(30) not null default '' comment '业务员 - (公司人员)',
+	Fdefault_type int not null default 0 comment '默认类型',
 	Fbelong_industry varchar(30) comment '所属行业',
 	Fcustomer_type varchar(30) comment '客户类型',
 	Fmemo varchar(200) comment '备注',
@@ -553,8 +553,8 @@ create table wldb.t_customer_info
 	Finputor varchar(50) not null comment '录入员',
 	Finput_time datetime not null comment '录入时间',	
 	Fdepartment varchar(100) not null comment '所属部门(列表选择)',
-	Faduitor varchar(50) not null comment '审核人',
-	Faduit_time datetime not null comment '审核时间'
+	Faduitor varchar(50) not null default '' comment '审核人',
+	Faduit_time datetime null comment '审核时间'
 	
 )ENGINE=Innodb default charset=utf8 AUTO_INCREMENT=100;
 

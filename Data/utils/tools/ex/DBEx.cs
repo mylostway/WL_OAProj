@@ -19,6 +19,8 @@ namespace WL_OA.Data
         public static BaseOpResult AddEntityListEx<T>(this ISession session, IList<T> entityList, bool bIsAutomic = false)
             where T : BaseEntity<int>, new()
         {
+            if (null == entityList || 0 == entityList.Count) return new BaseOpResult();
+
             try
             {
                 foreach (var e in entityList)

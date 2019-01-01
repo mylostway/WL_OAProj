@@ -13,9 +13,12 @@ namespace ConsoleTest.test_cases
         {
             var loginInfo = new LoginInfo()
             {
-                Account = "admin",
+                //Account = "admin",
                 Password = "admin".ToMD5()
             };
+
+            loginInfo.IsValid();
+
 
             (new UserManagerBLL()).CheckLogin(loginInfo);
         }

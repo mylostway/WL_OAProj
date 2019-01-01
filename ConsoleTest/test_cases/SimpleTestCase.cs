@@ -43,9 +43,9 @@ namespace ConsoleTest.test_cases
             (new WharfInfoBLL()).AddEntityList(wharfList);
 
             var airLineList = new List<AirwayEntity>();
-            airLineList.Add(new AirwayEntity("南方航空"));
-            airLineList.Add(new AirwayEntity("春秋航空"));
-            airLineList.Add(new AirwayEntity("中国国航"));
+            airLineList.Add(new AirwayEntity("南方航空","1001"));
+            airLineList.Add(new AirwayEntity("春秋航空", "1002"));
+            airLineList.Add(new AirwayEntity("中国国航", "1003"));
             (new AirLineInfoBLL()).AddEntityList(airLineList);
         }
 

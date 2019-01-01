@@ -33,8 +33,9 @@ namespace WL_OA.Data.entity
         /// <param name="usable"></param>
         /// <param name="engName"></param>
         /// <param name="remark"></param>
-        public AirwayEntity(string chnName,short usable = 1,string engName = "",string remark = "")
+        public AirwayEntity(string chnName,string airLineNo,short usable = 1,string engName = "",string remark = "")
         {
+            Fline_no = airLineNo;
             Fchn_Name = chnName;
             Feng_Name = engName;
             Fremark = remark;

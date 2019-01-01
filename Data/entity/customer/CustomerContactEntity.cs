@@ -22,37 +22,37 @@ namespace WL_OA.Data.entity
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string Fname { get; set; }
+        public virtual string Fname { get; set; } = "";
 
         /// <summary>
         /// 部门'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fdepartment { get; set; }
+        public virtual string Fdepartment { get; set; } = "";
 
         /// <summary>
         /// 公司电话'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone { get; set; }
+        public virtual string Fphone { get; set; } = "";
 
         /// <summary>
         /// 公司传真'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ffax { get; set; }
+        public virtual string Ffax { get; set; } = "";
 
         /// <summary>
         /// 移动电话'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fmobile { get; set; }
+        public virtual string Fmobile { get; set; } = "";
 
         /// <summary>
         /// 身份证号码'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fcert { get; set; }
+        public virtual string Fcert { get; set; } = "";
 
         /// <summary>
         /// 性别 0 -- 未知 1 - 男 2 - 女'
@@ -64,43 +64,43 @@ namespace WL_OA.Data.entity
         /// 职务'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fjob { get; set; }
+        public virtual string Fjob { get; set; } = "";
 
         /// <summary>
         /// QQ号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fqq { get; set; }
+        public virtual string Fqq { get; set; } = "";
 
         /// <summary>
         /// 微信号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fwx { get; set; }
+        public virtual string Fwx { get; set; } = "";
 
         /// <summary>
         /// 公司电话2'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone2 { get; set; }
+        public virtual string Fphone2 { get; set; } = "";
 
         /// <summary>
         /// 公司电话3'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone3 { get; set; }
+        public virtual string Fphone3 { get; set; } = "";
 
         /// <summary>
         /// 公司电话4'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone4 { get; set; }
+        public virtual string Fphone4 { get; set; } = "";
 
         /// <summary>
         /// 公司电话5'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone5 { get; set; }
+        public virtual string Fphone5 { get; set; } = "";
 
         /// <summary>
         /// 记录状态，按位取值，0 - 可用'
@@ -112,25 +112,25 @@ namespace WL_OA.Data.entity
         /// 备注'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get; set; }
+        public virtual string Fmemo { get; set; } = "";
 
         /// <summary>
         /// 备注2'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo2 { get; set; }
+        public virtual string Fmemo2 { get; set; } = "";
 
         /// <summary>
         /// 备注3'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo3 { get; set; }
+        public virtual string Fmemo3 { get; set; } = "";
 
         /// <summary>
         /// 排序号
         /// </summary>
         [MaxLength(200)]
-        public virtual string Forder { get; set; }
+        public virtual string Forder { get; set; } = "";
 
     }
 }

@@ -224,8 +224,9 @@ namespace WL_OA.Data
             var typeName = enumType.Name;
             if (!s_dicEnumsKeyValPair.ContainsKey(typeName)) return -1;
             var dic = s_dicEnumsKeyValPair[typeName];
-            if (!dic.ContainsKey(enumName)) return -1;            
-            return Convert.ToInt32(dic[enumName]);
+            if (!dic.ContainsKey(enumName)) return -1;
+            //return Convert.ToInt32(dic[enumName]);
+            return dic[enumName].EValue;
         }
 
 

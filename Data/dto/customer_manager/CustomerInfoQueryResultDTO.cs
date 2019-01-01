@@ -13,7 +13,7 @@ namespace WL_OA.Data.dto
             :base(rhs)
         {
             //IsUsable = ((rhs.FdataStatus & 0x02) > 1).ToYesNoStr();
-            IsUsable = ((rhs.FdataStatus & 0x02) > 1);
+            IsUsable = ((rhs.Fdata_status & 0x02) > 1);
         }
 
         /// <summary>

@@ -220,7 +220,9 @@ var entityGen = (function(){
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
 			line += _genAttribute(lArr);
 			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
-			line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
+            line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
+            // 因为db设置的原因（varchar列大部分都设置成not null default），而字符串在C#里默认为null，导致insert的时候会报错
+            //if (type == "string") line += " = \"\";";
 			resultStr += (line + "\r\n\r\n");
 		}
 		resultStr += _genConstructor();

@@ -24,15 +24,19 @@ namespace WL_OA.Data
     {
         public UserFriendlyException() { }
 
-        public UserFriendlyException(string msg, ExceptionScope exceptionScope = ExceptionScope.System, int exceptionCode = -1)
+        public UserFriendlyException(string msg, ExceptionScope exceptionScope = ExceptionScope.System, Exception innerException = null, int exceptionCode = -1)
             : base(msg)
         {
             ExceptionScope = exceptionScope;
             ExceptionCode = exceptionCode;
+            InnerException = innerException;
         }
+
 
         public int ExceptionCode { get; set; } 
 
         public ExceptionScope ExceptionScope { get; set; }
+
+        public Exception InnerException { get; set; }
     }
 }

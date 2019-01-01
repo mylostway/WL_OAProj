@@ -79,7 +79,7 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            //TestLocal();
+            TestLocal();
             //TestNet();
 
             //(new TestConfig()).RunTest();
@@ -88,7 +88,7 @@ namespace ConsoleTest
 
             //new TestGenTestData().Run();
 
-            new TestUserManager().Run();
+            //new TestUserManager().Run();
 
             Console.Read();
         }

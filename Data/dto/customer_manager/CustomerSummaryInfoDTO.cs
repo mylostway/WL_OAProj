@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using WL_OA.Data.entity;
 
@@ -55,6 +56,12 @@ namespace WL_OA.Data.dto
             {
                 e.FcustomerId = linkCustomerID;
             }
+        }
+
+
+        public override bool IsValid()
+        {
+            return base.IsValid();
         }
     }
 }

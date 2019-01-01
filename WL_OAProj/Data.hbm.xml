@@ -141,45 +141,44 @@
     <property name="Fhold_state" column="Fhold_state" />
   </class>
 
+<class name="CustomerInfoEntity" table="t_customer_info">
+	<id name="Fid" type="int" column="Fid" unsaved-value="0">
+		<generator class="identity"/>
+	</id>
+	<property name="Fstate" column="Fstate" not-null="true" />
 
-  <class name="CustomerInfoEntity" table="t_customer_info">
-    <!-- BaseEntity部分字段 -->
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
-      <generator class="identity"/>
-    </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+	<property name="Fname_for_short" column="Fname_for_short" />
+	<property name="Fmark" column="Fmark" />
+	<property name="Fname" column="Fname" />
+	<property name="Fcompany_type" column="Fcompany_type" />
+	<property name="Fbusinesser" column="Fbusinesser" />
+	<property name="Fdefault_type" column="Fdefault_type" />
+	<property name="Fbelong_industry" column="Fbelong_industry" />
+	<property name="Fcustomer_type" column="Fcustomer_type" />
+	<property name="Fmemo" column="Fmemo" />
+	<property name="Fmain_goods" column="Fmain_goods" />
+	<property name="Fsettle_way" column="Fsettle_way" />
+	<property name="Fpay_way" column="Fpay_way" />
+	<property name="Fbusiness_type" column="Fbusiness_type" />
+	<property name="Fcompany_title" column="Fcompany_title" />
+	<property name="Fcompany_address" column="Fcompany_address" />
+	<property name="Fbusiness_contact_people" column="Fbusiness_contact_people" />
+	<property name="Fbusiness_mobile" column="Fbusiness_mobile" />
+	<property name="Fbusiness_phone" column="Fbusiness_phone" />
+	<property name="Fbusiness_fax" column="Fbusiness_fax" />
+	<property name="Ffinance_concat_people" column="Ffinance_concat_people" />
+	<property name="Ffinance_phone" column="Ffinance_phone" />
+	<property name="Ffinance_fax" column="Ffinance_fax" />
+	<property name="Fprotocol_no" column="Fprotocol_no" />
+	<property name="Fdest_wharf_phone" column="Fdest_wharf_phone" />
+	<property name="Fdata_status" column="Fdata_status" />
+	<property name="Finputor" column="Finputor" />
+	<property name="Finput_time" column="Finput_time" />
+	<property name="Fdepartment" column="Fdepartment" />
+	<property name="Faduitor" column="Faduitor" />
+	<property name="Faduit_time" column="Faduit_time" />
+</class>
 
-    <property name="FnameForShort" column="Fname_for_short" />
-    <property name="Fmark" column="Fmark" />
-    <property name="Fname" column="Fname" />
-    <property name="FcompanyType" column="Fcompany_type" />
-    <property name="Fbusinesser" column="Fbusinesser" />
-    <property name="FdefaultType" column="Fdefault_type" />
-    <property name="FbelongIndustry" column="Fbelong_industry" />
-    <property name="FcustomerType" column="Fcustomer_type" />
-    <property name="Fmemo" column="Fmemo" />
-    <property name="FmainGoods" column="Fmain_goods" />
-    <property name="FsettleWay" column="Fsettle_way" />
-    <property name="FpayWay" column="Fpay_way" />
-    <property name="FbusinessType" column="Fbusiness_type" />
-    <property name="FcompanyTitle" column="Fcompany_title" />
-    <property name="FcompanyAddress" column="Fcompany_address" />
-    <property name="FbusinessContactPeople" column="Fbusiness_contact_people" />
-    <property name="FbusinessMobile" column="Fbusiness_mobile" />
-    <property name="FbusinessPhone" column="Fbusiness_phone" />
-    <property name="FbusinessFax" column="Fbusiness_fax" />
-    <property name="FfinanceConcatPeople" column="Ffinance_concat_people" />
-    <property name="FfinancePhone" column="Ffinance_phone" />
-    <property name="FfinanceFax" column="Ffinance_fax" />
-    <property name="FprotocolNo" column="Fprotocol_no" />
-    <property name="FdestWharfPhone" column="Fdest_wharf_phone" />
-    <property name="FdataStatus" column="Fdata_status" />
-    <property name="Finputor" column="Finputor" />
-    <property name="FinputTime" column="Finput_time" />
-    <property name="Fdepartment" column="Fdepartment" />
-    <property name="Faduitor" column="Faduitor" />
-    <property name="FaduitTime" column="Faduit_time" />
-  </class>
 
   <class name="CustomerContactEntity" table="t_customer_contact">
     <!-- BaseEntity部分字段 -->

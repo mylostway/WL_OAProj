@@ -21,7 +21,7 @@ namespace WL_OA.Data.entity
         /// 录入员'
         /// </summary>        
         [MaxLength(50)]
-        public string Finputor { get; set; }
+        public string Finputor { get; set; } = "";
 
         /// <summary>
         /// 录入时间'
@@ -32,13 +32,13 @@ namespace WL_OA.Data.entity
         /// 所属部门(列表选择)'
         /// </summary>        
         [MaxLength(100)]
-        public string Fdepartment { get; set; }
+        public string Fdepartment { get; set; } = "";
 
         /// <summary>
         /// 审核人'
         /// </summary>        
         [MaxLength(50)]
-        public string Faduitor { get; set; }
+        public string Faduitor { get; set; } = "";
 
         /// <summary>
         /// 审核时间

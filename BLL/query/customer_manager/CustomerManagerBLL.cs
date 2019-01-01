@@ -88,12 +88,12 @@ namespace WL_OA.BLL.query
                 case DateTypeEnums.None:
                 case DateTypeEnums.InputTime:
                     {
-                        query.And(c => c.FinputTime >= queryStartDate && c.FinputTime <= queryEndDate);
+                        query.And(c => c.Finput_time >= queryStartDate && c.Finput_time <= queryEndDate);
                         break;
                     }
                 case DateTypeEnums.AduitTime:
                     {
-                        query.And(c => c.FaduitTime >= queryStartDate && c.FaduitTime <= queryEndDate);
+                        query.And(c => c.Faduit_time >= queryStartDate && c.Faduit_time <= queryEndDate);
                         break;
                     }
                 default:
@@ -135,7 +135,7 @@ namespace WL_OA.BLL.query
                     case QueryCustomerInfoIDTypeEnums.None:
                     case QueryCustomerInfoIDTypeEnums.Forshot:
                         {
-                            query.Where(c => c.FnameForShort.Contains(val));
+                            query.Where(c => c.Fname_for_short.Contains(val));
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.FullName:
@@ -150,12 +150,12 @@ namespace WL_OA.BLL.query
                         }
                     case QueryCustomerInfoIDTypeEnums.CustomType:
                         {
-                            query.Where(c => c.FcustomerType == val);
+                            query.Where(c => c.Fcustomer_type == val);
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.Payway:
                         {
-                            query.Where(c => c.FpayWay == val.ToEnumVal(typeof(PaywayEnums)));                            
+                            query.Where(c => c.Fpay_way == val.ToEnumVal(typeof(PaywayEnums)));                            
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.BusinessMan:
@@ -185,52 +185,52 @@ namespace WL_OA.BLL.query
             {
                 case QueryCustomerInfoStateEnums.Useless:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x01) == 0));
+                        query.Where(c => ((c.Fdata_status & 0x01) == 0));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.Usable:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x01) == 1));
+                        query.Where(c => ((c.Fdata_status & 0x01) == 1));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.Aduited:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x02) == 1));
+                        query.Where(c => ((c.Fdata_status & 0x02) == 1));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.UnAduited:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x02) == 0));
+                        query.Where(c => ((c.Fdata_status & 0x02) == 0));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.Shared:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x04) == 1));
+                        query.Where(c => ((c.Fdata_status & 0x04) == 1));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.UnShared:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x04) == 0));
+                        query.Where(c => ((c.Fdata_status & 0x04) == 0));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.BlackList:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x08) == 1));
+                        query.Where(c => ((c.Fdata_status & 0x08) == 1));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.NotBlackList:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x08) == 0));
+                        query.Where(c => ((c.Fdata_status & 0x08) == 0));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.ReceivedShortmsg:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x10) == 1));
+                        query.Where(c => ((c.Fdata_status & 0x10) == 1));
                         break;
                     }
                 case QueryCustomerInfoStateEnums.NotReceivedShortmsg:
                     {
-                        query.Where(c => ((c.FdataStatus & 0x10) == 0));
+                        query.Where(c => ((c.Fdata_status & 0x10) == 0));
                         break;
                     }
             }
@@ -244,16 +244,21 @@ namespace WL_OA.BLL.query
             try
             {
                 // FIX：输入录入人
-                //dto.CustomerInfo.Finputor = "";
-                dto.CustomerInfo.FinputTime = DateTime.Now;
+                dto.CustomerInfo.Finputor = GetRequestContext().LoginInfo.Name;
+                dto.CustomerInfo.Finput_time = DateTime.Now;                
 
-                var customID = session.Save(dto.CustomerInfo);
-                dto.Linked(dto.CustomerInfo.Fid);
+                var customID = session.Save(new CustomerInfoEntity(dto.CustomerInfo));
+                dto.Linked(Convert.ToInt32(customID));
 
-                AddEntityList(session, dto.CustomerInfo.ContactInfoList);
-                AddEntityList(session, dto.CustomerInfo.BankAccountInfoList);
-                AddEntityList(session, dto.CustomerInfo.BookSpaceReceiverInfoList);
-                AddEntityList(session, dto.CustomerInfo.HoldAddrInfoList);
+                session.AddEntityListEx(dto.CustomerInfo.ContactInfoList);
+                session.AddEntityListEx(dto.CustomerInfo.BankAccountInfoList);
+                session.AddEntityListEx(dto.CustomerInfo.BookSpaceReceiverInfoList);
+                session.AddEntityListEx(dto.CustomerInfo.HoldAddrInfoList);
+
+                //AddEntityList(session, dto.CustomerInfo.ContactInfoList);
+                //AddEntityList(session, dto.CustomerInfo.BankAccountInfoList);
+                //AddEntityList(session, dto.CustomerInfo.BookSpaceReceiverInfoList);
+                //AddEntityList(session, dto.CustomerInfo.HoldAddrInfoList);
 
                 session.Save(dto.CreditInfo);
                 session.Save(dto.ConfigInfo);

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Text;
 
 namespace WL_OA.Data.entity
@@ -27,7 +29,21 @@ namespace WL_OA.Data.entity
 
         public virtual bool IsValid()
         {
-            //throw new NotImplementedException();
+            try
+            {
+                var validationContext = new ValidationContext(this);
+                var results = new List<ValidationResult>();
+                var isValid = Validator.TryValidateObject(this, validationContext, results, true);
+
+                if (!isValid)
+                {
+                    throw new UserFriendlyException(results[0].ErrorMessage, ExceptionScope.Parameter);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new UserFriendlyException(ex.Message, ExceptionScope.System, ex);
+            }
             return true;
         }
     }
@@ -51,7 +67,7 @@ namespace WL_OA.Data.entity
 
         /// <summary>
         /// 数据状态，1 - 启用，0 - 失效
-        /// </summary>
+        /// </summary>        
         public virtual short Fstate { get; set; }
 
         /// <summary>
@@ -59,7 +75,22 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual bool IsValid()
         {
-            //throw new NotImplementedException();
+            try
+            {
+                var validationContext = new ValidationContext(this);
+                var results = new List<ValidationResult>();
+                var isValid = Validator.TryValidateObject(this, validationContext, results, true);
+
+                if (!isValid)
+                {
+                    throw new UserFriendlyException(results[0].ErrorMessage, ExceptionScope.Parameter);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new UserFriendlyException(ex.Message, ExceptionScope.System, ex);
+            }
+
             return true;
         }
     }

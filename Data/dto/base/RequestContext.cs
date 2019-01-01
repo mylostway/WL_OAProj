@@ -12,6 +12,6 @@ namespace WL_OA.Data
         /// <summary>
         /// 登录信息
         /// </summary>
-        public LoginInfo LoginInfo { get; set; }
+        public LoginInfo LoginInfo { get; set; } = new LoginInfo();
     }
 }

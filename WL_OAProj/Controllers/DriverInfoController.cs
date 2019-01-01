@@ -14,14 +14,13 @@ namespace WL_OAProj.Controllers
 {
     [Produces("application/json")]
     //[Route("api/DriverInfo")]
-    public class DriverInfoController : Controller
+    public class DriverInfoController : BaseController<DriverInfoBLL>
     {
         [HttpPost]
         [Route("api/QueryDriverInfoList")]
-        public QueryResult<IList<DriverinfoEntity>> QueryDriverInfoList([FromQuery] QueryDriverInfoParams param)
+        public QueryResult<IList<DriverinfoEntity>> QueryDriverInfoList(QueryDriverInfoParams param)
         {
-            var bll = new DriverInfoBLL();
-            return bll.GetEntityList(param);
+            return BLL().GetEntityList(param);
         }
 
 
@@ -29,8 +28,7 @@ namespace WL_OAProj.Controllers
         [Route("api/AddDriverInfo")]
         public BaseOpResult AddDriverInfo([FromBody] DriverinfoEntity entity)
         {
-            var bll = new DriverInfoBLL();
-            return bll.AddEntity(entity);
+            return BLL().AddEntity(entity);
         }
 
 
@@ -38,8 +36,7 @@ namespace WL_OAProj.Controllers
         [Route("api/UpdateDriverInfo")]
         public BaseOpResult UpdateDriverInfo([FromBody] DriverinfoEntity entity)
         {
-            var bll = new DriverInfoBLL();
-            return bll.UpdateEntity(entity);
+            return BLL().UpdateEntity(entity);
         }
 
 
@@ -47,8 +44,7 @@ namespace WL_OAProj.Controllers
         [Route("api/DelDriverInfo/{entityID}")]
         public BaseOpResult DelDriverInfo(int entityID)
         {
-            var bll = new DriverInfoBLL();
-            return bll.DelEntity(entityID);
+            return BLL().DelEntity(entityID);
         }
     }
 }

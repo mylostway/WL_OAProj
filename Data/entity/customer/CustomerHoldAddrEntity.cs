@@ -22,61 +22,61 @@ namespace WL_OA.Data.entity
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string FgoodsOwner { get; set; }
+        public virtual string FgoodsOwner { get; set; } = "";
 
         /// <summary>
         /// 货主APP ID'
         /// </summary>
         [MaxLength(50)]
-        public virtual string FownerAppId { get; set; }
+        public virtual string FownerAppId { get; set; } = "";
 
         /// <summary>
         /// 装卸货区域'
         /// </summary>
         [MaxLength(50)]
-        public virtual string FholdArea { get; set; }
+        public virtual string FholdArea { get; set; } = "";
 
         /// <summary>
         /// 地点'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Faddr { get; set; }
+        public virtual string Faddr { get; set; } = "";
 
         /// <summary>
         /// 装卸说明'
         /// </summary>
         [MaxLength(200)]
-        public virtual string FholdMemo { get; set; }
+        public virtual string FholdMemo { get; set; } = "";
 
         /// <summary>
         /// 收(发)货单位'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Funit { get; set; }
+        public virtual string Funit { get; set; } = "";
 
         /// <summary>
         /// 联系人'
         /// </summary>
         [MaxLength(50)]
-        public virtual string FcontactMan { get; set; }
+        public virtual string FcontactMan { get; set; } = "";
 
         /// <summary>
         /// 电话'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fphone { get; set; }
+        public virtual string Fphone { get; set; } = "";
 
         /// <summary>
         /// 手机'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fmobile { get; set; }
+        public virtual string Fmobile { get; set; } = "";
 
         /// <summary>
         /// 传真'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ffax { get; set; }
+        public virtual string Ffax { get; set; } = "";
 
         /// <summary>
         /// 记录状态，按位取值，0 - 可用,1 - 是否发短信'
@@ -88,13 +88,13 @@ namespace WL_OA.Data.entity
         /// 备注'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get; set; }
+        public virtual string Fmemo { get; set; } = "";
 
         /// <summary>
         /// 排序号
         /// </summary>
         [MaxLength(200)]
-        public virtual string Forder { get; set; }
+        public virtual string Forder { get; set; } = "";
 
     }
 }

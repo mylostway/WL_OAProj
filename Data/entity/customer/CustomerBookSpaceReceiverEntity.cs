@@ -22,31 +22,31 @@ namespace WL_OA.Data.entity
         /// </summary>
         [Required]
         [MaxLength(100)]
-        public virtual string FshipCompany { get; set; }
+        public virtual string FshipCompany { get; set; } = "";
 
         /// <summary>
         /// 订舱收货人'
         /// </summary>
         [MaxLength(100)]
-        public virtual string Freceiver { get; set; }
+        public virtual string Freceiver { get; set; } = "";
 
         /// <summary>
         /// 联系人'
         /// </summary>
         [MaxLength(100)]
-        public virtual string Fcontact { get; set; }
+        public virtual string Fcontact { get; set; } = "";
 
         /// <summary>
         /// 电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fphone { get; set; }
+        public virtual string Fphone { get; set; } = "";
 
         /// <summary>
         /// 备注
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get; set; }
+        public virtual string Fmemo { get; set; } = "";
 
     }
 }

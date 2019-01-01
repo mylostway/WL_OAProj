@@ -10,40 +10,38 @@ using WL_OA.Data.entity;
 using WL_OA.Data.param;
 using WL_OA.Data.dto;
 
-
 namespace WL_OAProj.Controllers
 {
     [Produces("application/json")]
-    //[Route("api")]
-    public class GoodsInfoController : BaseController<GoodsInfoBLL>
+    public class AirwayController : BaseController<AirLineInfoBLL>
     {
         [HttpPost]
-        [Route("api/QueryGoodsInfoList")]
-        public QueryResult<IList<GoodsinfoEntity>> QueryGoodsInfoList(QueryGoodsInfoParam param)
-        {            
+        [Route("api/QueryAirwayInfoList")]
+        public QueryResult<IList<AirwayEntity>> QueryAirwayInfoList(QueryAirLineInfoParam param)
+        {
             return BLL().GetEntityList(param);
         }
 
 
         [HttpPost]
-        [Route("api/AddGoodsInfo")]
-        public BaseOpResult AddGoodsInfo(GoodsinfoEntity entity)
-        {            
+        [Route("api/AddAirwayInfo")]
+        public BaseOpResult AddAirwayInfo(AirwayEntity entity)
+        {
             return BLL().AddEntity(entity);
         }
 
         [HttpGet]
-        [Route("api/DelGoodsInfo/{entityID}")]
-        public BaseOpResult DelGoodsInfo(int entityID)
-        {            
+        [Route("api/DelAirwayInfo/{entityID}")]
+        public BaseOpResult DelAirwayInfo(int entityID)
+        {
             return BLL().DelEntity(entityID);
         }
 
 
         [HttpPost]
-        [Route("api/UpdateGoodsInfo")]
-        public BaseOpResult UpdateGoodsInfo(GoodsinfoEntity entity)
-        {            
+        [Route("api/UpdateAirwayInfo")]
+        public BaseOpResult UpdateAirwayInfo(AirwayEntity entity)
+        {
             return BLL().UpdateEntity(entity);
         }
     }

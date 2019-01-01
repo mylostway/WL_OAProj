@@ -102,6 +102,7 @@ namespace WL_OA.BLL
         /// 增加一个列表
         /// </summary>
         /// <param name="entityList"></param>
+        /// <param name="bIsAutomic">是否原子操作（目前仅仅表示，如果批量操作中有一个失败则全部回退，默认false）</param>
         public virtual BaseOpResult AddEntityList(List<T> entityList, bool bIsAutomic = false)
         {
             try
@@ -152,6 +153,8 @@ namespace WL_OA.BLL
         public virtual BaseOpResult AddEntityList<W>(ISession session, IList<W> entityList, bool bIsAutomic = false)
             where W : BaseEntity<int>, new()
         {
+            if (null == entityList || 0 == entityList.Count) return new BaseOpResult();
+
             try
             {
                 foreach (var e in entityList)
@@ -218,7 +221,7 @@ namespace WL_OA.BLL
         {
             try
             {
-                //entity.IsValid();
+                entity.IsValid();
 
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
@@ -292,8 +295,6 @@ namespace WL_OA.BLL
         {
             session.Transaction.Rollback();
         }
-
-        
     }
 
 

@@ -15,7 +15,6 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 司机编号'
         /// </summary>
-        [Required]
         [MaxLength(20)]
         public virtual string FdriverNo { get { return fdriverNo; } set { fdriverNo = value; } }
 
@@ -118,8 +117,8 @@ namespace WL_OA.Data.entity
         {
             this.Fname = name;
             this.Fphone1 = phone;
-            this.fcertID = certID;
-            this.FdriverCardNo = cardNo;
+            this.FcertID = certID;
+            this.FdriverCardNo = cardNo;            
         }
 
         public DriverinfoEntity(DriverinfoEntity rhs)
