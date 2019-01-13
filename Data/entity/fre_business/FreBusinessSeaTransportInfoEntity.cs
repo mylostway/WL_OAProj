@@ -52,29 +52,29 @@ namespace WL_OA.Data.entity
         [MaxLength(50)]
         public virtual string Fship_no { get { return fship_no; } set { fship_no = value; } }
 
-        protected DateTime fship_go_date = DateTime.Now;
+        protected DateTime? fship_go_date ;
         /// <summary>
         /// 预开船期'
         /// </summary>
-        public virtual DateTime Fship_go_date { get { return fship_go_date; } set { fship_go_date = value; } }
+        public virtual DateTime? Fship_go_date { get { return fship_go_date; } set { fship_go_date = value; } }
 
-        protected DateTime fship_reach_date = DateTime.Now;
+        protected DateTime? fship_reach_date ;
         /// <summary>
         /// 预到船期'
         /// </summary>
-        public virtual DateTime Fship_reach_date { get { return fship_reach_date; } set { fship_reach_date = value; } }
+        public virtual DateTime? Fship_reach_date { get { return fship_reach_date; } set { fship_reach_date = value; } }
 
-        protected DateTime fship_report_date = DateTime.Now;
+        protected DateTime? fship_report_date ;
         /// <summary>
         /// 预报船期'
         /// </summary>
-        public virtual DateTime Fship_report_date { get { return fship_report_date; } set { fship_report_date = value; } }
+        public virtual DateTime? Fship_report_date { get { return fship_report_date; } set { fship_report_date = value; } }
 
-        protected DateTime fpredit_reach_date = DateTime.Now;
+        protected DateTime? fpredit_reach_date ;
         /// <summary>
         /// 预计到达日期'
         /// </summary>
-        public virtual DateTime Fpredit_reach_date { get { return fpredit_reach_date; } set { fpredit_reach_date = value; } }
+        public virtual DateTime? Fpredit_reach_date { get { return fpredit_reach_date; } set { fpredit_reach_date = value; } }
 
         protected string fbook_order_man = "";
         /// <summary>
@@ -111,17 +111,17 @@ namespace WL_OA.Data.entity
         [MaxLength(50)]
         public virtual string Fbranch_ship_no { get { return fbranch_ship_no; } set { fbranch_ship_no = value; } }
 
-        protected DateTime ftransfer_ship_reach_date = DateTime.Now;
+        protected DateTime? ftransfer_ship_reach_date ;
         /// <summary>
         /// 中转船到期'
         /// </summary>
-        public virtual DateTime Ftransfer_ship_reach_date { get { return ftransfer_ship_reach_date; } set { ftransfer_ship_reach_date = value; } }
+        public virtual DateTime? Ftransfer_ship_reach_date { get { return ftransfer_ship_reach_date; } set { ftransfer_ship_reach_date = value; } }
 
-        protected DateTime ftransfer_ship_go_date = DateTime.Now;
+        protected DateTime? ftransfer_ship_go_date ;
         /// <summary>
         /// 中转开船期'
         /// </summary>
-        public virtual DateTime Ftransfer_ship_go_date { get { return ftransfer_ship_go_date; } set { ftransfer_ship_go_date = value; } }
+        public virtual DateTime? Ftransfer_ship_go_date { get { return ftransfer_ship_go_date; } set { ftransfer_ship_go_date = value; } }
 
         protected string ftriple_pass_way = "";
         /// <summary>
@@ -137,11 +137,11 @@ namespace WL_OA.Data.entity
         [MaxLength(50)]
         public virtual string Ftriple_pass_ship_no { get { return ftriple_pass_ship_no; } set { ftriple_pass_ship_no = value; } }
 
-        protected DateTime ftransfer_ship_go_date2 = DateTime.Now;
+        protected DateTime? ftransfer_ship_go_date2 ;
         /// <summary>
         /// 中转开船期2'
         /// </summary>
-        public virtual DateTime Ftransfer_ship_go_date2 { get { return ftransfer_ship_go_date2; } set { ftransfer_ship_go_date2 = value; } }
+        public virtual DateTime? Ftransfer_ship_go_date2 { get { return ftransfer_ship_go_date2; } set { ftransfer_ship_go_date2 = value; } }
 
         protected int fis_transfer_ship = 0;
         /// <summary>
@@ -162,11 +162,11 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual int Fis_main_line_car { get { return fis_main_line_car; } set { fis_main_line_car = value; } }
 
-        protected DateTime ftransfer_ship_reach_date2 = DateTime.Now;
+        protected DateTime? ftransfer_ship_reach_date2 ;
         /// <summary>
         /// 中转船到期2'
         /// </summary>
-        public virtual DateTime Ftransfer_ship_reach_date2 { get { return ftransfer_ship_reach_date2; } set { ftransfer_ship_reach_date2 = value; } }
+        public virtual DateTime? Ftransfer_ship_reach_date2 { get { return ftransfer_ship_reach_date2; } set { ftransfer_ship_reach_date2 = value; } }
 
         protected string ftransfer_ship_wharf = "";
         /// <summary>
@@ -190,11 +190,11 @@ namespace WL_OA.Data.entity
         [Range((int)FreBusinessBargeInformationEnums.None, (int)FreBusinessBargeInformationEnums.Intelligence, ErrorMessage = "非法的驳船信息")]
         public virtual int Fcarft_ship_info_way { get { return fcarft_ship_info_way; } set { fcarft_ship_info_way = value; } }
 
-        protected DateTime ffirst_ship_get_date = DateTime.Now;
+        protected DateTime? ffirst_ship_get_date ;
         /// <summary>
         /// 头程上船期'
         /// </summary>
-        public virtual DateTime Ffirst_ship_get_date { get { return ffirst_ship_get_date; } set { ffirst_ship_get_date = value; } }
+        public virtual DateTime? Ffirst_ship_get_date { get { return ffirst_ship_get_date; } set { ffirst_ship_get_date = value; } }
 
         public FreBusinessSeaTransportInfoEntity() { }
 

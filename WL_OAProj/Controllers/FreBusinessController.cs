@@ -32,7 +32,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/AddFreBusiness")]
-        public BaseOpResult GetDetail(FreBussinessOpCenterDTO dto)
+        public BaseOpResult AddFreBusiness(FreBussinessOpCenterDTO dto)
         {
             return BLL().AddEntity(dto);
         }
@@ -40,7 +40,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/DelFreBusiness/{listID}")]
-        public BaseOpResult GetDetail(string listID)
+        public BaseOpResult DelFreBusiness(string listID)
         {
             return BLL().Del(listID);
         }
