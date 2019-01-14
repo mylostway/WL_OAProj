@@ -74,7 +74,7 @@ namespace WL_OA.Data
     /// </summary>
     public enum FreBusinessReserveCarEnums : int
     {
-        [EnumNames("请选择",true)]
+        [EnumNames("请选择", true)]
         None = 0,
         [EnumNames("已电话预约")]
         Phoned,
@@ -108,7 +108,7 @@ namespace WL_OA.Data
     {
         [EnumNames("请选择")]
         None = 0,
-        [EnumNames("扣货",true)]
+        [EnumNames("扣货", true)]
         Hold,
         [EnumNames("放货")]
         Release,
@@ -120,7 +120,7 @@ namespace WL_OA.Data
     /// </summary>
     public enum FreBusinessDeliveryLevelEnums : int
     {
-        [EnumNames("请选择",true)]
+        [EnumNames("请选择", true)]
         None = 0,
         [EnumNames("普通安排")]
         Common,
@@ -156,7 +156,7 @@ namespace WL_OA.Data
         None = 0,
         [EnumNames("拖车")]
         Trail,
-        [EnumNames("货代",true)]
+        [EnumNames("货代", true)]
         Freight,
     }
 
@@ -185,7 +185,7 @@ namespace WL_OA.Data
     {
         [EnumNames("不限日期")]
         不限日期 = 0,
-        [EnumNames("业务日期")]
+        [EnumNames("业务日期", IsSelected = true)]
         业务日期,
         [EnumNames("制单日期")]
         制单日期,
@@ -312,7 +312,7 @@ namespace WL_OA.Data
         托运人,
         [EnumNames("运单号")]
         运单号,
-        [EnumNames("柜号")]
+        [EnumNames("柜号", IsSelected = true)]
         柜号,
         [EnumNames("工作单号")]
         工作单号,
@@ -519,7 +519,7 @@ namespace WL_OA.Data
         未取消,
         [EnumNames("已取消")]
         已取消,
-        [EnumNames("可用")]
+        [EnumNames("可用", IsSelected = true)]
         可用,
         [EnumNames("不可用")]
         不可用,
@@ -721,7 +721,7 @@ namespace WL_OA.Data
     public enum FreBusinessUnitType : int
     {
         [EnumNames("20GP")]
-	    E_20GP = 0,
+        E_20GP = 0,
         [EnumNames("40GP")]
         E_40GP,
         [EnumNames("20HQ")]
