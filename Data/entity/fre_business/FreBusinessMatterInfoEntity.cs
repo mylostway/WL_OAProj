@@ -50,11 +50,11 @@ namespace WL_OA.Data.entity
         [MaxLength(32)]
         public virtual string Fgather_list_no { get { return fgather_list_no; } set { fgather_list_no = value; } }
 
-        protected DateTime fback_cross_date = DateTime.Now;
+        protected DateTime? fback_cross_date;
         /// <summary>
         /// 回交日期'
         /// </summary>
-        public virtual DateTime Fback_cross_date { get { return fback_cross_date; } set { fback_cross_date = value; } }
+        public virtual DateTime? Fback_cross_date { get { return fback_cross_date; } set { fback_cross_date = value; } }
 
         protected string freclaim_info = "";
         /// <summary>

@@ -61,7 +61,7 @@ namespace WL_OA.BLL
 
             var strCounter = string.Format("{0:D2}", nCounter);
 
-            return string.Format("{0}{1}{2}{3}{4}", busType, strTime, strUserID, STR_UNUSED, strCounter);
+            return string.Format("{0}{1}{2}{3}{4}", strBusType, strTime, strUserID, STR_UNUSED, strCounter);
         }
     }
 }

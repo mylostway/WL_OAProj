@@ -9,9 +9,11 @@ using log4net.Core;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WL_OA.Data.utils;
+using WL_OAProj.Middlewares;
 
 namespace WL_OAProj
 {
@@ -27,7 +29,7 @@ namespace WL_OAProj
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<ILogger>();
+            services.AddSingleton<ILog>(LogManager.GetLogger(this.GetType()));
 
             services.AddMvc();
         }

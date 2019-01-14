@@ -75,15 +75,20 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual bool IsValid()
         {
+            var validationContext = new ValidationContext(this);
+            var results = new List<ValidationResult>();
             try
-            {
-                var validationContext = new ValidationContext(this);
-                var results = new List<ValidationResult>();
-                var isValid = Validator.TryValidateObject(this, validationContext, results, true);
-
+            {               
+                var isValid = Validator.TryValidateObject(this, validationContext, results, false);
                 if (!isValid)
                 {
-                    throw new UserFriendlyException(results[0].ErrorMessage, ExceptionScope.Parameter);
+                    var strFirstMember = "";
+                    foreach(var eMember in results[0].MemberNames)
+                    {
+                        strFirstMember = eMember;
+                        break;
+                    }
+                    throw new UserFriendlyException($"字段:{strFirstMember}异常，原因:{results[0].ErrorMessage}", ExceptionScope.Parameter);
                 }
             }
             catch (Exception ex)
