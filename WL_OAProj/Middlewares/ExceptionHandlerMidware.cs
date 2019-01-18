@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using WL_OA.Data;
 using WL_OA.Data.dto;
+using WL_OA.Data.utils;
 
 namespace WL_OAProj.Middlewares
 {
@@ -44,8 +45,8 @@ namespace WL_OAProj.Middlewares
 
         public async void UserFriendlyExceptionHandler(HttpContext context, UserFriendlyException ex)
         {
-            //m_logger?.Log();
-            m_logger?.LogError(ex.ToString(), null);
+            if (null != m_logger) m_logger.LogError(ex.ToString(), null);
+            else SLogger.Fatal($"发生已知逻辑异常，未捕获处理", ex);
 
             var rsp = new BaseOpResult(QueryResultCode.Failed, ex.Message);
             context.Response.StatusCode = 400;
@@ -53,10 +54,10 @@ namespace WL_OAProj.Middlewares
         }
 
 
-        public async void DefaultExceptionHandler(HttpContext context,Exception ex)
+        public async void DefaultExceptionHandler(HttpContext context, Exception ex)
         {
-            //m_logger?.Log();
-            m_logger?.LogError(ex.ToString(), null);
+            if (null != m_logger) m_logger.LogError(ex.ToString(), null);
+            else SLogger.Fatal($"发生未知系统异常，未捕获处理", ex);
 
             var rsp = new BaseOpResult(QueryResultCode.Failed, ex.Message);
             context.Response.StatusCode = 500;

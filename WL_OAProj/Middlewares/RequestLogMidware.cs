@@ -8,24 +8,65 @@ using WL_OA.Data;
 using WL_OA.Data.dto;
 using Microsoft.AspNetCore.Builder;
 using log4net;
+using System.IO;
+using Microsoft.Extensions.DependencyInjection;
+using WL_OA.Data.utils;
+using System.Diagnostics;
 
 namespace WL_OAProj.Middlewares
 {
+
     /// <summary>
     /// 记录请求日志
     /// </summary>
-    public static class RequestLogMidwareEx
+    public class RequestLogMidware
     {
-        static RequestLogMidwareEx() { }
+        private RequestDelegate m_nextDelegate;
 
-        public static void Register(this IApplicationBuilder app)
+        public RequestLogMidware(RequestDelegate next)
         {
-            app.Run(new RequestDelegate(async context =>
-            {
-                var logger = (ILog)app.ApplicationServices.GetService(typeof(ILog));
-
-                logger?.Info(context.Request.ToString());
-            }));
+            m_nextDelegate = next;
         }
-    }    
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public async Task Invoke(HttpContext httpContext, IServiceProvider sp)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var reqStatisticsInfo = new WebReqResStatisticsDTO();
+            var request = httpContext.Request;
+
+            var logger = (ILog)sp.GetService(typeof(ILog));
+
+            reqStatisticsInfo.Method = request.Method;
+            reqStatisticsInfo.ContentType = request.ContentType;
+            reqStatisticsInfo.RequestHeader = JsonHelper.SerializeTo(request.Headers);
+            reqStatisticsInfo.RequestFullUrl = $"{request.PathBase.Value}{request.Path.Value}?{request.QueryString.Value}";
+            reqStatisticsInfo.RequestBody = await httpContext.GetRequestBodyString();
+
+            try
+            {
+                await m_nextDelegate.Invoke(httpContext);
+            }
+            catch (Exception ex)
+            {
+                reqStatisticsInfo.Exception = ex;
+            }
+            finally
+            {
+                watch.Stop();
+                reqStatisticsInfo.ResponseBody = await httpContext.GetResponseBodyString();
+                reqStatisticsInfo.Cost = watch.ElapsedMilliseconds;
+
+                var strStatistics = JsonHelper.SerializeTo(reqStatisticsInfo);
+                if (null != logger) logger.Info(strStatistics);
+                else SLogger.Info(strStatistics);
+            }
+        }
+    }
 }

@@ -24,7 +24,8 @@ namespace WL_OA.Data.dal
 
             internal NHibernateSession()
             {
-                var cfg = new Configuration().Configure();
+                var cfgFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}/Configs/hibernate.cfg.xml";
+                var cfg = new Configuration().Configure(cfgFilePath);
                 sessionFactory = cfg.BuildSessionFactory();
             }
 

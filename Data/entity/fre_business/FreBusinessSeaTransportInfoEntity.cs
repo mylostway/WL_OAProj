@@ -147,6 +147,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 是否转船,0 - 否，1 - 是，默认0'
         /// </summary>
+        [Range(0,127,ErrorMessage ="非法的是否转船值")]
         public virtual int Fis_transfer_ship { get { return fis_transfer_ship; } set { fis_transfer_ship = value; } }
 
         protected string fline_chn_name = "";
@@ -160,6 +161,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 是否干线车,0 - 否，1 - 是，默认0'
         /// </summary>
+        [Range(0, 127, ErrorMessage = "非法的是否干线车值")]
         public virtual int Fis_main_line_car { get { return fis_main_line_car; } set { fis_main_line_car = value; } }
 
         protected DateTime? ftransfer_ship_reach_date2 ;
@@ -186,7 +188,6 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 驳船信息'
         /// </summary>
-        [MaxLength(50)]
         [Range((int)FreBusinessBargeInformationEnums.None, (int)FreBusinessBargeInformationEnums.Intelligence, ErrorMessage = "非法的驳船信息")]
         public virtual int Fcarft_ship_info_way { get { return fcarft_ship_info_way; } set { fcarft_ship_info_way = value; } }
 

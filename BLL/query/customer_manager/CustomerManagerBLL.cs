@@ -263,14 +263,14 @@ namespace WL_OA.BLL.query
                 session.Save(dto.CreditInfo);
                 session.Save(dto.ConfigInfo);
                 session.Save(dto.OtherInfo);
+
+                CommitOnSession(session);
             }
             catch(Exception ex)
             {
                 RollBackOnSession(session);
                 return new BaseOpResult(QueryResultCode.Failed, ex.Message);
             }
-
-            CommitOnSession(session);
 
             return BaseOpResult.SucceedInstance;
         }

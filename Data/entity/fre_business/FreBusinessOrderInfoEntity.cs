@@ -116,12 +116,14 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 是否包含保险，0 - 无，1 - 有'
         /// </summary>
+        [Range(0, 1, ErrorMessage = "非法的是否包含保险字段")]
         public virtual int Fhas_assurance { get { return fhas_assurance; } set { fhas_assurance = value; } }
 
         protected int fchild_bus_type = 0;
         /// <summary>
         /// 业务子类型，0 - 无，目前在网站上没有任何选择
         /// </summary>
+        [Range(0, 127, ErrorMessage = "非法的业务子类型")]
         public virtual int Fchild_bus_type { get { return fchild_bus_type; } set { fchild_bus_type = value; } }
 
         public FreBusinessOrderInfoEntity()

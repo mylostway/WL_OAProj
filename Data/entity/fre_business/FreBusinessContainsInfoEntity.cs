@@ -29,6 +29,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 规格，默认20GP'
         /// </summary>
+        [Range(0, 127, ErrorMessage = "非法的规格选项")]
         public virtual int Fspec_way { get { return fspec_way; } set { fspec_way = value; } }
 
         protected string fcabinet_no = "";
@@ -185,6 +186,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 包装形式'
         /// </summary>
+        [Range(0, 127, ErrorMessage = "非法的包装形式值")]
         public virtual int Fpacket_way { get { return fpacket_way; } set { fpacket_way = value; } }
 
         protected int fpacket_num = 0;

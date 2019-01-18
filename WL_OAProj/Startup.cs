@@ -29,9 +29,15 @@ namespace WL_OAProj
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ILog>(LogManager.GetLogger(this.GetType()));
+            //services.AddSingleton<ILog>(LogManager.GetLogger(this.GetType()));
+            //services.AddSingleton<ILog>(SLogger.Instance);
 
-            services.AddMvc();
+            // 使用内存Cache
+            services.AddMemoryCache();
+            // 再启动session
+            services.AddSession();
+
+            services.AddMvc();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +45,18 @@ namespace WL_OAProj
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
+                //.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)//增加环境配置文件，新建项目默认有
                 .AddEnvironmentVariables();
 
-            var Configuration = builder.Build();
-            var Repository = LogManager.CreateRepository("NETCoreRepository");
-            XmlConfigurator.Configure(Repository, new FileInfo("log4net.config"));
+            var Configuration = builder.Build();   
+            
+            
 
+            // FIXME：这里配置文件路径需要确认
+            var cfgPath = $"{env.ContentRootPath}/Configs/log4net.config";
+            XmlConfigurator.Configure(new FileInfo(cfgPath));
+            
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -55,11 +67,14 @@ namespace WL_OAProj
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseMiddleware<ExceptionHandlerMidware>();
+            app.UseMiddleware<RequestLogMidware>();
+
             app.UseStaticFiles();
 
             app.UseMvc();
-
-            SLogger.Err("server start...");
+            
+            SLogger.Info("server start...");            
         }
     }
 }

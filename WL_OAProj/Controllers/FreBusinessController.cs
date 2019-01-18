@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -31,8 +32,9 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         [Route("api/AddFreBusiness")]
-        public BaseOpResult AddFreBusiness(FreBussinessOpCenterDTO dto)
+        public BaseOpResult AddFreBusiness([FromBody] FreBussinessOpCenterDTO dto)
         {
             return BLL().AddEntity(dto);
         }

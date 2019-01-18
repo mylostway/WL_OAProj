@@ -17,11 +17,22 @@ using WL_OA.NET;
 using ConsoleTest.test_cases;
 
 using Newtonsoft.Json;
+using log4net.Config;
+using log4net;
 
 namespace ConsoleTest
 {
     class Program
     {
+        static Program()
+        {
+            // 初始化日志配置
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(@"./App.config"));            
+            
+
+            // 初始化依赖
+        }
+
         static void TestLocal()
         {
             SimpleTestCase.TestAddEntity();
@@ -79,7 +90,7 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            TestLocal();
+            //TestLocal();
             //TestNet();
 
             //(new TestConfig()).RunTest();
@@ -89,6 +100,8 @@ namespace ConsoleTest
             //new TestGenTestData().Run();
 
             //new TestUserManager().Run();
+
+            (new TestDTO()).Run();
 
             Console.Read();
         }

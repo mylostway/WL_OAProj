@@ -25,6 +25,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 数据状态，1 - 启用，0 - 失效
         /// </summary>
+        [Range(0, 127, ErrorMessage = "非法的数据状态值")]
         public virtual short Fstate { get; set; }
 
         public virtual bool IsValid()
@@ -67,7 +68,8 @@ namespace WL_OA.Data.entity
 
         /// <summary>
         /// 数据状态，1 - 启用，0 - 失效
-        /// </summary>        
+        /// </summary>     
+        [Range(0,127,ErrorMessage ="非法的数据状态值")]
         public virtual short Fstate { get; set; }
 
         /// <summary>

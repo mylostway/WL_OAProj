@@ -41,7 +41,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/AddCustomerInfo")]
-        public BaseOpResult AddCustomerInfo([FromBody] AddCustomerInfoDTO dto)
+        public BaseOpResult AddCustomerInfo(AddCustomerInfoDTO dto)
         {
             return BLL().AddEntity(dto);
         }

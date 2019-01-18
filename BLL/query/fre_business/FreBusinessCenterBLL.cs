@@ -78,11 +78,11 @@ namespace WL_OA.BLL
                         {
                             throw new NotImplementedException("暂时不支持这种单号类型的查询");
                         }
-                }                
+                }
             }
 
-            if(queryParam.State1 != StateEnums.None)
-            {                
+            if (queryParam.State1 != StateEnums.None)
+            {
                 query.And(c => c.Frecord_state == (int)queryParam.State1);
             }
             
@@ -115,6 +115,8 @@ namespace WL_OA.BLL
 
         public BaseOpResult AddEntity(FreBussinessOpCenterDTO dto)
         {
+            dto.IsValid();
+
             var listID = this.GenListID();
 
             dto.LinkListID(listID);
@@ -129,14 +131,18 @@ namespace WL_OA.BLL
                 session.Save(dto.HoldGoodsInfo);
                 session.Save(dto.LayGoodsInfo);
 
-                AddEntityList(session, dto.ContainsInfoList, true);
+                // FIXME：批量列表添加出现异常，待修复（null id in WL_OA.Data.entity.FreBusinessContainsInfoEntity entry (don't flush the Session after an exception occurs)）
+                //AddEntityList(session, dto.ContainsInfoList, true);
+                session.AddEntityListEx(dto.ContainsInfoList);
                 session.Save(dto.MatterInfo);
                 session.Save(dto.AssuranceInfo);
                 session.Save(dto.SeaTransportInfo);
                 session.Save(dto.OpInfo);
                 session.Save(dto.OtherInfo);
+
+                trans.Commit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 trans.Rollback();
                 return new BaseOpResult(QueryResultCode.Failed, ex.Message);

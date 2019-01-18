@@ -72,15 +72,19 @@ namespace WL_OA.Data.dto
             OpInfo.Flist_id = listID;
             OtherInfo.Flist_id = listID;
 
-            foreach(var e in ContainsInfoList)
+            if(ContainsInfoList != null && ContainsInfoList.Count > 0)
             {
-                e.Flist_id = listID;
-            }
+                foreach (var e in ContainsInfoList)
+                {
+                    e.Flist_id = listID;
+                }
+            }            
         }
 
 
         public bool IsValid()
         {
+            return true;
             var bRet = OrderInfo.IsValid()
                 && HoldGoodsInfo.IsValid()
                 && LayGoodsInfo.IsValid()
@@ -92,10 +96,13 @@ namespace WL_OA.Data.dto
 
             if(bRet)
             {
-                foreach (var e in ContainsInfoList)
+                if (ContainsInfoList != null && ContainsInfoList.Count > 0)
                 {
-                    if (!e.IsValid()) return false;
-                }
+                    foreach (var e in ContainsInfoList)
+                    {
+                        if (!e.IsValid()) return false;
+                    }
+                }                    
             }
 
             return bRet;

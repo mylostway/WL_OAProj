@@ -84,6 +84,7 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 是否套箱,0 - 不是,1 - 是，默认0'
         /// </summary>
+        [Range(0,1,ErrorMessage = "非法的是否套箱值")]
         public virtual int Fis_pour_jacket { get { return fis_pour_jacket; } set { fis_pour_jacket = value; } }
 
         protected string fpour_jacket_memo = "";
