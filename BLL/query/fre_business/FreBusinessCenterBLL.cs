@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using WL_OA.Data.run_time;
+using WL_OA.Data.consts;
 
 namespace WL_OA.BLL
 {
@@ -113,11 +115,17 @@ namespace WL_OA.BLL
 
 
 
+        /// <summary>
+        /// 添加业务工作单
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public BaseOpResult AddEntity(FreBussinessOpCenterDTO dto)
         {
             dto.IsValid();
 
-            var listID = this.GenListID();
+            //var listID = this.GenListID();
+            var listID = this.GenWorkListID(SystemSettings.COMPANY_APP_PREFIX);
 
             dto.LinkListID(listID);
 

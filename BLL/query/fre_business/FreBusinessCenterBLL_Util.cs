@@ -63,5 +63,38 @@ namespace WL_OA.BLL
 
             return string.Format("{0}{1}{2}{3}{4}", strBusType, strTime, strUserID, STR_UNUSED, strCounter);
         }
+
+
+        /// <summary>
+        /// 最大产生订单号的10次防数
+        /// </summary>
+        private const int MAX_GEN_LIST_ID_TEN_TIMES = 7;
+
+        /// <summary>
+        /// 生成工作单号（根据新集运规则）
+        /// </summary>
+        /// <param name="busType"></param>
+        /// <returns></returns>
+        public string GenWorkListID(string prefix)
+        {
+            if (string.IsNullOrEmpty(prefix))
+            {
+                throw new UserFriendlyException("产生工作单号的业务前缀不能为空！", ExceptionScope.Parameter);
+            }
+
+            var strTime = DateTime.Now.ToDateStr();
+            
+            var nCounter = Interlocked.Increment(ref s_idCounter);
+
+            if (nCounter >= MAX_COUNTER)
+            {                
+                throw new UserFriendlyException($"今天产生的订单量超出最大上限 {Math.Pow(10, MAX_GEN_LIST_ID_TEN_TIMES)}张!请联系管理员");
+            }
+
+            // 如此算，这个最大一天产生 10 ^ 7张单
+            var strCounter = string.Format("{0:D7}", nCounter);
+
+            return string.Format("{0}{1}{2}", prefix, strTime, strCounter);
+        }
     }
 }

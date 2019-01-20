@@ -11,5 +11,8 @@ namespace WL_OAProj.Settings
         /// 重定向的登录URL
         /// </summary>
         public const string RedirectUrl = "";
+
+
+        
     }
 }

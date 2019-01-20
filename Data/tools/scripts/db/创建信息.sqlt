@@ -253,6 +253,21 @@ create table wldb.t_fre_business_center
 )ENGINE=Innodb default charset=utf8;
 
 
+-- 货代业务操作中心 基本信息
+create table wldb.t_fre_business_basic_info
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+
+	Flist_id varchar(32) not null unique comment '关联的交易单号',
+
+	Finput_time datetime not null comment '录入时间',
+	Fstart_time datetime comment '起始时间',
+	Ffinish_time datetime comment '结束时间',
+	Flast_modify_time datetime not null comment '最近一次修改时间'
+)ENGINE=Innodb default charset=utf8;
+
+
 
 -- 货代业务操作中心 委托信息
 create table wldb.t_fre_business_order_info
@@ -925,4 +940,18 @@ create table wldb.t_main_menu
 )ENGINE=Innodb default charset=utf8;
 
 
+-- 公司系统基本信息表
+create table wldb.t_company_system_info
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 
+	Fname varchar(100) not null comment '公司名称',
+	Fsys_name varchar(100) not null comment '公司系统名称 - 通常取公司名称拼音，用作各业务前缀',
+	Freg_time datetime comment '注册时间',
+	Faddr varchar(300) not null default '' comment '公司地址',
+	Fcontact_way1 varchar(100) not null default '' comment '联系方式1',
+	Fcontact_way2 varchar(100) not null default '' comment '联系方式2',
+	Fcorporate varchar(100) not null default '' comment '法人',
+	Fmemo varchar(300) not null default '' comment '备注'
+)ENGINE=Innodb default charset=utf8 comment '公司系统基本信息表';

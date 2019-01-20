@@ -88,11 +88,37 @@ namespace WL_OAProj.Controllers
         }
 
 
+        /// <summary>
+        /// 创建逻辑层
+        /// </summary>
+        /// <returns></returns>
         public T BLL()            
         {
             var type = typeof(T);
 
             T ins = new T();
+
+            // 暂时没有登录信息
+            var context = new SysRequestContext();
+            //context.LoginInfo = GatherLoginInfo();
+
+            ins.SetRequestContext(context);
+
+            return ins;
+        }
+
+
+        /// <summary>
+        /// 创建指定类型的逻辑层
+        /// </summary>
+        /// <typeparam name="W"></typeparam>
+        /// <returns></returns>
+        public W BLL<W>()
+            where W : IRequestContext, new()
+        {
+            var type = typeof(W);
+
+            W ins = new W();
 
             // 暂时没有登录信息
             var context = new SysRequestContext();

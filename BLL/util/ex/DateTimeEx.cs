@@ -17,7 +17,16 @@ namespace WL_OA.BLL
         }
 
 
-        
+        /// <summary>
+        /// 日期格式化为yyyyMMdd
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string ToDateStr(this DateTime dt)
+        {
+            return dt.ToString("yyyyMMdd");
+        }
+
 
     }
 }
