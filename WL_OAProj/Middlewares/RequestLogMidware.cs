@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using WL_OA;
 using WL_OA.Data;
 using WL_OA.Data.dto;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,10 @@ using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using WL_OA.Data.utils;
 using System.Diagnostics;
+using System.Text;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Threading;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace WL_OAProj.Middlewares
 {
@@ -45,9 +50,15 @@ namespace WL_OAProj.Middlewares
 
             reqStatisticsInfo.Method = request.Method;
             reqStatisticsInfo.ContentType = request.ContentType;
+            if(request.Body.CanRead) reqStatisticsInfo.ContentLength = request.ContentLength;
             reqStatisticsInfo.RequestHeader = JsonHelper.SerializeTo(request.Headers);
             reqStatisticsInfo.RequestFullUrl = $"{request.PathBase.Value}{request.Path.Value}?{request.QueryString.Value}";
             reqStatisticsInfo.RequestBody = await httpContext.GetRequestBodyString();
+
+            var srcStream = httpContext.Response.Body;
+
+            var bufferStream = new MemoryStream();
+            httpContext.Response.Body = bufferStream;
 
             try
             {
@@ -60,13 +71,19 @@ namespace WL_OAProj.Middlewares
             finally
             {
                 watch.Stop();
-                reqStatisticsInfo.ResponseBody = await httpContext.GetResponseBodyString();
+                reqStatisticsInfo.ResponseBody = await httpContext.GetResponseString();
                 reqStatisticsInfo.Cost = watch.ElapsedMilliseconds;
 
                 var strStatistics = JsonHelper.SerializeTo(reqStatisticsInfo);
-                if (null != logger) logger.Info(strStatistics);
-                else SLogger.Info(strStatistics);
+                if (null != logger)
+                    logger.Info(strStatistics);
+                else
+                    SLogger.Info(strStatistics);
             }
         }
+
+
+
+
     }
 }

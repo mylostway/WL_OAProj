@@ -30,7 +30,7 @@ namespace WL_OA.Data.dto
         /// <summary>
         /// 货柜信息
         /// </summary>
-        public List<FreBusinessContainsInfoEntity> ContainsInfoList { get; set; } = new List<FreBusinessContainsInfoEntity>();
+        public IList<FreBusinessContainsInfoEntity> ContainsInfoList { get; set; } = new List<FreBusinessContainsInfoEntity>();
 
         /// <summary>
         /// 海运信息
@@ -84,15 +84,21 @@ namespace WL_OA.Data.dto
 
         public bool IsValid()
         {
-            return true;
-            var bRet = OrderInfo.IsValid()
+            var bRet = true;
+
+            bRet = OrderInfo != null
+                && HoldGoodsInfo != null
+                && LayGoodsInfo != null;
+
+            bRet = bRet && OrderInfo.IsValid()
                 && HoldGoodsInfo.IsValid()
-                && LayGoodsInfo.IsValid()
-                && SeaTransportInfo.IsValid()
-                && AssuranceInfo.IsValid()
-                && MatterInfo.IsValid()
-                && OpInfo.IsValid()
-                && OtherInfo.IsValid();
+                && LayGoodsInfo.IsValid();
+
+            if (bRet && SeaTransportInfo != null) bRet = SeaTransportInfo.IsValid();
+            if (bRet && null != AssuranceInfo) bRet = AssuranceInfo.IsValid();        
+            if (bRet && null != MatterInfo) bRet = MatterInfo.IsValid();
+            if (bRet && null != OpInfo) bRet = OpInfo.IsValid();
+            if (bRet && null != OtherInfo) bRet = OtherInfo.IsValid();
 
             if(bRet)
             {

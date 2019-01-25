@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace WL_OA.Data.entity.fre_business
+namespace WL_OA.Data.entity
 {
     [Table("t_fre_business_basic_info")]
     public class FreBusinessBasicInfoEntity : BaseEntity<int>

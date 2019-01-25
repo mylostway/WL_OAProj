@@ -12,7 +12,7 @@ namespace WL_OAProj.Sys
     {
         private SystemRunTimeDataManager()
         {
-            CompanySystemInfo = 
+            //CompanySystemInfo = 
         }
 
         public static SystemRunTimeDataManager Instance = new SystemRunTimeDataManager();

@@ -24,6 +24,8 @@ namespace WL_OA.Data.dto
 
         public string ContentType { get; set; }
 
+        public long? ContentLength { get; set; }
+
         public string RequestHeader { get; set; }
 
         public string RequestFullUrl { get; set; }
