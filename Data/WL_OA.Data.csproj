@@ -13,11 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="tools\test\FakeDataHeler_gen.cs" />
     <Compile Remove="utils\tools\FieldValueValidator.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AntiXssLibrary" Version="1.0.0" />
+    <PackageReference Include="Bogus" Version="25.0.4" />
     <PackageReference Include="Chloe" Version="3.0.0" />
     <PackageReference Include="Chloe.MySql" Version="3.0.2" />
     <PackageReference Include="log4net" Version="2.0.5" />

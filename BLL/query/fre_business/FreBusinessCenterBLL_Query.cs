@@ -130,14 +130,15 @@ namespace WL_OA.BLL
             }
 
             var rawRowCont = basicInfoQuery.RowCount();
+
+            basicInfoQuery = basicInfoQuery.OrderBy(x => x.Finput_time).Desc;
+
             if (queryParam.IsAllowPagging)
             {
                 QueryHelper.FixQueryTake(queryParam, rawRowCont);
                 if (null != queryParam.Skip && queryParam.Skip.Value > 0) basicInfoQuery.Skip(queryParam.Skip.Value);
                 if (null != queryParam.Take && queryParam.Take.Value > 0) basicInfoQuery.Take(queryParam.Take.Value);
             }
-
-            basicInfoQuery = basicInfoQuery.OrderBy(x => x.Finput_time).Desc;
 
             // 完成交易单基本信息查询
             var queryBasicInfoList = basicInfoQuery.List();

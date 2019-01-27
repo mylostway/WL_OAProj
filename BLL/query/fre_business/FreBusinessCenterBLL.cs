@@ -46,6 +46,7 @@ namespace WL_OA.BLL
 
             try
             {
+                session.Save(businessBasicInfo);
                 session.Save(dto.OrderInfo);
                 session.Save(dto.HoldGoodsInfo);
                 session.Save(dto.LayGoodsInfo);

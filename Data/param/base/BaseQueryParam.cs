@@ -6,7 +6,12 @@ namespace WL_OA.Data.param
 {
     public class BaseQueryParam : IQueryParam
     {
-        public BaseQueryParam() { }
+        public BaseQueryParam()
+        {
+            Skip = 0;
+            Take = 10;
+            IsAllowPagging = true;
+        }
 
         /// <summary>
         /// 跳过记录数
