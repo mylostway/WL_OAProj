@@ -17,9 +17,9 @@ namespace WL_OA.BLL.query
 
             var query = session.QueryOver<SystemRoleAuthRelationEntity>();
 
-            query.WhereifNotNull(param.Fid, x => x.Fid == param.Fid);
-            query.WhereifNotNull(param.RoleID, x => x.Frole_id == param.RoleID);
-            query.WhereifNotNull(param.AuthID, x => x.Fauth_id == param.AuthID);
+            query.WhereIfNotNull(param.Fid, x => x.Fid == param.Fid);
+            query.WhereIfNotNull(param.RoleID, x => x.Frole_id == param.RoleID);
+            query.WhereIfNotNull(param.AuthID, x => x.Fauth_id == param.AuthID);
 
             int rawRowCont = query.RowCount();
 

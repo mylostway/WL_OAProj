@@ -20,10 +20,10 @@ namespace WL_OA.BLL
 
             var query = session.QueryOver<SystemUserEntity>();
 
-            query.WhereifNotNull(param.Fid, x => x.Fid == param.Fid);
+            query.WhereIfNotNull(param.Fid, x => x.Fid == param.Fid);
             query.WhereIfNotEmpty(param.Account, x => x.Fuser_account == param.Account);
             query.WhereIfNotEmpty(param.Name, x => x.Fname == param.Name);
-            query.WhereifNotNull(param.CreateTime, x => x.Fcreate_time >= param.CreateTime);
+            query.WhereIfNotNull(param.CreateTime, x => x.Fcreate_time >= param.CreateTime);
 
             int rawRowCont = query.RowCount();
 

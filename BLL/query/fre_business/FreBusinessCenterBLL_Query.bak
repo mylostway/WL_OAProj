@@ -63,8 +63,8 @@ namespace WL_OA.BLL
                                 case DateTypeEnums.None:
                                 case DateTypeEnums.InputTime:
                                     {
-                                        query.WhereifNotNull(queryStartDate, x => x.Finput_time >= queryStartDate.Value);
-                                        query.WhereifNotNull(queryEndDate, x => x.Finput_time <= queryEndDate.Value);
+                                        query.WhereIfNotNull(queryStartDate, x => x.Finput_time >= queryStartDate.Value);
+                                        query.WhereIfNotNull(queryEndDate, x => x.Finput_time <= queryEndDate.Value);
                                         break;
                                     }
                             }
@@ -85,15 +85,15 @@ namespace WL_OA.BLL
                                 case DateTypeEnums.None:
                                 case DateTypeEnums.BookedShipStartDate:
                                     {
-                                        query.WhereifNotNull(queryStartDate, x => x.Fbook_date >= queryStartDate.Value);
-                                        query.WhereifNotNull(queryEndDate, x => x.Fbook_date <= queryEndDate.Value);
+                                        query.WhereIfNotNull(queryStartDate, x => x.Fbook_date >= queryStartDate.Value);
+                                        query.WhereIfNotNull(queryEndDate, x => x.Fbook_date <= queryEndDate.Value);
                                         break;
                                     }
                                 case DateTypeEnums.HoldGoodsDate:
                                     {
                                         // 装货日期
-                                        query.WhereifNotNull(queryStartDate, x => x.Fhold_goods_date >= queryStartDate.Value);
-                                        query.WhereifNotNull(queryEndDate, x => x.Fhold_goods_date <= queryEndDate.Value);
+                                        query.WhereIfNotNull(queryStartDate, x => x.Fhold_goods_date >= queryStartDate.Value);
+                                        query.WhereIfNotNull(queryEndDate, x => x.Fhold_goods_date <= queryEndDate.Value);
                                         break;
                                     }
                             }
@@ -113,8 +113,8 @@ namespace WL_OA.BLL
                                 case DateTypeEnums.None:
                                 case DateTypeEnums.WantedReachDate:
                                     {
-                                        query.WhereifNotNull(queryStartDate, x => x.Fpredit_reach_date >= queryStartDate.Value);
-                                        query.WhereifNotNull(queryEndDate, x => x.Fpredit_reach_date <= queryEndDate.Value);
+                                        query.WhereIfNotNull(queryStartDate, x => x.Fpredit_reach_date >= queryStartDate.Value);
+                                        query.WhereIfNotNull(queryEndDate, x => x.Fpredit_reach_date <= queryEndDate.Value);
                                         break;
                                     }
                             }

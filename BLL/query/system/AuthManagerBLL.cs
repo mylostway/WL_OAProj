@@ -19,7 +19,7 @@ namespace WL_OA.BLL.query
 
             var query = session.QueryOver<SystemAuthEntity>();
 
-            query.WhereifNotNull(param.Fid, x => x.Fid == param.Fid);
+            query.WhereIfNotNull(param.Fid, x => x.Fid == param.Fid);
             query.WhereIfNotEmpty(param.Name, x => x.Fname == param.Name);
 
             int rawRowCont = query.RowCount();

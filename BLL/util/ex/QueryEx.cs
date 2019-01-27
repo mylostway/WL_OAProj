@@ -20,7 +20,7 @@ namespace WL_OA
         }
 
 
-        public static IQueryOver<T, T> WhereifNotNull<T>(this IQueryOver<T, T> query, object param, Expression<Func<T, bool>> expression)
+        public static IQueryOver<T, T> WhereIfNotNull<T>(this IQueryOver<T, T> query, object param, Expression<Func<T, bool>> expression)
         {
             if (null != param)
             {
@@ -29,6 +29,6 @@ namespace WL_OA
             return query;
         }
 
-        
+
     }
 }
