@@ -128,7 +128,7 @@
     <property name="Fwork_order_no" column="Fwork_order_no" />
     <property name="Frecord_state" column="Frecord_state" />
     <property name="Fship_company" column="Fship_company" />
-    <property name="Fship_main_ship_name" column="Fship_main_ship_name" />
+    <property name="Fmain_line_ship_name" column="Fmain_line_ship_name" />
     <property name="Fship_main_line_no" column="Fship_main_line_no" />
     <property name="Fship_trans_no" column="Fship_trans_no" />
     <property name="Fstart_trail_car" column="Fstart_trail_car" />
@@ -309,6 +309,19 @@
     <property name="Fcity" column="Fcity" />
     <property name="Farea" column="Farea" />
     <property name="Fwebsite" column="Fwebsite" />
+  </class>
+
+  <class name="FreBusinessBasicInfoEntity" table="t_fre_business_basic_info">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Flist_id" column="Flist_id" />
+    <property name="Finput_time" column="Finput_time" />
+    <property name="Fstart_time" column="Fstart_time" />
+    <property name="Ffinish_time" column="Ffinish_time" />
+    <property name="Flast_modify_time" column="Flast_modify_time" />
   </class>
 
   <class name="FreBusinessOrderInfoEntity" table="t_fre_business_order_info">

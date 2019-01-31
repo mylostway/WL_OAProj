@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WL_OA.Data;
 using WL_OA.Data.utils;
 using WL_OAProj.Middlewares;
 
@@ -32,12 +33,16 @@ namespace WL_OAProj
             //services.AddSingleton<ILog>(LogManager.GetLogger(this.GetType()));
             //services.AddSingleton<ILog>(SLogger.Instance);
 
+            services.AddSingleton<IAssessRight>(DefaultAssessRight.Instance);                       
+
             // 使用内存Cache
             services.AddMemoryCache();
             // 再启动session
             services.AddSession();
 
-            services.AddMvc();            
+            services.AddMvc();
+
+            //services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +55,6 @@ namespace WL_OAProj
                 .AddEnvironmentVariables();
 
             var Configuration = builder.Build();   
-            
-            
 
             // FIXME：这里配置文件路径需要确认
             var cfgPath = $"{env.ContentRootPath}/Configs/log4net.config";

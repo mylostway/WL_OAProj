@@ -10,19 +10,24 @@ namespace WL_OA.Data.dto
     public enum QueryResultCode : int
     {
         /// <summary>
-        /// 
+        /// 失败
         /// </summary>
         Failed = -1,
 
         /// <summary>
-        /// 
+        /// 成功
         /// </summary>
         Succeed = 0,
 
         /// <summary>
-        /// 
+        /// 超时
         /// </summary>
         Timeout,
+
+        /// <summary>
+        /// 部分操作成功
+        /// </summary>
+        Partly,
     }
 
 
@@ -50,6 +55,11 @@ namespace WL_OA.Data.dto
         {
             ResultCode = rhs.ResultCode;
             RetMsg = rhs.RetMsg;
+        }
+
+        public virtual bool IsSucceed()
+        {
+            return ResultCode == QueryResultCode.Succeed;
         }
 
         /// <summary>

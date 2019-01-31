@@ -3,7 +3,7 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="WL_OA.Data" namespace="WL_OA.Data.entity" default-lazy="true">
 
   <class name="DriverinfoEntity" table="t_driverinfo">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0" >
       <generator class="identity"/>
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
@@ -128,7 +128,7 @@
     <property name="Fwork_order_no" column="Fwork_order_no" />
     <property name="Frecord_state" column="Frecord_state" />
     <property name="Fship_company" column="Fship_company" />
-    <property name="Fship_main_ship_name" column="Fship_main_ship_name" />
+    <property name="Fmain_line_ship_name" column="Fmain_line_ship_name" />
     <property name="Fship_main_line_no" column="Fship_main_line_no" />
     <property name="Fship_trans_no" column="Fship_trans_no" />
     <property name="Fstart_trail_car" column="Fstart_trail_car" />
@@ -311,6 +311,19 @@
     <property name="Fwebsite" column="Fwebsite" />
   </class>
 
+  <class name="FreBusinessBasicInfoEntity" table="t_fre_business_basic_info">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Flist_id" column="Flist_id" />
+    <property name="Finput_time" column="Finput_time" />
+    <property name="Fstart_time" column="Fstart_time" />
+    <property name="Ffinish_time" column="Ffinish_time" />
+    <property name="Flast_modify_time" column="Flast_modify_time" />
+  </class>
+
   <class name="FreBusinessOrderInfoEntity" table="t_fre_business_order_info">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
@@ -382,8 +395,8 @@
     <property name="Fpredit_send_goods_date" column="Fpredit_send_goods_date" />
   </class>
 
-  <class name="FreBusinessContainsInfoEntity" table="t_fre_business_contains_info">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+  <class name="FreBusinessContainsInfoEntity" table="t_fre_business_contains_info" >    
+    <id name="Fid" type="int" column="Fid" unsaved-value="0" >
       <generator class="identity"/>
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />

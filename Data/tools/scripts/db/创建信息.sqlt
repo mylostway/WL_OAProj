@@ -238,7 +238,7 @@ create table wldb.t_fre_business_center
 	Fwork_order_no varchar(40) not null comment '工单号',
 	Frecord_state int not null default 0 comment '记录单状态 - 按位记录 从低到高分别为：最终船到(0/1),送货派车,装货派车,干线上船,报柜号/配船,运单回传,送货完成(0/1)',
 	Fship_company varchar(40) not null comment '船公司',
-	Fship_main_ship_name varchar(40) not null comment '干线船名',
+	Fmain_line_ship_name varchar(40) not null comment '干线船名',
 	Fship_main_line_no varchar(40) not null comment '干线航次',
 	Fship_trans_no varchar(50) not null default '' comment '运单号',
 	Fstart_trail_car varchar(50) not null default '' comment '起始拖车',	
@@ -264,7 +264,8 @@ create table wldb.t_fre_business_basic_info
 	Finput_time datetime not null comment '录入时间',
 	Fstart_time datetime comment '起始时间',
 	Ffinish_time datetime comment '结束时间',
-	Flast_modify_time datetime not null comment '最近一次修改时间'
+	Flast_modify_time datetime not null comment '最近一次修改时间',
+	Finputor varchar(50) not null default '' comment '录入人'
 )ENGINE=Innodb default charset=utf8;
 
 
@@ -352,12 +353,13 @@ create table wldb.t_fre_business_lay_goods_info
 
 
 -- 货代业务操作中心 货柜信息
+-- FIXME：这里会有一个工作单N个该信息的情况，这里可能需要确定一个唯一关系，咨询业务。
 create table wldb.t_fre_business_contains_info
 (
 	Fid int primary key auto_increment comment '数据唯一ID',
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 
-	Flist_id varchar(32) not null unique comment '关联的交易单号',
+	Flist_id varchar(32) not null comment '关联的交易单号',
 
 	Finterflow_state varchar(50) not null comment '物流动态 - 未知填什么值',		
 	Fspec_way tinyint not null default 0 comment '规格，默认20GP',
@@ -401,7 +403,6 @@ create table wldb.t_fre_business_contains_info
 	Fassurance_no varchar(50) not null default '' comment '保险号,网站上不能编辑',
 	Fassurance_state varchar(20) not null default '' comment '保险状态,网站上不能编辑',
 	Fassurance_apply_no varchar(30) not null default '' comment '保险申请号,网站上不能编辑'
-
 
 )ENGINE=Innodb default charset=utf8;
 
@@ -508,9 +509,9 @@ create table wldb.t_fre_business_operation_info
 	Foperator varchar(30) not null default '' comment '操作员',
 	Foperator_company varchar(30) not null default '' comment '操作部门',
 	Finputor varchar(30) not null default '' comment '录入人员',
-	Fsplit_list_no varchar(32) not null unique comment '拆分单号',
-	Fsplit_source varchar(50) not null unique comment '拆分来源',
-	Fchild_work_list_no varchar(32) not null unique comment '子工作单号'
+	Fsplit_list_no varchar(32) not null comment '拆分单号',
+	Fsplit_source varchar(50) not null comment '拆分来源',
+	Fchild_work_list_no varchar(32) not null comment '子工作单号'
 
 )ENGINE=Innodb default charset=utf8;
 

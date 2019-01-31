@@ -17,9 +17,9 @@ namespace WL_OAProj.Controllers
     {
         [HttpPost]
         [Route("api/GetFreBusinessList")]
-        public QueryResult<IList<FreBusinessCenterEntity>> GetEntityList(QueryFreBusinessCenterParam param)
+        public QueryResult<IList<FreBussinessOpCenterDTO>> GetEntityList(QueryFreBusinessCenterParam param)
         {
-            return BLL().GetEntityList(param);
+            return BLL().GetFreBusinessOpCenterList(param);
         }
 
 
@@ -32,7 +32,6 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [DisableRequestSizeLimit]
         [Route("api/AddFreBusiness")]
         public BaseOpResult AddFreBusiness([FromBody] FreBussinessOpCenterDTO dto)
         {
@@ -41,10 +40,90 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("api/DelFreBusiness/{listID}")]
-        public BaseOpResult DelFreBusiness(string listID)
+        [Route("api/DelFreBusinessWorkList/{workListID}")]
+        public BaseOpResult DelFreBusinessWorkList(string workListID)
         {
-            return BLL().Del(listID);
+            return BLL().Del(workListID);
+        }
+
+
+        [HttpPost]
+        [Route("api/DelFreBusinessContainsInfo/{listID}")]
+        public BaseOpResult DelFreBusinessContainsInfo(string listID)
+        {
+            return new BaseOpResult(QueryResultCode.Failed, "该方法未支持");
+            //return BLL().Del(listID);
+        }
+
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessOrderInfo")]
+        public BaseOpResult UpdateOrderInfo(FreBusinessOrderInfoEntity orderInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(orderInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessHoldingGoodsInfo")]
+        public BaseOpResult UpdateHoldingGoodsInfo(FreBusinessHoldGoodsInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessLayingGoodsInfo")]
+        public BaseOpResult UpdateLayingGoodsInfo(FreBusinessLayGoodsInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessContainsInfo")]
+        public BaseOpResult UpdateContainsInfo(FreBusinessContainsInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessSeaInfo")]
+        public BaseOpResult UpdateSeaInfo(FreBusinessSeaTransportInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessOtherInfo")]
+        public BaseOpResult UpdateOtherInfo(FreBusinessOtherInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessOperationInfo")]
+        public BaseOpResult UpdateOperationInfo(FreBusinessOperationInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessMatterInfo")]
+        public BaseOpResult UpdateMatterInfo(FreBusinessMatterInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessAssuranceInfo")]
+        public BaseOpResult UpdateAssuranceInfo(FreBusinessAssuranceInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
+        }
+
+        [HttpPost]
+        [Route("api/UpdateFreBusinessBasicInfo")]
+        public BaseOpResult UpdateBasicInfo(FreBusinessBasicInfoEntity updateInfo)
+        {
+            return BLL().UpdateFreBusinessPartInfo(updateInfo);
         }
     }
 }

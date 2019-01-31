@@ -21,17 +21,23 @@ using WL_OA.Data.dal.Cache;
 namespace WL_OA.BLL
 {
     /// <summary>
-    /// 基础查询业务逻辑
+    /// 基础业务类
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="S"></typeparam>
-    /// <typeparam name="Q"></typeparam>
-    public abstract class BaseBLL<T, S, Q> : IRequestContext
-        where T : BaseEntity<S>, new()
-        where Q : BaseQueryParam        
+    public abstract class BaseBLL : IRequestContext, IBLL
     {
+        /// <summary>
+        /// 请求上下文
+        /// </summary>
         private SysRequestContext m_requestContext = null;
 
+        /// <summary>
+        /// 请求服务注册器
+        /// </summary>
+        private IServiceProvider m_serviceProvider = null;
+
+        /// <summary>
+        /// 缓存服务
+        /// </summary>
         protected ICacheContext m_cache;
 
         /// <summary>
@@ -52,6 +58,40 @@ namespace WL_OA.BLL
             m_requestContext = context;
         }
 
+
+        /// <summary>
+        /// 获取服务
+        /// </summary>
+        /// <typeparam name="C">要获取的服务类型</typeparam>
+        /// <returns></returns>
+        public C GetServices<C>()
+            where C : class
+        {
+            return m_serviceProvider?.GetService(typeof(C)) as C;
+        }
+
+
+        /// <summary>
+        /// 设置服务提供者
+        /// </summary>
+        /// <param name="sp"></param>
+        public void SetServicesProvider(IServiceProvider sp)
+        {
+            m_serviceProvider = sp;
+        }
+    }
+
+
+    /// <summary>
+    /// 基础实现的查询业务逻辑
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <typeparam name="Q"></typeparam>
+    public abstract class SimpleBaseBLL<T, S, Q> : BaseBLL
+        where T : BaseEntity<S>, new()
+        where Q : BaseQueryParam        
+    {       
         /// <summary>
         /// 根据指定ID获取实例
         /// </summary>
@@ -115,7 +155,6 @@ namespace WL_OA.BLL
                     try
                     {
                         e.IsValid();
-
                         var id = session.Save(e);
                     }
                     catch (Exception ex)
@@ -162,7 +201,6 @@ namespace WL_OA.BLL
                     try
                     {
                         e.IsValid();
-
                         var id = session.Save(e);
                     }
                     catch (Exception ex)
@@ -199,7 +237,6 @@ namespace WL_OA.BLL
             try
             {
                 entity.IsValid();
-
                 var session = NHibernateSessionManager.GetSession();
                 var trans = session.BeginTransaction();
                 session.Update(entity, entity.Fid);
@@ -303,7 +340,7 @@ namespace WL_OA.BLL
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="Q"></typeparam>
-    public abstract class CommBaseBLL<T, Q> : BaseBLL<T, int, Q>
+    public abstract class CommBaseBLL<T, Q> : SimpleBaseBLL<T, int, Q>
         where T : BaseEntity<int>, new()
         where Q : BaseQueryParam
     {

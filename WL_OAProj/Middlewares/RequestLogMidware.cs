@@ -71,8 +71,13 @@ namespace WL_OAProj.Middlewares
             finally
             {
                 watch.Stop();
+                reqStatisticsInfo.OutTime = DateTime.Now;
                 reqStatisticsInfo.ResponseBody = await httpContext.GetResponseString();
                 reqStatisticsInfo.Cost = watch.ElapsedMilliseconds;
+
+                bufferStream.Seek(0, SeekOrigin.Begin);
+                bufferStream.CopyTo(srcStream);
+                httpContext.Response.Body = srcStream;
 
                 var strStatistics = JsonHelper.SerializeTo(reqStatisticsInfo);
                 if (null != logger)

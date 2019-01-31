@@ -7,7 +7,7 @@ using System.Text;
 namespace WL_OA.Data.entity
 {
     [Table("t_fre_business_contains_info")]
-    public class FreBusinessContainsInfoEntity : BaseEntity<int>
+    public class FreBusinessContainsInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
         protected string flist_id = "";
         /// <summary>
@@ -283,7 +283,7 @@ namespace WL_OA.Data.entity
 
         protected string fassurance_apply_no = "";
         /// <summary>
-        /// 保险申请号,网站上不能编辑'
+        /// 保险申请号,网站上不能编辑
         /// </summary>
         [MaxLength(30)]
         public virtual string Fassurance_apply_no { get { return fassurance_apply_no; } set { fassurance_apply_no = value; } }
@@ -338,4 +338,5 @@ namespace WL_OA.Data.entity
             this.Fassurance_apply_no = rhs.Fassurance_apply_no;
         }
     }
+
 }

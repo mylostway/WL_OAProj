@@ -14,6 +14,34 @@ namespace WL_OA.BLL
 {
     public partial class FreBusinessCenterBLL : CommBaseBLL<FreBusinessCenterEntity, QueryFreBusinessCenterParam>
     {
+        static FreBusinessCenterBLL()
+        {
+            var instance = new FreBusinessCenterBLL();
+            var lastFreBusEntity = instance.GetLastFreBusinessBasicInfo();
+            if (null != lastFreBusEntity)
+            {
+                var listId = lastFreBusEntity.Flist_id;
+                var todayStr = DateTime.Now.ToDateStr();
+                var dateTimeOffsetInStr = listId.Length - (8 + MAX_GEN_LIST_ID_TEN_TIMES);
+                var lastEntityDayStr = listId.Substring(dateTimeOffsetInStr, 8);
+                if (todayStr == lastEntityDayStr)
+                {
+                    var counterStr = listId.Substring(dateTimeOffsetInStr + 8);
+                    s_idCounter = int.Parse(counterStr);
+                }
+                else
+                {
+                    s_idCounter = 0;
+                }
+            }
+            else
+            {
+                s_idCounter = 0;
+            }
+        }
+
+
+
         /// <summary>
         /// 业务类型占位
         /// </summary>
@@ -42,11 +70,13 @@ namespace WL_OA.BLL
         public string GenListID(string busType = "")
         {
             if (string.IsNullOrEmpty(busType)) busType = "";
+            if (busType.Length > LIST_ID_BUS_TYPE_TAKE)
+                throw new UserFriendlyException($"生成交易单操作，传入的业务类型：{busType}异常", ExceptionScope.Parameter);
             var strBusType = busType.PadLeft(LIST_ID_BUS_TYPE_TAKE - busType.Length, '0');
 
             var strTime = DateTime.Now.ToDateSecondStr();
 
-            var strUserID = GetRequestContext().LoginInfo.Account.ToUserID();
+            var strUserID = GetRequestContext().LoginInfo.Fid.ToUserID();
 
             var nCounter = Interlocked.Increment(ref s_idCounter);
 
@@ -69,6 +99,16 @@ namespace WL_OA.BLL
         /// 最大产生订单号的10次防数
         /// </summary>
         private const int MAX_GEN_LIST_ID_TEN_TIMES = 7;
+
+        /// <summary>
+        /// 辅助常量，去除prefix前缀的长度
+        /// </summary>
+        const int EXPECT_PREFIX_LEN_IN_LIST_ID = 8 + MAX_GEN_LIST_ID_TEN_TIMES;
+
+        /// <summary>
+        /// 最大工作单长度
+        /// </summary>
+        const int MAX_LIST_ID_LEN = 32;
 
         /// <summary>
         /// 生成工作单号（根据新集运规则）
@@ -95,6 +135,34 @@ namespace WL_OA.BLL
             var strCounter = string.Format("{0:D7}", nCounter);
 
             return string.Format("{0}{1}{2}", prefix, strTime, strCounter);
+        }
+
+
+        /// <summary>
+        /// 判断一个工作单号是否合法
+        /// </summary>
+        /// <param name="workListID"></param>
+        /// <returns></returns>
+        public void CheckValidWorkListId(string workListID)
+        {
+            SAssert.MustTrue(!workListID.NullOrEmpty(),"工作单号异常，不能为空串");
+            SAssert.MustTrue(workListID.Length > EXPECT_PREFIX_LEN_IN_LIST_ID && workListID.Length <= MAX_LIST_ID_LEN, $"工作单号异常：{workListID}");
+            var strExpectPrefix = workListID.Substring(workListID.Length - EXPECT_PREFIX_LEN_IN_LIST_ID);
+            long parseNum = 0;
+            SAssert.MustTrue(long.TryParse(strExpectPrefix, out parseNum), $"工作单号异常：{workListID}");
+            // 如果更严格的检查，可以查一下业务前缀是否已经记录
+        }
+
+
+
+        /// <summary>
+        /// 检测用户是否有权限操作该委托单
+        /// </summary>
+        public void CheckOpUserHasRight(string listID)
+        {
+            CheckValidWorkListId(listID);
+
+
         }
     }
 }

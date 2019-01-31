@@ -6,6 +6,7 @@ using WL_OA.Data.utils;
 using WL_OA.Data;
 
 using ConsoleTest.Base;
+using Xunit;
 
 namespace ConsoleTest.test_cases
 {
@@ -14,10 +15,14 @@ namespace ConsoleTest.test_cases
     /// </summary>
     public class EnumUnitTest : ITest
     {
+        [Fact]
         public bool RunTest()
         {
             SAssert.MustTrue("托运人".ToEnumVal<QueryCustomerInfoTypeEnums>() == QueryCustomerInfoTypeEnums.Consignor, "");
             SAssert.MustTrue("BusinessDate".ToEnumVal<DateTypeEnums>() != DateTypeEnums.BusinessDate,"");
+
+
+
             return true;
         }
     }

@@ -7,7 +7,7 @@ using System.Text;
 namespace WL_OA.Data.entity
 {
     [Table("t_fre_business_basic_info")]
-    public class FreBusinessBasicInfoEntity : BaseEntity<int>
+    public class FreBusinessBasicInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
         protected string flist_id = "";
         /// <summary>
@@ -30,18 +30,25 @@ namespace WL_OA.Data.entity
         /// </summary>
         public virtual DateTime Fstart_time { get { return fstart_time; } set { fstart_time = value; } }
 
-        protected DateTime? ffinish_time = null;
+        protected DateTime ffinish_time = DateTime.Now;
         /// <summary>
         /// 结束时间'
         /// </summary>
-        public virtual DateTime? Ffinish_time { get { return ffinish_time; } set { ffinish_time = value; } }
+        public virtual DateTime Ffinish_time { get { return ffinish_time; } set { ffinish_time = value; } }
 
         protected DateTime flast_modify_time = DateTime.Now;
         /// <summary>
-        /// 最近一次修改时间
+        /// 最近一次修改时间'
         /// </summary>
         [Required]
         public virtual DateTime Flast_modify_time { get { return flast_modify_time; } set { flast_modify_time = value; } }
+
+        protected string finputor = "";
+        /// <summary>
+        /// 录入人
+        /// </summary>
+        [MaxLength(50)]
+        public virtual string Finputor { get { return finputor; } set { finputor = value; } }
 
         public FreBusinessBasicInfoEntity() { }
 
@@ -55,6 +62,7 @@ namespace WL_OA.Data.entity
             this.Fstart_time = rhs.Fstart_time;
             this.Ffinish_time = rhs.Ffinish_time;
             this.Flast_modify_time = rhs.Flast_modify_time;
+            this.Finputor = rhs.Finputor;
         }
     }
 }

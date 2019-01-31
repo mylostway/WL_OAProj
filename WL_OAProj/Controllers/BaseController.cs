@@ -16,8 +16,8 @@ using WL_OAProj.Settings;
 namespace WL_OAProj.Controllers
 {    
     public class BaseController<T> : Controller
-        where T : IRequestContext, new()
-    {
+        where T : IRequestContext, IBLL, new()
+    {        
         const string TOKEN_KEY = "token";
 
         /// <summary>
@@ -103,6 +103,7 @@ namespace WL_OAProj.Controllers
             //context.LoginInfo = GatherLoginInfo();
 
             ins.SetRequestContext(context);
+            ins.SetServicesProvider(HttpContext.RequestServices);
 
             return ins;
         }

@@ -155,13 +155,13 @@ namespace WL_OA.Data.entity
         [MaxLength(40)]
         public virtual string Fship_company { get { return fship_company; } set { fship_company = value; } }
 
-        protected string fship_main_ship_name = "";
+        protected string fmain_line_ship_name = "";
         /// <summary>
         /// 干线船名'
         /// </summary>
         [Required]
         [MaxLength(40)]
-        public virtual string Fship_main_ship_name { get { return fship_main_ship_name; } set { fship_main_ship_name = value; } }
+        public virtual string Fmain_line_ship_name { get { return fmain_line_ship_name; } set { fmain_line_ship_name = value; } }
 
         protected string fship_main_line_no = "";
         /// <summary>
@@ -254,7 +254,7 @@ namespace WL_OA.Data.entity
             this.Fwork_order_no = rhs.Fwork_order_no;
             this.Frecord_state = rhs.Frecord_state;
             this.Fship_company = rhs.Fship_company;
-            this.Fship_main_ship_name = rhs.Fship_main_ship_name;
+            this.Fmain_line_ship_name = rhs.Fmain_line_ship_name;
             this.Fship_main_line_no = rhs.Fship_main_line_no;
             this.Fship_trans_no = rhs.Fship_trans_no;
             this.Fstart_trail_car = rhs.Fstart_trail_car;

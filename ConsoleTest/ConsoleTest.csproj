@@ -9,8 +9,8 @@
     <None Remove="App.config" />
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
-    <None Remove="configs\AppRunConfigs.json" />
-    <None Remove="configs\TestConfig.json" />
+    <None Remove="Configs\AppRunConfigs.json" />
+    <None Remove="Configs\TestConfig.json" />
     <None Remove="Data.hbm.xml" />
     <None Remove="hibernate.cfg.xml" />
     <None Remove="log4net_bak.config" />
@@ -27,10 +27,10 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="configs\AppRunConfigs.json">
+    <Content Include="Configs\AppRunConfigs.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="configs\TestConfig.json">
+    <Content Include="Configs\TestConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net_bak.config">
@@ -43,13 +43,15 @@
     <EmbeddedResource Include="nhibernate_hbms\Data.hbm.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="hibernate.cfg.xml">
+    <EmbeddedResource Include="Configs\hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AntiXssLibrary" Version="1.0.0" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
     <PackageReference Include="log4net" Version="2.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />

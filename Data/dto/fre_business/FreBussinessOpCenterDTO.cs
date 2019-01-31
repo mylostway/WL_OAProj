@@ -90,15 +90,17 @@ namespace WL_OA.Data.dto
                 && HoldGoodsInfo != null
                 && LayGoodsInfo != null;
 
+            if (!bRet) throw new UserFriendlyException("工作单信息缺乏必要信息录入");
+
             bRet = bRet && OrderInfo.IsValid()
                 && HoldGoodsInfo.IsValid()
                 && LayGoodsInfo.IsValid();
 
-            if (bRet && SeaTransportInfo != null) bRet = SeaTransportInfo.IsValid();
-            if (bRet && null != AssuranceInfo) bRet = AssuranceInfo.IsValid();        
-            if (bRet && null != MatterInfo) bRet = MatterInfo.IsValid();
-            if (bRet && null != OpInfo) bRet = OpInfo.IsValid();
-            if (bRet && null != OtherInfo) bRet = OtherInfo.IsValid();
+            SeaTransportInfo?.IsValid();
+            AssuranceInfo?.IsValid();        
+            MatterInfo?.IsValid();
+            OpInfo?.IsValid();
+            OtherInfo?.IsValid();
 
             if(bRet)
             {
@@ -106,9 +108,10 @@ namespace WL_OA.Data.dto
                 {
                     foreach (var e in ContainsInfoList)
                     {
+                        //if (null == e) continue;
                         if (!e.IsValid()) return false;
                     }
-                }                    
+                }
             }
 
             return bRet;

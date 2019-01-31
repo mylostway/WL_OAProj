@@ -11,7 +11,6 @@ using WL_OA.Data.dal;
 using WL_OA.Data.param;
 using WL_OA.BLL.query;
 using WL_OA.Data;
-
 using WL_OA.NET;
 
 using ConsoleTest.test_cases;
@@ -31,6 +30,7 @@ namespace ConsoleTest
             
 
             // 初始化依赖
+
         }
 
         static void TestLocal()
@@ -90,20 +90,10 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            //TestLocal();
-            //TestNet();
-
-            //(new TestConfig()).RunTest();
-
-            //new EnumUnitTest().RunTest();
-
-            //new TestGenTestData().Run();
-
-            //new TestUserManager().Run();
-
-            (new TestDTO()).Run();
-
-            Console.Read();
+            //(new TestFreBusiness()).TestAddFreBusinessInfo();
+            (new TestFreBusiness()).TestQueryFreBusinessInfo();
+            //(new TestFreBusiness()).TestUpdateFreBusinessInfo();
+            //(new TestFreBusiness()).TestDelFreBusinessRecord();
         }
     }
 }

@@ -199,6 +199,29 @@ namespace WL_OA.Data
 
 
         /// <summary>
+        /// 根据int值（枚举值）获取枚举设定名称
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static string ValToName<T>(int val)
+        {
+            var type = typeof(T);
+            if (!type.IsEnum) return "";
+            var typeName = type.Name;
+            var dic = s_dicEnumsKeyValPair[typeName];
+            foreach(var ePair in dic)
+            {
+                if(ePair.Value.EValue == val)
+                {
+                    return ePair.Key;
+                }
+            }
+            return "";
+        }
+
+
+        /// <summary>
         /// 将枚举类的名字转换成对应的约定值
         /// </summary>
         /// <typeparam name="T"></typeparam>

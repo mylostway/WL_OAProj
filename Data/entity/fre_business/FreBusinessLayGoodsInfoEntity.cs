@@ -7,7 +7,7 @@ using System.Text;
 namespace WL_OA.Data.entity
 {
     [Table("t_fre_business_lay_goods_info")]
-    public class FreBusinessLayGoodsInfoEntity : BaseEntity<int>
+    public class FreBusinessLayGoodsInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
         protected string flist_id = "";
         /// <summary>

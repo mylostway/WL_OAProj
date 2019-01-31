@@ -247,6 +247,7 @@ namespace WL_OA.Data
                             var genericType = eField.PropertyType.GetGenericArguments()[0];
 
                             var childElemsCount = GenRandomInt(5) + 1;
+                            //var childElemsCount = 1;
 
                             var genListType = typeof(List<>).MakeGenericType(new System.Type[] { genericType });
 

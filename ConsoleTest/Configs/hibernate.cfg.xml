@@ -9,6 +9,7 @@
     <property name="connection.connection_string">
       initial catalog=wldb;Data Source=localhost;User Id=root;Password=123456;CharacterSet=utf8;
       pooling=true;min pool size=5; max pool size=100;Connection Timeout=100;SslMode=none;
+      allowPublicKeyRetrieval=true
     </property>
     <!--NHibernate方言（Dialect）的类名 - 可以让NHibernate使用某些特定的数据库平台的特性-->
     <property name="dialect">NHibernate.Dialect.MySQL5Dialect</property>

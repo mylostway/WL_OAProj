@@ -52,6 +52,19 @@ namespace WL_OAProj
 
     public static class HttpContextEx
     {
+        /// <summary>
+        /// 判断内容类型是否需要记录日志
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        private static bool IsContentTypeCanMarkDown(string contentType)
+        {
+            return (!string.IsNullOrEmpty(contentType) 
+                    && (contentType.Contains("html")
+                        || contentType.Contains("json")
+                        || contentType.Contains("text")));
+        }
+
         #region HttpRequest
 
         public static async Task<string> GetRequestBodyString(this HttpContext httpContext)
@@ -60,12 +73,10 @@ namespace WL_OAProj
             if (null != req && req.Method.ToLower().IndexOf("post") >= 0)
             {
                 // 只保存html,json,text的请求内容
-                var contentType = req.ContentType.ToString();
-                if ((contentType.Contains("html")
-                    || contentType.Contains("json")
-                    || contentType.Contains("text"))
-                    && req.ContentLength != null
-                    && req.ContentLength > 0)
+                var contentType = req.ContentType;
+                if (req.ContentLength != null
+                    && req.ContentLength > 0
+                    && IsContentTypeCanMarkDown(contentType))
                 {
                     return await ReadBodyAsync(req);
                 }
@@ -106,8 +117,6 @@ namespace WL_OAProj
             }
         }
 
-
-
         #endregion
 
 
@@ -117,21 +126,12 @@ namespace WL_OAProj
         {
             var res = context.Response;
 
-            EnableReadAsync(res);
-
-            // 调用这个函数的时候应该在Response准备好了之后
-            /*
-            context.Response.OnCompleted(async o =>
+            if (IsContentTypeCanMarkDown(res.ContentType))
             {
-                var c = o as HttpContext;
-                if (c != null)
-                {
-                    var retStr = await ReadBodyAsync(c.Response).ConfigureAwait(false);                    
-                }
-            }, context);
-            */
-
-            return await ReadBodyAsync(res).ConfigureAwait(false);
+                EnableReadAsync(res);
+                return await ReadBodyAsync(res).ConfigureAwait(false);
+            }
+            return "";
         }
 
 

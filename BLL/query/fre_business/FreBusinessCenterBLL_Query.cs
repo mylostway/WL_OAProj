@@ -15,6 +15,7 @@ using System.Text;
 using System.Linq;
 using NHibernate.Transform;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace WL_OA.BLL
 {
@@ -39,7 +40,7 @@ namespace WL_OA.BLL
 
             var queryEndDate = queryParam.EndDate;
 
-            QueryHelper.FixDate(ref queryStartDate, ref queryEndDate, 1);
+            //QueryHelper.FixDate(ref queryStartDate, ref queryEndDate, 1);
 
             IList<string> queryWorkIDList = new List<string>();
 
@@ -52,11 +53,11 @@ namespace WL_OA.BLL
             if (!string.IsNullOrEmpty(queryParam.ListID))
             {
                 switch (queryParam.ListIDType)
-                {
+                {                    
                     case ListIDTypeEnums.None:
                     case ListIDTypeEnums.WorkNo:
                         {
-                            basicInfoQuery.Where(x => x.Flist_id == queryListID1);
+                            basicInfoQuery.And(x => x.Flist_id == queryListID1);
                             break;
                         }
                     case ListIDTypeEnums.CabinetNo:
@@ -112,24 +113,30 @@ namespace WL_OA.BLL
 
             if (null != containsInfoQuery)
             {
-                queryWorkIDList = containsInfoQuery.Select(x => x.Flist_id).TransformUsing(Transformers.AliasToBean<string>()).List<string>();
+                queryWorkIDList = containsInfoQuery.Select(x => x.Flist_id).List<string>();
+                // 如果有 containsInfoQuery，且查出来的关联工作单位空，则肯定结果为空
+                if (queryWorkIDList.IsNullOrEmpty()) return retResult;
             }
 
             if (null != seaInfoQuery)
             {
                 if (!queryWorkIDList.IsNullOrEmpty())
-                {
-                    seaInfoQuery.Where(x => queryWorkIDList.Contains(x.Flist_id));
-                }
-                queryWorkIDList = seaInfoQuery.Select(x => x.Flist_id).TransformUsing(Transformers.AliasToBean<string>()).List<string>();
+                    seaInfoQuery.Where(Restrictions.In("Flist_id", queryWorkIDList.ToArray()));
+                queryWorkIDList = seaInfoQuery.Select(x => x.Flist_id).List<string>();
+                // 如果有 seaInfoQuery，且查出来的关联工作单位空，则肯定结果为空
+                if (queryWorkIDList.IsNullOrEmpty()) return retResult;
             }
 
             if (!queryWorkIDList.IsNullOrEmpty())
             {
-                basicInfoQuery.Where(x => queryWorkIDList.Contains(x.Flist_id));
+                //basicInfoQuery.And(x => queryWorkIDList.Contains(x.Flist_id));
+                basicInfoQuery.And(Restrictions.In("Flist_id", queryWorkIDList.ToArray()));
             }
 
             var rawRowCont = basicInfoQuery.RowCount();
+
+            // 查询工单基本信息为空
+            if(0 == rawRowCont) return retResult;
 
             basicInfoQuery = basicInfoQuery.OrderBy(x => x.Finput_time).Desc;
 
@@ -143,22 +150,24 @@ namespace WL_OA.BLL
             // 完成交易单基本信息查询
             var queryBasicInfoList = basicInfoQuery.List();
 
+            if (0 == queryBasicInfoList.Count) return retResult;
+
             // 找出交易单列表
             var subQueryList = from eBasicInfo in queryBasicInfoList select eBasicInfo.Flist_id;
 
             // 组合DTO对象
 
             // 先批量查询完所有信息集合
-            var basicInfoList = session.QueryOver<FreBusinessBasicInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var orderInfoList = session.QueryOver<FreBusinessOrderInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var holdGoodsInfoList = session.QueryOver<FreBusinessHoldGoodsInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var layGoodsInfoList = session.QueryOver<FreBusinessLayGoodsInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var containInfoList = session.QueryOver<FreBusinessContainsInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var seaInfoList = session.QueryOver<FreBusinessSeaTransportInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var assuranceInfoList = session.QueryOver<FreBusinessAssuranceInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var matterInfoList = session.QueryOver<FreBusinessMatterInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var opInfoList = session.QueryOver<FreBusinessOperationInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
-            var otherInfoList = session.QueryOver<FreBusinessOtherInfoEntity>().Where(x => subQueryList.Contains(x.Flist_id)).List();
+            var basicInfoList = queryBasicInfoList;//session.QueryOver<FreBusinessBasicInfoEntity>().Where(Restrictions.In("Flist_id", queryWorkIDList.ToArray())).List();
+            var orderInfoList = session.QueryOver<FreBusinessOrderInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var holdGoodsInfoList = session.QueryOver<FreBusinessHoldGoodsInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var layGoodsInfoList = session.QueryOver<FreBusinessLayGoodsInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var containInfoList = session.QueryOver<FreBusinessContainsInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var seaInfoList = session.QueryOver<FreBusinessSeaTransportInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var assuranceInfoList = session.QueryOver<FreBusinessAssuranceInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var matterInfoList = session.QueryOver<FreBusinessMatterInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var opInfoList = session.QueryOver<FreBusinessOperationInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
+            var otherInfoList = session.QueryOver<FreBusinessOtherInfoEntity>().Where(Restrictions.In("Flist_id", subQueryList.ToArray())).List();
 
             // 组合所有结果到DTO
             foreach (var e in basicInfoList)
@@ -178,8 +187,6 @@ namespace WL_OA.BLL
             }
 
             retResult.ResultCount = rawRowCont;
-
-
             retResult.ResultData = retList;
 
             return retResult;
