@@ -79,5 +79,29 @@ namespace WL_OA.Data.entity
             this.Fback_cross_date = rhs.Fback_cross_date;
             this.Freclaim_info = rhs.Freclaim_info;
         }
+
+        public static bool operator ==(FreBusinessMatterInfoEntity lhs, FreBusinessMatterInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Frough_weight == rhs.Frough_weight &&
+               lhs.Ffinance_matter == rhs.Ffinance_matter &&
+               lhs.Fspecial_things == rhs.Fspecial_things &&
+               lhs.Fmatter_state == rhs.Fmatter_state &&
+               lhs.Fgather_list_no == rhs.Fgather_list_no &&
+               lhs.Fback_cross_date == rhs.Fback_cross_date &&
+               lhs.Freclaim_info == rhs.Freclaim_info
+           );
+        }
+
+        public static bool operator !=(FreBusinessMatterInfoEntity lhs, FreBusinessMatterInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

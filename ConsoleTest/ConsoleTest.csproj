@@ -66,4 +66,8 @@
     <ProjectReference Include="..\WL_OA.NET\WL_OA.NET.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="test_cases\test_roles\" />
+  </ItemGroup>
+
 </Project>

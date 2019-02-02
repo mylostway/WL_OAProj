@@ -40,6 +40,14 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
+        [Route("api/UpdateFreBusiness")]
+        public BaseOpResult UpdateFreBusiness(FreBussinessOpCenterDTO updateInfo)
+        {
+            return BLL().UpdateFreBusinessDTO(updateInfo);
+        }
+
+
+        [HttpPost]
         [Route("api/DelFreBusinessWorkList/{workListID}")]
         public BaseOpResult DelFreBusinessWorkList(string workListID)
         {
@@ -125,5 +133,8 @@ namespace WL_OAProj.Controllers
         {
             return BLL().UpdateFreBusinessPartInfo(updateInfo);
         }
+
+
+        
     }
 }

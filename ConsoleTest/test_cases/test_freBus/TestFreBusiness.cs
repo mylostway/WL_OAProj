@@ -12,6 +12,7 @@ using WL_OA.Data.param;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ConsoleTest.Utils;
+using WL_OA.Data.entity;
 
 namespace ConsoleTest.test_cases
 {
@@ -19,17 +20,18 @@ namespace ConsoleTest.test_cases
     {
         const int TEST_ADD_COUNT = 13;
 
-        FreBusinessCenterBLL busBLL = new FreBusinessCenterBLL();
+        FreBusinessCenterBLL m_bll = new FreBusinessCenterBLL();
 
         ObservableCollection<FreBussinessOpCenterDTO> genTestData = null;
 
         public TestFreBusiness()
         {
-            busBLL.SetRequestContext(TestSetting.TEST_SYS_REQ_CONTEXT);
-            genTestData = FakeDataHelper.Instance.CreateFakeDataCollection<FreBussinessOpCenterDTO>(TEST_ADD_COUNT);
-
+            // 请求上下文设置
+            m_bll.SetRequestContext(TestSetting.TEST_SYS_REQ_CONTEXT);
             // 设置依赖
-            busBLL.SetServicesProvider(DIHelper.Instance.GetServicesProvider());
+            m_bll.SetServicesProvider(DIHelper.Instance.GetServicesProvider());
+
+            genTestData = FakeDataHelper.Instance.CreateFakeDataCollection<FreBussinessOpCenterDTO>(TEST_ADD_COUNT);
 
             //foreach(var e in genTestData)
             //{
@@ -43,7 +45,7 @@ namespace ConsoleTest.test_cases
         {
             foreach(var e in genTestData)
             {
-                busBLL.AddEntity(e);
+                m_bll.AddEntity(e);
             }
         }
 
@@ -55,16 +57,72 @@ namespace ConsoleTest.test_cases
             queryParam.DateType = DateTypeEnums.BookedShipStartDate;
             queryParam.StartDate = DateTime.Parse("1970-01-01");
             queryParam.EndDate = DateTime.Now;
-            var queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            var queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.True(queryResult != null && queryResult.ResultCount > 0);
 
             var testFreBusinessDTO = queryResult.ResultData[0];
+
             var testUpdateOrderInfo = testFreBusinessDTO.OrderInfo;
 
             testUpdateOrderInfo.Fto_place = "update_to_test_place2";
             testUpdateOrderInfo.Fbusiness_date = DateTime.Now;
 
-            busBLL.UpdateFreBusinessPartInfo(testUpdateOrderInfo);
+            // 测试部分更新API
+            var updateResult = m_bll.UpdateFreBusinessPartInfo(testUpdateOrderInfo);
+
+            Assert.True(updateResult.IsSucceed());
+
+            // 测试 更新数据筛选 + 整体更新API
+            var toUpdateDTO = new FreBussinessOpCenterDTO(testFreBusinessDTO);
+
+            testFreBusinessDTO.FixUpdateResult(toUpdateDTO);
+
+            // 和原对象没改动，这里toUpdateDTO 应该为nullOrEmpty
+            Assert.True(toUpdateDTO.IsNullOrEmpty());
+            
+            toUpdateDTO = new FreBussinessOpCenterDTO(testFreBusinessDTO);
+            toUpdateDTO.AssuranceInfo.Fgoods_val += 1;
+            testFreBusinessDTO.FixUpdateResult(toUpdateDTO);
+
+            // 和原对象只改动了AssuranceInfo的值，只有AssuranceInfo不为null
+            Assert.True(!toUpdateDTO.IsNullOrEmpty() && toUpdateDTO.AssuranceInfo != null);
+
+            updateResult = m_bll.UpdateFreBusinessDTO(toUpdateDTO);
+
+            Assert.True(updateResult.IsSucceed());
+
+            toUpdateDTO.AssuranceInfo = null;
+
+            // 只有AssuranceInfo不为null
+            Assert.True(toUpdateDTO.IsNullOrEmpty());
+
+
+            // 测试几部分信息更新
+            toUpdateDTO = new FreBussinessOpCenterDTO(testFreBusinessDTO);
+
+            // 修改OrderInfo
+            toUpdateDTO.OrderInfo.Fbusinesser += "_fT";
+            toUpdateDTO.OrderInfo.Fbusiness_date = DateTime.Now;
+
+            // 修改其中几个ContainsInfo
+            toUpdateDTO.ContainsInfoList[0].Fback_date = DateTime.Now;
+            toUpdateDTO.ContainsInfoList[1].Fback_date = DateTime.Now;
+            // 增加ContainsInfo
+            toUpdateDTO.ContainsInfoList.Add(FakeDataHelper.Instance.GenData<FreBusinessContainsInfoEntity>());
+
+            // 修改SeaTransportInfo
+            toUpdateDTO.SeaTransportInfo.Ffirst_ship_get_date = DateTime.Now;
+
+            testFreBusinessDTO.FixUpdateResult(toUpdateDTO);
+
+            Assert.True(!toUpdateDTO.IsNullOrEmpty() 
+                && toUpdateDTO.OrderInfo != null
+                && toUpdateDTO.SeaTransportInfo != null
+                && toUpdateDTO.ContainsInfoList.Count == 3);
+
+            updateResult = m_bll.UpdateFreBusinessDTO(toUpdateDTO);
+
+            Assert.True(updateResult.IsSucceed());
         }
 
 
@@ -76,14 +134,14 @@ namespace ConsoleTest.test_cases
             queryParam.DateType = DateTypeEnums.BookedShipStartDate;
             queryParam.StartDate = DateTime.Parse("1970-01-01");
             queryParam.EndDate = DateTime.Now;
-            var queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            var queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.True(queryResult != null && queryResult.ResultCount > 0);
 
             var testFreBusinessDTO = queryResult.ResultData[0];
 
             //busBLL.Del(testFreBusinessDTO.OrderInfo.Flist_id);
 
-            busBLL.Del(testFreBusinessDTO.OrderInfo.Flist_id, false);
+            m_bll.Del(testFreBusinessDTO.OrderInfo.Flist_id, false);
         }
 
 
@@ -91,7 +149,7 @@ namespace ConsoleTest.test_cases
         public void TestQueryFreBusinessInfo()
         {
             var queryParam = new QueryFreBusinessCenterParam();
-            var queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            var queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.True(queryResult != null && queryResult.ResultCount > 0);
 
             // 只用下定船期时间查
@@ -107,7 +165,7 @@ namespace ConsoleTest.test_cases
             }
             queryParam.StartDate = dtMin;
             queryParam.EndDate = dtMax;
-            queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.True(queryResult != null && queryResult.ResultCount > 0);
 
 
@@ -122,7 +180,7 @@ namespace ConsoleTest.test_cases
             }
             queryParam.StartDate = dtMin;
             queryParam.EndDate = dtMax;
-            queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.True(queryResult != null && queryResult.ResultCount > 0);
 
 
@@ -138,7 +196,7 @@ namespace ConsoleTest.test_cases
             queryParam.StartDate = dtMin;
             queryParam.EndDate = dtMax;
             queryParam.ListID = genTestData[1].OrderInfo.Flist_id;
-            queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
 
 
             // 单查一个柜号
@@ -147,14 +205,14 @@ namespace ConsoleTest.test_cases
             queryParam.ListIDType = ListIDTypeEnums.CabinetNo;
             var testContainInfo = genTestData[3].ContainsInfoList[0];
             queryParam.ListID = "3142518381";//testContainInfo.Fcabinet_no;
-            queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
             Assert.NotNull(queryResult.ResultData);
 
             // 单查一个船运号
             queryParam.ListIDType = ListIDTypeEnums.ShipNo;
             var testSeaInfo = genTestData[11].SeaTransportInfo;
             queryParam.ListID = testSeaInfo.Fship_no;
-            queryResult = busBLL.GetFreBusinessOpCenterList(queryParam);
+            queryResult = m_bll.GetFreBusinessOpCenterList(queryParam);
         }
 
 

@@ -13,7 +13,7 @@ namespace ConsoleTest
         /// 测试专用请求上下文
         /// </summary>
         public static readonly SysRequestContext TEST_SYS_REQ_CONTEXT = new SysRequestContext() {
-            LoginInfo = new LoginInfo("test_account","test_password")
+            LoginInfo = new LoginInfo("test_tmp_account", "test_password")
         };
     }
 }

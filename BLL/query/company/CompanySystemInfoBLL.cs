@@ -11,6 +11,11 @@ namespace WL_OA.BLL.query.system
 {
     public class CompanySystemInfoBLL : CommBaseBLL<CompanySystemInfoEntity, QueryCompanySystemInfoParam>
     {
+        /// <summary>
+        /// 获取公司信息列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public override QueryResult<IList<CompanySystemInfoEntity>> GetEntityList(QueryCompanySystemInfoParam param)
         {
             var session = NHibernateSessionManager.GetSession();

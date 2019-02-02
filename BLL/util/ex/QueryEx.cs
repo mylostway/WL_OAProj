@@ -30,5 +30,14 @@ namespace WL_OA
         }
 
 
+        public static IQueryOver<T, T> WhereIf<T>(this IQueryOver<T, T> query, bool condition, Expression<Func<T, bool>> expression)
+        {
+            if(condition)
+            {
+                query.And(expression);
+            }
+            return query;
+        }
+
     }
 }

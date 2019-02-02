@@ -332,6 +332,19 @@ namespace WL_OA.BLL
         {
             session.Transaction.Rollback();
         }
+
+
+        /// <summary>
+        /// 检查当前请求的用户是否有权限做xx操作（简单封装）
+        /// </summary>
+        /// <param name="opID"></param>
+        /// <returns></returns>
+        public virtual bool CanUserDo(string opID,string opUser = "")
+        {
+            if(opUser.NullOrEmpty()) opUser = GetRequestContext().LoginInfo.Account;
+
+            return GetServices<IAssessRight>()?.CanUserDo(opUser, opID) == true;
+        }
     }
 
 

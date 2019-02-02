@@ -13,6 +13,13 @@ namespace WL_OA.Data.dto
             ResultData = result;
         }
 
+
+        public QueryResult(QueryResultCode resultCode, string msg = "")
+            : base(0, 0, resultCode, msg)
+        {
+
+        }
+
         public T ResultData { get; set; }
     }
 }

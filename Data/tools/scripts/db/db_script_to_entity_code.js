@@ -170,6 +170,30 @@ var entityGen = (function(){
 		return ret;
 	}
 	
+	
+	var _genEqualFunctionCode = function(){
+		if(!m_className) return "";
+		// 重载 == 操作符
+		var ret = "\n\n\t\tpublic static bool operator ==(" + m_className + " lhs, " + m_className + " rhs)" + LINE_SPLITOR + "\t\t{" + LINE_SPLITOR ;
+		ret += "\t\t\tif (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;" + LINE_SPLITOR;
+		ret += "\t\t\tif (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;" + LINE_SPLITOR;
+		ret += "\t\t\tif (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;" + LINE_SPLITOR;
+		ret += "\t\t\t return (" + LINE_SPLITOR;
+		for(var e in m_classFieldsDic){
+			ret += "\t\t\t\tlhs." + e + " == rhs." + e + " &&" + LINE_SPLITOR;
+		}
+		// 去掉最后的 &&
+		ret = ret.substr(0,ret.length - 3);
+		ret += "\n\t\t\t);\n\t\t}";
+		
+		// 重载配套的 != 操作符
+		ret += (LINE_SPLITOR + LINE_SPLITOR);
+		ret += "\t\tpublic static bool operator !=(" + m_className + " lhs, " + m_className + " rhs)" + LINE_SPLITOR + "\t\t{" + LINE_SPLITOR + "\t\t\t return !(lhs == rhs);" + LINE_SPLITOR + "\t\t}" + LINE_SPLITOR;
+				
+		return ret;
+	}
+	
+	
 	// 根据db表创建语句生成Entity属性
 	var _go = function(str){
 		var resultStr = "";	
@@ -226,6 +250,7 @@ var entityGen = (function(){
 			resultStr += (line + "\r\n\r\n");
 		}
 		resultStr += _genConstructor();
+		resultStr += _genEqualFunctionCode();
 		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
 		return resultStr;
 	}

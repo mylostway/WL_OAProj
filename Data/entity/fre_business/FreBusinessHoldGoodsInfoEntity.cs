@@ -145,5 +145,37 @@ namespace WL_OA.Data.entity
             this.Fhold_date = rhs.Fhold_date;
             this.Fhold_priority = rhs.Fhold_priority;
         }
+
+        public static bool operator ==(FreBusinessHoldGoodsInfoEntity lhs, FreBusinessHoldGoodsInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Fgoods_name == rhs.Fgoods_name &&
+               lhs.Fhold_goods_place == rhs.Fhold_goods_place &&
+               lhs.Fhold_goods_people == rhs.Fhold_goods_people &&
+               lhs.Fhold_goods_people_phone == rhs.Fhold_goods_people_phone &&
+               lhs.Fhold_goods_mobile == rhs.Fhold_goods_mobile &&
+               lhs.Fhold_goods_memo == rhs.Fhold_goods_memo &&
+               lhs.Fsend_goods_company == rhs.Fsend_goods_company &&
+               lhs.Fsend_goods_company_fax == rhs.Fsend_goods_company_fax &&
+               lhs.Fget_goods_list_no == rhs.Fget_goods_list_no &&
+               lhs.Fis_pour_jacket == rhs.Fis_pour_jacket &&
+               lhs.Fpour_jacket_memo == rhs.Fpour_jacket_memo &&
+               lhs.Fcar_book_way == rhs.Fcar_book_way &&
+               lhs.Fstart_trailer == rhs.Fstart_trailer &&
+               lhs.Fhold_date == rhs.Fhold_date &&
+               lhs.Fhold_priority == rhs.Fhold_priority
+           );
+        }
+
+        public static bool operator !=(FreBusinessHoldGoodsInfoEntity lhs, FreBusinessHoldGoodsInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

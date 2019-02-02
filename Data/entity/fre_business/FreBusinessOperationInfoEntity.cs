@@ -101,5 +101,31 @@ namespace WL_OA.Data.entity
             this.Fsplit_source = rhs.Fsplit_source;
             this.Fchild_work_list_no = rhs.Fchild_work_list_no;
         }
+
+        public static bool operator ==(FreBusinessOperationInfoEntity lhs, FreBusinessOperationInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Fbusiness_type == rhs.Fbusiness_type &&
+               lhs.Fassist_people == rhs.Fassist_people &&
+               lhs.Fdetent_people == rhs.Fdetent_people &&
+               lhs.Foperator == rhs.Foperator &&
+               lhs.Foperator_company == rhs.Foperator_company &&
+               lhs.Finputor == rhs.Finputor &&
+               lhs.Fsplit_list_no == rhs.Fsplit_list_no &&
+               lhs.Fsplit_source == rhs.Fsplit_source &&
+               lhs.Fchild_work_list_no == rhs.Fchild_work_list_no
+           );
+        }
+
+        public static bool operator !=(FreBusinessOperationInfoEntity lhs, FreBusinessOperationInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

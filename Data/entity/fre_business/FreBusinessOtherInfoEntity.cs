@@ -26,5 +26,22 @@ namespace WL_OA.Data.entity
             this.Fstate = rhs.Fstate;
             this.Flist_id = rhs.Flist_id;
         }
+
+        public static bool operator ==(FreBusinessOtherInfoEntity lhs, FreBusinessOtherInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id
+           );
+        }
+
+        public static bool operator !=(FreBusinessOtherInfoEntity lhs, FreBusinessOtherInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

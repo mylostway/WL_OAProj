@@ -138,5 +138,36 @@ namespace WL_OA.Data.entity
             this.Fdispatch_priority = rhs.Fdispatch_priority;
             this.Fpredit_send_goods_date = rhs.Fpredit_send_goods_date;
         }
+
+        public static bool operator ==(FreBusinessLayGoodsInfoEntity lhs, FreBusinessLayGoodsInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Flay_goods_place == rhs.Flay_goods_place &&
+               lhs.Flay_goods_people == rhs.Flay_goods_people &&
+               lhs.Flay_goods_people_phone == rhs.Flay_goods_people_phone &&
+               lhs.Flay_goods_mobile == rhs.Flay_goods_mobile &&
+               lhs.Flay_goods_memo == rhs.Flay_goods_memo &&
+               lhs.Frecv_goods_company == rhs.Frecv_goods_company &&
+               lhs.Frecv_goods_company_fax == rhs.Frecv_goods_company_fax &&
+               lhs.Fgoods_owner == rhs.Fgoods_owner &&
+               lhs.Fhold_get_way == rhs.Fhold_get_way &&
+               lhs.Fhold_get_memo == rhs.Fhold_get_memo &&
+               lhs.Fhold_get_date == rhs.Fhold_get_date &&
+               lhs.Ftarget_trailer == rhs.Ftarget_trailer &&
+               lhs.Fdispatch_priority == rhs.Fdispatch_priority &&
+               lhs.Fpredit_send_goods_date == rhs.Fpredit_send_goods_date
+           );
+        }
+
+        public static bool operator !=(FreBusinessLayGoodsInfoEntity lhs, FreBusinessLayGoodsInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

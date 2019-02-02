@@ -153,5 +153,37 @@ namespace WL_OA.Data.entity
             this.Fhas_assurance = rhs.Fhas_assurance;
             this.Fchild_bus_type = rhs.Fchild_bus_type;
         }
+
+        public static bool operator ==(FreBusinessOrderInfoEntity lhs, FreBusinessOrderInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Fconsign_man == rhs.Fconsign_man &&
+               lhs.Fstart_wharf == rhs.Fstart_wharf &&
+               lhs.Fstart_place == rhs.Fstart_place &&
+               lhs.Fto_place == rhs.Fto_place &&
+               lhs.Fto_wharf == rhs.Fto_wharf &&
+               lhs.Fbusiness_date == rhs.Fbusiness_date &&
+               lhs.Fbusinesser == rhs.Fbusinesser &&
+               lhs.Fop_term == rhs.Fop_term &&
+               lhs.Ftransit_term == rhs.Ftransit_term &&
+               lhs.Fpay_way == rhs.Fpay_way &&
+               lhs.Fprotocol_no == rhs.Fprotocol_no &&
+               lhs.Fassociate_way == rhs.Fassociate_way &&
+               lhs.Forder_no == rhs.Forder_no &&
+               lhs.Fhas_assurance == rhs.Fhas_assurance &&
+               lhs.Fchild_bus_type == rhs.Fchild_bus_type
+           );
+        }
+
+        public static bool operator !=(FreBusinessOrderInfoEntity lhs, FreBusinessOrderInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

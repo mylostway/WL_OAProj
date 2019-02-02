@@ -49,12 +49,20 @@ namespace WL_OA.BLL
         }
 
 
+        /// <summary>
+        /// 获取用户操作令牌过期时间
+        /// </summary>
+        /// <returns></returns>
         public static DateTime GetTokenTimeExpire()
         {
             return DateTime.Now.AddSeconds(BLLSettings.DEFAULT_TOKEN_TIME_OUT_IN_SEC);
         }
 
 
+        /// <summary>
+        /// 获取用户操作令牌
+        /// </summary>
+        /// <returns></returns>
         public static string GenToken()
         {
             return Guid.NewGuid().ToString().Replace("-","");

@@ -233,5 +233,49 @@ namespace WL_OA.Data.entity
             this.Fcarft_ship_info_way = rhs.Fcarft_ship_info_way;
             this.Ffirst_ship_get_date = rhs.Ffirst_ship_get_date;
         }
+
+        public static bool operator ==(FreBusinessSeaTransportInfoEntity lhs, FreBusinessSeaTransportInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Fbook_cabint_proxy == rhs.Fbook_cabint_proxy &&
+               lhs.Fship_company == rhs.Fship_company &&
+               lhs.Fmain_line_ship_name == rhs.Fmain_line_ship_name &&
+               lhs.Fmain_line_no == rhs.Fmain_line_no &&
+               lhs.Fship_no == rhs.Fship_no &&
+               lhs.Fship_go_date == rhs.Fship_go_date &&
+               lhs.Fship_reach_date == rhs.Fship_reach_date &&
+               lhs.Fship_report_date == rhs.Fship_report_date &&
+               lhs.Fpredit_reach_date == rhs.Fpredit_reach_date &&
+               lhs.Fbook_order_man == rhs.Fbook_order_man &&
+               lhs.Fbook_recv_man == rhs.Fbook_recv_man &&
+               lhs.Fcarft_ship_company == rhs.Fcarft_ship_company &&
+               lhs.Fbranch_ship_name == rhs.Fbranch_ship_name &&
+               lhs.Fbranch_ship_no == rhs.Fbranch_ship_no &&
+               lhs.Ftransfer_ship_reach_date == rhs.Ftransfer_ship_reach_date &&
+               lhs.Ftransfer_ship_go_date == rhs.Ftransfer_ship_go_date &&
+               lhs.Ftriple_pass_way == rhs.Ftriple_pass_way &&
+               lhs.Ftriple_pass_ship_no == rhs.Ftriple_pass_ship_no &&
+               lhs.Ftransfer_ship_go_date2 == rhs.Ftransfer_ship_go_date2 &&
+               lhs.Fis_transfer_ship == rhs.Fis_transfer_ship &&
+               lhs.Fline_chn_name == rhs.Fline_chn_name &&
+               lhs.Fis_main_line_car == rhs.Fis_main_line_car &&
+               lhs.Ftransfer_ship_reach_date2 == rhs.Ftransfer_ship_reach_date2 &&
+               lhs.Ftransfer_ship_wharf == rhs.Ftransfer_ship_wharf &&
+               lhs.Ftransfer_ship_wharf2 == rhs.Ftransfer_ship_wharf2 &&
+               lhs.Fcarft_ship_info_way == rhs.Fcarft_ship_info_way &&
+               lhs.Ffirst_ship_get_date == rhs.Ffirst_ship_get_date
+           );
+        }
+
+        public static bool operator !=(FreBusinessSeaTransportInfoEntity lhs, FreBusinessSeaTransportInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 }

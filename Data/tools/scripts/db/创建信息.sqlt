@@ -879,6 +879,7 @@ create table wldb.t_system_user
 
 insert into wldb.t_system_user(Fuser_account,Fname,Fphone,Femail,Fsex,Fcreate_time,Fpassword) values('admin','admin','15002094251','359050096@qq.com',1,'2019-01-01','21232F297A57A5A743894A0E4A801FC3');
 
+-- 系统角色信息表
 create table wldb.t_system_role
 (
 	Fid int primary key auto_increment comment '数据唯一ID',
@@ -891,7 +892,20 @@ create table wldb.t_system_role
 )ENGINE=Innodb default charset=utf8;
 
 
+-- 部门信息
+create table wldb.t_company_department
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+	
+	Fname varchar(30) not null comment '部门名称',
+	Fcreate_time datetime not null comment '创建时间',
+	Fcomment varchar(300) not null comment '备注'
+	
+)ENGINE=Innodb default charset=utf8;
 
+
+-- 系统授权信息表（权限信息表）
 create table wldb.t_system_auth
 (
 	Fid int primary key auto_increment comment '数据唯一ID',
@@ -903,7 +917,7 @@ create table wldb.t_system_auth
 )ENGINE=Innodb default charset=utf8;
 
 
-
+-- 系统用户&角色关系表
 create table wldb.t_system_user_role_relation
 (
 	Fid int primary key auto_increment comment '数据唯一ID',
@@ -916,7 +930,7 @@ create table wldb.t_system_user_role_relation
 
 
 
-
+-- 系统角色 & 权限关系表
 create table wldb.t_system_role_auth_relation
 (
 	Fid int primary key auto_increment comment '数据唯一ID',

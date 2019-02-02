@@ -337,6 +337,63 @@ namespace WL_OA.Data.entity
             this.Fassurance_state = rhs.Fassurance_state;
             this.Fassurance_apply_no = rhs.Fassurance_apply_no;
         }
+
+        public static bool operator ==(FreBusinessContainsInfoEntity lhs, FreBusinessContainsInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Finterflow_state == rhs.Finterflow_state &&
+               lhs.Fspec_way == rhs.Fspec_way &&
+               lhs.Fcabinet_no == rhs.Fcabinet_no &&
+               lhs.Ftitle_no == rhs.Ftitle_no &&
+               lhs.Flist_state == rhs.Flist_state &&
+               lhs.Fbook_space_list_no == rhs.Fbook_space_list_no &&
+               lhs.Fbook_date == rhs.Fbook_date &&
+               lhs.Fhold_goods_date == rhs.Fhold_goods_date &&
+               lhs.Fhold_goods_list_no == rhs.Fhold_goods_list_no &&
+               lhs.Fencrypt_title_no == rhs.Fencrypt_title_no &&
+               lhs.Fback_date == rhs.Fback_date &&
+               lhs.Fhold_get_way == rhs.Fhold_get_way &&
+               lhs.Fdispatch_goods_date == rhs.Fdispatch_goods_date &&
+               lhs.Fapproach_record == rhs.Fapproach_record &&
+               lhs.Fleave_record == rhs.Fleave_record &&
+               lhs.Fstart_car_no == rhs.Fstart_car_no &&
+               lhs.Fstart_driver == rhs.Fstart_driver &&
+               lhs.Fstart_driver_phone == rhs.Fstart_driver_phone &&
+               lhs.Fstart_driver_cert == rhs.Fstart_driver_cert &&
+               lhs.Fdispatch_car_no == rhs.Fdispatch_car_no &&
+               lhs.Fdispatch_driver == rhs.Fdispatch_driver &&
+               lhs.Fdispatch_driver_phone == rhs.Fdispatch_driver_phone &&
+               lhs.Fdispatch_driver_cert == rhs.Fdispatch_driver_cert &&
+               lhs.Fgoods_name == rhs.Fgoods_name &&
+               lhs.Fpacket_way == rhs.Fpacket_way &&
+               lhs.Fpacket_num == rhs.Fpacket_num &&
+               lhs.Fpacket_cbm == rhs.Fpacket_cbm &&
+               lhs.Fvalue == rhs.Fvalue &&
+               lhs.Fweight == rhs.Fweight &&
+               lhs.Frough_weight == rhs.Frough_weight &&
+               lhs.Ffab_factory == rhs.Ffab_factory &&
+               lhs.Fcontract_no == rhs.Fcontract_no &&
+               lhs.Fsend_goods_addr == rhs.Fsend_goods_addr &&
+               lhs.Fget_cabinet_addr == rhs.Fget_cabinet_addr &&
+               lhs.Fget_cabinet_date == rhs.Fget_cabinet_date &&
+               lhs.Fgive_cabinet_addr == rhs.Fgive_cabinet_addr &&
+               lhs.Fmemo == rhs.Fmemo &&
+               lhs.Fassurance_no == rhs.Fassurance_no &&
+               lhs.Fassurance_state == rhs.Fassurance_state &&
+               lhs.Fassurance_apply_no == rhs.Fassurance_apply_no
+           );
+        }
+
+        public static bool operator !=(FreBusinessContainsInfoEntity lhs, FreBusinessContainsInfoEntity rhs)
+        {
+            return !(lhs == rhs);
+        }
     }
 
 }

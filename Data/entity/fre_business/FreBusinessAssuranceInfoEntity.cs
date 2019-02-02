@@ -86,5 +86,30 @@ namespace WL_OA.Data.entity
             this.Fassurance_info = rhs.Fassurance_info;
             this.Fassurance_rate = rhs.Fassurance_rate;
         }
+
+        public static bool operator ==(FreBusinessAssuranceInfoEntity lhs, FreBusinessAssuranceInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Flist_id == rhs.Flist_id &&
+               lhs.Fassurance_state == rhs.Fassurance_state &&
+               lhs.Fassurance_no == rhs.Fassurance_no &&
+               lhs.Fassurance_fee == rhs.Fassurance_fee &&
+               lhs.Fassurance_company == rhs.Fassurance_company &&
+               lhs.Fgoods_val == rhs.Fgoods_val &&
+               lhs.Fassurance_type == rhs.Fassurance_type &&
+               lhs.Fassurance_info == rhs.Fassurance_info &&
+               lhs.Fassurance_rate == rhs.Fassurance_rate
+           );
+        }
+
+        public static bool operator !=(FreBusinessAssuranceInfoEntity lhs, FreBusinessAssuranceInfoEntity rhs)
+        {            
+            return !(lhs == rhs);
+        }
     }
 }
