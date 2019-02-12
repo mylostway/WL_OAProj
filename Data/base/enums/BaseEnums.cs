@@ -21,24 +21,41 @@ namespace WL_OA.Data
     /// <summary>
     /// 页面分页数据大小
     /// </summary>
-    public enum PageSizeEnums : int
+    public enum DefaultPageSizeEnums : int
     {
-        [EnumNames("10")]
-        PS10 = 0,
+        [EnumNames("10", IsSelected = true)]
+        PS10 = 10,
         [EnumNames("20")]
-        PS20,
+        PS20 = 20,
         [EnumNames("30")]
-        PS30,
+        PS30 = 30,
         [EnumNames("50")]
-        PS50,
+        PS50 = 50
+    }
+
+
+
+    /// <summary>
+    /// 页面分页数据大小
+    /// </summary>
+    public enum LargePageSizeEnums : int
+    {
+        [EnumNames("10", IsSelected = true)]
+        PS10 = 10,
+        [EnumNames("20")]
+        PS20 = 20,
+        [EnumNames("30")]
+        PS30 = 30,
+        [EnumNames("50")]
+        PS50 = 50,
         [EnumNames("100")]
-        PS100,
+        PS100 = 100,
         [EnumNames("150")]
-        PS150,
+        PS150 = 150,
         [EnumNames("200")]
-        PS200,
+        PS200 = 200,
         [EnumNames("500")]
-        PS500,
+        PS500 = 500,
     }
 
     /// <summary>

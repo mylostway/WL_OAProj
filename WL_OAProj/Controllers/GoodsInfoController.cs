@@ -27,12 +27,12 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/AddGoodsInfo")]
-        public BaseOpResult AddGoodsInfo(GoodsinfoEntity entity)
+        public BaseOpResult AddGoodsInfo([FromBody] GoodsinfoEntity entity)
         {            
             return BLL().AddEntity(entity);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/DelGoodsInfo/{entityID}")]
         public BaseOpResult DelGoodsInfo(int entityID)
         {            
@@ -42,7 +42,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/UpdateGoodsInfo")]
-        public BaseOpResult UpdateGoodsInfo(GoodsinfoEntity entity)
+        public BaseOpResult UpdateGoodsInfo([FromBody] GoodsinfoEntity entity)
         {            
             return BLL().UpdateEntity(entity);
         }

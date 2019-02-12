@@ -7,7 +7,11 @@ namespace WL_OA.Data.dto
     public class QueryResult<T> : BaseQueryResult
         where T : class
     {
-        public QueryResult(T result = null, int maxRow = 0, int curRow = 0)
+        public QueryResult()
+            : this(null, 0, 0)
+        { }
+
+        public QueryResult(T result, int maxRow = 0, int curRow = 0)
             : base(maxRow, curRow)
         {
             ResultData = result;

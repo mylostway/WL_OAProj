@@ -17,7 +17,7 @@ namespace WL_OAProj.Controllers
     {
         [HttpPost]
         [Route("api/GetFreBusinessList")]
-        public QueryResult<IList<FreBussinessOpCenterDTO>> GetEntityList(QueryFreBusinessCenterParam param)
+        public QueryResult<IList<FreBussinessOpCenterDTO>> GetEntityList([FromBody] QueryFreBusinessCenterParam param)
         {
             return BLL().GetFreBusinessOpCenterList(param);
         }
@@ -41,7 +41,7 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/UpdateFreBusiness")]
-        public BaseOpResult UpdateFreBusiness(FreBussinessOpCenterDTO updateInfo)
+        public BaseOpResult UpdateFreBusiness([FromBody] FreBussinessOpCenterDTO updateInfo)
         {
             return BLL().UpdateFreBusinessDTO(updateInfo);
         }
