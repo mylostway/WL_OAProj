@@ -36,7 +36,7 @@ namespace WL_OA.BLL
                 Finput_time = DateTime.Now,
                 Flast_modify_time = DateTime.Now,
                 Finputor = GetRequestContext().LoginInfo.Account
-        };
+            };
 
             dto.LinkListID(listID);
 

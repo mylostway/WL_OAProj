@@ -90,12 +90,12 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            //(new TestFreBusiness()).TestAddFreBusinessInfo();
+            (new TestFreBusiness()).TestAddFreBusinessInfo();
             //(new TestFreBusiness()).TestQueryFreBusinessInfo();
             //(new TestFreBusiness()).TestUpdateFreBusinessInfo();
             //(new TestFreBusiness()).TestDelFreBusinessRecord();
 
-            (new TestUserManager()).Run();
+            //(new TestUserManager()).Run();
         }
     }
 }

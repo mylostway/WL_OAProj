@@ -238,13 +238,13 @@ var entityGen = (function(){
 			}
 			
 			var fieldName = _toLittleCaseStr(name);
-			line += LINE_STAND_FORMAT_STR + "protected " + (type + " " + fieldName + " = " + _getDefaultFieldVal(type) + ";") + LINE_SPLITOR;
+			//line += LINE_STAND_FORMAT_STR + "protected " + (type + " " + fieldName + " = " + _getDefaultFieldVal(type) + ";") + LINE_SPLITOR;
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;			
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
 			line += _genAttribute(lArr);
-			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
-            line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
+			line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
+            //line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
             // 因为db设置的原因（varchar列大部分都设置成not null default），而字符串在C#里默认为null，导致insert的时候会报错
             //if (type == "string") line += " = \"\";";
 			resultStr += (line + "\r\n\r\n");
@@ -351,12 +351,103 @@ var entityGen = (function(){
 			resultStr += (line);
 		}
 		return resultStr;
-	}
+    }
+
+    var _toJson = function (str,isWithMock) {
+        var resultStr = "";	
+		var arr = _removeUselessLine(str.split(LINE_SPLITOR));
+		var i = 0;
+		var firstLine = _fixLineStr(arr[0]).toLocaleLowerCase();
+		var lArr = [];
+		var viewModeName = "";
+		if(m_className) {
+            resultStr += m_className + " : {\n";
+			i = 1;
+		}
+		for(;i < arr.length;i++){
+			var line = "";
+			lArr = _fixLineStr(arr[i]).split(" ");
+			if(lArr.length <= 1) continue;	
+			var name = _convName(_trim(lArr[0]));
+			// 已经从基类继承，忽略这两行
+			if(name == "Fstate") continue;
+			if(name == "Fid"){
+				//line += 
+				continue;
+            }
+            var type = _trim(lArr[1]).toLowerCase();
+            if (!type) continue;
+            if (!_convType(type)) continue;
+			var comment = "";
+			for(var j = 2;j < lArr.length;j++){
+				if(lArr[j].toLowerCase() == "comment") {
+					comment = _trim(lArr.splice(j+1).join(" "));
+					break;
+				}
+			}
+			
+            var fieldName = name;
+			
+            line += "\t " + fieldName + " : ";
+            if (!isWithMock) line += "'',";
+            else {
+                switch (type) {
+                    case "int": {
+                        line += "Mock.Random.integer(1,9999),";
+                        break;
+                    }
+                    case "tinyint": {
+                        line += "Mock.Random.integer(1,9),";
+                        break;
+                    }          
+                    case "datetime": {
+                        line += "Mock.Random.date(),";
+                        break;
+                    }
+                    default: {
+                        var cmpFieldName = fieldName.toLowerCase();
+                        if (cmpFieldName.indexOf("memo") >= 0) {
+                            line += "Mock.Random.csentence(),";
+                        }
+                        else if (cmpFieldName.indexOf("mark") >= 0) {
+                            line += "Mock.Random.word().toUpperCase(),";
+                        }
+                        else if (cmpFieldName.indexOf("phone") >= 0
+                            || cmpFieldName.indexOf("mobile") >= 0
+                            || cmpFieldName.indexOf("fax") >= 0
+                            || cmpFieldName.indexOf("deposit") >= 0
+                            || cmpFieldName.indexOf("account") >= 0
+                            || cmpFieldName.indexOf("qq") >= 0) {
+                            line += "Mock.Random.id().substr(0,10),";
+                        }
+                        else if (cmpFieldName.indexOf("status") >= 0
+                            || cmpFieldName.indexOf("state") >= 0) {
+                            line += "Mock.Random.integer(0, 2).toString(),";
+                        }
+                        else if (cmpFieldName.indexOf("wx") >= 0) {
+                            line += "Mock.Random.word() + \"@wx.tenpay.com\",";
+                        }
+                        else {
+                            line += "Mock.Random.cname(),";
+                        }
+                        
+                        break;
+                    }
+                }
+            }
+			resultStr += (line + "\n");
+        }		
+
+		if(firstLine.indexOf("create table ") >= 0) resultStr += "}";
+		return resultStr;
+    }
 	
 	return {
 		go : _go,
 		toXml : _toXml,
-		toViewMode : _toViewMode,
+        toViewMode: _toViewMode,
+        toJson: _toJson,
+
 		LINE_SPLITOR : LINE_SPLITOR
 	}
 	

@@ -45,7 +45,8 @@ namespace ConsoleTest.test_cases
         {
             foreach(var e in genTestData)
             {
-                m_bll.AddEntity(e);
+                var opResult = m_bll.AddEntity(e);
+                Assert.True(opResult.IsSucceed());
             }
         }
 

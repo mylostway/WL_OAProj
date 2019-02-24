@@ -73,6 +73,21 @@ create table wldb.t_driverInfo
 select * from wldb.t_driverInfo;
 
 
+-- 结算方式
+create table wldb.t_pay_ways
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+
+	Fmark varchar(15) not null comment '助记码',
+	Fchn_Name varchar(50) not null comment '结算方式名称（中文）',
+	Feng_Name varchar(30) not null default '' comment '结算方式名称（英文）',
+	Fusable tinyint not null default 0 comment '标志-可用'
+
+)ENGINE=Innodb default charset=utf8;
+
+
+
 -- 示例功能2，创建货名维护表
 create table wldb.t_goodsInfo
 (
