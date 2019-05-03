@@ -15,11 +15,17 @@ using BLL.util;
 using NHibernate;
 using NHibernate.Criterion;
 using WL_OA.Data;
+using System.Linq;
 
 namespace WL_OA.BLL.query
 {
     public partial class CustomerManagerBLL : CommBaseBLL<CustomerInfoEntity, QueryCustomerInfoParam>
     {
+        public QueryResult<AddCustomerInfoDTO> GetCustomerFullInfo(int customerId)
+        {
+            return GetCustomerFullInfo(new QueryCustomerFullInfoParam(customerId));
+        }
+
         /// <summary>
         /// 获取客户完整信息
         /// </summary>
@@ -33,14 +39,19 @@ namespace WL_OA.BLL.query
             var skipNum = queryParam.ChildInfoListSkip;
             var takeNum = queryParam.ChildInfoListTake;
             var queryEntity = session.Get<CustomerInfoEntity>(customerID);
-            var contactInfoQuery = session.QueryOver<CustomerContactEntity>().Where(c => c.FcustomerId == customerID);
-            var holdAddrQuery = session.QueryOver<CustomerHoldAddrEntity>().Where(c => c.FcustomerId == customerID);
-            var bankAccountQuery = session.QueryOver<CustomerBankAccountEntity>().Where(c => c.FcustomerId == customerID);
-            var bookSpaceReceiverQuery = session.QueryOver<CustomerBookSpaceReceiverEntity>().Where(c => c.FcustomerId == customerID);
+            if(null == queryEntity)
+            {
+                return new QueryResult<AddCustomerInfoDTO>(QueryResultCode.Failed, $"客户不存在");
+            }
+            var contactInfoQuery = session.QueryOver<CustomerContactEntity>().Where(c => c.Fcustomer_id == customerID);
+            var holdAddrQuery = session.QueryOver<CustomerHoldAddrEntity>().Where(c => c.Fcustomer_id == customerID);
+            var bankAccountQuery = session.QueryOver<CustomerBankAccountEntity>().Where(c => c.Fcustomer_id == customerID);
+            var bookSpaceReceiverQuery = session.QueryOver<CustomerBookSpaceReceiverEntity>().Where(c => c.Fcustomer_id == customerID);
 
-            var creditInfoQuery = session.QueryOver<CustomerCreditInfoEntity>().Where(c => c.FcustomerId == customerID);
-            var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.FcustomerId == customerID);
-            var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.FcustomerId == customerID);
+            var creditInfoQuery = session.QueryOver<CustomerCreditInfoEntity>().Where(c => c.Fcustomer_id == customerID);
+            var configInfoQuery = session.QueryOver<CustomerConfigInfoEntity>().Where(c => c.Fcustomer_id == customerID);
+            var otherInfoQuery = session.QueryOver<CustomerOtherInfoEntity>().Where(c => c.Fcustomer_id == customerID);
+            var inputInfoQuery = session.QueryOver<CustomerInputInfoEntity>().Where(c => c.Fcustomer_id == customerID);
 
             var retResult = new QueryResult<AddCustomerInfoDTO>(new AddCustomerInfoDTO()
             {
@@ -48,7 +59,8 @@ namespace WL_OA.BLL.query
                 CustomerInfo = new CustomerSummaryInfoDTO(queryEntity),
                 CreditInfo = creditInfoQuery.SingleOrDefault(),
                 ConfigInfo = configInfoQuery.SingleOrDefault(),
-                OtherInfo = otherInfoQuery.SingleOrDefault()
+                OtherInfo = otherInfoQuery.SingleOrDefault(),
+                InputInfo = inputInfoQuery.SingleOrDefault()
             });
 
             // 目前采取一次性查询完整数据返回的形式实现。
@@ -76,6 +88,8 @@ namespace WL_OA.BLL.query
 
             var query = session.QueryOver<CustomerInfoEntity>();
 
+            IQueryOver<CustomerInputInfoEntity, CustomerInputInfoEntity> queryInputInfo = null;
+
             var queryStartDate = queryParam.StartDate;
 
             var queryEndDate = queryParam.EndDate;
@@ -88,18 +102,25 @@ namespace WL_OA.BLL.query
                 case DateTypeEnums.None:
                 case DateTypeEnums.InputTime:
                     {
-                        query.And(c => c.Finput_time >= queryStartDate && c.Finput_time <= queryEndDate);
+                        queryInputInfo = session.QueryOver<CustomerInputInfoEntity>().Where(c => c.Finput_time >= queryStartDate && c.Finput_time <= queryEndDate);                        
                         break;
                     }
                 case DateTypeEnums.AduitTime:
                     {
-                        query.And(c => c.Faduit_time >= queryStartDate && c.Faduit_time <= queryEndDate);
+                        queryInputInfo = session.QueryOver<CustomerInputInfoEntity>().Where(c => c.Faduit_time >= queryStartDate && c.Faduit_time <= queryEndDate);
                         break;
                     }
                 default:
                     {
                         throw new NotImplementedException("暂时不支持这种日期类型的查询");
                     }
+            }
+
+            if (null != queryInputInfo)
+            {
+                var inputInfoEntityList = queryInputInfo.Select(x => x.Fcustomer_id).List<int>();
+                if (inputInfoEntityList.IsNullOrEmpty()) return new QueryResult<IList<CustomerInfoEntity>>();
+                query.And(Restrictions.In("Fid", inputInfoEntityList.ToArray()));
             }
 
             AddQueryIDTypeCondition(queryParam.IDType1, queryParam.ID1, query);
@@ -109,231 +130,23 @@ namespace WL_OA.BLL.query
 
             int rawRowCont = query.RowCount();
 
-            QueryHelper.FixQueryTake(param, rawRowCont);
+            //QueryHelper.FixQueryTake(param, rawRowCont);            
 
-            if (null != param.Skip && param.Skip.Value > 0) query.Skip(param.Skip.Value);
-            if (null != param.Take && param.Take.Value > 0) query.Take(param.Take.Value);
+            var pageIdx = param.GetFixedQueryPageIndex();
+            var pageSize = param.GetFixedQueryPageSize();
+
+            query.OrderBy((x) => x.Fid).Desc();
+
+            //if (null != param.Skip && param.Skip.Value > 0) query.Skip(param.Skip.Value);
+            //if (null != param.Take && param.Take.Value > 0) query.Take(param.Take.Value);
+            if(pageIdx > 1)
+            {
+                query.Skip((pageIdx - 1) * pageSize);
+            }
+            query.Take(pageSize);
 
             var retList = query.List();
             return new QueryResult<IList<CustomerInfoEntity>>(retList, rawRowCont, retList.Count);
         }
-
-
-        /// <summary>
-        /// 根据复杂的IDType，添加ID的查询条件，因为允许两个查询条件，所以提取出来当方法
-        /// </summary>
-        /// <param name="enumVal"></param>
-        /// <param name="val"></param>
-        /// <param name="query"></param>
-        private void AddQueryIDTypeCondition(QueryCustomerInfoIDTypeEnums? enumVal, string val,IQueryOver<CustomerInfoEntity, CustomerInfoEntity> query)
-        {
-            if (!string.IsNullOrEmpty(val))
-            {
-                switch (enumVal)
-                {
-                    case null:
-                    case QueryCustomerInfoIDTypeEnums.None:
-                    case QueryCustomerInfoIDTypeEnums.Forshot:
-                        {
-                            query.Where(c => c.Fname_for_short.Contains(val));
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.FullName:
-                        {
-                            query.Where(c => c.Fname.Contains(val));
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.Remark:
-                        {
-                            query.Where(c => c.Fmark.Contains(val));
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.CustomType:
-                        {
-                            query.Where(c => c.Fcustomer_type == val);
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.Payway:
-                        {
-                            query.Where(c => c.Fpay_way == val.ToEnumVal(typeof(PaywayEnums)));                            
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.BusinessMan:
-                        {
-                            query.Where(c => c.Fbusinesser.Contains(val));
-                            break;
-                        }
-                    case QueryCustomerInfoIDTypeEnums.Province:
-                        {
-                            // 这个要关联查询
-                            throw new NotImplementedException();
-                        }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 根据数据状态值添加查询条件
-        /// </summary>
-        /// <param name="enumVal"></param>
-        /// <param name="query"></param>
-        private void AddQueryDataStateCondition(QueryCustomerInfoStateEnums? enumVal, IQueryOver<CustomerInfoEntity, CustomerInfoEntity> query)
-        {
-            if (enumVal == null || enumVal == QueryCustomerInfoStateEnums.None) return;
-
-            switch(enumVal)
-            {
-                case QueryCustomerInfoStateEnums.Useless:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x01) == 0));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.Usable:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x01) == 1));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.Aduited:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x02) == 1));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.UnAduited:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x02) == 0));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.Shared:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x04) == 1));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.UnShared:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x04) == 0));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.BlackList:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x08) == 1));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.NotBlackList:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x08) == 0));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.ReceivedShortmsg:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x10) == 1));
-                        break;
-                    }
-                case QueryCustomerInfoStateEnums.NotReceivedShortmsg:
-                    {
-                        query.Where(c => ((c.Fdata_status & 0x10) == 0));
-                        break;
-                    }
-            }
-        }
-
-
-        public BaseOpResult AddEntity(AddCustomerInfoDTO dto)
-        {
-            var session = StartTrans();
-
-            try
-            {
-                // FIX：输入录入人
-                dto.CustomerInfo.Finputor = GetRequestContext().LoginInfo.Name;
-                dto.CustomerInfo.Finput_time = DateTime.Now;                
-
-                var customID = session.Save(new CustomerInfoEntity(dto.CustomerInfo));
-                dto.Linked(Convert.ToInt32(customID));
-
-                session.AddEntityListEx(dto.CustomerInfo.ContactInfoList);
-                session.AddEntityListEx(dto.CustomerInfo.BankAccountInfoList);
-                session.AddEntityListEx(dto.CustomerInfo.BookSpaceReceiverInfoList);
-                session.AddEntityListEx(dto.CustomerInfo.HoldAddrInfoList);
-
-                //AddEntityList(session, dto.CustomerInfo.ContactInfoList);
-                //AddEntityList(session, dto.CustomerInfo.BankAccountInfoList);
-                //AddEntityList(session, dto.CustomerInfo.BookSpaceReceiverInfoList);
-                //AddEntityList(session, dto.CustomerInfo.HoldAddrInfoList);
-
-                session.Save(dto.CreditInfo);
-                session.Save(dto.ConfigInfo);
-                session.Save(dto.OtherInfo);
-
-                CommitOnSession(session);
-            }
-            catch(Exception ex)
-            {
-                RollBackOnSession(session);
-                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
-            }
-
-            return BaseOpResult.SucceedInstance;
-        }
-
-
-        /// <summary>
-        /// 更新信息，考虑先用delete，再add替代，当然有不完备性，比如add异常，则数据已经被delete掉
-        /// </summary>
-        /// <param name="entity"></param>
-        public virtual BaseOpResult UpdateEntity(AddCustomerInfoDTO dto)
-        {
-            try
-            {
-                DelEntity(dto.CustomerInfo);
-
-                AddEntity(dto);
-            }
-            catch(Exception ex)
-            {
-                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
-            }
-
-            return BaseOpResult.SucceedInstance;
-
-            /*
-            var session = NHibernateHelper.getSession();
-            var trans = session.BeginTransaction();
-            session.Update(entity);
-            trans.Commit();
-            */
-        }
-
-
-        /// <summary>
-        /// 删除Entity
-        /// </summary>
-        /// <param name="entity"></param>
-        public override BaseOpResult DelEntity(CustomerInfoEntity entity)
-        {
-            var relatedID = entity.Fid;
-            var session = StartTrans();
-            try
-            {                
-                session.Delete(new CustomerContactEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerHoldAddrEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerBankAccountEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerBookSpaceReceiverEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerCreditInfoEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerConfigInfoEntity() { FcustomerId = relatedID });
-                session.Delete(new CustomerOtherInfoEntity() { FcustomerId = relatedID });
-
-                session.Delete(new CustomerInfoEntity() { Fid = relatedID });                
-            }
-            catch (Exception ex)
-            {
-                RollBackOnSession(session);
-                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
-            }
-
-            CommitOnSession(session);
-
-            return BaseOpResult.SucceedInstance;
-        }
-        
     }
 }

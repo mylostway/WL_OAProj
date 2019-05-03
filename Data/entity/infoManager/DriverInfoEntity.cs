@@ -11,114 +11,102 @@ namespace WL_OA.Data.entity
     [Table("t_driverinfo")]
     public class DriverinfoEntity : BaseEntity<int>
     {
-        protected string fdriverNo = "";
         /// <summary>
         /// 司机编号'
         /// </summary>
+        [Required]
         [MaxLength(20)]
-        public virtual string FdriverNo { get { return fdriverNo; } set { fdriverNo = value; } }
+        public virtual string FdriverNo { get; set; } = "";
 
-        protected string fname = "";
         /// <summary>
         /// 司机姓名'
         /// </summary>
         [Required]
         [MaxLength(30)]
-        public virtual string Fname { get { return fname; } set { fname = value; } }
+        public virtual string Fname { get; set; } = "";
 
-        protected string fphone1 = "";
         /// <summary>
         /// 司机手机号码'
         /// </summary>
         [Required]
         [MaxLength(15)]
-        public virtual string Fphone1 { get { return fphone1; } set { fphone1 = value; } }
+        public virtual string Fphone1 { get; set; } = "";
 
-        protected string fphone2 = "";
         /// <summary>
         /// 司机备用手机号码'
         /// </summary>
         [MaxLength(15)]
-        public virtual string Fphone2 { get { return fphone2; } set { fphone2 = value; } }
+        public virtual string Fphone2 { get; set; } = "";
 
-        protected string fcertID = "";
         /// <summary>
         /// 司机证件号码'
         /// </summary>
         [Required]
         [MaxLength(30)]
-        public virtual string FcertID { get { return fcertID; } set { fcertID = value; } }
+        public virtual string FcertID { get; set; } = "";
 
-        protected string fdriverCardNo = "";
         /// <summary>
         /// 驾驶证编号'
         /// </summary>
         [Required]
         [MaxLength(30)]
-        public virtual string FdriverCardNo { get { return fdriverCardNo; } set { fdriverCardNo = value; } }
+        public virtual string FdriverCardNo { get; set; } = "";
 
-        protected string fcarNo = "";
         /// <summary>
         /// 车牌号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string FcarNo { get { return fcarNo; } set { fcarNo = value; } }
+        public virtual string FcarNo { get; set; } = "";
 
-        protected string ftrailerNo = "";
         /// <summary>
         /// 挂车号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string FtrailerNo { get { return ftrailerNo; } set { ftrailerNo = value; } }
+        public virtual string FtrailerNo { get; set; } = "";
 
-        protected DateTime fbirthday = DateTime.Now;
         /// <summary>
         /// 生日'
         /// </summary>
-        public virtual DateTime Fbirthday { get { return fbirthday; } set { fbirthday = value; } }
+        public virtual DateTime? Fbirthday { get; set; } = default(DateTime?);
 
-        protected string fbirthPlace = "";
         /// <summary>
         /// 籍贯'
         /// </summary>
         [MaxLength(50)]
-        public virtual string FbirthPlace { get { return fbirthPlace; } set { fbirthPlace = value; } }
 
-        protected string flivePlace = "";
+        public virtual string FbirthPlace { get; set; } = "";
+
         /// <summary>
         /// 家庭住址'
         /// </summary>
         [MaxLength(50)]
-        public virtual string FlivePlace { get { return flivePlace; } set { flivePlace = value; } }
+        public virtual string FlivePlace { get; set; } = "";
 
-        protected int flowestSalary = 0;
         /// <summary>
         /// 保底工资(分)'
         /// </summary>
-        public virtual int FlowestSalary { get { return flowestSalary; } set { flowestSalary = value; } }
+        public virtual int? FlowestSalary { get; set; } = 0;
 
-        protected string fmemo = "";
         /// <summary>
         /// 备注'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get { return fmemo; } set { fmemo = value; } }
+        public virtual string Fmemo { get; set; } = "";
 
-        protected int fworkState = 0;
         /// <summary>
         /// 是否在职 0 - 否 1 - 是，其他待添加，默认0
         /// </summary>
         [Range(0, 1)]
-        public virtual int FworkState { get { return fworkState; } set { fworkState = value; } }
+        public virtual int? FworkState { get; set; } = 0;
 
         public DriverinfoEntity() { }
 
-        public DriverinfoEntity(string name,string phone,string certID,string cardNo)
+        public DriverinfoEntity(string name,string phone,string cert,string cardNo)
         {
             this.Fname = name;
             this.Fphone1 = phone;
-            this.FcertID = certID;
-            this.FdriverCardNo = cardNo;            
+            this.FcertID = cert;
+            this.FdriverCardNo = cardNo;
         }
 
         public DriverinfoEntity(DriverinfoEntity rhs)
@@ -140,6 +128,37 @@ namespace WL_OA.Data.entity
             this.FlowestSalary = rhs.FlowestSalary;
             this.Fmemo = rhs.Fmemo;
             this.FworkState = rhs.FworkState;
+        }
+
+
+        public static bool operator ==(DriverinfoEntity lhs, DriverinfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.FdriverNo == rhs.FdriverNo &&
+               lhs.Fname == rhs.Fname &&
+               lhs.Fphone1 == rhs.Fphone1 &&
+               lhs.Fphone2 == rhs.Fphone2 &&
+               lhs.FcertID == rhs.FcertID &&
+               lhs.FdriverCardNo == rhs.FdriverCardNo &&
+               lhs.FcarNo == rhs.FcarNo &&
+               lhs.FtrailerNo == rhs.FtrailerNo &&
+               lhs.Fbirthday == rhs.Fbirthday &&
+               lhs.FbirthPlace == rhs.FbirthPlace &&
+               lhs.FlivePlace == rhs.FlivePlace &&
+               lhs.FlowestSalary == rhs.FlowestSalary &&
+               lhs.Fmemo == rhs.Fmemo &&
+               lhs.FworkState == rhs.FworkState
+           );
+        }
+
+        public static bool operator !=(DriverinfoEntity lhs, DriverinfoEntity rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }

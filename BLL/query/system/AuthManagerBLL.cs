@@ -9,6 +9,7 @@ using WL_OA.Data.dal;
 using WL_OA.Data.dto;
 using WL_OA.Data.entity;
 using WL_OA.Data.param;
+using WL_OA.Data.utils;
 
 namespace WL_OA.BLL.query
 {
@@ -35,10 +36,13 @@ namespace WL_OA.BLL.query
 
                 if (param.IsAllowPagging)
                 {
-                    QueryHelper.FixQueryTake(param, rawRowCont);
-
-                    if (null != param.Skip && param.Skip.Value > 0) query.Skip(param.Skip.Value);
-                    if (null != param.Take && param.Take.Value > 0) query.Take(param.Take.Value);
+                    var pageIdx = param.GetFixedQueryPageIndex();
+                    var pageSize = param.GetFixedQueryPageSize();
+                    if (pageIdx > 1)
+                    {
+                        query.Skip((pageIdx - 1) * pageSize);
+                    }
+                    query.Take(pageSize);
                 }
 
                 var retList = query.List();

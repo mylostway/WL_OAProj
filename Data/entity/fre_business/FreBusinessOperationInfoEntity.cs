@@ -9,79 +9,66 @@ namespace WL_OA.Data.entity
     [Table("t_fre_business_operation_info")]
     public class FreBusinessOperationInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
-        protected string flist_id = "";
         /// <summary>
         /// 关联的交易单号'
         /// </summary>
         [Required]
         [MaxLength(32)]
-        public virtual string Flist_id { get { return flist_id; } set { flist_id = value; } }
+        public virtual string Flist_id { get; set; } = "";
 
-        protected int fbusiness_type = 0;
         /// <summary>
         /// 业务类型'
         /// </summary>
         [Range((int)FreBusinessBusinessTypeEnums.None, (int)FreBusinessBusinessTypeEnums.Freight, ErrorMessage = "非法的业务类型")]
-        public virtual int Fbusiness_type { get { return fbusiness_type; } set { fbusiness_type = value; } }
+        public virtual int? Fbusiness_type { get; set; } = 0;
 
-        protected string fassist_people = "";
         /// <summary>
         /// 协助人'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fassist_people { get { return fassist_people; } set { fassist_people = value; } }
+        public virtual string Fassist_people { get; set; } = "";
 
-        protected string fdetent_people = "";
         /// <summary>
         /// 扣货操作人'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdetent_people { get { return fdetent_people; } set { fdetent_people = value; } }
+        public virtual string Fdetent_people { get; set; } = "";
 
-        protected string foperator = "";
         /// <summary>
         /// 操作员'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Foperator { get { return foperator; } set { foperator = value; } }
+        public virtual string Foperator { get; set; } = "";
 
-        protected string foperator_company = "";
         /// <summary>
         /// 操作部门'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Foperator_company { get { return foperator_company; } set { foperator_company = value; } }
+        public virtual string Foperator_company { get; set; } = "";
 
-        protected string finputor = "";
         /// <summary>
         /// 录入人员'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Finputor { get { return finputor; } set { finputor = value; } }
+        public virtual string Finputor { get; set; } = "";
 
-        protected string fsplit_list_no = "";
         /// <summary>
         /// 拆分单号'
         /// </summary>
-        [Required]
         [MaxLength(32)]
-        public virtual string Fsplit_list_no { get { return fsplit_list_no; } set { fsplit_list_no = value; } }
+        public virtual string Fsplit_list_no { get; set; } = "";
 
-        protected string fsplit_source = "";
         /// <summary>
         /// 拆分来源'
         /// </summary>
-        [Required]
         [MaxLength(50)]
-        public virtual string Fsplit_source { get { return fsplit_source; } set { fsplit_source = value; } }
+        public virtual string Fsplit_source { get; set; } = "";
 
-        protected string fchild_work_list_no = "";
         /// <summary>
-        /// 子工作单号'
+        /// 子工作单号
         /// </summary>
-        [Required]
         [MaxLength(32)]
-        public virtual string Fchild_work_list_no { get { return fchild_work_list_no; } set { fchild_work_list_no = value; } }
+        public virtual string Fchild_work_list_no { get; set; } = "";
 
         public FreBusinessOperationInfoEntity() { }
 
@@ -101,6 +88,7 @@ namespace WL_OA.Data.entity
             this.Fsplit_source = rhs.Fsplit_source;
             this.Fchild_work_list_no = rhs.Fchild_work_list_no;
         }
+
 
         public static bool operator ==(FreBusinessOperationInfoEntity lhs, FreBusinessOperationInfoEntity rhs)
         {
@@ -128,4 +116,6 @@ namespace WL_OA.Data.entity
             return !(lhs == rhs);
         }
     }
+
+    
 }

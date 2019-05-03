@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using WL_OAProj;
 using WL_OA.BLL.query;
+using WL_OA.Data;
 using WL_OA.Data.dto;
 using WL_OA.Data.entity;
 using WL_OA.Data.param;
@@ -16,9 +19,9 @@ namespace WL_OAProj.Controllers
     [Produces("application/json")]
     public class CustomerManageController : BaseController<CustomerManagerBLL>
     {
-        [HttpGet]
-        [Route("GetCustomerFullInfo/{customerID}")]
-        public QueryResult<AddCustomerInfoDTO> GetCustomerFullInfo(QueryCustomerFullInfoParam param)
+        [HttpPost]
+        [Route("api/GetCustomerFullInfo")]
+        public QueryResult<AddCustomerInfoDTO> GetCustomerFullInfo([FromBody] QueryCustomerFullInfoParam param)
         {
             return BLL().GetCustomerFullInfo(param);
         }
@@ -31,9 +34,12 @@ namespace WL_OAProj.Controllers
             var baseInfoQueryResult = BLL().GetEntityList(param);
             var infoList = baseInfoQueryResult.ResultData;
             var retList = new List<CustomerInfoQueryResultDTO>();
-            foreach(var eInfo in infoList)
+            if(null != infoList)
             {
-                retList.Add(new CustomerInfoQueryResultDTO(eInfo));
+                foreach (var eInfo in infoList)
+                {
+                    retList.Add(new CustomerInfoQueryResultDTO(eInfo));
+                }
             }
             return new QueryResult<IList<CustomerInfoQueryResultDTO>>(retList, baseInfoQueryResult.MaxResultCount);
         }
@@ -41,8 +47,13 @@ namespace WL_OAProj.Controllers
 
         [HttpPost]
         [Route("api/AddCustomerInfo")]
-        public BaseOpResult AddCustomerInfo(AddCustomerInfoDTO dto)
+        public BaseOpResult AddCustomerInfo([FromBody] AddCustomerInfoDTO dto)
         {
+            /*
+             测试映射复杂对象用
+            var deObj = HttpContext.DeSerializeRequestObjFromRequest<AddCustomerInfoDTO>();
+            */
+            if (null == dto) return BaseOpResult.FailFor("添加的信息不能为空，请检查参数");
             return BLL().AddEntity(dto);
         }
 
@@ -51,6 +62,7 @@ namespace WL_OAProj.Controllers
         [Route("api/UpdateCustomerInfo")]
         public BaseOpResult UpdateEntity([FromBody] AddCustomerInfoDTO dto)
         {
+            if (null == dto) return BaseOpResult.FailFor("更新的信息不能为空，请检查参数");
             return BLL().UpdateEntity(dto);
         }
 

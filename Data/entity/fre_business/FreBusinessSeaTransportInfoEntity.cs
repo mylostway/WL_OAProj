@@ -9,193 +9,163 @@ namespace WL_OA.Data.entity
     [Table("t_fre_business_sea_transport_info")]
     public class FreBusinessSeaTransportInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
-        protected string flist_id = "";
         /// <summary>
         /// 关联的交易单号'
         /// </summary>
         [Required]
         [MaxLength(32)]
-        public virtual string Flist_id { get { return flist_id; } set { flist_id = value; } }
+        public virtual string Flist_id { get; set; } = "";
 
-        protected string fbook_cabint_proxy = "";
         /// <summary>
         /// 订舱代理'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbook_cabint_proxy { get { return fbook_cabint_proxy; } set { fbook_cabint_proxy = value; } }
+        public virtual string Fbook_cabint_proxy { get; set; } = "";
 
-        protected string fship_company = "";
         /// <summary>
         /// 船公司'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fship_company { get { return fship_company; } set { fship_company = value; } }
+        public virtual string Fship_company { get; set; } = "";
 
-        protected string fmain_line_ship_name = "";
         /// <summary>
         /// 干线船名'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fmain_line_ship_name { get { return fmain_line_ship_name; } set { fmain_line_ship_name = value; } }
+        public virtual string Fmain_line_ship_name { get; set; } = "";
 
-        protected string fmain_line_no = "";
         /// <summary>
         /// 干线航次'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fmain_line_no { get { return fmain_line_no; } set { fmain_line_no = value; } }
+        public virtual string Fmain_line_no { get; set; } = "";
 
-        protected string fship_no = "";
         /// <summary>
         /// 运单号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fship_no { get { return fship_no; } set { fship_no = value; } }
+        public virtual string Fship_no { get; set; } = "";
 
-        protected DateTime? fship_go_date ;
         /// <summary>
         /// 预开船期'
         /// </summary>
-        public virtual DateTime? Fship_go_date { get { return fship_go_date; } set { fship_go_date = value; } }
+        public virtual DateTime? Fship_go_date { get; set; } = default(DateTime?);
 
-        protected DateTime? fship_reach_date ;
         /// <summary>
         /// 预到船期'
         /// </summary>
-        public virtual DateTime? Fship_reach_date { get { return fship_reach_date; } set { fship_reach_date = value; } }
+        public virtual DateTime? Fship_reach_date { get; set; } = default(DateTime?);
 
-        protected DateTime? fship_report_date ;
         /// <summary>
         /// 预报船期'
         /// </summary>
-        public virtual DateTime? Fship_report_date { get { return fship_report_date; } set { fship_report_date = value; } }
+        public virtual DateTime? Fship_report_date { get; set; } = default(DateTime?);
 
-        protected DateTime? fpredit_reach_date ;
         /// <summary>
         /// 预计到达日期'
         /// </summary>
-        public virtual DateTime? Fpredit_reach_date { get { return fpredit_reach_date; } set { fpredit_reach_date = value; } }
+        public virtual DateTime? Fpredit_reach_date { get; set; } = default(DateTime?);
 
-        protected string fbook_order_man = "";
         /// <summary>
         /// 订舱委托人'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbook_order_man { get { return fbook_order_man; } set { fbook_order_man = value; } }
+        public virtual string Fbook_order_man { get; set; } = "";
 
-        protected string fbook_recv_man = "";
         /// <summary>
         /// 订舱收货人'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbook_recv_man { get { return fbook_recv_man; } set { fbook_recv_man = value; } }
+        public virtual string Fbook_recv_man { get; set; } = "";
 
-        protected string fcarft_ship_company = "";
         /// <summary>
         /// 驳船公司'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fcarft_ship_company { get { return fcarft_ship_company; } set { fcarft_ship_company = value; } }
+        public virtual string Fcarft_ship_company { get; set; } = "";
 
-        protected string fbranch_ship_name = "";
         /// <summary>
         /// 支线船名'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbranch_ship_name { get { return fbranch_ship_name; } set { fbranch_ship_name = value; } }
+        public virtual string Fbranch_ship_name { get; set; } = "";
 
-        protected string fbranch_ship_no = "";
         /// <summary>
         /// 支线航次'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbranch_ship_no { get { return fbranch_ship_no; } set { fbranch_ship_no = value; } }
+        public virtual string Fbranch_ship_no { get; set; } = "";
 
-        protected DateTime? ftransfer_ship_reach_date ;
         /// <summary>
         /// 中转船到期'
         /// </summary>
-        public virtual DateTime? Ftransfer_ship_reach_date { get { return ftransfer_ship_reach_date; } set { ftransfer_ship_reach_date = value; } }
+        public virtual DateTime? Ftransfer_ship_reach_date { get; set; } = default(DateTime?);
 
-        protected DateTime? ftransfer_ship_go_date ;
         /// <summary>
         /// 中转开船期'
         /// </summary>
-        public virtual DateTime? Ftransfer_ship_go_date { get { return ftransfer_ship_go_date; } set { ftransfer_ship_go_date = value; } }
+        public virtual DateTime? Ftransfer_ship_go_date { get; set; } = default(DateTime?);
 
-        protected string ftriple_pass_way = "";
         /// <summary>
         /// 三程船名'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ftriple_pass_way { get { return ftriple_pass_way; } set { ftriple_pass_way = value; } }
+        public virtual string Ftriple_pass_way { get; set; } = "";
 
-        protected string ftriple_pass_ship_no = "";
         /// <summary>
         /// 三程航次'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ftriple_pass_ship_no { get { return ftriple_pass_ship_no; } set { ftriple_pass_ship_no = value; } }
+        public virtual string Ftriple_pass_ship_no { get; set; } = "";
 
-        protected DateTime? ftransfer_ship_go_date2 ;
         /// <summary>
         /// 中转开船期2'
         /// </summary>
-        public virtual DateTime? Ftransfer_ship_go_date2 { get { return ftransfer_ship_go_date2; } set { ftransfer_ship_go_date2 = value; } }
+        public virtual DateTime? Ftransfer_ship_go_date2 { get; set; } = default(DateTime?);
 
-        protected int fis_transfer_ship = 0;
         /// <summary>
         /// 是否转船,0 - 否，1 - 是，默认0'
         /// </summary>
-        [Range(0,127,ErrorMessage ="非法的是否转船值")]
-        public virtual int Fis_transfer_ship { get { return fis_transfer_ship; } set { fis_transfer_ship = value; } }
+        public virtual int? Fis_transfer_ship { get; set; } = 0;
 
-        protected string fline_chn_name = "";
         /// <summary>
         /// 航线中文'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fline_chn_name { get { return fline_chn_name; } set { fline_chn_name = value; } }
+        public virtual string Fline_chn_name { get; set; } = "";
 
-        protected int fis_main_line_car = 0;
         /// <summary>
         /// 是否干线车,0 - 否，1 - 是，默认0'
         /// </summary>
-        [Range(0, 127, ErrorMessage = "非法的是否干线车值")]
-        public virtual int Fis_main_line_car { get { return fis_main_line_car; } set { fis_main_line_car = value; } }
+        public virtual int? Fis_main_line_car { get; set; } = 0;
 
-        protected DateTime? ftransfer_ship_reach_date2 ;
         /// <summary>
         /// 中转船到期2'
         /// </summary>
-        public virtual DateTime? Ftransfer_ship_reach_date2 { get { return ftransfer_ship_reach_date2; } set { ftransfer_ship_reach_date2 = value; } }
+        public virtual DateTime? Ftransfer_ship_reach_date2 { get; set; } = default(DateTime?);
 
-        protected string ftransfer_ship_wharf = "";
         /// <summary>
         /// 中转码头'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ftransfer_ship_wharf { get { return ftransfer_ship_wharf; } set { ftransfer_ship_wharf = value; } }
+        public virtual string Ftransfer_ship_wharf { get; set; } = "";
 
-        protected string ftransfer_ship_wharf2 = "";
         /// <summary>
         /// 中转码头2'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ftransfer_ship_wharf2 { get { return ftransfer_ship_wharf2; } set { ftransfer_ship_wharf2 = value; } }
+        public virtual string Ftransfer_ship_wharf2 { get; set; } = "";
 
-        protected int fcarft_ship_info_way = 0;
         /// <summary>
         /// 驳船信息'
         /// </summary>
-        [Range((int)FreBusinessBargeInformationEnums.None, (int)FreBusinessBargeInformationEnums.Intelligence, ErrorMessage = "非法的驳船信息")]
-        public virtual int Fcarft_ship_info_way { get { return fcarft_ship_info_way; } set { fcarft_ship_info_way = value; } }
+        [MaxLength(50)]
+        public virtual string Fcarft_ship_info_way { get; set; } = "";
 
-        protected DateTime? ffirst_ship_get_date ;
         /// <summary>
-        /// 头程上船期'
+        /// 头程上船期
         /// </summary>
-        public virtual DateTime? Ffirst_ship_get_date { get { return ffirst_ship_get_date; } set { ffirst_ship_get_date = value; } }
+        public virtual DateTime? Ffirst_ship_get_date { get; set; } = default(DateTime?);
 
         public FreBusinessSeaTransportInfoEntity() { }
 

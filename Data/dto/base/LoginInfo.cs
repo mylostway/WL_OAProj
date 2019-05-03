@@ -6,14 +6,23 @@ using WL_OA.Data.entity;
 
 namespace WL_OA.Data
 {
+    public static class LoginInfoEx
+    {
+        public static bool IsSucceed(this LoginInfo info)
+        {
+            return (null != info && !string.IsNullOrEmpty(info.Token) && string.IsNullOrEmpty(info.RetMsg));
+        }
+    }
+
     public class LoginInfo : BaseEntity<int>
     {
         public LoginInfo() { }
 
-        public LoginInfo(string account = "",string password = "")
+        public LoginInfo(string account = "",string password = "",string name = "")
         {
             this.Account = account;
             this.Password = password;
+            this.Name = name;
         }
 
         /// <summary>
@@ -52,5 +61,9 @@ namespace WL_OA.Data
         public DateTime LoginTime { get; set; } = DateTime.Now;
 
         
+        /// <summary>
+        /// 登录请求返回信息（错误用）
+        /// </summary>
+        public string RetMsg { get; set; }
     }
 }

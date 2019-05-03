@@ -11,7 +11,7 @@ namespace WL_OA.Data.dto
             : this(null, 0, 0)
         { }
 
-        public QueryResult(T result, int maxRow = 0, int curRow = 0)
+        public QueryResult(T result, int maxRow = 0, int curRow = 1)
             : base(maxRow, curRow)
         {
             ResultData = result;
@@ -25,5 +25,18 @@ namespace WL_OA.Data.dto
         }
 
         public T ResultData { get; set; }
+    }
+
+
+
+    public static class QueryResultEx
+    {
+        public static bool IsSucceed<T>(this QueryResult<T> result)
+            where T : class
+        {
+            return (null != result 
+                && result.ResultCode == QueryResultCode.Succeed 
+                && result.ResultCount > 0);
+        }
     }
 }

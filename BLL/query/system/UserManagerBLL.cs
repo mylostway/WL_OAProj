@@ -31,10 +31,13 @@ namespace WL_OA.BLL
 
             if (param.IsAllowPagging)
             {
-                QueryHelper.FixQueryTake(param, rawRowCont);
-
-                if (null != param.Skip && param.Skip.Value > 0) query.Skip(param.Skip.Value);
-                if (null != param.Take && param.Take.Value > 0) query.Take(param.Take.Value);
+                var pageIdx = param.GetFixedQueryPageIndex();
+                var pageSize = param.GetFixedQueryPageSize();
+                if (pageIdx > 1)
+                {
+                    query.Skip((pageIdx - 1) * pageSize);
+                }
+                query.Take(pageSize);
             }
 
             var retList = query.List();
@@ -49,34 +52,77 @@ namespace WL_OA.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public BaseOpResult CheckLogin(LoginInfo info)
+        public LoginInfo CheckLogin(LoginInfo info)
         {
+            if(string.IsNullOrEmpty(info.Account))
+            {
+                info.RetMsg = "请输入登录账号";
+                return info;
+            }
+
+            if (!string.IsNullOrEmpty(info.Token))
+            {
+                // 已启用session，检查token
+                if(null != m_cache)
+                {
+                    // 已经登录，检验token是否合法即可
+                    var cachedInfo = m_cache.Get<LoginInfo>(info.Token);
+                    if (null == cachedInfo)
+                    {
+                        // 已过期，重新登录
+                        info.RetMsg = "信息已过期，请重新登录";
+                        info.Token = "";
+                    }
+                    else
+                    {
+                        if (cachedInfo.Account != info.Account)
+                        {
+                            info.RetMsg = "错误的登录信息，请检查参数";
+                            info.Token = "";
+                        }
+
+                        m_cache.Set(info.Token, info, GetTokenTimeExpire());
+                    }
+                    return info;
+                }                
+            }
+            else { }
+
+            // 未登录，检验登录参数
+
             var session = NHibernateSessionManager.GetSession();
 
             // TODO:密码MD5，是否考虑进行密码MD5的再加密/解密
             var passWord = info.Password;
 
-            var userEntity = session.QueryOver<SystemUserEntity>()
+            var queryUsers = session.QueryOver<SystemUserEntity>()
                 .Where(x => x.Fuser_account == info.Account && x.Fpassword == passWord).List();
 
-            if(null == userEntity || 0 == userEntity.Count)
+            if(null == queryUsers || 0 == queryUsers.Count)
             {
                 //throw new UserFriendlyException("用户名或密码错误", ExceptionScope.Parameter);
-                return new BaseOpResult(QueryResultCode.Failed, "用户名或密码错误");
+                info.RetMsg = "用户名或密码错误";
+                info.Password = "";
+                return info;                
             }
 
-            if(1 != userEntity.Count)
+            if(1 != queryUsers.Count)
             {
                 //throw new UserFriendlyException("用户数据异常", ExceptionScope.DB);
-                SLogger.Err($"用户数据异常，账号：{info.Account}的数量为：{userEntity.Count}，大于1");
+                SLogger.Err($"用户数据异常，账号：{info.Account}的数量为：{queryUsers.Count}，大于1");
             }
+
+            var userEntity = queryUsers[0];
 
             info.Token = GenToken();
             info.LoginTime = DateTime.Now;
+            info.Name = userEntity.Fname;
+            info.Ticket = GenTicket();
 
             m_cache?.Set(info.Token, info, GetTokenTimeExpire());
 
-            return BaseOpResult.SucceedInstance;
+            //return BaseOpResult.SucceedInstance;
+            return info;
         }
 
         /// <summary>

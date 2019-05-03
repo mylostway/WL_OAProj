@@ -40,6 +40,23 @@ namespace WL_OA.BLL
         /// </summary>
         protected ICacheContext m_cache;
 
+
+        /// <summary>
+        /// 默认缓存失效时间
+        /// </summary>
+        const double DEFAULT_CACHE_EXPIRE_MIN = 10;
+
+
+        /// <summary>
+        /// 获取默认缓存失效时间
+        /// </summary>
+        /// <returns></returns>
+        public DateTime GetDefaultCacheExpireTime()
+        {
+            return DateTime.Now.AddMinutes(DEFAULT_CACHE_EXPIRE_MIN);
+        }
+
+
         /// <summary>
         /// 获取请求上下文
         /// </summary>

@@ -33,6 +33,13 @@ var entityGen = (function(){
 		"string" : "\"\"",
 	}
 	
+	// 判断是否可空类型
+	var _isEmptyableType = function(type){
+		if(!type) return false;
+		var cmpType = type.toString().toLowerCase();
+		return cmpType === "int" || cmpType === "datetime" || cmpType === "byte";
+	}
+	
 	// 转换属性名字
 	// 规则为：用下划线分组单词，然后每个组的单词首字母大写。
 	var _convName = function(nameStr){
@@ -242,8 +249,18 @@ var entityGen = (function(){
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ <summary>" + LINE_SPLITOR;			
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ " + comment.substr(1,comment.length - 2) + LINE_SPLITOR;
 			line += LINE_STAND_FORMAT_STR + "\/\/\/ </summary>" + LINE_SPLITOR;
-			line += _genAttribute(lArr);
+			var attrLine = _genAttribute(lArr);
+			line += attrLine;
+			// 可空类型
+			if(attrLine.indexOf("Required") < 0 && _isEmptyableType(type)){
+				type += "?";
+			}			
+			//line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
+			// 因为db设置的原因（varchar列大部分都设置成not null default），而字符串在C#里默认为null，导致insert的时候会报错
 			line += "\tpublic virtual " + (type + " " + name + "{ get; set; }");
+			if (type == "string") line += " = \"\";";
+			else if (type.indexOf("int") >= 0) line += " = 0;";
+			else line += " = default(" + type + ");";
             //line += "\tpublic virtual " + (type + " " + name + "{ get { return " + fieldName + "; } set { " + fieldName + " = value; } }");
             // 因为db设置的原因（varchar列大部分都设置成not null default），而字符串在C#里默认为null，导致insert的时候会报错
             //if (type == "string") line += " = \"\";";

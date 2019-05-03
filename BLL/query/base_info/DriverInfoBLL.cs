@@ -18,95 +18,43 @@ namespace WL_OA.BLL.query
 {
     public partial class DriverInfoBLL : CommBaseBLL<DriverinfoEntity,QueryDriverInfoParams>
     {
-        /*
-        /// <summary>
-        /// 获取DriverInfo列表
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        public QueryResult<IList<DriverInfoEntity>> GetDriverInfoList(QueryDriverInfoParams param)
+        public override QueryResult<IList<DriverinfoEntity>> GetEntityList(QueryDriverInfoParams param)
         {
-            var session = NHibernateUtil.getSession();
+            var queryParam = param as QueryDriverInfoParams;
 
-            var query2 = session.QueryOver<DriverInfoEntity>();
+            SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
 
-            if (null != param.Fid) query2.And(c => c.Fid == param.Fid.Value);
-            if (!string.IsNullOrEmpty(param.FName)) query2.And(Restrictions.Like("Fname", string.Format("%{0}%", param.FName)));
-            if (!string.IsNullOrEmpty(param.Fphone)) query2.And(c => c.Fphone1 == param.Fphone);
-            if (!string.IsNullOrEmpty(param.Fcert)) query2.And(c => c.FcertID == param.Fcert);
-            if (!string.IsNullOrEmpty(param.FdriverNo)) query2.And(c => c.FDriverNo == param.FdriverNo);
-            if (null != param.FworkState) query2.And(c => c.FworkState == param.FworkState.Value);
+            var session = NHibernateSessionManager.GetSession();
 
-            int rawRowCont = query2.RowCount();
+            var query = session.QueryOver<DriverinfoEntity>();
 
-            QueryHelper.FixQueryTake(param, rawRowCont);
+            if (null != queryParam.Fid) query.And(c => c.Fid == queryParam.Fid.Value);
+            if (!string.IsNullOrEmpty(queryParam.Fname)) query.And(Restrictions.Like("Fname", string.Format("%{0}%", queryParam.Fname)));
+            if (!string.IsNullOrEmpty(queryParam.Fphone)) query.And(c => c.Fphone1 == queryParam.Fphone);
+            if (!string.IsNullOrEmpty(queryParam.Fcert)) query.And(c => c.FcertID == queryParam.Fcert);
+            if (!string.IsNullOrEmpty(queryParam.FdriverNo)) query.And(c => c.FdriverCardNo == queryParam.FdriverNo);
+            if (null != queryParam.FworkState) query.And(c => c.FworkState == queryParam.FworkState.Value);
 
-            if (null != param.Skip && param.Skip.Value > 0) query2.Skip(param.Skip.Value);
-            if (null != param.Take && param.Take.Value > 0) query2.Take(param.Take.Value);
+            int rawRowCont = query.RowCount();
 
-            var retList = query2.List();      
+            query.OrderBy((x) => x.Fid).Desc();
 
-            return new QueryResult<IList<DriverInfoEntity>>(retList, rawRowCont, retList.Count);
-        }
-
-
-        /// <summary>
-        /// 增加DriverInfo
-        /// </summary>
-        /// <param name="entity"></param>
-        public void AddDriverInfo(DriverInfoEntity entity)
-        {
-            var session = NHibernateUtil.getSession();
-            var trans = session.BeginTransaction();
-            session.Save(entity);
-            trans.Commit();
-        }
-
-
-        /// <summary>
-        /// 增加一个列表
-        /// </summary>
-        /// <param name="entityList"></param>
-        public void AddDriverInfoList(List<DriverInfoEntity> entityList)
-        {
-            var session = NHibernateUtil.getSession();
-            var trans = session.BeginTransaction();            
-            foreach(var e in entityList)
+            var pageIdx = param.GetFixedQueryPageIndex();
+            var pageSize = param.GetFixedQueryPageSize();
+            if (pageIdx > 1)
             {
-                session.Save(e);
+                query.Skip((pageIdx - 1) * pageSize);
             }
-            trans.Commit();
+            query.Take(pageSize);
+
+            var retList = query.List();
+
+            return new QueryResult<IList<DriverinfoEntity>>(retList, rawRowCont, retList.Count);
         }
 
 
-        /// <summary>
-        /// 更新DriverInfo
-        /// </summary>
-        /// <param name="entity"></param>
-        public void UpdateDriverInfo(DriverInfoEntity entity)
-        {
-            var session = NHibernateUtil.getSession();
-            var trans = session.BeginTransaction();
-            session.Update(entity);
-            trans.Commit();
-        }
 
-
-        /// <summary>
-        /// 删除DriverInfo
-        /// </summary>
-        /// <param name="entity"></param>
-        public void DelDriverInfo(int entityID)
-        {
-            SAssert.MustTrue((0 > entityID), string.Format("非法的EntityID={0},Method={1}", entityID, MethodBase.GetCurrentMethod().Name));
-
-            var session = NHibernateUtil.getSession();
-            var trans = session.BeginTransaction();
-            session.Delete(new DriverInfoEntity(entityID));
-            trans.Commit();
-        }
-
-
+        /*
         /// <summary>
         /// 软删除数据
         /// </summary>
@@ -134,33 +82,6 @@ namespace WL_OA.BLL.query
         }
         */
 
-        public override QueryResult<IList<DriverinfoEntity>> GetEntityList(QueryDriverInfoParams param)
-        {
-            var queryParam = param as QueryDriverInfoParams;
 
-            SAssert.MustTrue((null != queryParam), string.Format("查询参数输入错误，在{0}", MethodBase.GetCurrentMethod().Name));
-
-            var session = NHibernateSessionManager.GetSession();
-            
-            var query2 = session.QueryOver<DriverinfoEntity>();
-
-            if (null != queryParam.Fid) query2.And(c => c.Fid == queryParam.Fid.Value);
-            if (!string.IsNullOrEmpty(queryParam.FName)) query2.And(Restrictions.Like("Fname", string.Format("%{0}%", queryParam.FName)));
-            if (!string.IsNullOrEmpty(queryParam.Fphone)) query2.And(c => c.Fphone1 == queryParam.Fphone);
-            if (!string.IsNullOrEmpty(queryParam.Fcert)) query2.And(c => c.FcertID == queryParam.Fcert);
-            if (!string.IsNullOrEmpty(queryParam.FdriverNo)) query2.And(c => c.FdriverCardNo == queryParam.FdriverNo);
-            if (null != queryParam.FworkState) query2.And(c => c.FworkState == queryParam.FworkState.Value);
-
-            int rawRowCont = query2.RowCount();
-
-            QueryHelper.FixQueryTake(param, rawRowCont);
-
-            if (null != param.Skip && param.Skip.Value > 0) query2.Skip(param.Skip.Value);
-            if (null != param.Take && param.Take.Value > 0) query2.Take(param.Take.Value);
-
-            var retList = query2.List();
-
-            return new QueryResult<IList<DriverinfoEntity>>(retList, rawRowCont, retList.Count);
-        }
     }
 }

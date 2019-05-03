@@ -10,6 +10,8 @@ namespace WL_OA.Data.param
         {
             Skip = 0;
             Take = 10;
+            page = 0;
+            pageSize = 10;
             IsAllowPagging = true;
         }
 
@@ -23,9 +25,13 @@ namespace WL_OA.Data.param
         /// </summary>
         public int? Take { get; set; }
 
+        public int? page { get; set; }
+
+        public int? pageSize { get; set; }
+
         /// <summary>
         /// 是否允许分页
         /// </summary>
-        public bool IsAllowPagging { get; set; }
+        public bool IsAllowPagging { get; set; } = true;
     }
 }

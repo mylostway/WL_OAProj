@@ -113,4 +113,57 @@ namespace ConsoleTest.test_cases
 
 
 
+
+    [Config("configs/db_connection.json")]
+    public class DbConnectionConfig
+    {
+        public Dictionary<string, List<DbConnectionInfo>> DbConnectionDic { get; set; } = new Dictionary<string, List<DbConnectionInfo>>();
+    }
+
+
+    public class DbConnectionInfo
+    {
+        public string DbName { get; set; }
+
+        public string ConnectionString { get; set; }
+    }
+
+
+
+    [Config("configs/table_db_mapping.json")]
+    public class TableDbMappingConfig
+    {
+        public Dictionary<string, List<TableDbMappingInfo>> TableDbMappingDic { get; set; }
+    }
+
+
+
+    public class TableDbMappingInfo
+    {
+        /// <summary>
+        /// 表名
+        /// </summary>
+        public string TableName { get; set; }
+
+        /// <summary>
+        /// 数据库连接
+        /// </summary>
+        public string DbConnectionName { get; set; }
+
+        /// <summary>
+        /// 数据库类型名称
+        /// </summary>
+        public string DbType { get; set; }
+
+        /// <summary>
+        /// 是否加密
+        /// </summary>
+        public bool IsEncrypt { get; set; } = false;
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Memo { get; set; }
+    }
+
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WL_OA.Data;
 
 namespace WL_OAProj
 {
@@ -66,6 +67,27 @@ namespace WL_OAProj
         }
 
         #region HttpRequest
+
+        /// <summary>
+        /// 从httpContext的请求Body中反射出请求对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static T DeSerializeRequestObjFromRequest<T>(this HttpContext httpContext)
+            where T : class, new()
+        {
+            var stream = httpContext.Request.Body;
+            if (!stream.CanRead || !stream.CanSeek) return default(T);
+            stream.Seek(0, SeekOrigin.Begin);
+            using (var reader = new StreamReader(stream))
+            {
+                var reqStr = reader.ReadToEnd();
+                var deObj = JsonHelper.DeserializeTo<T>(reqStr);
+                return deObj;
+            }
+            return default(T);
+        }
 
         public static async Task<string> GetRequestBodyString(this HttpContext httpContext)
         {

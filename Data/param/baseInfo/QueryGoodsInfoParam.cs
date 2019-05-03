@@ -23,5 +23,7 @@ namespace WL_OA.Data.param
         public string FChnName { get; set; }
         
         public string Fmark { get; set; }
+
+        public int? Fusable { get; set; }
     }
 }

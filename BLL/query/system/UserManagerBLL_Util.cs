@@ -67,5 +67,15 @@ namespace WL_OA.BLL
         {
             return Guid.NewGuid().ToString().Replace("-","");
         }
+
+
+        /// <summary>
+        /// 每次用户操作都生成一个操作Ticket，防止重放，token盗用等BUG，目前未实现(可以考虑用md5(account + time + rand))
+        /// </summary>
+        /// <returns></returns>
+        public static string GenTicket()
+        {
+            return "";
+        }
     }
 }

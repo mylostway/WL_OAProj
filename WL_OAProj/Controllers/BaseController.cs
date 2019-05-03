@@ -11,7 +11,9 @@ using WL_OA.BLL.query;
 using WL_OA.Data;
 using WL_OA.Data.entity;
 using WL_OA.Data.utils;
+using WL_OA.Data.utils.cfg;
 using WL_OAProj.Settings;
+using WL_OAProj.Sys.Config;
 
 namespace WL_OAProj.Controllers
 {    
@@ -97,12 +99,19 @@ namespace WL_OAProj.Controllers
             var type = typeof(T);
 
             T ins = new T();
+                       
+            if(AppRunConfigs.Instance.IsSingleTestMode)
+            {
+                ins.SetRequestContext(SysRequestContext.TestInstance);
+            }
+            else
+            {
+                // 暂时没有登录信息
+                var context = new SysRequestContext();
+                //context.LoginInfo = GatherLoginInfo();
+                ins.SetRequestContext(context);
+            }
 
-            // 暂时没有登录信息
-            var context = new SysRequestContext();
-            //context.LoginInfo = GatherLoginInfo();
-
-            ins.SetRequestContext(context);
             ins.SetServicesProvider(HttpContext.RequestServices);
 
             return ins;
@@ -115,17 +124,25 @@ namespace WL_OAProj.Controllers
         /// <typeparam name="W"></typeparam>
         /// <returns></returns>
         public W BLL<W>()
-            where W : IRequestContext, new()
+            where W : IRequestContext, IBLL, new()
         {
             var type = typeof(W);
 
             W ins = new W();
 
-            // 暂时没有登录信息
-            var context = new SysRequestContext();
-            //context.LoginInfo = GatherLoginInfo();
+            if (AppRunConfigs.Instance.IsSingleTestMode)
+            {
+                ins.SetRequestContext(SysRequestContext.TestInstance);
+            }
+            else
+            {
+                // 暂时没有登录信息
+                var context = new SysRequestContext();
+                //context.LoginInfo = GatherLoginInfo();
+                ins.SetRequestContext(context);
+            }
 
-            ins.SetRequestContext(context);
+            ins.SetServicesProvider(HttpContext.RequestServices);
 
             return ins;
         }

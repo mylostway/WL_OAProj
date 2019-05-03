@@ -85,6 +85,11 @@ namespace WL_OA.Data.dto
                 return new BaseOpResult(s_succeedInstance);
             }
         }
+
+        public static BaseOpResult FailFor(string retMsg)
+        {
+            return new BaseOpResult(QueryResultCode.Failed, retMsg);
+        }
     }
 
 
@@ -102,6 +107,8 @@ namespace WL_OA.Data.dto
             RetMsg = retMsg;
             MaxResultCount = maxResultCount;
             ResultCount = resultCount;
+
+            total = MaxResultCount;
         }
 
         /// <summary>
@@ -113,6 +120,11 @@ namespace WL_OA.Data.dto
         /// 返回查询最大记录数
         /// </summary>
         public int ResultCount { get; set; }
+
+        /// <summary>
+        /// 为适应页面，暂时做的属性，有时间迁移回来MaxResultCount
+        /// </summary>
+        public int total { get; set; }
     }
 
 

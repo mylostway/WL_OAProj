@@ -160,8 +160,8 @@ namespace ConsoleTest.test_cases
             {
                 foreach(var eC in e.ContainsInfoList)
                 {
-                    if (eC.Fbook_date > dtMax) dtMax = eC.Fback_date;
-                    if (eC.Fbook_date < dtMin) dtMin = eC.Fbook_date;
+                    if (eC.Fbook_date != null && eC.Fbook_date > dtMax) dtMax = eC.Fback_date.Value;
+                    if (eC.Fbook_date != null && eC.Fbook_date < dtMin) dtMin = eC.Fbook_date.Value;
                 }
             }
             queryParam.StartDate = dtMin;

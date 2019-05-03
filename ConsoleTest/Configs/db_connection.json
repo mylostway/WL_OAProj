@@ -1,0 +1,10 @@
+{
+  "DbConnectionDic": {
+    "mysql-default": [
+      {
+        "DbName": "mysql-default",
+        "ConnectionString": "initial catalog=wldb;Data Source=localhost;User Id=root;Password=123456;CharacterSet=utf8;pooling=true;min pool size=5; max pool size=100;Connection Timeout=100;SslMode=none;allowPublicKeyRetrieval=true"
+      }
+    ]
+  }  
+}

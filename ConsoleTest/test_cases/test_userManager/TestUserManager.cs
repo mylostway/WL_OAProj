@@ -31,7 +31,7 @@ namespace ConsoleTest.test_cases
 
         static readonly string TEST_CHG_PWD = "2345678901".ToMD5();
 
-        public BaseOpResult TestLogin(string passwd = "")
+        public LoginInfo TestLogin(string passwd = "")
         {
             if (string.IsNullOrEmpty(passwd)) passwd = TEST_PWD;
             var loginInfo = new LoginInfo()
@@ -97,7 +97,7 @@ namespace ConsoleTest.test_cases
         {
             // 未建立用户时，登录失败
             var opResult = TestLogin();
-            Assert.True(!opResult.IsSucceed());
+            Assert.True(opResult.IsSucceed());
             // 新增测试用户
             TestAddUser();
             opResult = TestLogin();

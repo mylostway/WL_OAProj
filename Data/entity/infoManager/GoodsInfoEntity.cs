@@ -11,69 +11,58 @@ namespace WL_OA.Data.entity
     [Table("t_goodsinfo")]
     public class GoodsinfoEntity : BaseEntity<int>
     {
-        protected string fchn_Name = "";
         /// <summary>
         /// 货物名称名（中文）'
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string Fchn_Name { get { return fchn_Name; } set { fchn_Name = value; } }
+        public virtual string Fchn_Name { get; set; }
 
-        protected string feng_Name = "";
         /// <summary>
         /// 货物名称名（英文）'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Feng_Name { get { return feng_Name; } set { feng_Name = value; } }
+        public virtual string Feng_Name { get; set; }
 
-        protected string fmark = "";
         /// <summary>
         /// 助记码'
         /// </summary>
         [Required]
         [MaxLength(15)]
-        public virtual string Fmark { get { return fmark; } set { fmark = value; } }
+        public virtual string Fmark { get; set; }
 
-        protected int fgoodsType = 0;
         /// <summary>
         /// 货物类型'
         /// </summary>
-        [Range(0,5)]
-        public virtual int FgoodsType { get { return fgoodsType; } set { fgoodsType = value; } }
+        public virtual int? FgoodsType { get; set; }
 
-        protected int fbelongType = 0;
         /// <summary>
         /// 所属货类'
         /// </summary>
-        [Range(0, 3)]
-        public virtual int FbelongType { get { return fbelongType; } set { fbelongType = value; } }
+        public virtual int? FbelongType { get; set; }
 
-        protected int fisCheckWeight = 0;
         /// <summary>
         /// 标志-需核实重量'
         /// </summary>
-        public virtual int FisCheckWeight { get { return fisCheckWeight; } set { fisCheckWeight = value; } }
+        public virtual int? FisCheckWeight { get; set; }
 
-
-        protected string fmemo = "";
         /// <summary>
         /// 备注'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get { return fmemo; } set { fmemo = value; } }
+        public virtual string Fmemo { get; set; }
 
-        protected int fusable = 0;
         /// <summary>
         /// 标志-可用
         /// </summary>
-        public virtual int Fusable { get { return fusable; } set { fusable = value; } }
+        public virtual int? Fusable { get; set; }
 
         public GoodsinfoEntity() { }
 
-        public GoodsinfoEntity(string chnName,string remark)
+        public GoodsinfoEntity(string chnName,string mark)
         {
             this.Fchn_Name = chnName;
-            this.Fmark = remark;
+            this.Fmark = mark;
         }
 
         public GoodsinfoEntity(GoodsinfoEntity rhs)
@@ -89,6 +78,31 @@ namespace WL_OA.Data.entity
             this.FisCheckWeight = rhs.FisCheckWeight;
             this.Fmemo = rhs.Fmemo;
             this.Fusable = rhs.Fusable;
+        }
+
+
+        public static bool operator ==(GoodsinfoEntity lhs, GoodsinfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Fchn_Name == rhs.Fchn_Name &&
+               lhs.Feng_Name == rhs.Feng_Name &&
+               lhs.Fmark == rhs.Fmark &&
+               lhs.FgoodsType == rhs.FgoodsType &&
+               lhs.FbelongType == rhs.FbelongType &&
+               lhs.FisCheckWeight == rhs.FisCheckWeight &&
+               lhs.Fmemo == rhs.Fmemo &&
+               lhs.Fusable == rhs.Fusable
+           );
+        }
+
+        public static bool operator !=(GoodsinfoEntity lhs, GoodsinfoEntity rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }

@@ -80,6 +80,8 @@ namespace WL_OA.BLL
                 return new BaseOpResult(QueryResultCode.Failed, $"更新数据工作单号不能为空");
             }
 
+            updateInfo.LinkListID(listID);
+
             var opUser = GetRequestContext().LoginInfo.Account;
 
             using (var session = NHibernateSessionManager.GetSession())

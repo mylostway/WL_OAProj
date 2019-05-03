@@ -16,6 +16,8 @@ namespace WL_OA.Data.utils.cfg
     {
         private const String DEFAULT_CFG_FILE_NAME = "appsettings.json";
 
+        static readonly Encoding DEFAULT_ENCODING = Encoding.UTF8;
+
         /// <summary>
         /// 配置缓存
         /// </summary>
@@ -51,7 +53,7 @@ namespace WL_OA.Data.utils.cfg
 
                 ConfigurationDic.Add(cfgFileName, configuartion);
 
-                var cfgContent = FileHelper.ReadFileContent(cfgFilePath);
+                var cfgContent = FileHelper.ReadFileContent(cfgFilePath, DEFAULT_ENCODING);
 
                 ConfigurationContentDic.Add(cfgFileName, cfgContent);
             }

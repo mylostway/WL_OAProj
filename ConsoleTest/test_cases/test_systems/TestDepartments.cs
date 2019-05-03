@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WL_OA.BLL;
-using WL_OA.Data.entity.company;
+using WL_OA.Data.entity;
 using WL_OA.Data.param;
 using Xunit;
 

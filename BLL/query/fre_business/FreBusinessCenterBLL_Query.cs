@@ -142,9 +142,13 @@ namespace WL_OA.BLL
 
             if (queryParam.IsAllowPagging)
             {
-                QueryHelper.FixQueryTake(queryParam, rawRowCont);
-                if (null != queryParam.Skip && queryParam.Skip.Value > 0) basicInfoQuery.Skip(queryParam.Skip.Value);
-                if (null != queryParam.Take && queryParam.Take.Value > 0) basicInfoQuery.Take(queryParam.Take.Value);
+                var pageIdx = queryParam.GetFixedQueryPageIndex();
+                var pageSize = queryParam.GetFixedQueryPageSize();
+                if (pageIdx > 1)
+                {
+                    basicInfoQuery.Skip((pageIdx - 1) * pageSize);
+                }
+                basicInfoQuery.Take(pageSize);
             }
 
             // 完成交易单基本信息查询
@@ -173,6 +177,7 @@ namespace WL_OA.BLL
             foreach (var e in basicInfoList)
             {
                 var dto = new FreBussinessOpCenterDTO();
+                dto.Flist_id = e.Flist_id;
                 dto.OrderInfo = (from item in orderInfoList where item.Flist_id == e.Flist_id select item).FirstOrDefault();
                 dto.HoldGoodsInfo = (from item in holdGoodsInfoList where item.Flist_id == e.Flist_id select item).FirstOrDefault();
                 dto.LayGoodsInfo = (from item in layGoodsInfoList where item.Flist_id == e.Flist_id select item).FirstOrDefault();

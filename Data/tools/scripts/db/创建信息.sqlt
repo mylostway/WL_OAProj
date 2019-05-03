@@ -5,6 +5,8 @@ show variables like 'character%';
 
 alter database wldb default character set 'utf8';
 
+-- 建表思想：尽量将可选项也作为字符串类型，因为如果是int数值，则紧耦合于关联的表，一旦误操作，则所有数据全都异常！
+
 -- 数据库存放数据的编码为utf8
 SET character_set_database='utf8';
 -- 连接的时候为gbk（中文输入兼容）
@@ -301,11 +303,11 @@ create table wldb.t_fre_business_order_info
 	Fbusiness_date datetime comment '业务日期',
 	Fbusinesser varchar(30) comment '业务员',
 
-	Fop_term tinyint not null comment '操作条款',
-	Ftransit_term tinyint not null comment '运输条款',
-	Fpay_way tinyint not null comment '付款方式',
+	Fop_term varchar(60) not null comment '操作条款',
+	Ftransit_term varchar(60) not null comment '运输条款',
+	Fpay_way varchar(60) not null comment '付款方式',
 	Fprotocol_no varchar(60) not null default '' comment '协议号',
-	Fassociate_way int not null default 0 comment '整柜拼箱方式',
+	Fassociate_way varchar(60) not null default 0 comment '整柜拼箱方式',
 	Forder_no varchar(32) not null default '' comment '委托单号',
 	Fhas_assurance tinyint not null default 0 comment '是否包含保险，0 - 无，1 - 有',
 	Fchild_bus_type tinyint not null default 0 comment '业务子类型，0 - 无，目前在网站上没有任何选择'
@@ -332,10 +334,10 @@ create table wldb.t_fre_business_hold_goods_info
 	Fget_goods_list_no varchar(32) not null default '' comment '提货单号',
 	Fis_pour_jacket tinyint not null default 0 comment '是否套箱,0 - 不是,1 - 是，默认0',
 	Fpour_jacket_memo varchar(40) not null default '' comment '套箱说明',
-	Fcar_book_way tinyint not null default 0 comment '发车预约方式',
+	Fcar_book_way varchar(30) not null default '' comment '发车预约方式',
 	Fstart_trailer varchar(30) not null default '' comment '起始拖车',
 	Fhold_date datetime null comment '装货日期',
-	Fhold_priority tinyint not null default 0 comment '装货优先级'
+	Fhold_priority varchar(30) not null default '' comment '装货优先级'
 
 )ENGINE=Innodb default charset=utf8;
 
@@ -356,12 +358,12 @@ create table wldb.t_fre_business_lay_goods_info
 	Frecv_goods_company varchar(50) not null default '' comment '收货单位',
 	Frecv_goods_company_fax varchar(30) not null default '' comment '收货方传真',
 	Fgoods_owner varchar(30) not null default '' comment '货主',
-	Fhold_get_way tinyint not null default 0 comment '扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货',
+	Fhold_get_way varchar(30) not null default '' comment '扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货',
 	Fhold_get_memo varchar(100) not null default '' comment '扣放货说明',
 	Fhold_get_date datetime null comment '扣放货日期',
 	Ftarget_trailer varchar(30) not null default '' comment '目的拖车',
-	Fdispatch_priority int not null default 0 comment '配送优先级',
-	Fpredit_send_goods_date datetime not null comment '预计送货期'
+	Fdispatch_priority varchar(30) not null default '' comment '配送优先级',
+	Fpredit_send_goods_date datetime null comment '预计送货期'
 
 )ENGINE=Innodb default charset=utf8;
 
@@ -377,7 +379,7 @@ create table wldb.t_fre_business_contains_info
 	Flist_id varchar(32) not null comment '关联的交易单号',
 
 	Finterflow_state varchar(50) not null comment '物流动态 - 未知填什么值',		
-	Fspec_way tinyint not null default 0 comment '规格，默认20GP',
+	Fspec_way varchar(30) not null default '' comment '规格，默认20GP',
 	Fcabinet_no varchar(50) not null default '' comment '柜号',
 	Ftitle_no varchar(50) not null default '' comment '封号',
 	
@@ -388,7 +390,7 @@ create table wldb.t_fre_business_contains_info
 	Fhold_goods_list_no varchar(32) not null default '' comment '装货单号',
 	Fencrypt_title_no varchar(32) not null default '' comment '加密封号',
 	Fback_date datetime null comment '回场日期',
-	Fhold_get_way tinyint not null default 1 comment '扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货',
+	Fhold_get_way varchar(30) not null default '' comment '扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货',
 	Fdispatch_goods_date datetime comment '送货日期',
 	Fapproach_record varchar(50) not null default '' comment '进场记录',
 	Fleave_record varchar(50) not null default '' comment '出场记录',
@@ -402,7 +404,7 @@ create table wldb.t_fre_business_contains_info
 	Fdispatch_driver_phone varchar(30) not null default '' comment '送货司机电话',
 	Fdispatch_driver_cert varchar(30) not null default '' comment '送货司机证件号',
 	Fgoods_name varchar(60) not null default '' comment '货名',
-	Fpacket_way tinyint not null default 0 comment '包装形式',
+	Fpacket_way varchar(30) not null default '' comment '包装形式',
 	Fpacket_num int not null default 0 comment '件数',
 	Fpacket_cbm int not null default 0 comment '体积(CBM)',
 	Fvalue int not null default 0 comment '货值',
@@ -482,7 +484,7 @@ create table wldb.t_fre_business_assurance_info
 	Fassurance_fee int not null default 0 comment '保费（金额，分）',
 	Fassurance_company varchar(30) not null default '' comment '保险公司',
 	Fgoods_val int not null default 0 comment '货值（金额，分）',
-	Fassurance_type int not null default 0 comment '保险类型',
+	Fassurance_type varchar(30) not null default '' comment '保险类型',
 	Fassurance_info varchar(32) not null default '' comment '承保信息',
 	Fassurance_rate int not null default 0 comment '费率（万分）'
 
@@ -518,15 +520,15 @@ create table wldb.t_fre_business_operation_info
 
 	Flist_id varchar(32) not null unique comment '关联的交易单号',
 
-	Fbusiness_type int not null default 0 comment '业务类型',
+	Fbusiness_type varchar(30) not null default 0 comment '业务类型',
 	Fassist_people varchar(30) not null default '' comment '协助人',
 	Fdetent_people varchar(30) not null default '' comment '扣货操作人',
 	Foperator varchar(30) not null default '' comment '操作员',
 	Foperator_company varchar(30) not null default '' comment '操作部门',
 	Finputor varchar(30) not null default '' comment '录入人员',
-	Fsplit_list_no varchar(32) not null comment '拆分单号',
-	Fsplit_source varchar(50) not null comment '拆分来源',
-	Fchild_work_list_no varchar(32) not null comment '子工作单号'
+	Fsplit_list_no varchar(32) not null default '' comment '拆分单号',
+	Fsplit_source varchar(50) not null default '' comment '拆分来源',
+	Fchild_work_list_no varchar(32) not null default '' comment '子工作单号'
 
 )ENGINE=Innodb default charset=utf8;
 
@@ -557,14 +559,14 @@ create table wldb.t_customer_info
 	Fname varchar(50) not null default '' comment '公司全称',
 	Fcompany_type varchar(200) not null default '' comment '企业类型',
 	Fbusinesser varchar(30) not null default '' comment '业务员 - (公司人员)',
-	Fdefault_type int not null default 0 comment '默认类型',
+	Fdefault_type varchar(30) not null default '' comment '默认类型',
 	Fbelong_industry varchar(30) comment '所属行业',
 	Fcustomer_type varchar(30) comment '客户类型',
 	Fmemo varchar(200) comment '备注',
 		
-	Fmain_goods int not null default 0 comment '主要货物，（引用自商品表）',
+	Fmain_goods varchar(100) not null default '' comment '主要货物',
 	Fsettle_way varchar(30) not null default '' comment '结算方式',
-	Fpay_way tinyint not null default 0 comment '付款方式 - 1 - 月结,2 - 票结,3 - 代收款,4 - 代垫',
+	Fpay_way varchar(30) not null default '' comment '付款方式 - 1 - 月结,2 - 票结,3 - 代收款,4 - 代垫',
 	Fbusiness_type varchar(30) not null default '' comment '业务类型',
 	
 	Fcompany_title varchar(60) not null default '' comment '公司抬头',
@@ -579,14 +581,9 @@ create table wldb.t_customer_info
 	Fprotocol_no varchar(60) not null default '' comment '协议号',
 	Fdest_wharf_phone varchar(30) not null default '' comment '目的港电话',
 	
-	Fdata_status int not null default 0 comment '记录状态，按位取值，0 - 可用，1 - 已审核，2 - 共享，3 - 完成，4 - 黑名单，5 - 收短信',
-	
-	Finputor varchar(50) not null comment '录入员',
-	Finput_time datetime not null comment '录入时间',	
-	Fdepartment varchar(100) not null comment '所属部门(列表选择)',
-	Faduitor varchar(50) not null default '' comment '审核人',
-	Faduit_time datetime null comment '审核时间'
-	
+	Fdata_status int not null default 0 comment '记录状态，按位取值，0 - 可用，1 - 已审核，2 - 共享，3 - 完成，4 - 黑名单，5 - 收短信',	
+	Fdepartment varchar(100) not null default '' comment '所属部门(列表选择)'
+
 )ENGINE=Innodb default charset=utf8 AUTO_INCREMENT=100;
 
 
@@ -691,8 +688,8 @@ create table wldb.t_customer_credit_info (
 	
 	Fcustomer_id int not null comment '联系人所属公司id',
 	
-	Fcredit_limit int not null comment '资信额度',
-	Flimit_memo varchar(100) not null comment '额度说明',
+	Fcredit_limit int not null default 0 comment '资信额度',
+	Flimit_memo varchar(100) not null default '' comment '额度说明',
 	Fexponential varchar(100) not null default '' comment '数期',
 	Fcurrency varchar(10) not null default '' comment '币种',
 	Festimate_type varchar(30) not null default '' comment '评估类别',
@@ -712,8 +709,8 @@ create table wldb.t_customer_config_info (
 	
 	Fcustomer_id int not null comment '联系人所属公司id',
 	
-	Fcompany_logistics_id varchar(50) not null comment '企业物流号(列表选择)',
-	Flinked_company varchar(50) not null comment '关联企业(列表选择)',
+	Fcompany_logistics_id varchar(50) not null default '' comment '企业物流号(列表选择)',
+	Flinked_company varchar(50) not null default '' comment '关联企业(列表选择)',
 	Fbelongs_ship_company varchar(100) not null default '' comment '所属船公司(列表选择)',
 	
 	Fgoods_owner_app_id varchar(10) not null default '' comment '货主APP-ID',
@@ -729,7 +726,7 @@ create table wldb.t_customer_other_info (
 	
 	Fcustomer_id int not null comment '联系人所属公司id',
 	
-	Feng_full_name varchar(50) not null comment '英文全称',
+	Feng_full_name varchar(50) not null default '' comment '英文全称',
 	Feng_for_short varchar(20) not null default '' comment '英文简称',	
 	Feng_addr varchar(100) not null default '' comment '英文地址',
 	
@@ -742,22 +739,20 @@ create table wldb.t_customer_other_info (
 
 
 -- 客户管理，录入信息
--- 暂时废弃
-/*
 create table wldb.t_customer_input_info (
 	Fid int primary key auto_increment comment '数据唯一ID',
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 	
 	Fcustomer_id int not null comment '联系人所属公司id',
 	
-	Finputor varchar(50) not null comment '录入员',
-	Finput_time datetime not null comment '录入时间',	
+	Finputor varchar(50) not null default '' comment '录入员',
+	Finput_time datetime null comment '录入时间',	
 	Fdepartment varchar(100) not null comment '所属部门(列表选择)',
-	Faduitor varchar(50) not null comment '审核人',
-	Faduit_time datetime not null comment '审核时间'
+	Faduitor varchar(50) not null default '' comment '审核人',
+	Faduit_time datetime null comment '审核时间'
 	
 )ENGINE=Innodb default charset=utf8 AUTO_INCREMENT=100;
-*/
+
 
 
 
@@ -881,14 +876,17 @@ create table wldb.t_system_user
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 		
 	Fuser_account char(30) not null unique comment '用户账号',
-	Fname varchar(30) not null comment '用户名',
+	Fname varchar(30) not null comment '用户姓名',
+	Fsource tinyint not null default 0 comment '注册来源',
 	Fphone varchar(30) not null default '' comment '用户联系手机',
 	Femail varchar(30) not null default '' comment '用户email',
 	Fdepartment_id int not null default 0 comment '用户所属部门ID',
 	Fsex tinyint not null default 0 comment '性别,1 - 男 2 - 女',
 	Fcert varchar(30) not null default '' comment '证件',
 	Fcreate_time datetime not null comment '创建时间',
-	Fpassword varchar(50) not null comment '密码MD5'
+	Fpassword varchar(50) not null comment '密码MD5',
+	Fcheck_state tinyint not null default 0 comment '认证状态 0 - 未认证 1 - 已认证',
+	Fsafe_dev_id varchar(50) not null default '' comment '安全设备Id'
 	
 )ENGINE=Innodb default charset=utf8;
 
@@ -914,8 +912,18 @@ create table wldb.t_company_department
 	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
 	
 	Fname varchar(30) not null comment '部门名称',
+	Ffull_name varchar(60) not null default '' comment '部门全称',
+	Fmark varchar(30) not null default '' comment '部门编码',
+	Ftype tinyint not null default 0 comment '部门类型',
+	Fleader varchar(30) not null default '' comment '部门负责人',
+	Fleader_phone varchar(30) not null default '' comment '负责人电话',
+	Fphone varchar(30) not null default '' comment '部门电话',
+	Ffax varchar(30) not null default '' comment '部门传真',
+	Femail varchar(30) not null default '' comment '部门email',
+	Finputor varchar(30) not null default '' comment '录入人',
 	Fcreate_time datetime not null comment '创建时间',
-	Fcomment varchar(300) not null comment '备注'
+	Fcomment varchar(300) not null comment '备注',
+	Fparent_department_id int not null default 0 comment '隶属部门ID，0为不属于任何部门'
 	
 )ENGINE=Innodb default charset=utf8;
 
@@ -985,3 +993,118 @@ create table wldb.t_company_system_info
 	Fcorporate varchar(100) not null default '' comment '法人',
 	Fmemo varchar(300) not null default '' comment '备注'
 )ENGINE=Innodb default charset=utf8 comment '公司系统基本信息表';
+
+
+
+
+
+
+-- 全局经营统计报表历史已统计记录（如果是带其他条件统计的，是实时计算还是统计好查表，目前未定解决方案，先按照实时计算做吧）
+create table wldb.t_customer_other_info (
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+	
+	FstaDate datetime not null comment '统计时间（月）',
+	Fbusiness_man varchar(50) not null default '' comment '业务员',
+	Forder_man varchar(100) not null default '' comment '委托人',
+	Fdepartment varchar(100) not null default '' comment '部门',
+	Fsrecv BIGINT UNSIGNED not null default 0 comment '应收',
+	Fspay BIGINT UNSIGNED not null default 0 comment '应付',
+	Fgprofit BIGINT UNSIGNED not null default 0 comment '毛利',
+	Farecv BIGINT UNSIGNED not null default 0 comment '实收',
+	Fnrecv BIGINT UNSIGNED not null default 0 comment '未收',
+	Fapay BIGINT UNSIGNED not null default 0 comment '实付',
+	Fnpay BIGINT UNSIGNED not null default 0 comment '未付',
+	Fgprofit_rate BIGINT UNSIGNED not null default 0 comment '毛利率',
+	Frecv_rate BIGINT UNSIGNED not null default 0 comment '收款比例',
+	Fpay_rate BIGINT UNSIGNED not null default 0 comment '付款比例',
+	F20th int UNSIGNED not null default 0 comment '20th',
+	F40th int UNSIGNED not null default 0 comment '40th',
+	Fbusiness_list_num int UNSIGNED not null default 0 comment '业务单数量',
+	Fcustomer_num int UNSIGNED not null default 0 comment '客户数',
+	F45th int UNSIGNED not null default 0 comment '45th',
+	Fdata_state tinyint not null default 0 comment '数据状态,(已对账，已核销……)'
+	
+)ENGINE=Innodb default charset=utf8 AUTO_INCREMENT=100;
+
+
+-- 示例功能，创建在线审批表
+create table wldb.t_fee_check_control_info
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Fapply_time datetime not null comment '申请时间',	
+	Fapply_man varchar(50) not null comment '申请人',
+	Fapply_reason varchar(200) not null comment '申请原因',
+	Fop_type tinyint not null default 0 comment '审批状态 0 - 未审批 1 - 通过，2 - 拒绝，3 - 失效',
+	Fop_time datetime not null comment '审批时间',
+	Fop_user varchar(50) not null comment '审批人',
+	Fop_reason varchar(200) not null default '' comment '审批意见',
+
+)ENGINE=Innodb default charset=utf8;
+
+
+
+-- 示例功能，创建费用核销控制表
+create table wldb.t_fee_check_control_info
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Fmark varchar(30) not null default '' comment '助记码',
+	Fname varchar(50) not null default '' comment '费用项目名称',
+	Ffull_name varchar(200) not null default '' comment '费用项目全称',
+	Fmemo varchar(200) not null default '' comment '备注',
+	Finput_time datetime null comment '录入时间',		
+	Fnot_audit_check_state tinyint not null default 0 comment '不审核可对账 0 - 否 1 - 是',
+	Fnot_check_cancel_state tinyint not null default 0 comment '不对账可核销 0 - 否 1 - 是',
+	Fuseable tinyint not null default 0 comment '可用 0 - 否 1 - 是'
+	
+)ENGINE=Innodb default charset=utf8;
+
+
+
+
+-- 示例功能，创建系统登录日志表
+create table wldb.t_login_log
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Ftype tinyint not null default 0 comment '登录类型（1 - 账号登录，2 - 扫码登录）',
+	Faccount varchar(50) not null default '' comment '账号',
+	Fname varchar(200) not null default '' comment '姓名',
+	Fcompany_name varchar(200) not null default '' comment '公司名称',
+	Flogin_time datetime null comment '登录时间',		
+	Flocation varchar(200) not null default '' comment '登录地点',
+	Fip varchar(50) not null default '' comment '登录IP',
+	Fdevice_ip varchar(50) not null default '' comment '设备网络地址',
+	Fdevice_no varchar(50) not null default '' comment '设备号',
+	Flo_state tinyint not null default 1 comment '登录状态 1 - 正常 其他 - 异常'
+	
+)ENGINE=Innodb default charset=utf8;
+
+
+
+
+
+-- 示例功能，创建发票抬头表
+create table wldb.t_ticket_title_info
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Ftype tinyint not null default 0 comment '抬头类型',
+	Fname varchar(200) not null default '' comment '抬头名称',
+	Ftax_no varchar(200) not null default '' comment '税号',
+	Fbank_name varchar(50) not null default '' comment '开户银行',
+	Fbank_account varchar(50) not null default '' comment '银行账号',
+	Fcompany_addr varchar(200) not null default '' comment '单位地址',
+	Fphone varchar(30) not null default '' comment '电话',
+	Fis_default tinyint not null default 0 comment '是否默认 0 - 否，1 - 是',	
+	Fadd_time datetime null comment '添加日期',	
+	Finputor varchar(50) not null default '' comment '录入人'
+	
+)ENGINE=Innodb default charset=utf8; 
+

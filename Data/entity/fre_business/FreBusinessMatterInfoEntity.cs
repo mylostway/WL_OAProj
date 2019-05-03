@@ -9,59 +9,52 @@ namespace WL_OA.Data.entity
     [Table("t_fre_business_matter_info")]
     public class FreBusinessMatterInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
-        protected string flist_id = "";
         /// <summary>
         /// 关联的交易单号'
         /// </summary>
         [Required]
         [MaxLength(32)]
-        public virtual string Flist_id { get { return flist_id; } set { flist_id = value; } }
+        public virtual string Flist_id { get; set; } = "";
 
-        protected int frough_weight = 0;
         /// <summary>
         /// 毛重'
         /// </summary>
-        public virtual int Frough_weight { get { return frough_weight; } set { frough_weight = value; } }
+        public virtual int? Frough_weight { get; set; } = 0;
 
-        protected string ffinance_matter = "";
         /// <summary>
         /// 财务事项'
         /// </summary>
         [MaxLength(100)]
-        public virtual string Ffinance_matter { get { return ffinance_matter; } set { ffinance_matter = value; } }
+        public virtual string Ffinance_matter { get; set; } = "";
 
-        protected string fspecial_things = "";
         /// <summary>
         /// 特殊事项'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fspecial_things { get { return fspecial_things; } set { fspecial_things = value; } }
+        public virtual string Fspecial_things { get; set; } = "";
 
-        protected int fmatter_state = 0;
         /// <summary>
         /// 事项状态，按位取值，从低到高为：超重拆箱 - 回交 - 危险品 - 代收款 - 回收'
         /// </summary>
-        public virtual int Fmatter_state { get { return fmatter_state; } set { fmatter_state = value; } }
+        [BitUsageField(5, ErrorMsg = "非法的事项状态值")]
+        public virtual int? Fmatter_state { get; set; } = 0;
 
-        protected string fgather_list_no = "";
         /// <summary>
         /// 收款单号'
         /// </summary>
         [MaxLength(32)]
-        public virtual string Fgather_list_no { get { return fgather_list_no; } set { fgather_list_no = value; } }
+        public virtual string Fgather_list_no { get; set; } = "";
 
-        protected DateTime? fback_cross_date;
         /// <summary>
         /// 回交日期'
         /// </summary>
-        public virtual DateTime? Fback_cross_date { get { return fback_cross_date; } set { fback_cross_date = value; } }
+        public virtual DateTime? Fback_cross_date { get; set; } = default(DateTime?);
 
-        protected string freclaim_info = "";
         /// <summary>
-        /// 回收信息'
+        /// 回收信息
         /// </summary>
         [MaxLength(50)]
-        public virtual string Freclaim_info { get { return freclaim_info; } set { freclaim_info = value; } }
+        public virtual string Freclaim_info { get; set; } = "";
 
         public FreBusinessMatterInfoEntity() { }
 
@@ -79,6 +72,7 @@ namespace WL_OA.Data.entity
             this.Fback_cross_date = rhs.Fback_cross_date;
             this.Freclaim_info = rhs.Freclaim_info;
         }
+
 
         public static bool operator ==(FreBusinessMatterInfoEntity lhs, FreBusinessMatterInfoEntity rhs)
         {
@@ -104,4 +98,6 @@ namespace WL_OA.Data.entity
             return !(lhs == rhs);
         }
     }
+
+  
 }

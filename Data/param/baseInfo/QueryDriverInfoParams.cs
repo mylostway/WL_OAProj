@@ -14,12 +14,12 @@ namespace WL_OA.Data.param
         public QueryDriverInfoParams(int? id = null, string name = "")
         {
             this.Fid = id;
-            this.FName = name;
+            this.Fname = name;
         }
 
         public int? Fid { get; set; }
 
-        public string FName { get; set; }
+        public string Fname { get; set; }
 
         public string Fphone { get; set; }
 

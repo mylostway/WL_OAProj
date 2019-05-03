@@ -9,284 +9,243 @@ namespace WL_OA.Data.entity
     [Table("t_fre_business_contains_info")]
     public class FreBusinessContainsInfoEntity : BaseEntity<int>, IFreBusinessPartInfoEntity
     {
-        protected string flist_id = "";
         /// <summary>
         /// 关联的交易单号'
         /// </summary>
         [Required]
         [MaxLength(32)]
-        public virtual string Flist_id { get { return flist_id; } set { flist_id = value; } }
+        public virtual string Flist_id { get; set; } = "";
 
-        protected string finterflow_state = "";
         /// <summary>
         /// 物流动态 - 未知填什么值'
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string Finterflow_state { get { return finterflow_state; } set { finterflow_state = value; } }
+        public virtual string Finterflow_state { get; set; } = "";
 
-        protected int fspec_way = 0;
         /// <summary>
         /// 规格，默认20GP'
         /// </summary>
-        [Range(0, 127, ErrorMessage = "非法的规格选项")]
-        public virtual int Fspec_way { get { return fspec_way; } set { fspec_way = value; } }
+        [MaxLength(30)]
+        public virtual string Fspec_way { get; set; } = "";
 
-        protected string fcabinet_no = "";
         /// <summary>
         /// 柜号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fcabinet_no { get { return fcabinet_no; } set { fcabinet_no = value; } }
+        public virtual string Fcabinet_no { get; set; } = "";
 
-        protected string ftitle_no = "";
         /// <summary>
         /// 封号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ftitle_no { get { return ftitle_no; } set { ftitle_no = value; } }
+        public virtual string Ftitle_no { get; set; } = "";
 
-        protected int flist_state = 0;
         /// <summary>
         /// 货柜状态，按位取值,从低到高为：订舱 - 装货（办单）- 装货（派车） - 回场 - 送货 - 维修'
         /// </summary>
         [BitUsageField(6, "货柜状态错误")]
-        public virtual int Flist_state { get { return flist_state; } set { flist_state = value; } }
+        public virtual int? Flist_state { get; set; } = 0;
 
-        protected string fbook_space_list_no = "";
         /// <summary>
         /// 订舱单号'
         /// </summary>
         [MaxLength(32)]
-        public virtual string Fbook_space_list_no { get { return fbook_space_list_no; } set { fbook_space_list_no = value; } }
+        public virtual string Fbook_space_list_no { get; set; } = "";
 
-        protected DateTime fbook_date = DateTime.Now;
         /// <summary>
         /// 订舱日期，如果选择订舱，则默认是当天'
         /// </summary>
-        public virtual DateTime Fbook_date { get { return fbook_date; } set { fbook_date = value; } }
+        public virtual DateTime? Fbook_date { get; set; } = default(DateTime?);
 
-        protected DateTime fhold_goods_date = DateTime.Now;
         /// <summary>
         /// 装货日期'
         /// </summary>
-        public virtual DateTime Fhold_goods_date { get { return fhold_goods_date; } set { fhold_goods_date = value; } }
+        public virtual DateTime? Fhold_goods_date { get; set; } = default(DateTime?);
 
-        protected string fhold_goods_list_no = "";
         /// <summary>
         /// 装货单号'
         /// </summary>
         [MaxLength(32)]
-        public virtual string Fhold_goods_list_no { get { return fhold_goods_list_no; } set { fhold_goods_list_no = value; } }
+        public virtual string Fhold_goods_list_no { get; set; } = "";
 
-        protected string fencrypt_title_no = "";
         /// <summary>
         /// 加密封号'
         /// </summary>
         [MaxLength(32)]
-        public virtual string Fencrypt_title_no { get { return fencrypt_title_no; } set { fencrypt_title_no = value; } }
+        public virtual string Fencrypt_title_no { get; set; } = "";
 
-        protected DateTime fback_date = DateTime.Now;
         /// <summary>
         /// 回场日期'
         /// </summary>
-        public virtual DateTime Fback_date { get { return fback_date; } set { fback_date = value; } }
+        public virtual DateTime? Fback_date { get; set; } = default(DateTime?);
 
-        protected int fhold_get_way = 0;
         /// <summary>
         /// 扣放货方式，0 - 无，1 - 扣货（默认）,2 - 放货'
         /// </summary>
-        [Range((int)FreBusinessDetainReleaseEnums.None, (int)FreBusinessDetainReleaseEnums.Release, ErrorMessage = "非法的扣放货方式")]
-        public virtual int Fhold_get_way { get { return fhold_get_way; } set { fhold_get_way = value; } }
+        [MaxLength(30)]
+        public virtual string Fhold_get_way { get; set; } = "";
 
-        protected DateTime fdispatch_goods_date = DateTime.Now;
         /// <summary>
         /// 送货日期'
         /// </summary>
-        public virtual DateTime Fdispatch_goods_date { get { return fdispatch_goods_date; } set { fdispatch_goods_date = value; } }
+        public virtual DateTime? Fdispatch_goods_date { get; set; } = default(DateTime?);
 
-        protected string fapproach_record = "";
         /// <summary>
         /// 进场记录'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fapproach_record { get { return fapproach_record; } set { fapproach_record = value; } }
+        public virtual string Fapproach_record { get; set; } = "";
 
-        protected string fleave_record = "";
         /// <summary>
         /// 出场记录'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fleave_record { get { return fleave_record; } set { fleave_record = value; } }
+        public virtual string Fleave_record { get; set; } = "";
 
-        protected string fstart_car_no = "";
         /// <summary>
         /// 起始车牌号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fstart_car_no { get { return fstart_car_no; } set { fstart_car_no = value; } }
+        public virtual string Fstart_car_no { get; set; } = "";
 
-        protected string fstart_driver = "";
         /// <summary>
         /// 起始司机'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fstart_driver { get { return fstart_driver; } set { fstart_driver = value; } }
+        public virtual string Fstart_driver { get; set; } = "";
 
-        protected string fstart_driver_phone = "";
         /// <summary>
         /// 起始司机电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fstart_driver_phone { get { return fstart_driver_phone; } set { fstart_driver_phone = value; } }
+        public virtual string Fstart_driver_phone { get; set; } = "";
 
-        protected string fstart_driver_cert = "";
         /// <summary>
         /// 起始司机证件号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fstart_driver_cert { get { return fstart_driver_cert; } set { fstart_driver_cert = value; } }
+        public virtual string Fstart_driver_cert { get; set; } = "";
 
-        protected string fdispatch_car_no = "";
         /// <summary>
         /// 送货车牌号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdispatch_car_no { get { return fdispatch_car_no; } set { fdispatch_car_no = value; } }
+        public virtual string Fdispatch_car_no { get; set; } = "";
 
-        protected string fdispatch_driver = "";
         /// <summary>
         /// 送货司机'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdispatch_driver { get { return fdispatch_driver; } set { fdispatch_driver = value; } }
+        public virtual string Fdispatch_driver { get; set; } = "";
 
-        protected string fdispatch_driver_phone = "";
         /// <summary>
         /// 送货司机电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdispatch_driver_phone { get { return fdispatch_driver_phone; } set { fdispatch_driver_phone = value; } }
+        public virtual string Fdispatch_driver_phone { get; set; } = "";
 
-        protected string fdispatch_driver_cert = "";
         /// <summary>
         /// 送货司机证件号'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdispatch_driver_cert { get { return fdispatch_driver_cert; } set { fdispatch_driver_cert = value; } }
+        public virtual string Fdispatch_driver_cert { get; set; } = "";
 
-        protected string fgoods_name = "";
         /// <summary>
         /// 货名'
         /// </summary>
         [MaxLength(60)]
-        public virtual string Fgoods_name { get { return fgoods_name; } set { fgoods_name = value; } }
+        public virtual string Fgoods_name { get; set; } = "";
 
-        protected int fpacket_way = 0;
         /// <summary>
         /// 包装形式'
         /// </summary>
-        [Range(0, 127, ErrorMessage = "非法的包装形式值")]
-        public virtual int Fpacket_way { get { return fpacket_way; } set { fpacket_way = value; } }
+        [MaxLength(30)]
+        public virtual string Fpacket_way { get; set; } = "";
 
-        protected int fpacket_num = 0;
         /// <summary>
         /// 件数'
         /// </summary>
-        public virtual int Fpacket_num { get { return fpacket_num; } set { fpacket_num = value; } }
+        public virtual int? Fpacket_num { get; set; } = 0;
 
-        protected int fpacket_cbm = 0;
         /// <summary>
         /// 体积(CBM)'
         /// </summary>
-        public virtual int Fpacket_cbm { get { return fpacket_cbm; } set { fpacket_cbm = value; } }
+        public virtual int? Fpacket_cbm { get; set; } = 0;
 
-        protected int fvalue = 0;
         /// <summary>
         /// 货值'
         /// </summary>
-        public virtual int Fvalue { get { return fvalue; } set { fvalue = value; } }
+        public virtual int? Fvalue { get; set; } = 0;
 
-        protected int fweight = 0;
         /// <summary>
         /// 净重(TON)'
         /// </summary>
-        public virtual int Fweight { get { return fweight; } set { fweight = value; } }
+        public virtual int? Fweight { get; set; } = 0;
 
-        protected int frough_weight = 0;
         /// <summary>
         /// 毛重(TON)'
         /// </summary>
-        public virtual int Frough_weight { get { return frough_weight; } set { frough_weight = value; } }
+        public virtual int? Frough_weight { get; set; } = 0;
 
-        protected string ffab_factory = "";
         /// <summary>
         /// 加工厂'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ffab_factory { get { return ffab_factory; } set { ffab_factory = value; } }
+        public virtual string Ffab_factory { get; set; } = "";
 
-        protected string fcontract_no = "";
         /// <summary>
         /// 合同号'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fcontract_no { get { return fcontract_no; } set { fcontract_no = value; } }
+        public virtual string Fcontract_no { get; set; } = "";
 
-        protected string fsend_goods_addr = "";
         /// <summary>
         /// 送货地址'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fsend_goods_addr { get { return fsend_goods_addr; } set { fsend_goods_addr = value; } }
+        public virtual string Fsend_goods_addr { get; set; } = "";
 
-        protected string fget_cabinet_addr = "";
         /// <summary>
         /// 提柜地点'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fget_cabinet_addr { get { return fget_cabinet_addr; } set { fget_cabinet_addr = value; } }
+        public virtual string Fget_cabinet_addr { get; set; } = "";
 
-        protected DateTime fget_cabinet_date = DateTime.Now;
         /// <summary>
         /// 提柜日期'
         /// </summary>
-        public virtual DateTime Fget_cabinet_date { get { return fget_cabinet_date; } set { fget_cabinet_date = value; } }
+        public virtual DateTime? Fget_cabinet_date { get; set; } = default(DateTime?);
 
-        protected string fgive_cabinet_addr = "";
         /// <summary>
         /// 交柜地点'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fgive_cabinet_addr { get { return fgive_cabinet_addr; } set { fgive_cabinet_addr = value; } }
+        public virtual string Fgive_cabinet_addr { get; set; } = "";
 
-        protected string fmemo = "";
         /// <summary>
         /// 备注'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fmemo { get { return fmemo; } set { fmemo = value; } }
+        public virtual string Fmemo { get; set; } = "";
 
-        protected string fassurance_no = "";
         /// <summary>
         /// 保险号,网站上不能编辑'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fassurance_no { get { return fassurance_no; } set { fassurance_no = value; } }
+        public virtual string Fassurance_no { get; set; } = "";
 
-        protected string fassurance_state = "";
         /// <summary>
         /// 保险状态,网站上不能编辑'
         /// </summary>
         [MaxLength(20)]
-        public virtual string Fassurance_state { get { return fassurance_state; } set { fassurance_state = value; } }
+        public virtual string Fassurance_state { get; set; } = "";
 
-        protected string fassurance_apply_no = "";
         /// <summary>
         /// 保险申请号,网站上不能编辑
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fassurance_apply_no { get { return fassurance_apply_no; } set { fassurance_apply_no = value; } }
+        public virtual string Fassurance_apply_no { get; set; } = "";
 
         public FreBusinessContainsInfoEntity() { }
 

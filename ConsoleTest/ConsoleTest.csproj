@@ -10,10 +10,13 @@
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="Configs\AppRunConfigs.json" />
+    <None Remove="Configs\db_connection.json" />
+    <None Remove="Configs\table_db_mapping.json" />
     <None Remove="Configs\TestConfig.json" />
     <None Remove="Data.hbm.xml" />
     <None Remove="hibernate.cfg.xml" />
     <None Remove="log4net_bak.config" />
+    <None Remove="nhibernate_hbms\Data.hbm.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +33,14 @@
     <Content Include="Configs\AppRunConfigs.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Configs\db_connection.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configs\table_db_mapping.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Configs\TestConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -41,7 +52,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="nhibernate_hbms\Data.hbm.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Configs\hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

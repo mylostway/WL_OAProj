@@ -74,6 +74,7 @@ namespace WL_OA.BLL
 
             var retDto = new FreBussinessOpCenterDTO();
 
+            retDto.Flist_id = basicInfo.Flist_id;
             retDto.OrderInfo = session.QueryOver<FreBusinessOrderInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
             retDto.HoldGoodsInfo = session.QueryOver<FreBusinessHoldGoodsInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
             retDto.LayGoodsInfo = session.QueryOver<FreBusinessLayGoodsInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
@@ -83,7 +84,7 @@ namespace WL_OA.BLL
             retDto.MatterInfo = session.QueryOver<FreBusinessMatterInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
             retDto.OpInfo = session.QueryOver<FreBusinessOperationInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
             retDto.OtherInfo = session.QueryOver<FreBusinessOtherInfoEntity>().Where(x => x.Flist_id == workID).SingleOrDefault();
-
+            
             if (!retDto.IsValid()) throw new UserFriendlyException($"工作单号{workID}数据异常!请联系管理员");
 
             return retDto;

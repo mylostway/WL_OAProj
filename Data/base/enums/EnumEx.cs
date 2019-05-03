@@ -36,6 +36,15 @@ namespace WL_OA.Data
             IsSelected = isSelected;
         }
 
+
+        public EnumInfo(EnumInfo rhs)
+        {
+            Value = rhs.Value;
+            EValue = rhs.EValue;
+            Name = rhs.Name;
+            IsSelected = rhs.IsSelected;
+        }
+
         /// <summary>
         /// 枚举值
         /// </summary>
@@ -67,6 +76,24 @@ namespace WL_OA.Data
     public static class EnumHelper
     {
         static Dictionary<string, Dictionary<string, EnumInfo>> s_dicEnumsKeyValPair = new Dictionary<string, Dictionary<string, EnumInfo>>();
+
+
+        public static Dictionary<string, Dictionary<string, EnumInfo>> GetAllEnums()
+        {
+            var dic = new Dictionary<string, Dictionary<string, EnumInfo>>();
+            foreach (var eType in s_dicEnumsKeyValPair)
+            {
+                var dstDic = new Dictionary<string, EnumInfo>();
+                var srcDic = eType.Value;
+                foreach(var e in srcDic)
+                {
+                    dstDic.Add(e.Key, new EnumInfo(e.Value));
+                }                
+                dic.Add(eType.Key, dstDic);
+            }
+            return dic;
+        }
+
 
         /// <summary>
         /// 获取指定名称的枚举配置

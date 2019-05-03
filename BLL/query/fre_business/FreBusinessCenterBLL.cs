@@ -23,8 +23,6 @@ namespace WL_OA.BLL
         /// <returns></returns>
         public BaseOpResult AddEntity(FreBussinessOpCenterDTO dto)
         {
-            dto.IsValid();
-
             //var listID = this.GenListID();
             var listID = this.GenWorkListID(SystemSettings.COMPANY_APP_PREFIX);
 
@@ -39,6 +37,8 @@ namespace WL_OA.BLL
             };
 
             dto.LinkListID(listID);
+
+            dto.IsValid();
 
             dto.OpInfo.Finputor = GetRequestContext().LoginInfo.Name;
 

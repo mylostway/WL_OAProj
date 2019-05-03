@@ -31,19 +31,24 @@ namespace WL_OA.BLL.query
 
             var session = NHibernateSessionManager.GetSession();
 
-            var query2 = session.QueryOver<AirwayEntity>();
+            var query = session.QueryOver<AirwayEntity>();
 
-            if (null != param.AirLineNo) query2.And(c => c.Fid == queryParam.AirLineNo.Value);
-            if (!string.IsNullOrEmpty(queryParam.AirName)) query2.And(Restrictions.Like("Fchn_name", string.Format("%{0}%", queryParam.AirName)));            
+            if (null != param.AirLineNo) query.And(c => c.Fid == queryParam.AirLineNo.Value);
+            if (!string.IsNullOrEmpty(queryParam.AirName)) query.And(Restrictions.Like("Fchn_name", string.Format("%{0}%", queryParam.AirName)));            
 
-            int rawRowCont = query2.RowCount();
+            int rawRowCont = query.RowCount();
 
-            QueryHelper.FixQueryTake(param, rawRowCont);
+            query.OrderBy((x) => x.Fid).Desc();
 
-            if (null != param.Skip && param.Skip.Value > 0) query2.Skip(param.Skip.Value);
-            if (null != param.Take && param.Take.Value > 0) query2.Take(param.Take.Value);
+            var pageIdx = param.GetFixedQueryPageIndex();
+            var pageSize = param.GetFixedQueryPageSize();
+            if (pageIdx > 1)
+            {
+                query.Skip((pageIdx - 1) * pageSize);
+            }
+            query.Take(pageSize);
 
-            var retList = query2.List();
+            var retList = query.List();
 
             return new QueryResult<IList<AirwayEntity>>(retList, rawRowCont, retList.Count);
         }

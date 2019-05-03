@@ -25,21 +25,26 @@ namespace WL_OA.BLL.query
 
             var session = NHibernateSessionManager.GetSession();
 
-            var query2 = session.QueryOver<WharfinfoEntity>();
+            var query = session.QueryOver<WharfinfoEntity>();
 
-            if (!string.IsNullOrEmpty(queryParam.Area)) query2.And(Restrictions.Like("Fposition", string.Format("%{0}%", queryParam.Area)));
-            if (!string.IsNullOrEmpty(queryParam.Mark)) query2.And(Restrictions.Like("Fmark", string.Format("%{0}%", queryParam.Mark)));
-            if (!string.IsNullOrEmpty(queryParam.Alias)) query2.And(Restrictions.Like("Falias", string.Format("%{0}%", queryParam.Alias)));
-            if (!string.IsNullOrEmpty(queryParam.WharfName)) query2.And(Restrictions.Like("Fposition", string.Format("%{0}%", queryParam.WharfName)));
+            if (!string.IsNullOrEmpty(queryParam.Area)) query.And(Restrictions.Like("Fposition", string.Format("%{0}%", queryParam.Area)));
+            if (!string.IsNullOrEmpty(queryParam.Mark)) query.And(Restrictions.Like("Fmark", string.Format("%{0}%", queryParam.Mark)));
+            if (!string.IsNullOrEmpty(queryParam.Alias)) query.And(Restrictions.Like("Falias", string.Format("%{0}%", queryParam.Alias)));
+            if (!string.IsNullOrEmpty(queryParam.WharfName)) query.And(Restrictions.Like("Fposition", string.Format("%{0}%", queryParam.WharfName)));
 
-            int rawRowCont = query2.RowCount();
+            int rawRowCont = query.RowCount();
 
-            QueryHelper.FixQueryTake(param, rawRowCont);
+            query.OrderBy((x) => x.Fid).Desc();
 
-            if (null != param.Skip && param.Skip.Value > 0) query2.Skip(param.Skip.Value);
-            if (null != param.Take && param.Take.Value > 0) query2.Take(param.Take.Value);
+            var pageIdx = param.GetFixedQueryPageIndex();
+            var pageSize = param.GetFixedQueryPageSize();
+            if (pageIdx > 1)
+            {
+                query.Skip((pageIdx - 1) * pageSize);
+            }
+            query.Take(pageSize);
 
-            var retList = query2.List();
+            var retList = query.List();
 
             return new QueryResult<IList<WharfinfoEntity>>(retList, rawRowCont, retList.Count);
         }

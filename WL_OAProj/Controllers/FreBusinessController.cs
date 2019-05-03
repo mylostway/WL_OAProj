@@ -35,6 +35,8 @@ namespace WL_OAProj.Controllers
         [Route("api/AddFreBusiness")]
         public BaseOpResult AddFreBusiness([FromBody] FreBussinessOpCenterDTO dto)
         {
+            //var dtoObj = HttpContext.DeSerializeRequestObjFromRequest<FreBussinessOpCenterDTO>();
+            if (null == dto) return BaseOpResult.FailFor("添加的信息不能为空，请检查参数");
             return BLL().AddEntity(dto);
         }
 
@@ -43,6 +45,8 @@ namespace WL_OAProj.Controllers
         [Route("api/UpdateFreBusiness")]
         public BaseOpResult UpdateFreBusiness([FromBody] FreBussinessOpCenterDTO updateInfo)
         {
+            //var req = HttpContext.DeSerializeRequestObjFromRequest<FreBussinessOpCenterDTO>();
+            if(null == updateInfo) return BaseOpResult.FailFor("添加的信息不能为空，请检查参数");
             return BLL().UpdateFreBusinessDTO(updateInfo);
         }
 

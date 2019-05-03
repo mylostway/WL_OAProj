@@ -1,0 +1,6 @@
+﻿{
+  "ServerHost": "localhost",
+  "ServerPort": 8097,
+  "IsSingleTestMode": true,
+  "DefaultRequestTimeout": 5000
+}

@@ -3,7 +3,7 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="WL_OA.Data" namespace="WL_OA.Data.entity" default-lazy="true">
 
   <class name="DriverinfoEntity" table="t_driverinfo">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0" >
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
@@ -24,7 +24,7 @@
     <property name="FworkState" column="FworkState" />
   </class>
 
-
+  
   <class name="GoodsinfoEntity" table="t_goodsinfo">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
@@ -141,6 +141,7 @@
     <property name="Fhold_state" column="Fhold_state" />
   </class>
 
+
   <class name="CustomerInfoEntity" table="t_customer_info">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
@@ -172,22 +173,19 @@
     <property name="Fprotocol_no" column="Fprotocol_no" />
     <property name="Fdest_wharf_phone" column="Fdest_wharf_phone" />
     <property name="Fdata_status" column="Fdata_status" />
-    <property name="Finputor" column="Finputor" />
-    <property name="Finput_time" column="Finput_time" />
     <property name="Fdepartment" column="Fdepartment" />
-    <property name="Faduitor" column="Faduitor" />
-    <property name="Faduit_time" column="Faduit_time" />
   </class>
 
 
+
+
   <class name="CustomerContactEntity" table="t_customer_contact">
-    <!-- BaseEntity部分字段 -->
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+    <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
     <property name="Fname" column="Fname" />
     <property name="Fdepartment" column="Fdepartment" />
     <property name="Fphone" column="Fphone" />
@@ -202,7 +200,7 @@
     <property name="Fphone3" column="Fphone3" />
     <property name="Fphone4" column="Fphone4" />
     <property name="Fphone5" column="Fphone5" />
-    <property name="FdataStatus" column="Fdata_status" />
+    <property name="Fdata_status" column="Fdata_status" />
     <property name="Fmemo" column="Fmemo" />
     <property name="Fmemo2" column="Fmemo2" />
     <property name="Fmemo3" column="Fmemo3" />
@@ -210,74 +208,75 @@
   </class>
 
   <class name="CustomerHoldAddrEntity" table="t_customer_hold_addr">
-    <!-- BaseEntity部分字段 -->
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+    <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FgoodsOwner" column="Fgoods_owner" />
-    <property name="FownerAppId" column="Fowner_app_id" />
-    <property name="FholdArea" column="Fhold_area" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Fgoods_owner" column="Fgoods_owner" />
+    <property name="Fowner_app_id" column="Fowner_app_id" />
+    <property name="Fhold_area" column="Fhold_area" />
     <property name="Faddr" column="Faddr" />
-    <property name="FholdMemo" column="Fhold_memo" />
+    <property name="Fhold_memo" column="Fhold_memo" />
     <property name="Funit" column="Funit" />
-    <property name="FcontactMan" column="Fcontact_man" />
+    <property name="Fcontact_man" column="Fcontact_man" />
     <property name="Fphone" column="Fphone" />
     <property name="Fmobile" column="Fmobile" />
     <property name="Ffax" column="Ffax" />
-    <property name="FdataStatus" column="Fdata_status" />
+    <property name="Fdata_status" column="Fdata_status" />
     <property name="Fmemo" column="Fmemo" />
     <property name="Forder" column="Forder" />
   </class>
 
+
   <class name="CustomerBankAccountEntity" table="t_customer_bank_account">
-    <!-- BaseEntity部分字段 -->
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+    <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FbankDeposit" column="Fbank_deposit" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Fbank_deposit" column="Fbank_deposit" />
     <property name="Faccount" column="Faccount" />
-    <property name="FdepositName" column="Fdeposit_name" />
+    <property name="Fdeposit_name" column="Fdeposit_name" />
     <property name="Fmemo" column="Fmemo" />
   </class>
 
+
   <class name="CustomerBookSpaceReceiverEntity" table="t_customer_book_space_receiver">
-    <!-- BaseEntity部分字段 -->
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
-    <property name="Fstate" not-null="true" column="Fstate"  />
+    <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FshipCompany" column="Fship_company" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Fship_company" column="Fship_company" />
     <property name="Freceiver" column="Freceiver" />
     <property name="Fcontact" column="Fcontact" />
     <property name="Fphone" column="Fphone" />
     <property name="Fmemo" column="Fmemo" />
   </class>
 
+
   <class name="CustomerCreditInfoEntity" table="t_customer_credit_info">
-    <id name="Fid" type="int" column="Fid" unsaved-value="0" >
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FcreditLimit" column="Fcredit_limit" />
-    <property name="FlimitMemo" column="Flimit_memo" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Fcredit_limit" column="Fcredit_limit" />
+    <property name="Flimit_memo" column="Flimit_memo" />
     <property name="Fexponential" column="Fexponential" />
     <property name="Fcurrency" column="Fcurrency" />
-    <property name="FestimateType" column="Festimate_type" />
-    <property name="FpayEstimate" column="Fpay_estimate" />
-    <property name="FlevelEstimate" column="Flevel_estimate" />
-    <property name="FbankName" column="Fbank_name" />
-    <property name="FbankAccount" column="Fbank_account" />
+    <property name="Festimate_type" column="Festimate_type" />
+    <property name="Fpay_estimate" column="Fpay_estimate" />
+    <property name="Flevel_estimate" column="Flevel_estimate" />
+    <property name="Fbank_name" column="Fbank_name" />
+    <property name="Fbank_account" column="Fbank_account" />
   </class>
+
 
 
   <class name="CustomerConfigInfoEntity" table="t_customer_config_info">
@@ -286,13 +285,30 @@
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FcompanyLogisticsId" column="Fcompany_logistics_id" />
-    <property name="FlinkedCompany" column="Flinked_company" />
-    <property name="FbelongsShipCompany" column="Fbelongs_ship_company" />
-    <property name="FgoodsOwnerAppId" column="Fgoods_owner_app_id" />
-    <property name="FdataStatus" column="Fdata_status" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Fcompany_logistics_id" column="Fcompany_logistics_id" />
+    <property name="Flinked_company" column="Flinked_company" />
+    <property name="Fbelongs_ship_company" column="Fbelongs_ship_company" />
+    <property name="Fgoods_owner_app_id" column="Fgoods_owner_app_id" />
+    <property name="Fdata_status" column="Fdata_status" />
   </class>
+
+
+  <class name="CustomerInputInfoEntity" table="t_customer_input_info">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Finputor" column="Finputor" />
+    <property name="Finput_time" column="Finput_time" />
+    <property name="Fdepartment" column="Fdepartment" />
+    <property name="Faduitor" column="Faduitor" />
+    <property name="Faduit_time" column="Faduit_time" />
+  </class>
+
+
 
   <class name="CustomerOtherInfoEntity" table="t_customer_other_info">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
@@ -300,16 +316,17 @@
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />
 
-    <property name="FcustomerId" column="Fcustomer_id" />
-    <property name="FengFullName" column="Feng_full_name" />
-    <property name="FengForShort" column="Feng_for_short" />
-    <property name="FengAddr" column="Feng_addr" />
+    <property name="Fcustomer_id" column="Fcustomer_id" />
+    <property name="Feng_full_name" column="Feng_full_name" />
+    <property name="Feng_for_short" column="Feng_for_short" />
+    <property name="Feng_addr" column="Feng_addr" />
     <property name="Femail" column="Femail" />
     <property name="Fprovince" column="Fprovince" />
     <property name="Fcity" column="Fcity" />
     <property name="Farea" column="Farea" />
     <property name="Fwebsite" column="Fwebsite" />
   </class>
+
 
   <class name="FreBusinessBasicInfoEntity" table="t_fre_business_basic_info">
     <id name="Fid" type="int" column="Fid" unsaved-value="0">
@@ -395,8 +412,8 @@
     <property name="Fpredit_send_goods_date" column="Fpredit_send_goods_date" />
   </class>
 
-  <class name="FreBusinessContainsInfoEntity" table="t_fre_business_contains_info" >    
-    <id name="Fid" type="int" column="Fid" unsaved-value="0" >
+  <class name="FreBusinessContainsInfoEntity" table="t_fre_business_contains_info">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
       <generator class="identity"/>
     </id>
     <property name="Fstate" column="Fstate" not-null="true" />

@@ -37,25 +37,25 @@ namespace WL_OA.Data.dto
 
         public void Linked(int linkCustomerID)
         {
-            foreach(var e in ContactInfoList)
+            if(null != ContactInfoList && ContactInfoList.Count > 0)
             {
-                e.FcustomerId = linkCustomerID;
+                foreach (var e in ContactInfoList) e.Fcustomer_id = linkCustomerID;
             }
-
-            foreach (var e in HoldAddrInfoList)
+            
+            if(null != HoldAddrInfoList && HoldAddrInfoList.Count > 0)
             {
-                e.FcustomerId = linkCustomerID;
+                foreach (var e in HoldAddrInfoList) e.Fcustomer_id = linkCustomerID;
             }
-
-            foreach (var e in BankAccountInfoList)
+            
+            if(null != BankAccountInfoList && BankAccountInfoList.Count > 0)
             {
-                e.FcustomerId = linkCustomerID;
+                foreach (var e in BankAccountInfoList) e.Fcustomer_id = linkCustomerID;
             }
-
-            foreach (var e in BookSpaceReceiverInfoList)
+            
+            if(null != BookSpaceReceiverInfoList && BookSpaceReceiverInfoList.Count > 0)
             {
-                e.FcustomerId = linkCustomerID;
-            }
+                foreach (var e in BookSpaceReceiverInfoList) e.Fcustomer_id = linkCustomerID;
+            }            
         }
 
 

@@ -13,5 +13,11 @@ namespace WL_OA.Data
         /// 登录信息
         /// </summary>
         public LoginInfo LoginInfo { get; set; } = new LoginInfo();
+
+
+        public static readonly SysRequestContext TestInstance = new SysRequestContext()
+        {
+            LoginInfo = new LoginInfo("system", CryptHelper.ToMD5("system"), "测试管理员")
+        };
     }
 }

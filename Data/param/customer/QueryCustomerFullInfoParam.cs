@@ -7,6 +7,10 @@ namespace WL_OA.Data.param
 {
     public class QueryCustomerFullInfoParam 
     {
+        public QueryCustomerFullInfoParam() { }
+
+        public QueryCustomerFullInfoParam(int id) { CustomerID = id; }
+
         /// <summary>
         /// 客户ID
         /// </summary>

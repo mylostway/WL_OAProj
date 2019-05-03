@@ -18,22 +18,22 @@ namespace WL_OAProj.Controllers
     public class GoodsInfoController : BaseController<GoodsInfoBLL>
     {
         [HttpPost]
-        [Route("api/QueryGoodsInfoList")]
-        public QueryResult<IList<GoodsinfoEntity>> QueryGoodsInfoList(QueryGoodsInfoParam param)
+        [Route("baseInfo/goodNames/get")]
+        public QueryResult<IList<GoodsinfoEntity>> QueryGoodsInfoList([FromBody] QueryGoodsInfoParam param)
         {            
             return BLL().GetEntityList(param);
         }
 
 
         [HttpPost]
-        [Route("api/AddGoodsInfo")]
+        [Route("baseInfo/goodNames/add")]
         public BaseOpResult AddGoodsInfo([FromBody] GoodsinfoEntity entity)
         {            
             return BLL().AddEntity(entity);
         }
 
-        [HttpPost]
-        [Route("api/DelGoodsInfo/{entityID}")]
+        [HttpGet]
+        [Route("baseInfo/goodNames/del/{entityID}")]
         public BaseOpResult DelGoodsInfo(int entityID)
         {            
             return BLL().DelEntity(entityID);
@@ -41,10 +41,20 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("api/UpdateGoodsInfo")]
+        [Route("baseInfo/goodNames/update")]
         public BaseOpResult UpdateGoodsInfo([FromBody] GoodsinfoEntity entity)
         {            
             return BLL().UpdateEntity(entity);
+        }
+
+
+        [HttpGet]
+        [Route("baseInfo/goodNames/getAll")]
+        public QueryResult<IList<GoodsInfoForSelData>> GetAllGoodsInfo()
+        {
+            var getList = BLL().GetAllGoodsInfo();
+            var retList = GoodsInfoForSelData.ConvFrom(getList);
+            return new QueryResult<IList<GoodsInfoForSelData>>(retList, retList.Count, retList.Count);
         }
     }
 }

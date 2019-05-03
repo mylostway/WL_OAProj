@@ -11,213 +11,161 @@ namespace WL_OA.Data.entity
     [Table("t_customer_info")]
     public class CustomerInfoEntity : BaseEntity<int>
     {
-        protected string fname_for_short = "";
         /// <summary>
         /// 客户简称'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fname_for_short { get { return fname_for_short; } set { fname_for_short = value; } }
+        public virtual string Fname_for_short { get; set; }
 
-        protected string fmark = "";
         /// <summary>
         /// 助记码'
         /// </summary>
         [MaxLength(10)]
-        public virtual string Fmark { get { return fmark; } set { fmark = value; } }
+        public virtual string Fmark { get; set; }
 
-        protected string fname = "";
         /// <summary>
         /// 公司全称'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fname { get { return fname; } set { fname = value; } }
+        public virtual string Fname { get; set; }
 
-        protected string fcompany_type = "";
         /// <summary>
         /// 企业类型'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fcompany_type { get { return fcompany_type; } set { fcompany_type = value; } }
+        public virtual string Fcompany_type { get; set; }
 
-        protected string fbusinesser = "";
         /// <summary>
         /// 业务员 - (公司人员)'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fbusinesser { get { return fbusinesser; } set { fbusinesser = value; } }
+        public virtual string Fbusinesser { get; set; }
 
-        protected int fdefault_type = 0;
         /// <summary>
         /// 默认类型'
         /// </summary>
-        [Range((int)QueryCustomerInfoTypeEnums.None, (int)QueryCustomerInfoTypeEnums.DstFleet, ErrorMessage = "非法的默认类型")]
-        public virtual int Fdefault_type { get { return fdefault_type; } set { fdefault_type = value; } }
+        [MaxLength(30)]
+        public virtual string Fdefault_type { get; set; }
 
-        protected string fbelong_industry = "";
         /// <summary>
         /// 所属行业'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fbelong_industry { get { return fbelong_industry; } set { fbelong_industry = value; } }
+        public virtual string Fbelong_industry { get; set; }
 
-        protected string fcustomer_type = "";
         /// <summary>
         /// 客户类型'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fcustomer_type { get { return fcustomer_type; } set { fcustomer_type = value; } }
+        public virtual string Fcustomer_type { get; set; }
 
-        protected string fmemo = "";
         /// <summary>
         /// 备注'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fmemo { get { return fmemo; } set { fmemo = value; } }
+        public virtual string Fmemo { get; set; }
 
-        protected int fmain_goods = 0;
         /// <summary>
-        /// 主要货物，（引用自商品表）'
+        /// 主要货物'
         /// </summary>
-        public virtual int Fmain_goods { get { return fmain_goods; } set { fmain_goods = value; } }
+        [MaxLength(100)]
+        public virtual string Fmain_goods { get; set; }
 
-        protected string fsettle_way = "";
         /// <summary>
         /// 结算方式'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fsettle_way { get { return fsettle_way; } set { fsettle_way = value; } }
+        public virtual string Fsettle_way { get; set; }
 
-        protected int fpay_way = 0;
         /// <summary>
         /// 付款方式 - 1 - 月结,2 - 票结,3 - 代收款,4 - 代垫'
         /// </summary>
-        [Range((int)FreBusinessPaymentTypeEnums.None, (int)FreBusinessPaymentTypeEnums.Advance, ErrorMessage = "非法的付款方式")]
-        public virtual int Fpay_way { get { return fpay_way; } set { fpay_way = value; } }
+        [MaxLength(30)]
+        public virtual string Fpay_way { get; set; }
 
-        protected string fbusiness_type = "";
         /// <summary>
         /// 业务类型'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fbusiness_type { get { return fbusiness_type; } set { fbusiness_type = value; } }
+        public virtual string Fbusiness_type { get; set; }
 
-        protected string fcompany_title = "";
         /// <summary>
         /// 公司抬头'
         /// </summary>
         [MaxLength(60)]
-        public virtual string Fcompany_title { get { return fcompany_title; } set { fcompany_title = value; } }
+        public virtual string Fcompany_title { get; set; }
 
-        protected string fcompany_address = "";
         /// <summary>
         /// 公司地址'
         /// </summary>
         [MaxLength(200)]
-        public virtual string Fcompany_address { get { return fcompany_address; } set { fcompany_address = value; } }
+        public virtual string Fcompany_address { get; set; }
 
-        protected string fbusiness_contact_people = "";
         /// <summary>
         /// 公司联系人'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Fbusiness_contact_people { get { return fbusiness_contact_people; } set { fbusiness_contact_people = value; } }
+        public virtual string Fbusiness_contact_people { get; set; }
 
-        protected string fbusiness_mobile = "";
         /// <summary>
         /// 业务手机'
         /// </summary>
         [MaxLength(20)]
-        public virtual string Fbusiness_mobile { get { return fbusiness_mobile; } set { fbusiness_mobile = value; } }
+        public virtual string Fbusiness_mobile { get; set; }
 
-        protected string fbusiness_phone = "";
         /// <summary>
         /// 业务电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fbusiness_phone { get { return fbusiness_phone; } set { fbusiness_phone = value; } }
+        public virtual string Fbusiness_phone { get; set; }
 
-        protected string fbusiness_fax = "";
         /// <summary>
         /// 业务传真'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fbusiness_fax { get { return fbusiness_fax; } set { fbusiness_fax = value; } }
+        public virtual string Fbusiness_fax { get; set; }
 
-        protected string ffinance_concat_people = "";
         /// <summary>
         /// 财务联系人'
         /// </summary>
         [MaxLength(50)]
-        public virtual string Ffinance_concat_people { get { return ffinance_concat_people; } set { ffinance_concat_people = value; } }
+        public virtual string Ffinance_concat_people { get; set; }
 
-        protected string ffinance_phone = "";
         /// <summary>
         /// 财务电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Ffinance_phone { get { return ffinance_phone; } set { ffinance_phone = value; } }
+        public virtual string Ffinance_phone { get; set; }
 
-        protected string ffinance_fax = "";
         /// <summary>
         /// 财务传真'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Ffinance_fax { get { return ffinance_fax; } set { ffinance_fax = value; } }
+        public virtual string Ffinance_fax { get; set; }
 
-        protected string fprotocol_no = "";
         /// <summary>
         /// 协议号'
         /// </summary>
         [MaxLength(60)]
-        public virtual string Fprotocol_no { get { return fprotocol_no; } set { fprotocol_no = value; } }
+        public virtual string Fprotocol_no { get; set; }
 
-        protected string fdest_wharf_phone = "";
         /// <summary>
         /// 目的港电话'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fdest_wharf_phone { get { return fdest_wharf_phone; } set { fdest_wharf_phone = value; } }
+        public virtual string Fdest_wharf_phone { get; set; }
 
-        protected int fdata_status = 0;
         /// <summary>
         /// 记录状态，按位取值，0 - 可用，1 - 已审核，2 - 共享，3 - 完成，4 - 黑名单，5 - 收短信'
         /// </summary>
-        [BitUsageField(6, "记录状态取值错误")]
-        public virtual int Fdata_status { get { return fdata_status; } set { fdata_status = value; } }
+        [BitUsageField(6)]
+        public virtual int? Fdata_status { get; set; }
 
-        protected string finputor = "";
-        /// <summary>
-        /// 录入员'
-        /// </summary>
-        [MaxLength(50)]
-        public virtual string Finputor { get { return finputor; } set { finputor = value; } }
-
-        protected DateTime finput_time = DateTime.Now;
-        /// <summary>
-        /// 录入时间'
-        /// </summary>
-        [Required]
-        public virtual DateTime Finput_time { get { return finput_time; } set { finput_time = value; } }
-
-        protected string fdepartment = "";
         /// <summary>
         /// 所属部门(列表选择)'
         /// </summary>
         [MaxLength(100)]
-        public virtual string Fdepartment { get { return fdepartment; } set { fdepartment = value; } }
-
-        protected string faduitor = "";
-        /// <summary>
-        /// 审核人'
-        /// </summary>
-        [MaxLength(50)]
-        public virtual string Faduitor { get { return faduitor; } set { faduitor = value; } }
-
-        protected DateTime faduit_time = DateTime.Now;
-        /// <summary>
-        /// 审核时间
-        /// </summary>
-        public virtual DateTime Faduit_time { get { return faduit_time; } set { faduit_time = value; } }
+        public virtual string Fdepartment { get; set; }
 
         public CustomerInfoEntity() { }
 
@@ -251,11 +199,50 @@ namespace WL_OA.Data.entity
             this.Fprotocol_no = rhs.Fprotocol_no;
             this.Fdest_wharf_phone = rhs.Fdest_wharf_phone;
             this.Fdata_status = rhs.Fdata_status;
-            this.Finputor = rhs.Finputor;
-            this.Finput_time = rhs.Finput_time;
             this.Fdepartment = rhs.Fdepartment;
-            this.Faduitor = rhs.Faduitor;
-            this.Faduit_time = rhs.Faduit_time;
+        }
+
+
+        public static bool operator ==(CustomerInfoEntity lhs, CustomerInfoEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Fname_for_short == rhs.Fname_for_short &&
+               lhs.Fmark == rhs.Fmark &&
+               lhs.Fname == rhs.Fname &&
+               lhs.Fcompany_type == rhs.Fcompany_type &&
+               lhs.Fbusinesser == rhs.Fbusinesser &&
+               lhs.Fdefault_type == rhs.Fdefault_type &&
+               lhs.Fbelong_industry == rhs.Fbelong_industry &&
+               lhs.Fcustomer_type == rhs.Fcustomer_type &&
+               lhs.Fmemo == rhs.Fmemo &&
+               lhs.Fmain_goods == rhs.Fmain_goods &&
+               lhs.Fsettle_way == rhs.Fsettle_way &&
+               lhs.Fpay_way == rhs.Fpay_way &&
+               lhs.Fbusiness_type == rhs.Fbusiness_type &&
+               lhs.Fcompany_title == rhs.Fcompany_title &&
+               lhs.Fcompany_address == rhs.Fcompany_address &&
+               lhs.Fbusiness_contact_people == rhs.Fbusiness_contact_people &&
+               lhs.Fbusiness_mobile == rhs.Fbusiness_mobile &&
+               lhs.Fbusiness_phone == rhs.Fbusiness_phone &&
+               lhs.Fbusiness_fax == rhs.Fbusiness_fax &&
+               lhs.Ffinance_concat_people == rhs.Ffinance_concat_people &&
+               lhs.Ffinance_phone == rhs.Ffinance_phone &&
+               lhs.Ffinance_fax == rhs.Ffinance_fax &&
+               lhs.Fprotocol_no == rhs.Fprotocol_no &&
+               lhs.Fdest_wharf_phone == rhs.Fdest_wharf_phone &&
+               lhs.Fdata_status == rhs.Fdata_status &&
+               lhs.Fdepartment == rhs.Fdepartment
+           );
+        }
+
+        public static bool operator !=(CustomerInfoEntity lhs, CustomerInfoEntity rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }

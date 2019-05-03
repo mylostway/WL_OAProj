@@ -9,69 +9,77 @@ namespace WL_OA.Data.entity
     [Table("t_system_user")]
     public class SystemUserEntity : BaseEntity<int>
     {
-        protected string fuser_account = "";
         /// <summary>
-        /// 用户ID，用户注册的账号
+        /// 用户账号'
         /// </summary>
         [Required]
         [MaxLength(30)]
-        public virtual string Fuser_account { get { return fuser_account; } set { fuser_account = value; } }
+        public virtual string Fuser_account { get; set; } = "";
 
-        protected string fname = "";
         /// <summary>
-        /// 用户名'
+        /// 用户姓名'
         /// </summary>
         [Required]
         [MaxLength(30)]
-        public virtual string Fname { get { return fname; } set { fname = value; } }
+        public virtual string Fname { get; set; } = "";
 
-        protected string fphone = "";
+        /// <summary>
+        /// 注册来源'
+        /// </summary>
+        public virtual int? Fsource { get; set; } = 0;
+
         /// <summary>
         /// 用户联系手机'
         /// </summary>
-        [MaxLength(10)]
-        public virtual string Fphone { get { return fphone; } set { fphone = value; } }
+        [MaxLength(30)]
+        public virtual string Fphone { get; set; } = "";
 
-        protected string femail = "";
         /// <summary>
         /// 用户email'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Femail { get { return femail; } set { femail = value; } }
+        public virtual string Femail { get; set; } = "";
 
-        protected int fdepartment_id = 0;
         /// <summary>
         /// 用户所属部门ID'
         /// </summary>
-        public virtual int Fdepartment_id { get { return fdepartment_id; } set { fdepartment_id = value; } }
+        public virtual int? Fdepartment_id { get; set; } = 0;
 
-        protected int fsex = 0;
         /// <summary>
-        /// 性别'
+        /// 性别,1 - 男 2 - 女'
         /// </summary>
-        public virtual int Fsex { get { return fsex; } set { fsex = value; } }
+        public virtual int? Fsex { get; set; } = 0;
 
-        protected string fcert = "";
         /// <summary>
         /// 证件'
         /// </summary>
         [MaxLength(30)]
-        public virtual string Fcert { get { return fcert; } set { fcert = value; } }
+        public virtual string Fcert { get; set; } = "";
 
-        protected DateTime fcreate_time = DateTime.Now;
         /// <summary>
         /// 创建时间'
         /// </summary>
         [Required]
-        public virtual DateTime Fcreate_time { get { return fcreate_time; } set { fcreate_time = value; } }
+        public virtual DateTime Fcreate_time { get; set; } = default(DateTime);
 
-        protected string fpassword = "";
         /// <summary>
         /// 密码MD5'
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string Fpassword { get { return fpassword; } set { fpassword = value; } }
+        public virtual string Fpassword { get; set; } = "";
+
+        /// <summary>
+        /// 认证状态 0 - 未认证 1 - 已认证'
+        /// </summary>
+        public virtual int? Fcheck_state { get; set; } = 0;
+
+        /// <summary>
+        /// 安全设备Id
+        /// </summary>
+        [Required]
+        [MaxLength(50)]
+        public virtual string Fsafe_dev_id { get; set; } = "";
 
         public SystemUserEntity() { }
 
@@ -82,6 +90,7 @@ namespace WL_OA.Data.entity
             this.Fstate = rhs.Fstate;
             this.Fuser_account = rhs.Fuser_account;
             this.Fname = rhs.Fname;
+            this.Fsource = rhs.Fsource;
             this.Fphone = rhs.Fphone;
             this.Femail = rhs.Femail;
             this.Fdepartment_id = rhs.Fdepartment_id;
@@ -89,6 +98,37 @@ namespace WL_OA.Data.entity
             this.Fcert = rhs.Fcert;
             this.Fcreate_time = rhs.Fcreate_time;
             this.Fpassword = rhs.Fpassword;
+            this.Fcheck_state = rhs.Fcheck_state;
+            this.Fsafe_dev_id = rhs.Fsafe_dev_id;
+        }
+
+
+        public static bool operator ==(SystemUserEntity lhs, SystemUserEntity rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null) && !Object.ReferenceEquals(rhs, null)) return false;
+            if (!Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return false;
+            if (Object.ReferenceEquals(lhs, null) && Object.ReferenceEquals(rhs, null)) return true;
+            return (
+               lhs.Fid == rhs.Fid &&
+               lhs.Fstate == rhs.Fstate &&
+               lhs.Fuser_account == rhs.Fuser_account &&
+               lhs.Fname == rhs.Fname &&
+               lhs.Fsource == rhs.Fsource &&
+               lhs.Fphone == rhs.Fphone &&
+               lhs.Femail == rhs.Femail &&
+               lhs.Fdepartment_id == rhs.Fdepartment_id &&
+               lhs.Fsex == rhs.Fsex &&
+               lhs.Fcert == rhs.Fcert &&
+               lhs.Fcreate_time == rhs.Fcreate_time &&
+               lhs.Fpassword == rhs.Fpassword &&
+               lhs.Fcheck_state == rhs.Fcheck_state &&
+               lhs.Fsafe_dev_id == rhs.Fsafe_dev_id
+           );
+        }
+
+        public static bool operator !=(SystemUserEntity lhs, SystemUserEntity rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }

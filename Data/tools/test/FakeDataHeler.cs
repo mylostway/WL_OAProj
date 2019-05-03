@@ -120,6 +120,11 @@ namespace WL_OA.Data
                 // 赋值protected字段（按照目前约定，Entity生成的Field为protected）
                 var fieldTypeStr = eField.PropertyType.ToString().ToLower();
 
+                Type genericTypeDefinition = null;
+
+                if(eField.PropertyType.IsGenericType)
+                    genericTypeDefinition = eField.PropertyType.GetGenericTypeDefinition();
+
                 // BaseEntity的字段不生成值
                 if (eField.Name == "Fid" || eField.Name == "Fstate") continue;
 
@@ -219,15 +224,36 @@ namespace WL_OA.Data
 
                     if (randMax <= 0) randMax = 1;
 
-                    eField.SetValue(retObj, GenRandomInt(randMax));
+                    if(null != genericTypeDefinition && genericTypeDefinition == typeof(Nullable<>))
+                    {
+                        eField.SetValue(retObj, Convert.ChangeType(GenRandomInt(randMax), Nullable.GetUnderlyingType(eField.PropertyType)));
+                    }
+                    else
+                    {
+                        eField.SetValue(retObj, GenRandomInt(randMax));
+                    }
                 }
                 else if (fieldTypeStr.IndexOf("bool") >= 0)
                 {
-                    eField.SetValue(retObj, GenRandomBool());
+                    if (null != genericTypeDefinition && genericTypeDefinition == typeof(Nullable<>))
+                    {
+                        eField.SetValue(retObj, Convert.ChangeType(GenRandomBool(), Nullable.GetUnderlyingType(eField.PropertyType)));
+                    }
+                    else
+                    {
+                        eField.SetValue(retObj, GenRandomBool());
+                    }
                 }
                 else if(fieldTypeStr.IndexOf("date") >= 0)
                 {
-                    eField.SetValue(retObj, GenRandomDate());
+                    if (null != genericTypeDefinition && genericTypeDefinition == typeof(Nullable<>))
+                    {
+                        eField.SetValue(retObj, Convert.ChangeType(GenRandomDate(), Nullable.GetUnderlyingType(eField.PropertyType)));
+                    }
+                    else
+                    {
+                        eField.SetValue(retObj, GenRandomDate());
+                    }
                 }
                 else
                 {

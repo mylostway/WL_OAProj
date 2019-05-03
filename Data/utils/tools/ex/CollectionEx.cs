@@ -59,7 +59,39 @@ namespace WL_OA.Data
         }
 
 
+        /// <summary>
+        /// 简单判断两个列表是否相等（仅比较列表，不比较元素）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public static bool IsSimpleEqualTo<T>(this IList<T> lhs, IList<T> rhs)
+        {
+            if (lhs == null && rhs == null) return true;
+            if (lhs == null && rhs != null) return false;
+            if (lhs != null && rhs == null) return false;
+            if (lhs.Count != rhs.Count) return false;
+            return true;
+        }
 
+
+        /// <summary>
+        /// 判断两个列表是否相等
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public static bool IsEqualTo<T>(this IList<T> lhs, IList<T> rhs)
+        {
+            if (!IsSimpleEqualTo(lhs, rhs)) return false;
+            for (var i = 0; i < lhs.Count; i++)
+            {
+                if (lhs[i].Equals(rhs[i])) return false;
+            }
+            return true;
+        }
         
     }
 }

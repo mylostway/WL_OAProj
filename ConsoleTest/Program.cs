@@ -18,6 +18,7 @@ using ConsoleTest.test_cases;
 using Newtonsoft.Json;
 using log4net.Config;
 using log4net;
+using WL_OA.Data.utils.cfg;
 
 namespace ConsoleTest
 {
@@ -90,12 +91,15 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            (new TestFreBusiness()).TestAddFreBusinessInfo();
+            //(new TestFreBusiness()).TestAddFreBusinessInfo();
             //(new TestFreBusiness()).TestQueryFreBusinessInfo();
             //(new TestFreBusiness()).TestUpdateFreBusinessInfo();
             //(new TestFreBusiness()).TestDelFreBusinessRecord();
 
             //(new TestUserManager()).Run();
+
+            //(new TestCustomerManager()).TestAddCustomerInfo();
+            (new TestCustomerManager()).TestUpdateCustomerInfo();
         }
     }
 }

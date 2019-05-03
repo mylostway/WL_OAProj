@@ -17,15 +17,15 @@ namespace WL_OAProj.Controllers
     public class DriverInfoController : BaseController<DriverInfoBLL>
     {
         [HttpPost]
-        [Route("api/QueryDriverInfoList")]
-        public QueryResult<IList<DriverinfoEntity>> QueryDriverInfoList(QueryDriverInfoParams param)
+        [Route("baseInfo/driverInfo/get")]
+        public QueryResult<IList<DriverinfoEntity>> QueryDriverInfoList([FromBody] QueryDriverInfoParams param)
         {
             return BLL().GetEntityList(param);
         }
 
 
         [HttpPost]
-        [Route("api/AddDriverInfo")]
+        [Route("baseInfo/driverInfo/add")]
         public BaseOpResult AddDriverInfo([FromBody] DriverinfoEntity entity)
         {
             return BLL().AddEntity(entity);
@@ -33,7 +33,7 @@ namespace WL_OAProj.Controllers
 
 
         [HttpPost]
-        [Route("api/UpdateDriverInfo")]
+        [Route("baseInfo/driverInfo/update")]
         public BaseOpResult UpdateDriverInfo([FromBody] DriverinfoEntity entity)
         {
             return BLL().UpdateEntity(entity);
@@ -41,7 +41,7 @@ namespace WL_OAProj.Controllers
 
 
         [HttpGet]
-        [Route("api/DelDriverInfo/{entityID}")]
+        [Route("baseInfo/driverInfo/del/{entityID}")]
         public BaseOpResult DelDriverInfo(int entityID)
         {
             return BLL().DelEntity(entityID);

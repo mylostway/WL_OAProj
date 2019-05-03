@@ -1,0 +1,153 @@
+{
+  "TableDbMappingDic": {
+    "t_customer_info": [
+      {
+        "TableName": "t_customer_info",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+    "t_customer_contact": [
+      {
+        "TableName": "t_customer_contact",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_hold_addr": [
+      {
+        "TableName": "t_customer_hold_addr",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_bank_account": [
+      {
+        "TableName": "t_customer_bank_account",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_book_space_receiver": [
+      {
+        "TableName": "t_customer_book_space_receiver",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_credit_info": [
+      {
+        "TableName": "t_customer_credit_info",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_config_info": [
+      {
+        "TableName": "t_customer_config_info",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_other_info": [
+      {
+        "TableName": "t_customer_other_info",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_customer_input_info": [
+      {
+        "TableName": "t_customer_input_info",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_driverInfo": [
+      {
+        "TableName": "t_driverInfo",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_pay_ways": [
+      {
+        "TableName": "t_pay_ways",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_goodsInfo": [
+      {
+        "TableName": "t_goodsInfo",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_wharfInfo": [
+      {
+        "TableName": "t_wharfInfo",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_airway": [
+      {
+        "TableName": "t_airway",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ],
+
+    "t_carCardNo": [
+      {
+        "TableName": "t_carCardNo",
+        "DbConnectionName": "mysql-default",
+        "DbType": "mysql",
+        "IsEncrypt": false,
+        "Memo": "客户管理信息表"
+      }
+    ]
+
+  }  
+}

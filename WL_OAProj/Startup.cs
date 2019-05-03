@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using WL_OA.Data;
 using WL_OA.Data.utils;
 using WL_OAProj.Middlewares;
@@ -40,7 +42,19 @@ namespace WL_OAProj
             // 再启动session
             services.AddSession();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                //options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                //忽略循环引用
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //不使用驼峰样式的key
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+
+                options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
+            });
 
             //services.BuildServiceProvider();
         }

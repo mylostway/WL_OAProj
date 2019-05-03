@@ -11,6 +11,7 @@ using BLL.settings;
 
 namespace BLL.util
 {
+    /*
     public static class QueryHelper
     {
         /// <summary>
@@ -109,4 +110,5 @@ namespace BLL.util
             return entity.Fstate == SOFT_DELETED_FSTATE;
         }
     }
+    */
 }
