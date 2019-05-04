@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text;
+using WL_OA.Data.utils;
 
 namespace WL_OA.Data.entity
 {
@@ -58,7 +59,7 @@ namespace WL_OA.Data.entity
         public BaseEntity(T id = default(T))
         {
             Fid = id;
-            Fstate = 1;
+            Fstate = (int)DataStateEnum.Normal;
         }
 
         /// <summary>
@@ -67,9 +68,9 @@ namespace WL_OA.Data.entity
         public virtual T Fid { get; set; }
 
         /// <summary>
-        /// 数据状态，1 - 启用，0 - 失效
+        /// 数据状态，0 - 正常,1 - 软删除等异常状态
         /// </summary>     
-        [Range(0,127,ErrorMessage ="非法的数据状态值")]
+        [Range(0, 127, ErrorMessage = "非法的数据状态值")]
         public virtual short Fstate { get; set; }
 
         /// <summary>

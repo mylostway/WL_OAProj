@@ -7,6 +7,7 @@ using System.Text;
 using WL_OA.BLL.query;
 using WL_OA.Data;
 using WL_OA.Data.dal;
+using WL_OA.Data.dal.Cache;
 using WL_OA.Data.dto;
 using WL_OA.Data.entity;
 using WL_OA.Data.param;
@@ -46,6 +47,48 @@ namespace WL_OA.BLL
         }
 
 
+        const string ALL_USERS_CACHE_KEY = "CK_SYS_USERS";
+
+
+        /// <summary>
+        /// 获取所有用户信息（通常用于选择面板）
+        /// </summary>
+        /// <returns></returns>
+        public IList<SystemUserEntity> GetAllUsers()
+        {
+            IList<SystemUserEntity> retList = null;
+
+            if (null != m_cache)
+            {
+                retList = m_cache.Get<IList<SystemUserEntity>>(ALL_USERS_CACHE_KEY);
+                if (null != retList)
+                {
+                    return retList;
+                }
+            }
+
+            var session = NHibernateSessionManager.GetSession();
+
+            var query = session.QueryOver<SystemUserEntity>();
+
+            int rawRowCont = query.RowCount();
+
+            retList = query.List();
+
+            if (null != m_cache)
+            {
+                // 缓存设置失效时间，失效之后有请求调用该接口的会自动刷新缓存，省去很多修改的麻烦
+                // 有特殊场景再特殊做，现在没空考虑这么多
+                if (!m_cache.Add(ALL_USERS_CACHE_KEY, retList, CacheSetting.GetCacheDefaultExpireTimespan()))
+                {
+                    SLogger.Warn($"缓存记录 - {ALL_USERS_CACHE_KEY} 失败");
+                }
+            }
+
+            return retList;
+        }
+
+
 
         /// <summary>
         /// 检查登录授权
@@ -81,7 +124,7 @@ namespace WL_OA.BLL
                             info.Token = "";
                         }
 
-                        m_cache.Set(info.Token, info, GetTokenTimeExpire());
+                        m_cache.Add(info.Token, info);
                     }
                     return info;
                 }                
@@ -114,12 +157,19 @@ namespace WL_OA.BLL
 
             var userEntity = queryUsers[0];
 
+            if(userEntity.Fstate == (int)DataStateEnum.Discard)
+            {
+                info.RetMsg = $"账号{info.Account}已被弃用，请联系管理员";
+                info.Token = "";
+                return info;
+            }
+
             info.Token = GenToken();
             info.LoginTime = DateTime.Now;
             info.Name = userEntity.Fname;
             info.Ticket = GenTicket();
 
-            m_cache?.Set(info.Token, info, GetTokenTimeExpire());
+            m_cache?.Add(info.Token, info);
 
             //return BaseOpResult.SucceedInstance;
             return info;
@@ -137,10 +187,57 @@ namespace WL_OA.BLL
             if (null != loginInfo)
             {
                 // 更新信息过期时间
-                m_cache?.Set(loginInfo.Token, loginInfo, GetTokenTimeExpire());
+                m_cache?.Add(loginInfo.Token, loginInfo);
             }
 
             return loginInfo;
+        }
+
+
+        public override BaseOpResult AddEntityList(List<SystemUserEntity> entityList, bool bIsAutomic = false)
+        {
+            try
+            {
+                using (var session = NHibernateSessionManager.GetSession())
+                {
+                    var trans = session.BeginTransaction();
+
+                    foreach (var newUser in entityList)
+                    {
+                        // 重置新用户的Fid，确保错误参数不影响操作
+                        newUser.Fid = 0;
+                        // 赋值用户创建时间
+                        newUser.Fcreate_time = DateTime.Now;
+                        // 赋值用户创建人
+                        newUser.Fcreate_user = GetRequestContext().LoginInfo.Account;
+                        try
+                        {
+                            newUser.IsValid();
+                            var id = session.Save(newUser);
+                        }
+                        catch (Exception ex)
+                        {
+                            if (bIsAutomic)
+                            {
+                                trans.Rollback();
+                                throw ex;
+                            }
+                        }
+                    }
+                    trans.Commit();
+                }                 
+            }
+            catch (Exception ex)
+            {
+                return new BaseOpResult(QueryResultCode.Failed, ex.Message);
+            }
+            return BaseOpResult.SucceedInstance;
+        }
+
+
+        public override BaseOpResult AddEntity(SystemUserEntity entity)
+        {
+            return AddUser(entity);
         }
 
 
@@ -166,6 +263,8 @@ namespace WL_OA.BLL
                 newUser.Fid = 0;
                 // 赋值用户创建时间
                 newUser.Fcreate_time = DateTime.Now;
+                // 赋值用户创建人
+                newUser.Fcreate_user = GetRequestContext().LoginInfo.Account;
 
                 var trans = session.BeginTransaction();
                 try
@@ -184,6 +283,15 @@ namespace WL_OA.BLL
             return BaseOpResult.SucceedInstance;
         }
 
+        public override BaseOpResult DelEntity(int entityID)
+        {
+            return DelUser(entityID);
+        }
+
+        public override BaseOpResult DelEntity(SystemUserEntity entity)
+        {
+            return DelUser(entity.Fid);
+        }
 
         public BaseOpResult DelUser(int userID)
         {
@@ -204,9 +312,9 @@ namespace WL_OA.BLL
                 var trans = session.BeginTransaction();
                 try
                 {
-                    //queryUser.Fstate = 0;
-                    //session.Update(queryUser);
-                    session.Delete(queryUser);
+                    queryUser.Fstate = (int)DataStateEnum.Discard;
+                    session.Update(queryUser);
+                    //session.Delete(queryUser);
                     trans.Commit();
                 }
                 catch (Exception ex)
@@ -239,9 +347,9 @@ namespace WL_OA.BLL
                 var trans = session.BeginTransaction();
                 try
                 {
-                    //queryUser.Fstate = 0;
-                    //session.Update(queryUser);
-                    session.Delete(queryUser);
+                    queryUser.Fstate = (int)DataStateEnum.Discard;
+                    session.Update(queryUser);
+                    //session.Delete(queryUser);
                     trans.Commit();
                 }
                 catch (Exception ex)
@@ -255,6 +363,11 @@ namespace WL_OA.BLL
             return BaseOpResult.SucceedInstance;
         }
 
+
+        public override BaseOpResult UpdateEntity(SystemUserEntity entity)
+        {
+            return UpdateUser(entity);
+        }
 
 
         /// <summary>

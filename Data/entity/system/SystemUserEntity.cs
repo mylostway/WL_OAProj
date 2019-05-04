@@ -59,7 +59,6 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 创建时间'
         /// </summary>
-        [Required]
         public virtual DateTime Fcreate_time { get; set; } = default(DateTime);
 
         /// <summary>
@@ -77,9 +76,15 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 安全设备Id
         /// </summary>
-        [Required]
         [MaxLength(50)]
         public virtual string Fsafe_dev_id { get; set; } = "";
+
+
+        /// <summary>
+        /// 创建用户的人
+        /// </summary>
+        [MaxLength(50)]
+        public virtual string Fcreate_user { get; set; } = "";
 
         public SystemUserEntity() { }
 
@@ -100,6 +105,7 @@ namespace WL_OA.Data.entity
             this.Fpassword = rhs.Fpassword;
             this.Fcheck_state = rhs.Fcheck_state;
             this.Fsafe_dev_id = rhs.Fsafe_dev_id;
+            this.Fcreate_user = rhs.Fcreate_user;
         }
 
 
@@ -122,7 +128,8 @@ namespace WL_OA.Data.entity
                lhs.Fcreate_time == rhs.Fcreate_time &&
                lhs.Fpassword == rhs.Fpassword &&
                lhs.Fcheck_state == rhs.Fcheck_state &&
-               lhs.Fsafe_dev_id == rhs.Fsafe_dev_id
+               lhs.Fsafe_dev_id == rhs.Fsafe_dev_id &&
+               lhs.Fcreate_user == rhs.Fcreate_user
            );
         }
 

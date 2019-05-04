@@ -15,6 +15,7 @@ using BLL.settings;
 using BLL.util;
 using WL_OA.Data;
 using WL_OA.Data.dal.Cache;
+using WL_OA.Data.utils;
 
 //using Chloe;
 
@@ -38,7 +39,7 @@ namespace WL_OA.BLL
         /// <summary>
         /// 缓存服务
         /// </summary>
-        protected ICacheContext m_cache;
+        protected ICacheServices m_cache;
 
 
         /// <summary>
@@ -95,6 +96,8 @@ namespace WL_OA.BLL
         public void SetServicesProvider(IServiceProvider sp)
         {
             m_serviceProvider = sp;
+
+            m_cache = m_serviceProvider?.GetService(typeof(ICacheServices)) as ICacheServices;
         }
     }
 
@@ -305,9 +308,9 @@ namespace WL_OA.BLL
                 var trans = session.BeginTransaction();
                 var queryEntity = session.Get<T>(entity.Fid);
                 if (null == queryEntity) return new BaseOpResult(QueryResultCode.Failed, "要废弃的记录不存在");
-                if(queryEntity.Fstate != 0)
+                if(queryEntity.Fstate == (int)DataStateEnum.Normal)
                 {
-                    queryEntity.Fstate = 0;
+                    queryEntity.Fstate = (int)DataStateEnum.Discard;
                     session.Update(queryEntity);
                     trans.Commit();
                 }
@@ -359,7 +362,6 @@ namespace WL_OA.BLL
         public virtual bool CanUserDo(string opID,string opUser = "")
         {
             if(opUser.NullOrEmpty()) opUser = GetRequestContext().LoginInfo.Account;
-
             return GetServices<IAssessRight>()?.CanUserDo(opUser, opID) == true;
         }
     }
@@ -412,9 +414,9 @@ namespace WL_OA.BLL
                 var trans = session.BeginTransaction();
                 var queryEntity = session.Get<T>(entityID);
                 if (null == queryEntity) return new BaseOpResult(QueryResultCode.Failed, "要废弃的记录不存在");
-                if (queryEntity.Fstate != 0)
+                if (queryEntity.Fstate == (int)DataStateEnum.Normal)
                 {
-                    queryEntity.Fstate = 0;
+                    queryEntity.Fstate = (int)DataStateEnum.Discard;
                     session.Update(queryEntity);
                     trans.Commit();
                 }

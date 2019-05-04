@@ -14,11 +14,31 @@ namespace WL_OAProj.Controllers
     public class WebAppDataController : BaseController<UserManagerBLL>
     {
         [HttpPost]
-        [Route("api/GetWebAppSelectPanelData/{id}")]
-        public QueryResult<IDictionary<string, IList<BaseEntity<int>>>> GetWebAppSelectPanelData(string appId)
+        [Route("api/DynamicSelects/GoodNames/{appId}")]
+        public QueryResult<IList<GoodsInfoForSelData>> GetDSGoodsInfo(string appId)
         {
-            var retDic = new Dictionary<string, IList<BaseEntity<int>>>();
-            return new QueryResult<IDictionary<string, IList<BaseEntity<int>>>>(retDic, retDic.Keys.Count, retDic.Keys.Count);
+            var getList = BLL<GoodsInfoBLL>().GetAllGoodsInfo();
+            var retList = GoodsInfoForSelData.ConvFrom(getList);
+
+            //var retResult = new DynamicSelectInfo()
+            //{
+            //    cols = new List<DSStruct>() {
+            //        new DSStruct(){label="货物名称",prop="Fname" },
+            //        new DSStruct(){label="助记码",prop="Fmark",isKeyCol=true }
+            //    },
+            //};
+
+            return new QueryResult<IList<GoodsInfoForSelData>>(retList, retList.Count, retList.Count);
+        }
+
+
+        [HttpPost]
+        [Route("api/DynamicSelects/BusinessMan/{appId}")]
+        public QueryResult<IList<UserInfoForSelData>> GetDSBusinessMan(string appId)
+        {
+            var getList = BLL<UserManagerBLL>().GetAllUsers();
+            var retList = UserInfoForSelData.ConvFrom(getList);
+            return new QueryResult<IList<UserInfoForSelData>>(retList, retList.Count, retList.Count);
         }
     }
 }

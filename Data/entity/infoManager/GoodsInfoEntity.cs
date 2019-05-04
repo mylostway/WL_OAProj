@@ -34,12 +34,12 @@ namespace WL_OA.Data.entity
         /// <summary>
         /// 货物类型'
         /// </summary>
-        public virtual int? FgoodsType { get; set; }
+        public virtual string FgoodsType { get; set; }
 
         /// <summary>
         /// 所属货类'
         /// </summary>
-        public virtual int? FbelongType { get; set; }
+        public virtual string FbelongType { get; set; }
 
         /// <summary>
         /// 标志-需核实重量'

@@ -10,11 +10,13 @@ using log4net.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using WL_OA.Data;
+using WL_OA.Data.dal.Cache;
 using WL_OA.Data.utils;
 using WL_OAProj.Middlewares;
 
@@ -35,12 +37,18 @@ namespace WL_OAProj
             //services.AddSingleton<ILog>(LogManager.GetLogger(this.GetType()));
             //services.AddSingleton<ILog>(SLogger.Instance);
 
-            services.AddSingleton<IAssessRight>(DefaultAssessRight.Instance);                       
-
             // 使用内存Cache
-            services.AddMemoryCache();
+            //services.AddMemoryCache();
+            services.AddSingleton<IMemoryCache>(factory =>
+            {
+                var cache = new MemoryCache(new MemoryCacheOptions());
+                return cache;
+            });
+            services.AddSingleton<ICacheServices, MemoryCacheServices>();
             // 再启动session
             services.AddSession();
+
+            services.AddSingleton<IAssessRight>(DefaultAssessRight.Instance);            
 
             services.AddMvc().AddJsonOptions(options =>
             {

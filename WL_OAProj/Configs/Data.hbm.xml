@@ -577,6 +577,7 @@
     <property name="Fpassword" column="Fpassword" />
     <property name="Fcheck_state" column="Fcheck_state" />
     <property name="Fsafe_dev_id" column="Fsafe_dev_id" />
+    <property name="Fcreate_user" column="Fcreate_user" />
   </class>
 
 

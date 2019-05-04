@@ -13,6 +13,7 @@ using BLL.settings;
 using BLL.util;
 using WL_OA.Data.utils;
 using System.Reflection;
+using WL_OA.Data.dal.Cache;
 
 namespace WL_OA.BLL.query
 {
@@ -83,7 +84,9 @@ namespace WL_OA.BLL.query
 
             if(null != m_cache)
             {
-                if(!m_cache.Set(ALL_GOODS_INFO_CACHE_KEY, retList, GetDefaultCacheExpireTime()))
+                // 缓存设置失效时间，失效之后有请求调用该接口的会自动刷新缓存，省去很多修改的麻烦
+                // 有特殊场景再特殊做，现在没空考虑这么多
+                if(!m_cache.Add(ALL_GOODS_INFO_CACHE_KEY, retList, CacheSetting.GetCacheDefaultExpireTimespan()))
                 {
                     SLogger.Warn($"缓存记录 - {ALL_GOODS_INFO_CACHE_KEY} 失败");
                 }

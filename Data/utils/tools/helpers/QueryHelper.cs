@@ -7,6 +7,22 @@ using WL_OA.Data.param;
 
 namespace WL_OA.Data.utils
 {
+    /// <summary>
+    /// 数据状态枚举
+    /// </summary>
+    public enum DataStateEnum
+    {
+        /// <summary>
+        /// 数据正常状态
+        /// </summary>
+        Normal = 0,
+        /// <summary>
+        /// 数据弃用状态
+        /// </summary>
+        Discard,
+    }
+
+
     public static class QueryHelper
     {
         /// <summary>
@@ -100,10 +116,8 @@ namespace WL_OA.Data.utils
             }
         }
 
-        /// <summary>
-        /// 软删除的状态值
-        /// </summary>
-        public const int SOFT_DELETED_FSTATE = 0;
+
+       
 
         /// <summary>
         /// 判断数据状态值是否软删除
@@ -112,7 +126,7 @@ namespace WL_OA.Data.utils
         /// <returns></returns>
         public static bool IsDataSoftDeleted(int Fstate)
         {
-            return Fstate == SOFT_DELETED_FSTATE;
+            return Fstate == (int)DataStateEnum.Discard;
         }
 
         /// <summary>
@@ -122,7 +136,7 @@ namespace WL_OA.Data.utils
         /// <returns></returns>
         public static bool IsDataSoftDeleted(this BaseEntity entity)
         {
-            return entity.Fstate == SOFT_DELETED_FSTATE;
+            return entity.Fstate == (int)DataStateEnum.Discard;
         }
 
         /// <summary>
@@ -132,7 +146,7 @@ namespace WL_OA.Data.utils
         /// <returns></returns>
         public static bool IsDataSoftDeleted<T>(this BaseEntity<T> entity)
         {
-            return entity.Fstate == SOFT_DELETED_FSTATE;
+            return entity.Fstate == (int)DataStateEnum.Discard;
         }
     }
 }

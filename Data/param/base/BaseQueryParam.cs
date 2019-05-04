@@ -6,7 +6,9 @@ namespace WL_OA.Data.param
 {
     public class BaseQueryParam : IQueryParam
     {
-        public BaseQueryParam()
+        public BaseQueryParam() : this(10) { }
+
+        public BaseQueryParam(int pSize = 10)
         {
             Skip = 0;
             Take = 10;

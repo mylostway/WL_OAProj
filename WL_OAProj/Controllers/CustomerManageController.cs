@@ -48,12 +48,13 @@ namespace WL_OAProj.Controllers
         [HttpPost]
         [Route("api/AddCustomerInfo")]
         public BaseOpResult AddCustomerInfo([FromBody] AddCustomerInfoDTO dto)
-        {
-            /*
-             测试映射复杂对象用
-            var deObj = HttpContext.DeSerializeRequestObjFromRequest<AddCustomerInfoDTO>();
-            */
-            if (null == dto) return BaseOpResult.FailFor("添加的信息不能为空，请检查参数");
+        {                       
+            if (null == dto)
+            {
+                //测试映射复杂对象用 
+                var deObj = HttpContext.DeSerializeRequestObjFromRequest<AddCustomerInfoDTO>();
+                return BaseOpResult.FailFor("添加的信息不能为空，请检查参数");
+            }
             return BLL().AddEntity(dto);
         }
 
@@ -62,7 +63,12 @@ namespace WL_OAProj.Controllers
         [Route("api/UpdateCustomerInfo")]
         public BaseOpResult UpdateEntity([FromBody] AddCustomerInfoDTO dto)
         {
-            if (null == dto) return BaseOpResult.FailFor("更新的信息不能为空，请检查参数");
+            if (null == dto)
+            {
+                //测试映射复杂对象用 
+                var deObj = HttpContext.DeSerializeRequestObjFromRequest<AddCustomerInfoDTO>();
+                return BaseOpResult.FailFor("更新的信息不能为空，请检查参数");
+            }
             return BLL().UpdateEntity(dto);
         }
 
