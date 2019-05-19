@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace WL_OA.Data
 {
+    /// <summary>
+    /// JSON工具类
+    /// </summary>
     public class JsonHelper
     {
         public static object DeserializeTo(string jsonStr)
@@ -44,6 +47,23 @@ namespace WL_OA.Data
             settings.NullValueHandling = NullValueHandling.Ignore;
 
             return JsonConvert.SerializeObject(obj,Formatting.None, settings);
+        }
+    }
+
+
+    /// <summary>
+    /// JSON相关扩展类
+    /// </summary>
+    public static class JsonEx
+    {
+        /// <summary>
+        /// 转换到JSON字符串
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToJson(this object obj)
+        {
+            return JsonHelper.SerializeTo(obj);
         }
     }
 }

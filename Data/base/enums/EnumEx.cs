@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using WL_OA.Data.utils.tools;
 
 namespace WL_OA.Data
 {
@@ -280,6 +281,19 @@ namespace WL_OA.Data
         }
 
 
+        /// <summary>
+        /// 空方法，仅仅触发每次启动进程更新枚举数据
+        /// </summary>
+        public static void Check()
+        {
+
+        }
+
+        /// <summary>
+        /// 更新枚举json数据到网站目录
+        /// </summary>
+        const string ENUM_JSON_FILE_SAVE_PATH = "./wwwroot/res/enum.json";
+
         static EnumHelper()
         {
             // 这样查找非常方便，不过效率可能低，因为要遍历整个Assembly的数据
@@ -313,6 +327,11 @@ namespace WL_OA.Data
                     s_dicEnumsKeyValPair.Add(eType.Name, dic);
                 }
             }
+
+            // 更新枚举数据到文件，方便网站访问直接下载
+            var enumJson = s_dicEnumsKeyValPair.ToJson();
+            var strSaveContent = "{\"serverEnumDatas\":" + enumJson + "}";
+            FileHelper.SaveToFile(ENUM_JSON_FILE_SAVE_PATH, strSaveContent);
         }
     }
 }

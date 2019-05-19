@@ -64,6 +64,8 @@ namespace WL_OAProj
                 options.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
             });
 
+            EnumHelper.Check();
+
             //services.BuildServiceProvider();
         }
 

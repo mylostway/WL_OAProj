@@ -40,5 +40,16 @@ namespace WL_OA.Data.utils.tools
         {
             SAssert.MustTrue(IsNotUpPath(path), string.Format("非法文件路径:{0}", path));
         }
+
+
+        /// <summary>
+        /// 判断路径的目录是否存在
+        /// </summary>
+        /// <param name="path"></param>
+        public static bool IsPathDirectoryExist(string path)
+        {
+            var dirPath = Path.GetDirectoryName(path);
+            return Directory.Exists(dirPath);
+        }
     }
 }

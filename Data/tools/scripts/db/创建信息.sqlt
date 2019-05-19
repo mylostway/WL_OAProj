@@ -99,8 +99,8 @@ create table wldb.t_goodsInfo
 	Fchn_Name varchar(50) not null comment '货物名称名（中文）',
 	Feng_Name varchar(30) not null default '' comment '货物名称名（英文）',
 	Fmark varchar(15) not null comment '助记码',
-	FgoodsType tinyint not null default 0 comment '货物类型',
-	FbelongType tinyint not null default 0 comment '所属货类',
+	FgoodsType varchar(50) not null default '' comment '货物类型',
+	FbelongType varchar(50) not null default '' comment '所属货类',
 	FisCheckWeight tinyint not null default 0 comment '标志-需核实重量',
 	Fmemo varchar(200) not null default '' comment '备注',
 	Fusable tinyint not null default 0 comment '标志-可用'
@@ -186,6 +186,50 @@ create table wldb.t_carCardNo
 	Fztgczl varchar(30) not null default '' comment '准托挂车质量',
 	Fjssqpgcs varchar(30) not null default '' comment '驾驶室前排共乘数',
 	
+)ENGINE=Innodb default charset=utf8;
+
+
+
+
+-- 示例功能，创建公司账号表
+create table wldb.t_company_account
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Faccount varchar(100) not null comment '公司账号',
+	Fbank_name varchar(100) not null comment '开户银行（中文）',
+	Fbank_eng_Name varchar(50) not null default '' comment '开户银行（英文）',
+	Faccount_name varchar(60) not null default '' comment '开户名称',
+	Faddr varchar(300) not null default '' comment '地址',
+	Fmemo varchar(300) not null default '' comment '备注',
+	Finput_date datetime null comment '录入时间',
+	Finputor varchar(100) not null default '' comment '录入人',
+	
+	Fusable tinyint not null default 0 comment '是否可用，0 - 是，其他 - 否',
+	Fcert_default_use tinyint not null default 0 comment '凭证默认调用,0 - 否'
+)ENGINE=Innodb default charset=utf8;
+
+
+
+
+-- 示例功能，创建费用项目表
+create table wldb.t_fee_project
+(
+	Fid int primary key auto_increment comment '数据唯一ID',
+	Fstate tinyint not null default 0 comment '数据状态 0 - 正常,1 - 软删除等异常状态',
+			
+	Fmark varchar(100) not null comment '助记码',
+	Fproj_name varchar(100) not null comment '项目名称',
+	Fproj_full_name varchar(100) not null default '' comment '项目全称（中文）',
+	Fproj_full_eng_name varchar(60) not null default '' comment '项目全称（英文）',
+	Ffee_subject varchar(100) not null default '' comment '费用科目',
+	Fmemo varchar(300) not null default '' comment '备注',
+	Finput_date datetime null comment '录入时间',
+	Finputor varchar(100) not null default '' comment '录入人',
+	
+	Fusable tinyint not null default 0 comment '是否可用，0 - 是，其他 - 否',
+	Fnot_concerned tinyint not null default 0 comment '无关,0 - 否'
 )ENGINE=Innodb default charset=utf8;
 
 
@@ -886,7 +930,8 @@ create table wldb.t_system_user
 	Fcreate_time datetime not null comment '创建时间',
 	Fpassword varchar(50) not null comment '密码MD5',
 	Fcheck_state tinyint not null default 0 comment '认证状态 0 - 未认证 1 - 已认证',
-	Fsafe_dev_id varchar(50) not null default '' comment '安全设备Id'
+	Fsafe_dev_id varchar(50) not null default '' comment '安全设备Id',
+	Fcreate_user varchar(50) not null comment '创建用户的人'
 	
 )ENGINE=Innodb default charset=utf8;
 

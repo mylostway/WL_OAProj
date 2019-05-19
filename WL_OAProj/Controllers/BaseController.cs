@@ -22,6 +22,23 @@ namespace WL_OAProj.Controllers
     {        
         const string TOKEN_KEY = "token";
 
+        protected SysRequestContext RequestContext = null;
+
+        public BaseController()
+            :base()
+        {
+            if (AppRunConfigs.Instance.IsSingleTestMode)
+            {
+                RequestContext = SysRequestContext.TestInstance;
+            }
+            else
+            {
+                // 暂时没有登录信息
+                RequestContext = new SysRequestContext();
+                //RequestContext.LoginInfo = GatherLoginInfo();
+            }
+        }
+
         /// <summary>
         /// 从Request中获取指定key的值，顺序是 querystring -> form -> cookie
         /// </summary>
@@ -102,14 +119,16 @@ namespace WL_OAProj.Controllers
                        
             if(AppRunConfigs.Instance.IsSingleTestMode)
             {
-                ins.SetRequestContext(SysRequestContext.TestInstance);
+                //RequestContext = SysRequestContext.TestInstance;
+                ins.SetRequestContext(RequestContext);
             }
             else
             {
                 // 暂时没有登录信息
-                var context = new SysRequestContext();
-                //context.LoginInfo = GatherLoginInfo();
-                ins.SetRequestContext(context);
+                //RequestContext = new SysRequestContext();
+                //RequestContext.LoginInfo = GatherLoginInfo();
+
+                ins.SetRequestContext(RequestContext);
             }
 
             ins.SetServicesProvider(HttpContext.RequestServices);

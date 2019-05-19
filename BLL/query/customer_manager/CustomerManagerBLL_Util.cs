@@ -36,17 +36,17 @@ namespace WL_OA.BLL.query
                     case QueryCustomerInfoIDTypeEnums.None:
                     case QueryCustomerInfoIDTypeEnums.Forshot:
                         {
-                            query.And(c => c.Fname_for_short.Contains(val));
+                            query.And(Restrictions.Like("Fname_for_short", string.Format("%{0}%", val)));                            
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.FullName:
                         {
-                            query.And(c => c.Fname.Contains(val));
+                            query.And(Restrictions.Like("Fname", string.Format("%{0}%", val)));                            
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.Remark:
                         {
-                            query.And(c => c.Fmark.Contains(val));
+                            query.And(c => c.Fmark == val);
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.CustomType:
@@ -61,7 +61,7 @@ namespace WL_OA.BLL.query
                         }
                     case QueryCustomerInfoIDTypeEnums.BusinessMan:
                         {
-                            query.And(c => c.Fbusinesser.Contains(val));
+                            query.And(Restrictions.Like("Fbusinesser", string.Format("%{0}%", val)));                            
                             break;
                         }
                     case QueryCustomerInfoIDTypeEnums.Province:
@@ -74,13 +74,15 @@ namespace WL_OA.BLL.query
         }
 
         /// <summary>
-        /// 根据数据状态值添加查询条件
+        /// 根据数据状态值添加查询条件(位与运算暂时无法使用)
         /// </summary>
         /// <param name="enumVal"></param>
         /// <param name="query"></param>
         private void AddQueryDataStateCondition(QueryCustomerInfoStateEnums? enumVal, IQueryOver<CustomerInfoEntity, CustomerInfoEntity> query)
         {
             if (enumVal == null || enumVal == QueryCustomerInfoStateEnums.None) return;
+
+            return;
 
             switch (enumVal)
             {
@@ -100,7 +102,7 @@ namespace WL_OA.BLL.query
                         break;
                     }
                 case QueryCustomerInfoStateEnums.UnAduited:
-                    {
+                    {                                                                        
                         query.And(c => ((c.Fdata_status & 0x02) == 0));
                         break;
                     }

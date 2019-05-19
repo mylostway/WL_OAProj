@@ -41,6 +41,55 @@
     <property name="Fusable" column="Fusable" />
   </class>
 
+  <class name="PayWaysEntity" table="t_pay_ways">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Fmark" column="Fmark" />
+    <property name="Fchn_Name" column="Fchn_Name" />
+    <property name="Feng_Name" column="Feng_Name" />
+    <property name="Fusable" column="Fusable" />
+  </class>
+
+
+  <class name="CompanyAccountEntity" table="t_company_account">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Faccount" column="Faccount" />
+    <property name="Fbank_name" column="Fbank_name" />
+    <property name="Fbank_eng_Name" column="Fbank_eng_Name" />
+    <property name="Faccount_name" column="Faccount_name" />
+    <property name="Faddr" column="Faddr" />
+    <property name="Fmemo" column="Fmemo" />
+    <property name="Finput_date" column="Finput_date" />
+    <property name="Finputor" column="Finputor" />
+    <property name="Fusable" column="Fusable" />
+    <property name="Fcert_default_use" column="Fcert_default_use" />
+  </class>
+
+  <class name="FeeProjectEntity" table="t_fee_project">
+    <id name="Fid" type="int" column="Fid" unsaved-value="0">
+      <generator class="identity"/>
+    </id>
+    <property name="Fstate" column="Fstate" not-null="true" />
+
+    <property name="Fmark" column="Fmark" />
+    <property name="Fproj_name" column="Fproj_name" />
+    <property name="Fproj_full_name" column="Fproj_full_name" />
+    <property name="Fproj_full_eng_name" column="Fproj_full_eng_name" />
+    <property name="Ffee_subject" column="Ffee_subject" />
+    <property name="Fmemo" column="Fmemo" />
+    <property name="Finput_date" column="Finput_date" />
+    <property name="Finputor" column="Finputor" />
+    <property name="Fusable" column="Fusable" />
+    <property name="Fnot_concerned" column="Fnot_concerned" />
+  </class>
+
 
 
   <class name="WharfinfoEntity" table="t_wharfinfo">
